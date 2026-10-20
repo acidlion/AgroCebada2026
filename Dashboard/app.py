@@ -22,7 +22,9 @@ from sklearn.impute import SimpleImputer
 # ZONA DE INTEGRACIÓN DEL MODELO REAL
 # ---------------------------------------------------------
 # import joblib
-MODELO_PATH = Path(__file__).resolve().parent.parent / "models" / "modelos_ensamble.joblib"
+RAIZ_PROYECTO = Path(__file__).resolve().parent.parent
+MODELO_PATH = RAIZ_PROYECTO / "models" / "modelos_ensamble.joblib"
+PREDICCIONES_OFICIALES_PATH = RAIZ_PROYECTO / "models" / "ENTREGA_ENSAMBLE_59_PARCELAS.csv"
 
 # ========================================================
 # 2. CLASE ENVOLTORIO PARA EL ENSAMBLE CUSTOM
@@ -69,7 +71,6 @@ modelo_rf = None
 
 print("==================================================")
 print(f"Buscando el modelo en: {MODELO_PATH}")
-
 if not os.path.exists(MODELO_PATH):
     print("ERROR CRÍTICO: El archivo .joblib NO EXISTE en esa ruta.")
 else:
@@ -84,6 +85,13 @@ else:
                 compatibilizar_imputador_serializado(imputador)
 
             modelo_rf = EnsamblePersonalizado(objeto_cargado)
+            try:
+                df_oficial = pd.read_csv(PREDICCIONES_OFICIALES_PATH)
+                rendimiento_promedio_regional = np.round(df_oficial["RENDIMIENTO"].mean(), 2)
+                texto_promedio = f"{rendimiento_promedio_regional} t/ha"
+            except Exception as e:
+                print(f"Aviso al cargar CSV: {e}")
+                texto_promedio = "N/D"
             print("Ensamble Manual (Ridge + XGBoost) ensamblado y fusionado exitosamente.")
         else:
             modelo_rf = objeto_cargado
@@ -91,18 +99,10 @@ else:
   
     except Exception as e:
         print(f"ERROR CRÍTICO al leer el archivo .joblib: {e}")
+
 # ==========================================
 # 1. PREPARACIÓN DE DATOS ESPACIALES
 # ==========================================
-DATOS_EDA_PATH = Path(__file__).resolve().parent / "parcelas" / "datos_consolidados_eda.csv"
-
-# Leer el archivo. Intenta capturar errores si el archivo no existe aún.
-try:
-    df_eda = pd.read_csv(DATOS_EDA_PATH)
-except FileNotFoundError:
-    print(f"Advertencia: No se encontró el archivo de estadísticas en {DATOS_EDA_PATH}")
-    df_eda = pd.DataFrame(columns=['ID_Parcela', 'Rendimiento_tha', 'Elevacion', 'Pendiente', 'Precipitacion_Acum', 'Temp_Max_Prom', 'NDVI_Max'])
-
 ESTADOS_PATH = Path(__file__).resolve().parent / "assets" / "mexico_estados.geojson"
 ESTADOS = gpd.read_file(ESTADOS_PATH)
 if ESTADOS.crs is None:
@@ -133,6 +133,140 @@ PARCELAS = PARCELAS.rename(columns={area_columns[0]: "AREA_HA"})
 
 conteo_entrenamiento = int((PARCELAS["CONJUNTO"] == "ENTRENAMIENTO").sum())
 conteo_prediccion = int((PARCELAS["CONJUNTO"] == "PREDICCION").sum())
+
+TABLA_CICLO_PATH = RAIZ_PROYECTO / "data" / "processed" / "tabla_integrada_parcela_ciclo_2025.csv"
+TABLA_MENSUAL_PATH = RAIZ_PROYECTO / "data" / "processed" / "tabla_mensual_303_xgb_2025.csv"
+MESES_CICLO_2025 = tuple(f"__2025_{mes:02d}" for mes in range(4, 11))
+RENDIMIENTOS_PATH = (
+    RAIZ_PROYECTO
+    / "data"
+    / "raw"
+    / "DATASET_RETO_AGRO_2026"
+    / "ID_area_rendimiento_70_30_Reto_AgroCebada.csv"
+)
+if not isinstance(modelo_rf, EnsamblePersonalizado):
+    raise RuntimeError("El simulador requiere que el ensamble Ridge + XGBoost esté cargado.")
+
+for ruta_datos in (
+    TABLA_CICLO_PATH,
+    TABLA_MENSUAL_PATH,
+    RENDIMIENTOS_PATH,
+    PREDICCIONES_OFICIALES_PATH,
+):
+    if not ruta_datos.is_file():
+        raise FileNotFoundError(f"No se encontró un archivo necesario para el simulador: {ruta_datos}")
+
+df_ciclo_simulador = pd.read_csv(TABLA_CICLO_PATH, dtype={"ID_POLIGONO": str})
+df_mensual_simulador = pd.read_csv(TABLA_MENSUAL_PATH, dtype={"ID_POLIGONO": str})
+df_rendimientos = pd.read_csv(RENDIMIENTOS_PATH, dtype={"ID_POLIGONO": str})
+df_predicciones_oficiales = pd.read_csv(PREDICCIONES_OFICIALES_PATH, dtype={"ID_PARCELA": str})
+
+for dataframe, nombre, columna_id in (
+    (df_ciclo_simulador, "tabla de ciclo", "ID_POLIGONO"),
+    (df_mensual_simulador, "tabla mensual", "ID_POLIGONO"),
+    (df_rendimientos, "rendimientos de entrenamiento", "ID_POLIGONO"),
+    (df_predicciones_oficiales, "predicciones oficiales", "ID_PARCELA"),
+):
+    if columna_id not in dataframe.columns or dataframe[columna_id].duplicated().any():
+        raise ValueError(f"La {nombre} debe tener IDs de parcela únicos en {columna_id}.")
+
+df_estadisticas = df_ciclo_simulador[
+    [
+        "ID_POLIGONO",
+        "AREA_HA",
+        "precipitacion_acumulada_mm",
+        "tmax_media_ciclo_c",
+        "tmin_media_ciclo_c",
+        "elevacion_m",
+        "pendiente_grados",
+        "basico_sentinel_2__ndvi__media_ciclo",
+    ]
+].merge(
+    df_rendimientos[["ID_POLIGONO", "RENDIMIENTO_T_HA", "CONJUNTO"]],
+    on="ID_POLIGONO",
+    how="inner",
+    validate="one_to_one",
+)
+df_estadisticas_entrenamiento = df_estadisticas.loc[
+    df_estadisticas["CONJUNTO"].eq("ENTRENAMIENTO")
+].copy()
+if len(df_estadisticas_entrenamiento) != 138:
+    raise ValueError(
+        "Las estadísticas finales requieren 138 parcelas de entrenamiento; "
+        f"se encontraron {len(df_estadisticas_entrenamiento)}."
+    )
+
+columnas_estadisticas_numericas = [
+    "RENDIMIENTO_T_HA",
+    "elevacion_m",
+    "pendiente_grados",
+    "precipitacion_acumulada_mm",
+    "tmax_media_ciclo_c",
+    "tmin_media_ciclo_c",
+    "basico_sentinel_2__ndvi__media_ciclo",
+]
+if df_estadisticas_entrenamiento[columnas_estadisticas_numericas].isna().any().any():
+    raise ValueError("Hay valores faltantes en las variables finales usadas por Estadísticas.")
+
+df_mensual_entrenamiento = (
+    df_mensual_simulador.loc[
+        df_mensual_simulador["ID_POLIGONO"].isin(
+            df_estadisticas_entrenamiento["ID_POLIGONO"]
+        )
+    ]
+    .set_index("ID_POLIGONO")
+    .reindex(df_estadisticas_entrenamiento["ID_POLIGONO"])
+)
+
+X_RIDGE_SIMULADOR = df_ciclo_simulador.set_index("ID_POLIGONO")
+X_XGBOOST_SIMULADOR = df_mensual_simulador.set_index("ID_POLIGONO")
+columnas_ridge_faltantes = [
+    columna for columna in modelo_rf.columnas_ridge if columna not in X_RIDGE_SIMULADOR.columns
+]
+columnas_xgboost_faltantes = [
+    columna for columna in modelo_rf.columnas_xgboost if columna not in X_XGBOOST_SIMULADOR.columns
+]
+if columnas_ridge_faltantes or columnas_xgboost_faltantes:
+    raise ValueError(
+        "Las tablas del simulador no contienen todas las variables del modelo: "
+        f"Ridge={columnas_ridge_faltantes}; XGBoost={columnas_xgboost_faltantes}"
+    )
+
+df_catalogo_simulador = df_rendimientos.set_index("ID_POLIGONO").copy()
+df_catalogo_simulador = df_catalogo_simulador.join(
+    df_predicciones_oficiales.set_index("ID_PARCELA")["RENDIMIENTO"].rename("RENDIMIENTO_OFICIAL"),
+    how="left",
+)
+df_catalogo_simulador = df_catalogo_simulador.join(
+    X_RIDGE_SIMULADOR[
+        [
+            "precipitacion_acumulada_mm",
+            "tmax_media_ciclo_c",
+            "tmin_media_ciclo_c",
+            "elevacion_m",
+            "pendiente_grados",
+            "basico_sentinel_2__ndvi__media_ciclo",
+        ]
+    ],
+    how="left",
+)
+df_catalogo_simulador = df_catalogo_simulador.join(
+    PARCELAS.drop_duplicates("ID_POLIGON").set_index("ID_POLIGON")[["Municipio", "Estado"]],
+    how="left",
+)
+if df_catalogo_simulador[
+    ["precipitacion_acumulada_mm", "elevacion_m", "pendiente_grados"]
+].isna().all(axis=1).any():
+    raise ValueError("Hay parcelas sin datos reales de condiciones para el simulador.")
+
+OPCIONES_PARCELAS_SIMULADOR = [
+    {
+        "label": f"{id_parcela} · {fila['CONJUNTO'].capitalize()}",
+        "value": id_parcela,
+    }
+    for id_parcela, fila in df_catalogo_simulador.sort_index().iterrows()
+]
+PARCELA_INICIAL_SIMULADOR = OPCIONES_PARCELAS_SIMULADOR[0]["value"]
 
 # ==========================================
 # 2. INICIALIZACIÓN DE LA APLICACIÓN
@@ -316,7 +450,7 @@ layout_mapa = html.Div([
 #Modelo predictivo
 layout_modelo = html.Div(
     [
-        html.H2("Inferencia de Rendimiento (Random Forest)", className="dashboard-title mb-4"),
+        html.H2("Inferencia de Rendimiento (Ridge y XGBoost)", className="dashboard-title mb-4"),
 
         dbc.Tabs(
             [
@@ -516,12 +650,11 @@ layout_modelo = html.Div(
                             dbc.Col([
                                 html.Label("Seleccionar Parcela:", className="fw-bold"),
                                 dcc.Dropdown(
-                                    id="whatif-parcela",
-                                    # Simulamos IDs de parcelas para el ejemplo
-                                    options=[{"label": f"Parcela {str(i).zfill(3)}", "value": f"AGC_{str(i).zfill(3)}"} for i in range(139, 149)],
-                                    value="AGC_139",
-                                    clearable=False,
-                                    className="mb-4"
+                                   id="whatif-parcela",
+                                   options=OPCIONES_PARCELAS_SIMULADOR,
+                                   value=PARCELA_INICIAL_SIMULADOR,
+                                   clearable=False,
+                                   className="mb-4"
                                 ),
                                 
                                 html.Label([html.I(className="fas fa-cloud-rain me-2 text-primary"), "Variación de Precipitación (%)"], className="fw-bold"),
@@ -558,7 +691,19 @@ layout_modelo = html.Div(
                                     ]
                                 )
                             ], md=7, className="d-flex align-items-center justify-content-center bg-light rounded shadow-sm")
-                        ])
+                        ]),
+                        dbc.Card(
+                            dbc.CardBody([
+                               html.H6("Datos reales y condiciones registradas de la parcela", className="mb-1"),
+                               html.P(
+                                   "Rendimiento observado para parcelas de entrenamiento o estimación oficial para parcelas de predicción. "
+                                   "Las condiciones corresponden a los datos registrados para el ciclo 2025.",
+                                   className="text-muted small mb-3",
+                               ),
+                               html.Div(id="whatif-datos-parcela"),
+                            ]),
+                            className="mt-4 shadow-sm",
+                        ),
                     ],
                     className="p-4 border border-top-0 bg-white"
                 ),
@@ -573,15 +718,20 @@ layout_modelo = html.Div(
 #Estadisticas 
 layout_estadisticas = html.Div(
     [
-        html.H2("Análisis Exploratorio de Datos (EDA)", className="dashboard-title mb-4"),
+        html.H2("Estadísticas finales del ciclo 2025", className="dashboard-title mb-2"),
+        html.P(
+            "Gráficas calculadas con las 138 parcelas del conjunto de entrenamiento y sus rendimientos observados. "
+            "Las 59 parcelas de predicción se excluyen de la correlación porque no tienen rendimiento real observado.",
+            className="text-muted mb-4",
+        ),
         
         # Fila 1: Distribución y Relaciones Topográficas
         dbc.Row([
             dbc.Col(
                 dbc.Card(
                     dbc.CardBody([
-                        html.H5("Distribución del Rendimiento (Conjunto de Entrenamiento)", className="card-title text-success"),
-                        html.P("Rango de toneladas por hectárea logradas en el ciclo.", className="text-muted small"),
+                        html.H5("Rendimiento observado · entrenamiento (n=138)", className="card-title text-success"),
+                        html.P("Distribución de RENDIMIENTO_T_HA (t/ha) en las parcelas etiquetadas.", className="text-muted small"),
                         dcc.Graph(id="grafico-histograma-rendimiento", style={"height": "300px"})
                     ]),
                     className="shadow-sm border-0 mb-4"
@@ -590,8 +740,8 @@ layout_estadisticas = html.Div(
             dbc.Col(
                 dbc.Card(
                     dbc.CardBody([
-                        html.H5("Impacto Topográfico en el Rendimiento", className="card-title text-success"),
-                        html.P("Relación entre la elevación (CEM INEGI) y las toneladas cosechadas.", className="text-muted small"),
+                        html.H5("Elevación y rendimiento observado", className="card-title text-success"),
+                        html.P("Cada punto es una parcela de entrenamiento; el color indica la pendiente en grados.", className="text-muted small"),
                         dcc.Graph(id="grafico-dispersion-topografia", style={"height": "300px"})
                     ]),
                     className="shadow-sm border-0 mb-4"
@@ -604,8 +754,8 @@ layout_estadisticas = html.Div(
             dbc.Col(
                 dbc.Card(
                     dbc.CardBody([
-                        html.H5("Evolución de Índices de Vegetación (Ciclo 2025)", className="card-title text-success"),
-                        html.P("Se requieren observaciones con fecha para mostrar la evolución de NDVI y EVI.", className="text-muted small"),
+                        html.H5("NDVI y EVI mensuales · entrenamiento 2025", className="card-title text-success"),
+                        html.P("Promedio mensual de las parcelas de entrenamiento; los valores provienen de las variables satelitales procesadas.", className="text-muted small"),
                         dcc.Graph(id="grafico-serie-ndvi", style={"height": "350px"})
                     ]),
                     className="shadow-sm border-0 mb-4"
@@ -614,8 +764,8 @@ layout_estadisticas = html.Div(
             dbc.Col(
                 dbc.Card(
                     dbc.CardBody([
-                        html.H5("Matriz de Correlación de Variables", className="card-title text-success"),
-                        html.P("Relación lineal entre clima, topografía y rendimiento.", className="text-muted small"),
+                        html.H5("Correlación de variables observadas (n=138)", className="card-title text-success"),
+                        html.P("Correlación de Pearson en el conjunto de entrenamiento; no incluye predicciones.", className="text-muted small"),
                         dcc.Graph(id="grafico-correlacion", style={"height": "350px"})
                     ]),
                     className="shadow-sm border-0 mb-4"
@@ -674,7 +824,7 @@ layout_metodologia = html.Div(
         # Fila 2: El Equipo
         html.Hr(className="my-5", style={"borderColor": "var(--cebada-brillante)"}),
         
-        html.H3("Equipo Tlayolli", className="text-center mb-4", style={"color": "var(--tierra-oscura)"}),
+        html.H3("Equipo Cebadato", className="text-center mb-4", style={"color": "var(--tierra-oscura)"}),
         
         dbc.Row([
             dbc.Col(
@@ -802,7 +952,7 @@ def actualizar_mapa(conjunto):
         font={"family": "Arial, sans-serif"},
     )
 
-    return fig, total_parcelas, area_total, "N/D"
+    return fig, total_parcelas, area_total, texto_promedio
 
 
 
@@ -825,10 +975,8 @@ def ejecutar_inferencia(n_clicks):
     # ========================================================
   
     
-    archivo_oficial = r"models\ENTREGA_ENSAMBLE_59_PARCELAS.csv"
-    
-    if os.path.exists(archivo_oficial):
-        df_oficial = pd.read_csv(archivo_oficial)
+    if PREDICCIONES_OFICIALES_PATH.is_file():
+        df_oficial = pd.read_csv(PREDICCIONES_OFICIALES_PATH)
         tabla_salida = pd.DataFrame({
             "ID Parcela": df_oficial["ID_PARCELA"],
             "Rendimiento Estimado (t/ha)": np.round(df_oficial["RENDIMIENTO"], 2)
@@ -930,119 +1078,146 @@ def cargar_graficos_estadisticas(pathname):
     if pathname != "/estadisticas":
         raise dash.exceptions.PreventUpdate
 
-    if df_eda.empty:
-        fig_vacia = go.Figure().add_annotation(
-            text="No hay datos cargados para estadísticas",
-            showarrow=False,
-            font={"size": 16},
-        )
-        fig_sin_serie = go.Figure().add_annotation(
-            text="No hay datos temporales de NDVI/EVI",
-            showarrow=False,
-            font={"size": 16},
-        )
-        return fig_vacia, fig_vacia, fig_vacia, fig_sin_serie
-
-    df_entrenamiento = df_eda.loc[df_eda["CONJUNTO"] == "ENTRENAMIENTO"]
-    df_rendimiento = df_entrenamiento.dropna(subset=["Rendimiento_tha"])
-    if df_rendimiento.empty:
-        fig_hist = go.Figure().add_annotation(
-            text="No hay rendimientos de entrenamiento disponibles",
-            showarrow=False,
-            font={"size": 16},
-        )
-    else:
-        fig_hist = px.histogram(
-            df_rendimiento,
-            x="Rendimiento_tha",
-            nbins=20,
-            title="Distribución del Rendimiento (t/ha)",
-            color_discrete_sequence=["#DDA15E"],
-        )
+    df_entrenamiento = df_estadisticas_entrenamiento
+    fig_hist = px.histogram(
+        df_entrenamiento,
+        x="RENDIMIENTO_T_HA",
+        nbins=14,
+        title="Rendimiento observado (t/ha)",
+        color_discrete_sequence=["#DDA15E"],
+        labels={"RENDIMIENTO_T_HA": "Rendimiento observado (t/ha)", "count": "Número de parcelas"},
+    )
+    rendimiento_medio = df_entrenamiento["RENDIMIENTO_T_HA"].mean()
+    fig_hist.add_vline(
+        x=rendimiento_medio,
+        line_dash="dash",
+        line_color="#2E7D32",
+        annotation_text=f"Media: {rendimiento_medio:.2f} t/ha",
+        annotation_position="top",
+    )
     fig_hist.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        margin={"t": 30, "b": 10},
+        margin={"t": 50, "b": 35},
+        xaxis_title="Rendimiento observado (t/ha)",
+        yaxis_title="Número de parcelas",
     )
 
-    columnas_dispersion = ["Elevacion", "Rendimiento_tha", "Pendiente"]
-    df_dispersion = df_entrenamiento.dropna(subset=columnas_dispersion)
-    if df_dispersion.empty:
-        fig_scatter = go.Figure().add_annotation(
-            text="No hay datos suficientes para la dispersión topográfica",
-            showarrow=False,
-            font={"size": 16},
+    fig_scatter = px.scatter(
+        df_entrenamiento,
+        x="elevacion_m",
+        y="RENDIMIENTO_T_HA",
+        color="pendiente_grados",
+        hover_name="ID_POLIGONO",
+        hover_data={
+            "elevacion_m": ":.1f",
+            "RENDIMIENTO_T_HA": ":.2f",
+            "pendiente_grados": ":.2f",
+        },
+        labels={
+            "elevacion_m": "Elevación (m)",
+            "RENDIMIENTO_T_HA": "Rendimiento observado (t/ha)",
+            "pendiente_grados": "Pendiente (°)",
+        },
+        color_continuous_scale=["#B7D7B0", "#1F4D2B"],
+        title="Parcelas de entrenamiento",
+    )
+    x = df_entrenamiento["elevacion_m"].to_numpy(dtype=float)
+    y = df_entrenamiento["RENDIMIENTO_T_HA"].to_numpy(dtype=float)
+    coeficientes = np.polyfit(x, y, 1)
+    x_linea = np.linspace(x.min(), x.max(), 100)
+    fig_scatter.add_trace(
+        go.Scatter(
+            x=x_linea,
+            y=np.polyval(coeficientes, x_linea),
+            mode="lines",
+            name="Tendencia lineal",
+            line={"color": "#DDA15E", "width": 2},
+            hoverinfo="skip",
         )
-    else:
-        fig_scatter = px.scatter(
-            df_dispersion,
-            x="Elevacion",
-            y="Rendimiento_tha",
-            color="Pendiente",
-            labels={
-                "Elevacion": "Elevación (msnm)",
-                "Rendimiento_tha": "Rendimiento (t/ha)",
-                "Pendiente": "Pendiente (%)",
-            },
-            color_continuous_scale="greens",
-        )
-        if df_dispersion["Elevacion"].nunique() > 1:
-            x = df_dispersion["Elevacion"].to_numpy(dtype=float)
-            y = df_dispersion["Rendimiento_tha"].to_numpy(dtype=float)
-            coeficientes = np.polyfit(x, y, 1)
-            x_linea = np.linspace(x.min(), x.max(), 100)
-            fig_scatter.add_trace(
-                go.Scatter(
-                    x=x_linea,
-                    y=np.polyval(coeficientes, x_linea),
-                    mode="lines",
-                    name="Tendencia lineal",
-                    line={"color": "#DDA15E", "width": 2},
-                )
-            )
+    )
     fig_scatter.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        margin={"t": 10, "b": 10},
+        margin={"t": 40, "b": 35},
+        xaxis_title="Elevación (m)",
+        yaxis_title="Rendimiento observado (t/ha)",
     )
 
-    columnas_corr = [
-        "Rendimiento_tha",
-        "Elevacion",
-        "Pendiente",
-        "Precipitacion_Acum",
-        "Temp_Max_Prom",
-        "NDVI_Max",
-    ]
-    df_correlacion = df_entrenamiento.dropna(subset=columnas_corr)
-    if df_correlacion.empty:
-        fig_corr = go.Figure().add_annotation(
-            text="No hay datos completos para calcular correlaciones",
-            showarrow=False,
-            font={"size": 16},
-        )
-    else:
-        matriz_corr = df_correlacion[columnas_corr].corr()
-        fig_corr = px.imshow(
-            matriz_corr,
-            x=columnas_corr,
-            y=columnas_corr,
-            color_continuous_scale="greens",
-            zmin=-1,
-            zmax=1,
-            text_auto=".2f",
-            aspect="auto",
-        )
+    nombres_variables_corr = {
+        "RENDIMIENTO_T_HA": "Rendimiento (t/ha)",
+        "elevacion_m": "Elevación (m)",
+        "pendiente_grados": "Pendiente (°)",
+        "precipitacion_acumulada_mm": "Precipitación acumulada (mm)",
+        "tmax_media_ciclo_c": "Temperatura máxima media (°C)",
+        "tmin_media_ciclo_c": "Temperatura mínima media (°C)",
+        "basico_sentinel_2__ndvi__media_ciclo": "NDVI medio (Sentinel-2)",
+    }
+    matriz_corr = (
+        df_entrenamiento[list(nombres_variables_corr)]
+        .rename(columns=nombres_variables_corr)
+        .corr(method="pearson")
+    )
+    fig_corr = px.imshow(
+        matriz_corr,
+        color_continuous_scale="RdBu",
+        zmin=-1,
+        zmax=1,
+        text_auto=".2f",
+        aspect="auto",
+        title="Correlación de Pearson · entrenamiento (n=138)",
+    )
     fig_corr.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        margin={"t": 10, "b": 10},
+        margin={"t": 60, "b": 120, "l": 120, "r": 20},
+        xaxis_tickangle=-35,
     )
 
-    fig_sin_serie = go.Figure().add_annotation(
-        text="El archivo de estadísticas no contiene observaciones temporales de NDVI/EVI",
-        showarrow=False,
-        font={"size": 16},
+    columnas_series = {
+        "NDVI": "basico_sentinel_2__ndvi__media_mensual__",
+        "EVI": "basico_sentinel_2__evi__media_mensual__",
+    }
+    datos_series = []
+    for nombre_indice, prefijo in columnas_series.items():
+        columnas_mensuales = [
+            columna for columna in df_mensual_entrenamiento.columns
+            if columna.startswith(prefijo)
+        ]
+        columnas_mensuales.sort(key=lambda columna: columna.rsplit("__", 1)[-1])
+        if not columnas_mensuales:
+            raise ValueError(f"No hay columnas mensuales reales disponibles para {nombre_indice}.")
+        for columna in columnas_mensuales:
+            mes = columna.rsplit("__", 1)[-1]
+            serie = pd.to_numeric(df_mensual_entrenamiento[columna], errors="coerce")
+            datos_series.append({
+                "Mes": pd.to_datetime(f"{mes[:4]}-{mes[-2:]}-01"),
+                "Índice": nombre_indice,
+                "Promedio": serie.mean(),
+                "Parcelas con dato": int(serie.notna().sum()),
+            })
+
+    df_series = pd.DataFrame(datos_series)
+    fig_sin_serie = px.line(
+        df_series,
+        x="Mes",
+        y="Promedio",
+        color="Índice",
+        markers=True,
+        custom_data=["Parcelas con dato"],
+        color_discrete_map={"NDVI": "#2E7D32", "EVI": "#DDA15E"},
+        title="Promedio mensual en las parcelas de entrenamiento",
+    )
+    fig_sin_serie.update_traces(
+        hovertemplate="%{x|%b %Y}<br>%{fullData.name}: %{y:.3f}<br>Parcelas con dato: %{customdata[0]}<extra></extra>"
+    )
+    fig_sin_serie.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        margin={"t": 40, "b": 35},
+        xaxis_title="Mes",
+        yaxis_title="Índice promedio",
+        legend_title_text="Índice satelital",
     )
     return fig_hist, fig_scatter, fig_corr, fig_sin_serie
 
@@ -1161,49 +1336,68 @@ def ocultar_splash(n_clicks):
     return ""
  # Simluador 
 @app.callback(
-    Output("whatif-resultado", "figure"),
+    [Output("whatif-resultado", "figure"),
+     Output("whatif-datos-parcela", "children")],
     [Input("whatif-parcela", "value"),
      Input("whatif-lluvia", "value"),
      Input("whatif-temp", "value"),
      Input("whatif-ndvi", "value")]
 )
 def actualizar_simulador_whatif(parcela_id, var_lluvia, var_temp, var_ndvi):
-    # 1. Recuperar los datos REALES de la parcela (aquí los simulamos)
-    # NOTA: Cuando tu equipo te dé el CSV final, buscarás los datos base de 'parcela_id' aquí
-    base_ndvi = 0.70
-    base_lluvia = 500.0  # mm
-    base_elevacion = 2300 # msnm (Fija, no se afecta por el clima)
-    base_temp = 24.0      # °C
-    base_pendiente = 4.5  # % (Fija)
-    
-    # 2. Calcular rendimiento ORIGINAL (Sin variaciones)
-    X_base = pd.DataFrame([{
-        'basico_sentinel_2__ndvi__media_ciclo': base_ndvi, 
-        'precipitacion_acumulada_mm': base_lluvia, 
-        'elevacion_m': base_elevacion, 
-        'tmax_media_ciclo_c': base_temp, 
-        'pendiente_grados': base_pendiente
-    }])
-    rendimiento_base = modelo_rf.predict(X_base)[0]
-   
-    
-    # 3. Aplicar las matemáticas de los sliders
-    nueva_lluvia = base_lluvia * (1 + (var_lluvia / 100.0))
-    nueva_temp = base_temp + var_temp
-    # El NDVI no puede ser mayor a 1 ni menor a 0
-    nuevo_ndvi = max(0.0, min(1.0, base_ndvi + var_ndvi)) 
-    
-    # 4. Calcular rendimiento NUEVO
-    X_nuevo = pd.DataFrame([{
-        'basico_sentinel_2__ndvi__media_ciclo': nuevo_ndvi, 
-        'precipitacion_acumulada_mm': nueva_lluvia, 
-        'elevacion_m': base_elevacion, 
-        'tmax_media_ciclo_c': nueva_temp, 
-        'pendiente_grados': base_pendiente
-    }])
-    rendimiento_nuevo = modelo_rf.predict(X_nuevo)[0]
-    
-    # 5. Dibujar el Indicador
+    if parcela_id not in df_catalogo_simulador.index:
+        return go.Figure(), dbc.Alert("No se encontraron datos para la parcela seleccionada.", color="warning")
+
+    fila = df_catalogo_simulador.loc[parcela_id]
+    X_ridge_base = X_RIDGE_SIMULADOR.loc[[parcela_id], modelo_rf.columnas_ridge].copy()
+    X_xgb_base = X_XGBOOST_SIMULADOR.loc[[parcela_id], modelo_rf.columnas_xgboost].copy()
+    rendimiento_base = modelo_rf.predict_componentes(X_ridge_base, X_xgb_base)[0]
+
+    factor_lluvia = 1 + ((var_lluvia or 0) / 100.0)
+    X_ridge_escenario = X_ridge_base.copy()
+    X_xgb_escenario = X_xgb_base.copy()
+
+    columnas_lluvia_ridge = [
+        columna for columna in X_ridge_escenario.columns
+        if columna == "precipitacion_acumulada_mm"
+    ]
+    columnas_lluvia_xgb = [
+        columna for columna in X_xgb_escenario.columns
+        if columna.startswith("precipitacion_mm__") and columna.endswith(MESES_CICLO_2025)
+    ]
+    X_ridge_escenario[columnas_lluvia_ridge] *= factor_lluvia
+    X_xgb_escenario[columnas_lluvia_xgb] *= factor_lluvia
+
+    columnas_tmax_ridge = [
+        columna for columna in X_ridge_escenario.columns
+        if columna == "tmax_media_ciclo_c"
+    ]
+    columnas_tmax_xgb = [
+        columna for columna in X_xgb_escenario.columns
+        if columna.startswith("tmax_c__") and columna.endswith(MESES_CICLO_2025)
+    ]
+    X_ridge_escenario[columnas_tmax_ridge] += var_temp or 0
+    X_xgb_escenario[columnas_tmax_xgb] += var_temp or 0
+
+    columnas_ndvi_ridge = [
+        columna for columna in X_ridge_escenario.columns
+        if columna == "basico_sentinel_2__ndvi__media_ciclo"
+    ]
+    columnas_ndvi_xgb = [
+        columna for columna in X_xgb_escenario.columns
+        if columna.startswith("basico_sentinel_2__ndvi__media_mensual__")
+        and columna.endswith(MESES_CICLO_2025)
+    ]
+    for dataframe, columnas in (
+        (X_ridge_escenario, columnas_ndvi_ridge),
+        (X_xgb_escenario, columnas_ndvi_xgb),
+    ):
+        dataframe[columnas] = (dataframe[columnas] + (var_ndvi or 0)).clip(0, 1)
+
+    rendimiento_nuevo = modelo_rf.predict_componentes(
+        X_ridge_escenario,
+        X_xgb_escenario,
+    )[0]
+
     fig = go.Figure(go.Indicator(
         mode = "number+delta",
         value = np.round(rendimiento_nuevo, 2),
@@ -1227,8 +1421,49 @@ def actualizar_simulador_whatif(parcela_id, var_lluvia, var_temp, var_ndvi):
     ))
     
     fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", margin={'t':0, 'b':0})
-    
-    return fig
+
+    def mostrar_valor(valor, unidad="", decimales=2):
+        if pd.isna(valor):
+            return "Sin dato registrado"
+        return f"{float(valor):,.{decimales}f} {unidad}".strip()
+
+    if fila["CONJUNTO"] == "ENTRENAMIENTO":
+        etiqueta_rendimiento = "Rendimiento observado en entrenamiento"
+        rendimiento_registrado = fila["RENDIMIENTO_T_HA"]
+    else:
+        etiqueta_rendimiento = "Estimación oficial de rendimiento"
+        rendimiento_registrado = fila["RENDIMIENTO_OFICIAL"]
+
+    def tarjeta_dato(etiqueta, valor):
+        return dbc.Col(
+            dbc.Card(
+                dbc.CardBody([
+                    html.Small(etiqueta, className="text-muted"),
+                    html.Div(valor, className="fw-bold mt-1"),
+                ]),
+                className="h-100 border-0 bg-light",
+            ),
+            xs=12,
+            sm=6,
+            lg=4,
+            className="mb-3",
+        )
+
+    detalle_parcela = dbc.Row([
+        tarjeta_dato("Parcela / conjunto", f"{parcela_id} · {fila['CONJUNTO'].capitalize()}"),
+        tarjeta_dato(etiqueta_rendimiento, mostrar_valor(rendimiento_registrado, "t/ha")),
+        tarjeta_dato("Área", mostrar_valor(fila["AREA_HA"], "ha")),
+        tarjeta_dato("Precipitación acumulada (ciclo 2025)", mostrar_valor(fila["precipitacion_acumulada_mm"], "mm")),
+        tarjeta_dato("Temperatura máxima promedio (ciclo 2025)", mostrar_valor(fila["tmax_media_ciclo_c"], "°C")),
+        tarjeta_dato("Temperatura mínima promedio (ciclo 2025)", mostrar_valor(fila["tmin_media_ciclo_c"], "°C")),
+        tarjeta_dato("Salud vegetal (NDVI Sentinel-2 promedio)", mostrar_valor(fila["basico_sentinel_2__ndvi__media_ciclo"])),
+        tarjeta_dato("Elevación", mostrar_valor(fila["elevacion_m"], "m")),
+        tarjeta_dato("Pendiente", mostrar_valor(fila["pendiente_grados"], "°")),
+        tarjeta_dato("Municipio", fila["Municipio"] if pd.notna(fila["Municipio"]) else "Sin dato registrado"),
+        tarjeta_dato("Estado", fila["Estado"] if pd.notna(fila["Estado"]) else "Sin dato registrado"),
+    ], className="g-2")
+
+    return fig, detalle_parcela
 #Descargar CSV de predicciones
 @app.callback(
     Output("descarga-csv-predicciones", "data"),
@@ -1245,5 +1480,5 @@ def descargar_resultados_csv(n_clicks, datos_tabla):
     
     # Dash enviará automáticamente el archivo al navegador del usuario
     return dcc.send_data_frame(df_descarga.to_csv, "AgroCebada_Predicciones_2025.csv", index=False)
-if __name__ == "__main__":
-    app.run(debug=False)
+if __name__ == '__main__':
+    app.run_server(debug=True)
