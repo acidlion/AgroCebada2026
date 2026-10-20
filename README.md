@@ -10,6 +10,8 @@ Repositorio oficial del equipo **Cebadatos** para el **Reto AgroCebada FIRA 2026
 
 El núcleo analítico está compuesto por un **Ensamble Híbrido 50/50** entre un modelo lineal regularizado (`Ridge`, 33 variables condensadas del ciclo) y un modelo de potenciación de gradiente (`XGBoost`, 303 variables mensuales desagregadas con ventana de pre-siembra). Los resultados se encuentran desplegados en una interfaz interactiva (*Dashboard*) orientada a mitigar la asimetría de información y facilitar la inclusión financiera y colocación de crédito rural formal respaldado por FIRA.
 
+El despliegue de la aplicación se hizo a través de https://render.com/
+# Al abrir la aplicación desde https://tlayolli-agro.onrender.com/ después de un periodo de inactividad, puede tomar un tiempo de varios segundos en cargar.
 ---
 
 ## Métricas Clave y Modelo Ganador
