@@ -1,0 +1,31 @@
+DISTANCIAS EN METROS
+
+         grupo  parcelas   min_m    p25_m  mediana_m  media_m    p75_m    p90_m     max_m
+validacion_OOF       138 653.409 1916.869   2821.139 3961.820 4971.808 9508.558 13754.902
+ prediccion_59        59  66.756  225.851    350.357  494.505  563.168 1076.104  1914.979
+
+DISTANCIAS POR FOLD
+
+ grupo  parcelas    min_m    p25_m  mediana_m  media_m     p75_m     p90_m     max_m
+fold_1        31  653.409 1130.616   1953.569 2077.549  2466.645  4006.680  4474.381
+fold_2        26  788.134 1310.990   2073.077 2587.562  2783.190  5444.742  7593.915
+fold_3        27  653.409 1962.755   2609.428 3316.538  4604.639  5805.577 10539.464
+fold_4        27 1249.991 3508.097   3951.107 4248.275  5307.685  6199.399  7408.054
+fold_5        27 1249.991 4355.770   9452.642 7807.427 10356.282 11214.803 13754.902
+
+PREDICCION: DIEZ PARCELAS MAS ALEJADAS
+
+             distancia_m vecino_etiquetado  supera_p90_distancia_OOF
+ID_POLIGONO                                                         
+AGC_065         1914.979           AGC_051                     False
+AGC_173         1698.681           AGC_187                     False
+AGC_174         1642.769           AGC_083                     False
+AGC_120         1258.656           AGC_054                     False
+AGC_147         1169.518           AGC_144                     False
+AGC_183         1086.046           AGC_163                     False
+AGC_118         1073.619           AGC_121                     False
+AGC_061          983.215           AGC_074                     False
+AGC_011          835.702           AGC_056                     False
+AGC_029          782.019           AGC_001                     False
+
+Parcelas de prediccion que superan el p90 OOF: 0 de 59.

@@ -1,0 +1,3 @@
+﻿modelo,MAE_OOF,RMSE_OOF,R2_OOF,sesgo_pred_menos_real,R2_train_media_folds,variables_seleccionadas_media,variables_seleccionadas_min,variables_seleccionadas_max,variables_seleccionadas_en_5_folds,folds_con_avisos_convergencia
+lasso_ciclo_anidado,0.5475645295860887,0.7045832086475278,0.3097603830244896,0.09274864464375221,0.6531848822912515,12.0,5,29,4,5
+lasso_mensual_anidado,0.5833880874785675,0.7627657739398425,0.19105741306553836,0.11507581038662025,0.6432607498564554,10.4,8,18,0,5

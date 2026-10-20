@@ -1,0 +1,97 @@
+EXPERIMENTO 4: DIAGNOSTICO TEMPORAL DE NDVI
+
+No se utilizo rendimiento ni se entrenaron modelos.
+No se cambiaron las bases de 33 y 213 variables.
+No se interpolaron ni suavizaron curvas.
+Sentinel-2 y Planet se analizaron por separado.
+Maximos: medias mensuales de abril-octubre.
+Minimo descriptivo para resumir maximo: 4 meses.
+Un maximo no es una fecha observada de siembra.
+Un maximo en abril u octubre puede estar limitado por la ventana analizada.
+En empates se registra el primer mes observado.
+
+Casos con nubosidad 100 y NDVI presente: 0
+
+COBERTURA POR VENTANA
+
+                       ventana     sensor  parcelas  meses_esperados  parcelas_con_algun_ndvi  meses_disponibles_mediana  meses_disponibles_min  meses_disponibles_max
+    antecedente_3m_ene_mar2025     Planet       197                3                      197                   3.000000                      3                      3
+    antecedente_3m_ene_mar2025 Sentinel-2       197                3                      197                   3.000000                      3                      3
+antecedente_6m_oct2024_mar2025     Planet       197                6                      197                   3.000000                      3                      3
+antecedente_6m_oct2024_mar2025 Sentinel-2       197                6                      197                   6.000000                      6                      6
+      ciclo_2024_abril_octubre     Planet       197                7                        0                   0.000000                      0                      0
+      ciclo_2024_abril_octubre Sentinel-2       197                7                      197                   7.000000                      6                      7
+      ciclo_2025_abril_octubre     Planet       197                7                      197                   7.000000                      7                      7
+      ciclo_2025_abril_octubre Sentinel-2       197                7                      197                   7.000000                      7                      7
+
+RESUMEN DE PERFILES
+
+    sensor  anio  parcelas  cobertura_completa  maximos_resumibles  maximos_en_borde  perfiles_con_empate
+    Planet  2024       197                   0                   0                 0                    0
+    Planet  2025       197                 197                 197                18                    0
+Sentinel-2  2024       197                 193                 197                14                    0
+Sentinel-2  2025       197                 197                 197                30                    0
+
+MESES CON MAXIMO OBSERVADO
+
+    sensor  anio  cobertura_completa  mes_maximo_observado  parcelas  total_perfiles_del_grupo  porcentaje_del_grupo
+    Planet  2025                True                     7         6                       197              3.045685
+    Planet  2025                True                     8        79                       197             40.101523
+    Planet  2025                True                     9        94                       197             47.715736
+    Planet  2025                True                    10        18                       197              9.137056
+Sentinel-2  2024               False                     8         4                         4            100.000000
+Sentinel-2  2024                True                     7         1                       193              0.518135
+Sentinel-2  2024                True                     8       120                       193             62.176166
+Sentinel-2  2024                True                     9        58                       193             30.051813
+Sentinel-2  2024                True                    10        14                       193              7.253886
+Sentinel-2  2025                True                     7        11                       197              5.583756
+Sentinel-2  2025                True                     8        96                       197             48.730964
+Sentinel-2  2025                True                     9        60                       197             30.456853
+Sentinel-2  2025                True                    10        30                       197             15.228426
+
+COBERTURA Y CURVA AGREGADA ABRIL-OCTUBRE 2025
+
+    sensor  fecha_mes  parcelas  parcelas_con_capturas  parcelas_con_ndvi  observaciones_validas  capturas  capturas_nubosidad_100  ndvi_medio_entre_parcelas  ndvi_mediano_entre_parcelas  porcentaje_parcelas_con_ndvi  anio  mes
+    Planet 2025-04-01       197                    197                197                   4476      4760                     284                   0.216984                     0.212240                    100.000000  2025    4
+    Planet 2025-05-01       197                    197                197                   3118      4436                    1318                   0.209711                     0.205846                    100.000000  2025    5
+    Planet 2025-06-01       197                    197                197                   1222      2213                     991                   0.308197                     0.297800                    100.000000  2025    6
+    Planet 2025-07-01       197                    197                197                   1796      2940                    1144                   0.534203                     0.522875                    100.000000  2025    7
+    Planet 2025-08-01       197                    197                197                   3215      4381                    1166                   0.633322                     0.638800                    100.000000  2025    8
+    Planet 2025-09-01       197                    197                197                   2142      3964                    1822                   0.665238                     0.660500                    100.000000  2025    9
+    Planet 2025-10-01       197                    197                197                   2279      3561                    1282                   0.562693                     0.558778                    100.000000  2025   10
+Sentinel-2 2025-04-01       197                    197                197                   1530      1576                      46                   0.145254                     0.138750                    100.000000  2025    4
+Sentinel-2 2025-05-01       197                    197                197                    911      1379                     468                   0.140236                     0.135750                    100.000000  2025    5
+Sentinel-2 2025-06-01       197                    197                197                    631      1576                     945                   0.200942                     0.187500                    100.000000  2025    6
+Sentinel-2 2025-07-01       197                    197                197                   1106      1379                     273                   0.462186                     0.460167                    100.000000  2025    7
+Sentinel-2 2025-08-01       197                    197                197                   1291      1379                      88                   0.539775                     0.545333                    100.000000  2025    8
+Sentinel-2 2025-09-01       197                    197                197                    854      1318                     464                   0.531785                     0.527667                    100.000000  2025    9
+Sentinel-2 2025-10-01       197                    197                197                   1029      1379                     350                   0.455661                     0.452833                    100.000000  2025   10
+
+PERFILES DE LAS SEIS PARCELAS DE EJEMPLO
+
+    sensor ID_POLIGONO  anio  meses_esperados  meses_con_ndvi  cobertura_completa  maximo_resumible  ndvi_medio_ciclo  ndvi_minimo  ndvi_maximo  amplitud_observada  mes_maximo_observado  numero_meses_empatados_maximo  maximo_en_borde_abril_octubre
+    Planet     AGC_001  2024                7               0               False             False               NaN          NaN          NaN                 NaN                  <NA>                              0                          False
+    Planet     AGC_040  2024                7               0               False             False               NaN          NaN          NaN                 NaN                  <NA>                              0                          False
+    Planet     AGC_079  2024                7               0               False             False               NaN          NaN          NaN                 NaN                  <NA>                              0                          False
+    Planet     AGC_118  2024                7               0               False             False               NaN          NaN          NaN                 NaN                  <NA>                              0                          False
+    Planet     AGC_157  2024                7               0               False             False               NaN          NaN          NaN                 NaN                  <NA>                              0                          False
+    Planet     AGC_197  2024                7               0               False             False               NaN          NaN          NaN                 NaN                  <NA>                              0                          False
+Sentinel-2     AGC_001  2024                7               7                True              True          0.324655     0.104500     0.672500            0.568000                     9                              1                          False
+Sentinel-2     AGC_040  2024                7               7                True              True          0.368236     0.120500     0.727600            0.607100                     8                              1                          False
+Sentinel-2     AGC_079  2024                7               7                True              True          0.332793     0.103833     0.728500            0.624667                     9                              1                          False
+Sentinel-2     AGC_118  2024                7               7                True              True          0.360845     0.110800     0.754000            0.643200                     8                              1                          False
+Sentinel-2     AGC_157  2024                7               7                True              True          0.304281     0.120667     0.568500            0.447833                     8                              1                          False
+Sentinel-2     AGC_197  2024                7               7                True              True          0.336350     0.126800     0.637250            0.510450                     8                              1                          False
+    Planet     AGC_001  2025                7               7                True              True          0.426584     0.171824     0.798909            0.627086                     9                              1                          False
+    Planet     AGC_040  2025                7               7                True              True          0.461488     0.204000     0.776462            0.572462                     9                              1                          False
+    Planet     AGC_079  2025                7               7                True              True          0.421097     0.173923     0.728067            0.554144                     8                              1                          False
+    Planet     AGC_118  2025                7               7                True              True          0.406907     0.201333     0.696813            0.495479                     8                              1                          False
+    Planet     AGC_157  2025                7               7                True              True          0.427153     0.189533     0.763786            0.574252                     9                              1                          False
+    Planet     AGC_197  2025                7               7                True              True          0.382673     0.205846     0.591300            0.385454                     9                              1                          False
+Sentinel-2     AGC_001  2025                7               7                True              True          0.313874     0.107750     0.593500            0.485750                     9                              1                          False
+Sentinel-2     AGC_040  2025                7               7                True              True          0.347834     0.123667     0.649800            0.526133                     9                              1                          False
+Sentinel-2     AGC_079  2025                7               7                True              True          0.337589     0.107500     0.604000            0.496500                     8                              1                          False
+Sentinel-2     AGC_118  2025                7               7                True              True          0.306563     0.137750     0.575429            0.437679                     8                              1                          False
+Sentinel-2     AGC_157  2025                7               7                True              True          0.325300     0.094800     0.620000            0.525200                     9                              1                          False
+Sentinel-2     AGC_197  2025                7               7                True              True          0.290205     0.129600     0.490333            0.360733                     9                              1                          False
+

@@ -1,0 +1,6 @@
+﻿variante,parcelas_totales,parcelas_train,parcelas_prediccion,variables,NA_train,NA_prediccion,parcelas_train_con_NA,columnas_totalmente_vacias_train
+e4_ciclo_dinamica,197,138,59,45,0,0,0,0
+e4_ciclo_dinamica_3m,197,138,59,47,0,0,0,0
+e4_ciclo_dinamica_6m,197,138,59,48,0,0,0,0
+e4_mensual_3m,197,138,59,303,7,1,7,0
+e4_mensual_6m,197,138,59,381,7,1,7,0

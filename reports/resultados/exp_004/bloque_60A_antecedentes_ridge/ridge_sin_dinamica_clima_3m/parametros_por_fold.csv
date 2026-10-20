@@ -1,0 +1,6 @@
+﻿modelo,fold,ridge__alpha
+ridge_sin_dinamica_clima_3m,1,10.0
+ridge_sin_dinamica_clima_3m,2,10.0
+ridge_sin_dinamica_clima_3m,3,100.0
+ridge_sin_dinamica_clima_3m,4,100.0
+ridge_sin_dinamica_clima_3m,5,10.0

@@ -1,0 +1,5 @@
+﻿modelo,folds_menor_RMSE_que_ridge,folds_menor_MAE_que_ridge,max_RMSE_fold,max_sesgo_absoluto_fold,R2_train_media_folds
+ridge_sin_dinamica_clima_3m,1,2,0.8056505836276436,0.39116367620277037,0.649490376406822
+ridge_sin_dinamica_clima_anual2024,2,2,0.7331489171750628,0.32389892038357176,0.7095854698719911
+ridge_sin_dinamica_ndvi_3m,3,2,0.7578370494915619,0.3786643992156025,0.690772074757537
+ridge_sin_dinamica_ndvi_6m,2,0,0.7637941024041601,0.38802935244166886,0.6927580717982406

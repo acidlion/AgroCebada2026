@@ -1,0 +1,6 @@
+﻿modelo,fold,regressor__kernelridge__alpha,regressor__kernelridge__gamma
+kernel_ridge_62B_rbf_ciclo,1,0.1,0.01
+kernel_ridge_62B_rbf_ciclo,2,0.1,0.01
+kernel_ridge_62B_rbf_ciclo,3,0.1,0.01
+kernel_ridge_62B_rbf_ciclo,4,0.1,0.001
+kernel_ridge_62B_rbf_ciclo,5,0.1,0.01

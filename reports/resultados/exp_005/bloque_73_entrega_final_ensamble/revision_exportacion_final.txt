@@ -1,0 +1,101 @@
+EXPORTACION FINAL DEL ENSAMBLE
+
+138 etiquetas utilizadas en el ajuste final.
+59 parcelas objetivo, únicas y verificadas.
+Pesos fijos: 50% Ridge y 50% XGBoost.
+Sin ExtraTrees, PLSR ni correcciones post hoc.
+CSV releído y modelos recargados con predicciones verificadas.
+No se sobrescribieron entregas anteriores.
+No se publicó ningún archivo en la plataforma.
+
+{
+  "procedimiento": "ensamble_ridge_xgb3m_50_50",
+  "n_train": 138,
+  "n_prediccion": 59,
+  "variables_ridge": 33,
+  "variables_xgboost": 303,
+  "fuente_xgboost": "tablas_e4_57['e4_mensual_3m']",
+  "alpha_final_ridge": 1.0,
+  "pesos": {
+    "ridge": 0.5,
+    "xgboost": 0.5
+  },
+  "columnas_entrega": [
+    "ID_PARCELA",
+    "RENDIMIENTO"
+  ],
+  "unidad": "t/ha",
+  "sha256_csv": "3f8f94b8043b9ed17e153462b7f6670f87df8de8c6e3b67b09458903e0696736",
+  "evaluacion_OOF_previa": {
+    "MAE_t_ha": 0.44887724471537443,
+    "RMSE_t_ha": 0.6114043954005277,
+    "R2": 0.4802524899094036,
+    "sesgo_t_ha": 0.05384323974386151
+  },
+  "nota_metricas": "Las métricas OOF corresponden a la evaluación previa; no son métricas medidas sobre estas 59 parcelas.",
+  "entregas_anteriores_sobrescritas": false,
+  "publicado_en_plataforma": false
+}
+
+PREDICCIONES
+
+ID_PARCELA  RENDIMIENTO
+   AGC_003     3.747446
+   AGC_011     4.738996
+   AGC_016     4.125193
+   AGC_025     2.865416
+   AGC_027     3.197555
+   AGC_028     4.560771
+   AGC_029     3.023826
+   AGC_030     3.165402
+   AGC_031     4.219763
+   AGC_036     4.395898
+   AGC_039     3.064194
+   AGC_042     3.116297
+   AGC_043     4.216417
+   AGC_050     2.977518
+   AGC_052     4.495126
+   AGC_061     2.834355
+   AGC_063     4.110591
+   AGC_065     4.156706
+   AGC_071     3.076832
+   AGC_075     3.041206
+   AGC_076     4.429232
+   AGC_082     4.280631
+   AGC_085     4.210385
+   AGC_086     2.883178
+   AGC_087     2.864797
+   AGC_088     4.395647
+   AGC_091     4.355934
+   AGC_093     3.037588
+   AGC_094     4.528803
+   AGC_095     4.345044
+   AGC_107     4.411050
+   AGC_113     3.064595
+   AGC_116     4.154717
+   AGC_118     3.544731
+   AGC_120     3.343261
+   AGC_126     4.591073
+   AGC_128     4.494786
+   AGC_129     3.274050
+   AGC_130     4.331438
+   AGC_136     4.439558
+   AGC_142     4.763525
+   AGC_143     4.349526
+   AGC_147     3.245817
+   AGC_149     4.400352
+   AGC_153     4.106232
+   AGC_154     4.714527
+   AGC_156     2.973500
+   AGC_158     4.253757
+   AGC_173     2.881765
+   AGC_174     4.288779
+   AGC_175     4.750720
+   AGC_177     4.484701
+   AGC_182     4.519292
+   AGC_183     2.935825
+   AGC_186     4.139050
+   AGC_188     4.820018
+   AGC_190     4.525271
+   AGC_191     4.764598
+   AGC_192     4.463709

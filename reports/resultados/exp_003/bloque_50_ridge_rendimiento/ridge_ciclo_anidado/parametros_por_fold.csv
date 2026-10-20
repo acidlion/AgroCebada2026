@@ -1,0 +1,6 @@
+﻿modelo,fold,ridge__alpha
+ridge_ciclo_anidado,1,10.0
+ridge_ciclo_anidado,2,10.0
+ridge_ciclo_anidado,3,10.0
+ridge_ciclo_anidado,4,10.0
+ridge_ciclo_anidado,5,10.0

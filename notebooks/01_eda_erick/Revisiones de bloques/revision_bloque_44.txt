@@ -1,0 +1,23 @@
+COMPARACION XGBOOST FIJO Y AJUSTE ANIDADO
+
+procedimiento  MAE_OOF  RMSE_OOF   R2_OOF  RMSE_media_folds  R2_media_folds  R2_train_media_folds
+     xgb_fijo 0.473144  0.636959 0.435897          0.634592       -0.499008              0.995824
+  xgb_anidado 0.484345  0.636049 0.437507          0.632166       -0.495956              0.917088
+
+RESULTADOS EXTERNOS POR FOLD
+
+ fold  n_train  n_validacion  RMSE_interno_seleccionado  MAE_val  RMSE_val    R2_val  R2_train  sesgo_pred_menos_real
+    1      107            31                   0.670194 0.465129  0.607283 -0.231051  0.974334              -0.114609
+    2      112            26                   0.742644 0.446014  0.605147 -0.065338  0.805048              -0.105840
+    3      111            27                   0.715934 0.430992  0.555000  0.176481  0.958388              -0.363996
+    4      111            27                   0.640286 0.482255  0.616491  0.371612  0.869684               0.442609
+    5      111            27                   0.672350 0.598760  0.776910 -2.731484  0.977984               0.524960
+
+PARAMETROS ELEGIDOS POR FOLD
+
+ fold  subsample  reg_lambda  reg_alpha  n_estimators  min_child_weight  max_depth  learning_rate  colsample_bytree
+    1        0.7        20.0        0.0           400                10          2           0.05               0.5
+    2        0.7        20.0        0.5           200                10          3           0.02               0.7
+    3        0.8        10.0        2.0           600                10          4           0.03               1.0
+    4        1.0        20.0        0.0           400                 3          2           0.02               0.7
+    5        1.0        20.0        0.5           600                 3          4           0.02               1.0

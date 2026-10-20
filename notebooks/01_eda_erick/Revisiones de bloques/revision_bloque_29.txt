@@ -1,0 +1,13 @@
+CLIMA Y TOPOGRAFIA POR PARCELA Y MES
+
+ filas  parcelas  meses  columnas  NA_totales
+  9456       197     48         9           0
+
+PRIMERAS CINCO FILAS
+
+ID_POLIGONO  anio  mes  fecha_mes  precipitacion_mm    tmax_c    tmin_c  elevacion_m  pendiente_grados
+    AGC_001  2022    1 2022-01-01         19.545547 20.292349  6.107370  2708.937487          3.039548
+    AGC_001  2022    2 2022-02-01         14.697198 21.410572  6.613323  2708.937487          3.039548
+    AGC_001  2022    3 2022-03-01          4.974521 24.541271  8.275019  2708.937487          3.039548
+    AGC_001  2022    4 2022-04-01         47.755169 25.377922 11.046246  2708.937487          3.039548
+    AGC_001  2022    5 2022-05-01         45.257622 26.147617 11.043602  2708.937487          3.039548

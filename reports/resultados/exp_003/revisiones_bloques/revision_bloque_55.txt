@@ -1,0 +1,108 @@
+LASSO: CICLO Y MESES SEPARADOS
+
+Sin seleccion previa basada en Ridge.
+Mismas parcelas y particiones externas anteriores.
+Alpha seleccionado dentro de cada entrenamiento.
+Mediana y escalado dentro del Pipeline.
+Coeficiente activo: abs(coef) > 1e-08.
+La frecuencia no es una probabilidad de importancia.
+Los coeficientes no son efectos causales.
+Los avisos pueden corresponder a candidatos internos.
+No se entreno un modelo final para las 59 parcelas.
+No se modifico la entrega vigente de Ridge.
+
+COMPARACION GLOBAL
+
+                  modelo  MAE_OOF  RMSE_OOF    R2_OOF  sesgo_pred_menos_real  delta_MAE_vs_ridge_ciclo  delta_RMSE_vs_ridge_ciclo
+     ridge_ciclo_anidado 0.470097  0.628702  0.450427               0.042333                  0.000000                   0.000000
+     xgb_mensual_anidado 0.484345  0.636049  0.437507               0.072404                  0.014248                   0.007347
+     xgb_meses_separados 0.473144  0.636959  0.435897               0.083965                  0.003048                   0.008257
+      rf_meses_separados 0.504797  0.678088  0.360696               0.114991                  0.034700                   0.049386
+catboost_mensual_anidado 0.513834  0.696484  0.325538               0.171786                  0.043738                   0.067782
+     lasso_ciclo_anidado 0.547565  0.704583  0.309760               0.092749                  0.077468                   0.075881
+   ridge_mensual_anidado 0.562753  0.732759  0.253451               0.101157                  0.092656                   0.104057
+        rf_resumen_ciclo 0.595045  0.745641  0.226973               0.123563                  0.124948                   0.116939
+   lasso_mensual_anidado 0.583388  0.762766  0.191057               0.115076                  0.113291                   0.134064
+       xgb_resumen_ciclo 0.621767  0.781536  0.150754               0.139551                  0.151670                   0.152834
+       mlp_resumen_ciclo 0.595298  0.828246  0.046207               0.126316                  0.125201                   0.199544
+          baseline_media 0.857892  0.958918 -0.278494              -0.002534                  0.387795                   0.330216
+     mlp_meses_separados 0.776576  0.993611 -0.372677               0.078145                  0.306479                   0.364909
+
+RESUMEN LASSO
+
+               modelo  MAE_OOF  RMSE_OOF   R2_OOF  sesgo_pred_menos_real  R2_train_media_folds  variables_seleccionadas_media  variables_seleccionadas_min  variables_seleccionadas_max  variables_seleccionadas_en_5_folds  folds_con_avisos_convergencia
+  lasso_ciclo_anidado 0.547565  0.704583 0.309760               0.092749              0.653185                      12.000000                            5                           29                                   4                              5
+lasso_mensual_anidado 0.583388  0.762766 0.191057               0.115076              0.643261                      10.400000                            8                           18                                   0                              5
+
+RESULTADOS POR FOLD
+
+               modelo  fold  n_train  n_validacion  variables_candidatas  variables_seleccionadas  alpha_elegido  alpha_en_extremo_rejilla  RMSE_interno_elegido  MAE_val  RMSE_val    R2_val  R2_train  sesgo_pred_menos_real  iteraciones_refit  dual_gap_refit  avisos_convergencia_busqueda  avisos_totales
+  lasso_ciclo_anidado     1      107            31                    33                        8       0.030000                     False              0.761569 0.500580  0.632176 -0.334045  0.707206              -0.252612                 92        0.000004                             3               3
+  lasso_ciclo_anidado     2      112            26                    33                        8       0.030000                     False              0.725123 0.365663  0.560840  0.084955  0.656186               0.064061                107        0.000001                             1               1
+  lasso_ciclo_anidado     3      111            27                    33                       29       0.000100                      True              0.719599 0.510723  0.663941 -0.178545  0.753453              -0.235649              50000        0.000349                             4               4
+  lasso_ciclo_anidado     4      111            27                    33                        5       0.100000                     False              0.667841 0.743320  0.840220 -0.167242  0.512905               0.542556                 10        0.000000                             3               3
+  lasso_ciclo_anidado     5      111            27                    33                       10       0.010000                     False              0.595798 0.617760  0.792978 -2.887425  0.636174               0.395490                 93        0.000006                             3               3
+lasso_mensual_anidado     1      107            31                   213                        8       0.100000                     False              0.770404 0.480823  0.597743 -0.192675  0.689354              -0.240819                176        0.000002                             4               4
+lasso_mensual_anidado     2      112            26                   213                        8       0.100000                     False              0.713947 0.417154  0.592763 -0.022180  0.653092              -0.091917                272        0.000000                             3               3
+lasso_mensual_anidado     3      111            27                   213                       10       0.100000                     False              0.757900 0.444555  0.563922  0.149794  0.638483              -0.343759                224        0.000000                             3               3
+lasso_mensual_anidado     4      111            27                   213                        8       0.100000                     False              0.674814 0.588708  0.700724  0.188163  0.568928               0.462913                 38        0.000000                             3               3
+lasso_mensual_anidado     5      111            27                   213                       18       0.030000                     False              0.605695 0.994738  1.189999 -7.754545  0.666447               0.834021                641        0.000001                             3               3
+
+VARIABLES MAS FRECUENTES: HASTA 15 POR VERSION
+
+               modelo                                         variable  folds_seleccionada  folds_positiva  folds_negativa  coeficiente_medio  abs_coeficiente_medio  frecuencia_seleccion
+  lasso_ciclo_anidado                               tmin_media_ciclo_c                   5               5               0           0.394882               0.394882              1.000000
+  lasso_ciclo_anidado                       precipitacion_acumulada_mm                   5               0               5          -0.166205               0.166205              1.000000
+  lasso_ciclo_anidado                               tmax_media_ciclo_c                   5               0               5          -0.161263               0.161263              1.000000
+  lasso_ciclo_anidado                                 pendiente_grados                   5               5               0           0.120237               0.120237              1.000000
+  lasso_ciclo_anidado            basico_sentinel_2__dswi3__media_ciclo                   4               3               1           0.052469               0.091843              0.800000
+  lasso_ciclo_anidado                basico_landsat__vi6t__media_ciclo                   3               3               0           0.103689               0.103689              0.600000
+  lasso_ciclo_anidado            basico_sentinel_2__dswi2__media_ciclo                   3               2               1           0.034184               0.036440              0.600000
+  lasso_ciclo_anidado              basico_sentinel_2__evi__media_ciclo                   2               1               1           0.430983               0.447509              0.400000
+  lasso_ciclo_anidado             basico_sentinel_2__ndti__media_ciclo                   2               2               0           0.434827               0.434827              0.400000
+  lasso_ciclo_anidado                     pro_planet__lai__media_ciclo                   2               0               2          -0.238616               0.238616              0.400000
+  lasso_ciclo_anidado                     pro_planet__evi__media_ciclo                   2               0               2          -0.224075               0.224075              0.400000
+  lasso_ciclo_anidado              basico_sentinel_2__sti__media_ciclo                   2               2               0           0.220919               0.220919              0.400000
+  lasso_ciclo_anidado                                      elevacion_m                   2               1               1           0.009740               0.023576              0.400000
+  lasso_ciclo_anidado            basico_sentinel_2__srndi__media_ciclo                   1               1               0           1.061824               1.061824              0.200000
+  lasso_ciclo_anidado             basico_sentinel_2__savi__media_ciclo                   1               0               1          -0.773531               0.773531              0.200000
+lasso_mensual_anidado                                  tmin_c__2025_04                   4               4               0           0.193105               0.193105              0.800000
+lasso_mensual_anidado                        precipitacion_mm__2025_06                   4               0               4          -0.123168               0.123168              0.800000
+lasso_mensual_anidado        pro_planet__msavi__media_mensual__2025_05                   4               4               0           0.092225               0.092225              0.800000
+lasso_mensual_anidado                        precipitacion_mm__2025_05                   4               0               4          -0.061755               0.061755              0.800000
+lasso_mensual_anidado  basico_sentinel_2__ndvi__media_mensual__2025_05                   4               4               0           0.046373               0.046373              0.800000
+lasso_mensual_anidado                                  tmax_c__2025_09                   3               0               3          -0.048496               0.048496              0.600000
+lasso_mensual_anidado   basico_sentinel_2__mra__media_mensual__2025_05                   3               3               0           0.009140               0.009140              0.600000
+lasso_mensual_anidado   basico_sentinel_2__evi__media_mensual__2025_06                   2               2               0           0.014586               0.014586              0.400000
+lasso_mensual_anidado                                  tmax_c__2025_05                   1               1               0           0.048352               0.048352              0.200000
+lasso_mensual_anidado                                  tmax_c__2025_04                   1               0               1          -0.028028               0.028028              0.200000
+lasso_mensual_anidado                                      elevacion_m                   1               1               0           0.019976               0.019976              0.200000
+lasso_mensual_anidado                                  tmax_c__2025_10                   1               0               1          -0.016300               0.016300              0.200000
+lasso_mensual_anidado basico_sentinel_2__dswi2__media_mensual__2025_09                   1               1               0           0.008701               0.008701              0.200000
+lasso_mensual_anidado basico_sentinel_2__ndsvi__media_mensual__2025_05                   1               1               0           0.008336               0.008336              0.200000
+lasso_mensual_anidado  basico_sentinel_2__savi__media_mensual__2025_05                   1               1               0           0.008273               0.008273              0.200000
+
+AVISOS: PRIMEROS 20; DETALLE COMPLETO EN CSV
+
+               modelo  fold          categoria  es_convergencia                                                                                                                                                                                              mensaje
+  lasso_ciclo_anidado     1 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.818e-03, tolerance: 5.282e-04
+  lasso_ciclo_anidado     1 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 5.290e-01, tolerance: 5.528e-04
+  lasso_ciclo_anidado     1 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.162e-02, tolerance: 4.186e-04
+  lasso_ciclo_anidado     2 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.706e-01, tolerance: 4.875e-04
+  lasso_ciclo_anidado     3 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.849e-03, tolerance: 5.434e-04
+  lasso_ciclo_anidado     3 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.706e-01, tolerance: 4.875e-04
+  lasso_ciclo_anidado     3 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.245e-02, tolerance: 3.991e-04
+  lasso_ciclo_anidado     3 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.869e-02, tolerance: 8.051e-04
+  lasso_ciclo_anidado     4 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.820e-02, tolerance: 5.845e-04
+  lasso_ciclo_anidado     4 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.919e-01, tolerance: 4.378e-04
+  lasso_ciclo_anidado     4 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 4.036e-01, tolerance: 4.178e-04
+  lasso_ciclo_anidado     5 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.924e-01, tolerance: 5.645e-04
+  lasso_ciclo_anidado     5 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.240e-02, tolerance: 5.033e-04
+  lasso_ciclo_anidado     5 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.552e-01, tolerance: 2.369e-04
+lasso_mensual_anidado     1 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.125e-03, tolerance: 5.282e-04
+lasso_mensual_anidado     1 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 4.324e-02, tolerance: 5.528e-04
+lasso_mensual_anidado     1 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 9.432e-03, tolerance: 4.186e-04
+lasso_mensual_anidado     1 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.641e-03, tolerance: 5.528e-04
+lasso_mensual_anidado     2 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.396e-02, tolerance: 5.312e-04
+lasso_mensual_anidado     2 ConvergenceWarning             True Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.342e-02, tolerance: 4.875e-04
+

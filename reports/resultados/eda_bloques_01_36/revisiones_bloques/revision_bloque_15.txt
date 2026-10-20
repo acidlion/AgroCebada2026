@@ -1,0 +1,10 @@
+RESULTADO DE LA IMPUTACION DE FAPAR
+
+ID_POLIGONO fecha_captura  porcentaje_nubosidad  fapar_promedio  fapar_std  fapar_max  fapar_min
+    AGC_086    07/12/2022                   0.0        0.074333   0.018333   0.204333   0.043333
+    AGC_019    07/12/2022                   0.0        0.095000   0.039667   0.309333   0.033000
+    AGC_173    07/12/2022                   0.0        0.179500   0.102500   0.559000   0.070000
+    AGC_103    07/12/2022                   0.0        0.097667   0.038333   0.259667   0.052000
+
+Celdas imputadas: 16
+Filas conservadas: 104610

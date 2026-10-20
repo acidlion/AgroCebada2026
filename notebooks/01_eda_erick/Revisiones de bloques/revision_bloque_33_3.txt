@@ -1,0 +1,19 @@
+TABLA MENSUAL POR PARCELA INTEGRADA
+
+ filas  IDs_unicos  columnas  parcelas_con_rendimiento  parcelas_sin_rendimiento  NA_area  NA_conjunto  NA_topografia  NA_indices_mensuales
+   197         197       426                       138                        59        0            0              0                     8
+
+DISTRIBUCION POR CONJUNTO
+
+     CONJUNTO  parcelas  con_rendimiento  sin_rendimiento
+ENTRENAMIENTO       138              138                0
+   PREDICCION        59                0               59
+
+PRIMERAS CINCO PARCELAS
+
+ID_POLIGONO  AREA_HA      CONJUNTO  RENDIMIENTO_T_HA  elevacion_m  pendiente_grados
+    AGC_001     7.61 ENTRENAMIENTO              3.50  2708.937487          3.039548
+    AGC_002     2.31 ENTRENAMIENTO              4.63  2611.461295          0.597507
+    AGC_003    18.68    PREDICCION               NaN  2642.600950          2.278437
+    AGC_004     8.00 ENTRENAMIENTO              3.00  2564.199598          1.345183
+    AGC_005     2.27 ENTRENAMIENTO              5.16  2623.981209          1.432019

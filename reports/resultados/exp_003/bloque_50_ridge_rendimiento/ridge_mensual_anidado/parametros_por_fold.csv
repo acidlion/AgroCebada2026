@@ -1,0 +1,6 @@
+﻿modelo,fold,ridge__alpha
+ridge_mensual_anidado,1,100.0
+ridge_mensual_anidado,2,100.0
+ridge_mensual_anidado,3,100.0
+ridge_mensual_anidado,4,1000.0
+ridge_mensual_anidado,5,100.0

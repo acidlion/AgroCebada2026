@@ -1,0 +1,2 @@
+﻿modelo,folds_menor_RMSE_que_ridge,folds_menor_RMSE_que_ensamble,max_RMSE_fold
+ridge_62C_ventanas_ndvi_evi,2,0,0.9093080401238309

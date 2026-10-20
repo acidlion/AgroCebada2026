@@ -1,0 +1,61 @@
+{
+  "modelo": "ridge_62C_ventanas_ndvi_evi",
+  "fuente": "df_parcela_meses_base",
+  "variables": [
+    "AREA_HA",
+    "precipitacion_acumulada_mm",
+    "tmax_media_ciclo_c",
+    "tmin_media_ciclo_c",
+    "elevacion_m",
+    "pendiente_grados",
+    "ventana__sentinel2__ndvi__abr_jun2025",
+    "ventana__sentinel2__ndvi__jul_ago2025",
+    "ventana__sentinel2__ndvi__sep_oct2025",
+    "ventana__sentinel2__evi__abr_jun2025",
+    "ventana__sentinel2__evi__jul_ago2025",
+    "ventana__sentinel2__evi__sep_oct2025",
+    "ventana__planet__ndvi__abr_jun2025",
+    "ventana__planet__ndvi__jul_ago2025",
+    "ventana__planet__ndvi__sep_oct2025",
+    "ventana__planet__evi__abr_jun2025",
+    "ventana__planet__evi__jul_ago2025",
+    "ventana__planet__evi__sep_oct2025"
+  ],
+  "ventanas": {
+    "abr_jun2025": [
+      4,
+      5,
+      6
+    ],
+    "jul_ago2025": [
+      7,
+      8
+    ],
+    "sep_oct2025": [
+      9,
+      10
+    ]
+  },
+  "rejilla": {
+    "ridge__alpha": [
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0
+    ]
+  },
+  "regla_agregacion": "Media de medias mensuales, igual peso por mes; si falta algun mes, la ventana queda como NA",
+  "regla_imputacion": "Mediana dentro del Pipeline en cada entrenamiento",
+  "notas": [
+    "Mismas 138 etiquetas y particiones espaciales.",
+    "No se usan las 59 parcelas para seleccionar parametros.",
+    "No se agregan antecedentes ni dinamica.",
+    "Ventanas temporales; no etapas fenologicas verificadas.",
+    "Se sustituyen otros indices y se elimina VI6T.",
+    "No aisla exclusivamente el efecto de las ventanas.",
+    "Comparacion exploratoria sobre folds ya consultados.",
+    "No se selecciona automaticamente un modelo final.",
+    "No se modifica ninguna entrega."
+  ]
+}

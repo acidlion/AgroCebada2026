@@ -1,0 +1,2 @@
+﻿modelo,folds_menor_RMSE_que_ridge,folds_menor_RMSE_que_ensamble,max_RMSE_fold
+kernel_ridge_62B_rbf_ciclo,2,1,0.7814026192172085

@@ -1,0 +1,16 @@
+REVISION DEL SHAPEFILE DE PARCELAS
+
+CRS: EPSG:4326
+Columnas: ['Cultivo', 'ID_POLIGON', 'área_ha', 'Municipio', 'Estado', 'CONJUNTO', 'geometry']
+
+ filas  geometrias_nulas  geometrias_vacias  geometrias_no_validas_no_nulas
+   197                 0                  0                               0
+
+PRIMERAS CINCO FILAS SIN GEOMETRIA
+
+Cultivo ID_POLIGON  área_ha             Municipio  Estado      CONJUNTO
+ Cebada    AGC_196     8.57       Emiliano Zapata Hidalgo ENTRENAMIENTO
+ Cebada    AGC_044     0.68       Emiliano Zapata Hidalgo ENTRENAMIENTO
+ Cebada    AGC_020     8.34       Emiliano Zapata Hidalgo ENTRENAMIENTO
+ CEBADA    AGC_174     6.89 Cuautepec de Hinojosa Hidalgo    PREDICCION
+ CEBADA    AGC_083     2.87 Cuautepec de Hinojosa Hidalgo ENTRENAMIENTO

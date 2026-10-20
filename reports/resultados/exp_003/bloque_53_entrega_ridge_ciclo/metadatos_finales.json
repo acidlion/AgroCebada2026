@@ -1,0 +1,80 @@
+{
+  "procedimiento": "Ridge con resumen del ciclo",
+  "variables": [
+    "AREA_HA",
+    "precipitacion_acumulada_mm",
+    "tmax_media_ciclo_c",
+    "tmin_media_ciclo_c",
+    "elevacion_m",
+    "pendiente_grados",
+    "basico_landsat__vi6t__media_ciclo",
+    "basico_sentinel_2__ndvi__media_ciclo",
+    "basico_sentinel_2__evi__media_ciclo",
+    "basico_sentinel_2__crc__media_ciclo",
+    "basico_sentinel_2__mcrc__media_ciclo",
+    "basico_sentinel_2__ndsvi__media_ciclo",
+    "basico_sentinel_2__srndi__media_ciclo",
+    "basico_sentinel_2__mra__media_ciclo",
+    "basico_sentinel_2__lai__media_ciclo",
+    "basico_sentinel_2__fapar__media_ciclo",
+    "basico_sentinel_2__savi__media_ciclo",
+    "basico_sentinel_2__ndti__media_ciclo",
+    "basico_sentinel_2__sti__media_ciclo",
+    "basico_sentinel_2__ndwi__media_ciclo",
+    "basico_sentinel_2__endwi__media_ciclo",
+    "basico_sentinel_2__msi__media_ciclo",
+    "basico_sentinel_2__emsi__media_ciclo",
+    "basico_sentinel_2__dswi2__media_ciclo",
+    "basico_sentinel_2__dswi3__media_ciclo",
+    "basico_sentinel_2__dswi4__media_ciclo",
+    "basico_sentinel_2__dswi5__media_ciclo",
+    "basico_sentinel_2__nddi__media_ciclo",
+    "basico_sentinel_2__enddi__media_ciclo",
+    "pro_planet__ndvi__media_ciclo",
+    "pro_planet__evi__media_ciclo",
+    "pro_planet__lai__media_ciclo",
+    "pro_planet__msavi__media_ciclo"
+  ],
+  "parcelas_entrenamiento": 138,
+  "parcelas_prediccion": 59,
+  "rejilla": {
+    "ridge__alpha": [
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0
+    ]
+  },
+  "seleccion": "menor RMSE medio en tres folds por grupos",
+  "preprocesamiento": [
+    "mediana dentro de cada entrenamiento",
+    "StandardScaler dentro de cada entrenamiento"
+  ],
+  "evaluacion_del_procedimiento": "OOF espacial anidada del bloque 50",
+  "notas": [
+    "La seleccion actual utiliza solo las 138 etiquetas conocidas.",
+    "El RMSE interno no reemplaza la evaluacion del bloque 50.",
+    "No se aplican recortes a entradas ni predicciones.",
+    "No se sobrescribe la entrega de XGBoost.",
+    "La comparacion de modelos fue exploratoria."
+  ],
+  "alpha_elegido": 1.0,
+  "RMSE_interno_solo_para_seleccion": 0.7237142858516524,
+  "evaluacion_OOF_previa": {
+    "modelo": "ridge_ciclo_anidado",
+    "MAE_OOF": 0.4700966721342612,
+    "RMSE_OOF": 0.6287020903174452,
+    "R2_OOF": 0.4504273481669254,
+    "sesgo_pred_menos_real": 0.042332692646040254,
+    "R2_train_media_folds": 0.6683667195119355
+  },
+  "predicciones_negativas": 0,
+  "python": "3.13.6",
+  "scikit_learn": "1.7.2",
+  "numpy": "2.3.2",
+  "pandas": "2.3.1",
+  "joblib": "1.5.2",
+  "sha256_modelo": "80f61f94c9c044fdee647516c73a863d4a56d4ba5cc3b2c15b6255cf05182cc7",
+  "sha256_entrega": "9fd4793d4f4a517c4070c432de3547cea85b14eb72e31d91a489e208baceb3d7"
+}

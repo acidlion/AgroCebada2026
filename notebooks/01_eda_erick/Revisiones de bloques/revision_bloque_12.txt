@@ -1,0 +1,13 @@
+DONANTES UTILIZADOS
+
+ID_POLIGONO fecha_captura  porcentaje_nubosidad  vi6t_promedio  vi6t_std  vi6t_max  vi6t_min
+    AGC_013    12/04/2022                 97.73         -0.620     0.001    -0.618    -0.621
+    AGC_013    06/07/2024                 96.59         -0.624     0.021    -0.596    -0.647
+    AGC_013    27/11/2024                 98.86         -0.644     0.000    -0.644    -0.644
+
+VALORES IMPUTADOS
+
+vi6t_promedio   -0.629333
+vi6t_std         0.007333
+vi6t_max        -0.619333
+vi6t_min        -0.637333

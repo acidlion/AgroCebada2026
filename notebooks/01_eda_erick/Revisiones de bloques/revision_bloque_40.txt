@@ -1,0 +1,33 @@
+DISTRIBUCION Y SESGO POR FOLD
+
+ fold  n_validacion  rendimiento_medio_train  rendimiento_medio_val  rendimiento_std_val  rendimiento_min_val  rendimiento_max_val  prediccion_media_mensual  sesgo_mensual_pred_menos_real
+    1            31                 3.851776               4.312903             0.547335             2.150000             5.010000                  4.392970                       0.080066
+    2            26                 3.822321               4.528462             0.586297             2.640000             5.460000                  4.468351                      -0.060110
+    3            27                 3.831892               4.462963             0.611585             3.000000             5.590000                  3.990900                      -0.472063
+    4            27                 4.092252               3.392593             0.777701             2.500000             4.870000                  3.807634                       0.415041
+    5            27                 4.176036               3.048148             0.402189             2.000000             3.700000                  3.658857                       0.610709
+
+FOLD 5: CON Y SIN FALTANTES
+
+ tiene_NA_mensual  parcelas  rendimiento_medio  MAE_mensual  RMSE_mensual  sesgo_pred_menos_real
+            False        20           3.030000     0.674047      0.850573               0.543313
+             True         7           3.100000     0.999310      1.121410               0.803271
+
+MAYORES ERRORES DEL MODELO MENSUAL
+
+ID_POLIGONO  rendimiento_observado  baseline_media  rf_resumen_ciclo  rf_meses_separados  bloque_espacial  fold_validacion  tiene_NA_mensual  error_mensual  error_absoluto_mensual
+    AGC_171               2.150000        3.851776          4.121490            4.399210                6                1             False       2.249210                2.249210
+    AGC_034               2.000000        4.176036          3.988908            4.055031                2                5              True       2.055031                2.055031
+    AGC_041               2.500000        4.176036          4.104724            4.439811                2                5             False       1.939811                1.939811
+    AGC_015               2.640000        3.822321          4.407169            4.537534                1                2             False       1.897534                1.897534
+    AGC_166               2.500000        4.176036          4.119146            4.311044                2                5             False       1.811044                1.811044
+    AGC_162               5.590000        3.831892          4.313171            3.959928                5                3             False      -1.630072                1.630072
+    AGC_024               3.030000        3.851776          4.433263            4.457218                6                1             False       1.427218                1.427218
+    AGC_127               5.570000        3.831892          4.286401            4.354369                5                3             False      -1.215631                1.215631
+    AGC_067               3.000000        4.176036          4.557883            4.212525                2                5              True       1.212525                1.212525
+    AGC_078               3.000000        4.176036          4.333634            4.192874                2                5              True       1.192874                1.192874
+    AGC_160               3.620000        3.822321          4.350402            4.771028                1                2             False       1.151028                1.151028
+    AGC_058               2.500000        4.092252          3.860634            3.624902                3                4             False       1.124902                1.124902
+    AGC_048               2.500000        4.092252          3.875251            3.598610                3                4             False       1.098610                1.098610
+    AGC_068               2.500000        4.092252          3.865097            3.592678                3                4             False       1.092678                1.092678
+    AGC_169               2.500000        4.092252          3.832966            3.590277                3                4             False       1.090277                1.090277

@@ -1,0 +1,93 @@
+AUDITORIA DESCRIPTIVA DE ERRORES OOF
+
+Error = prediccion menos observado.
+Compartido grande = ambos errores absolutos >= P80 de su modelo y mismo signo.
+Umbrales solo para priorizar inspeccion.
+Vecinos: entrenamiento del fold, 33 variables originales.
+Escalado ajustado solo en entrenamiento del fold.
+Distancias no prueban anomalias ni errores de etiqueta.
+No se reentrenaron modelos predictivos.
+No se eliminaron parcelas ni se modifico la entrega.
+
+PENDIENTES CON FUENTES ORIGINALES:
+- Verificar identidad y rendimiento registrado.
+- Revisar cobertura y nubosidad.
+- Inspeccionar curvas mensuales por sensor.
+- Documentar evidencia antes de corregir datos.
+
+RESUMEN GENERAL
+
+ parcelas  umbral_abs_error_ridge_p80  umbral_abs_error_xgb_p80  compartidos_grandes  mismo_signo  signos_opuestos  correlacion_errores
+      138                    0.711112                  0.647931                   19          113               25             0.897254
+
+RESUMEN POR FOLD
+
+ fold  parcelas  rendimiento_medio  rendimiento_std  compartidos_grandes  ambos_sobreestiman  ambos_subestiman  signos_opuestos  MAE_ridge  RMSE_ridge  sesgo_ridge  MAE_xgb  RMSE_xgb  sesgo_xgb  MAE_ensamble  RMSE_ensamble  sesgo_ensamble
+    1        31           4.312903         0.556382                    2                   6                21                4   0.510727    0.657937    -0.243262 0.391652  0.553586  -0.060439      0.436702       0.588368       -0.151851
+    2        26           4.528462         0.597908                    3                  10                11                5   0.368536    0.557214     0.048804 0.423252  0.619016  -0.032564      0.382701       0.572529        0.008120
+    3        27           4.462963         0.623235                    4                   5                16                6   0.416018    0.562560    -0.268910 0.446314  0.570517  -0.390012      0.410643       0.542667       -0.329461
+    4        27           3.392593         0.792516                    5                  17                 5                5   0.462721    0.572739     0.336278 0.483525  0.594466   0.375158      0.456179       0.570494        0.355718
+    5        27           3.048148         0.409850                    5                  19                 3                5   0.582700    0.761410     0.381303 0.559395  0.779726   0.449636      0.557513       0.759966        0.415469
+
+PATRONES
+
+      patron_error  parcelas  compartidos_grandes  MAE_ridge  MAE_xgb  MAE_ensamble
+ambos_sobreestiman        57                   13   0.601677 0.594484      0.598081
+  ambos_subestiman        56                    6   0.489535 0.433684      0.461610
+   signos_opuestos        25                    0   0.126552 0.207326      0.080173
+
+SOPORTE DESCRIPTIVO
+
+              grupo  parcelas  mediana_percentil_distancia  mediana_variables_fuera_rango  mediana_abs_diferencia_media_vecinos
+compartidos_grandes        19                    77.678571                       1.000000                              1.082000
+              resto       119                    78.378378                       1.000000                              0.522000
+
+COMPARTIDOS GRANDES
+
+             fold_validacion  rendimiento_observado  ridge_ciclo_anidado  xgb_e4_mensual_3m  error_ridge  error_xgb  abs_error_ensamble        patron_error  percentil_distancia_vs_train  n_variables_fuera_rango_train  observado_menos_media_5_vecinos
+ID_POLIGONO                                                                                                                                                                                                                                              
+AGC_171                    1               2.150000             4.154495           4.110335     2.004495   1.960335            1.982415  ambos_sobreestiman                     63.551402                              0                        -1.072000
+AGC_015                    2               2.640000             4.728116           4.592427     2.088116   1.952427            2.020272  ambos_sobreestiman                     77.678571                              0                        -1.798000
+AGC_041                    5               2.500000             4.207406           4.601327     1.707406   2.101327            1.904367  ambos_sobreestiman                     96.396396                              1                        -1.446000
+AGC_034                    5               2.000000             3.860249           3.643805     1.860249   1.643805            1.752027  ambos_sobreestiman                     98.198198                              1                        -2.074000
+AGC_166                    5               2.500000             4.119209           4.479155     1.619209   1.979155            1.799182  ambos_sobreestiman                     88.288288                              2                        -1.898000
+AGC_162                    3               5.590000             4.306732           4.201081    -1.283268  -1.388919            1.336094    ambos_subestiman                    100.000000                              8                         0.962000
+AGC_127                    3               5.570000             4.327619           4.312642    -1.242381  -1.257358            1.249869    ambos_subestiman                     96.396396                              1                         1.082000
+AGC_024                    1               3.030000             4.235345           4.420869     1.205345   1.390869            1.298107  ambos_sobreestiman                     63.551402                              0                        -1.562000
+AGC_058                    4               2.500000             3.543689           3.763674     1.043689   1.263674            1.153681  ambos_sobreestiman                     64.864865                              0                        -0.920000
+AGC_048                    4               2.500000             3.566033           3.542005     1.066033   1.042005            1.054019  ambos_sobreestiman                     36.936937                              0                        -0.500000
+AGC_138                    4               2.500000             3.713294           3.463906     1.213294   0.963906            1.088600  ambos_sobreestiman                     23.423423                              0                        -1.190000
+AGC_068                    4               2.500000             3.453458           3.596028     0.953458   1.096028            1.024743  ambos_sobreestiman                     63.063063                              1                        -1.332000
+AGC_160                    2               3.620000             4.654825           4.570927     1.034825   0.950927            0.992876  ambos_sobreestiman                     77.678571                              0                        -1.034000
+AGC_169                    4               2.500000             3.428672           3.620089     0.928672   1.120089            1.024380  ambos_sobreestiman                     29.729730                              0                        -1.246000
+AGC_172                    3               5.190000             4.350487           4.424503    -0.839513  -0.765497            0.802505    ambos_subestiman                     87.387387                              1                         0.470000
+AGC_067                    5               3.000000             4.049182           3.757935     1.049182   0.757935            0.903559  ambos_sobreestiman                     98.198198                              1                        -1.274000
+AGC_055                    2               5.450000             4.707803           4.457619    -0.742197  -0.992381            0.867289    ambos_subestiman                     70.535714                              0                         1.008000
+AGC_049                    3               5.530000             4.790612           4.592672    -0.739388  -0.937328            0.838358    ambos_subestiman                     62.162162                              2                         0.726000
+AGC_001                    5               3.500000             2.433263           2.809625    -1.066737  -0.690375            0.878556    ambos_subestiman                     95.495495                              2                        -0.214000
+
+TOP 20 ERRORES DEL ENSAMBLE
+
+             fold_validacion  rendimiento_observado  ridge_ciclo_anidado  xgb_e4_mensual_3m  error_ridge  error_xgb  abs_error_ensamble        patron_error  percentil_distancia_vs_train  n_variables_fuera_rango_train  observado_menos_media_5_vecinos
+ID_POLIGONO                                                                                                                                                                                                                                              
+AGC_015                    2               2.640000             4.728116           4.592427     2.088116   1.952427            2.020272  ambos_sobreestiman                     77.678571                              0                        -1.798000
+AGC_171                    1               2.150000             4.154495           4.110335     2.004495   1.960335            1.982415  ambos_sobreestiman                     63.551402                              0                        -1.072000
+AGC_041                    5               2.500000             4.207406           4.601327     1.707406   2.101327            1.904367  ambos_sobreestiman                     96.396396                              1                        -1.446000
+AGC_166                    5               2.500000             4.119209           4.479155     1.619209   1.979155            1.799182  ambos_sobreestiman                     88.288288                              2                        -1.898000
+AGC_034                    5               2.000000             3.860249           3.643805     1.860249   1.643805            1.752027  ambos_sobreestiman                     98.198198                              1                        -2.074000
+AGC_162                    3               5.590000             4.306732           4.201081    -1.283268  -1.388919            1.336094    ambos_subestiman                    100.000000                              8                         0.962000
+AGC_024                    1               3.030000             4.235345           4.420869     1.205345   1.390869            1.298107  ambos_sobreestiman                     63.551402                              0                        -1.562000
+AGC_127                    3               5.570000             4.327619           4.312642    -1.242381  -1.257358            1.249869    ambos_subestiman                     96.396396                              1                         1.082000
+AGC_058                    4               2.500000             3.543689           3.763674     1.043689   1.263674            1.153681  ambos_sobreestiman                     64.864865                              0                        -0.920000
+AGC_138                    4               2.500000             3.713294           3.463906     1.213294   0.963906            1.088600  ambos_sobreestiman                     23.423423                              0                        -1.190000
+AGC_048                    4               2.500000             3.566033           3.542005     1.066033   1.042005            1.054019  ambos_sobreestiman                     36.936937                              0                        -0.500000
+AGC_068                    4               2.500000             3.453458           3.596028     0.953458   1.096028            1.024743  ambos_sobreestiman                     63.063063                              1                        -1.332000
+AGC_169                    4               2.500000             3.428672           3.620089     0.928672   1.120089            1.024380  ambos_sobreestiman                     29.729730                              0                        -1.246000
+AGC_160                    2               3.620000             4.654825           4.570927     1.034825   0.950927            0.992876  ambos_sobreestiman                     77.678571                              0                        -1.034000
+AGC_067                    5               3.000000             4.049182           3.757935     1.049182   0.757935            0.903559  ambos_sobreestiman                     98.198198                              1                        -1.274000
+AGC_001                    5               3.500000             2.433263           2.809625    -1.066737  -0.690375            0.878556    ambos_subestiman                     95.495495                              2                        -0.214000
+AGC_009                    3               4.790000             4.150109           3.678678    -0.639891  -1.111322            0.875607    ambos_subestiman                     91.891892                              2                         1.228000
+AGC_055                    2               5.450000             4.707803           4.457619    -0.742197  -0.992381            0.867289    ambos_subestiman                     70.535714                              0                         1.008000
+AGC_049                    3               5.530000             4.790612           4.592672    -0.739388  -0.937328            0.838358    ambos_subestiman                     62.162162                              2                         0.726000
+AGC_194                    5               3.200000             3.900667           4.148059     0.700667   0.948059            0.824363  ambos_sobreestiman                     94.594595                              2                        -1.378000
+

@@ -1,0 +1,20 @@
+RESUMEN DE ARCHIVOS DE LOS INVENTARIOS
+
+   inventario  registros_revisados  archivos_encontrados  no_encontrados
+precipitacion                   48                    48               0
+  temperatura                   96                    96               0
+   topografia                    2                     2               0
+
+ARCHIVOS NO ENCONTRADOS
+
+Empty DataFrame
+Columns: [inventario, archivo, ruta, existe]
+Index: []
+
+COMPONENTES DEL SHAPEFILE
+
+                                                                                                                                                                    archivo  existe
+C:\Users\navae\OneDrive\Escritorio\Tec\Semestre 7\AgroCebada\AgroCebada2026\data\raw\DATASET_RETO_AGRO_2026\Parcelas_Reto_AGC_CONJUNTO_70_30\Parcelas_Reto_AGC_CONJUNTO.shp    True
+C:\Users\navae\OneDrive\Escritorio\Tec\Semestre 7\AgroCebada\AgroCebada2026\data\raw\DATASET_RETO_AGRO_2026\Parcelas_Reto_AGC_CONJUNTO_70_30\Parcelas_Reto_AGC_CONJUNTO.shx    True
+C:\Users\navae\OneDrive\Escritorio\Tec\Semestre 7\AgroCebada\AgroCebada2026\data\raw\DATASET_RETO_AGRO_2026\Parcelas_Reto_AGC_CONJUNTO_70_30\Parcelas_Reto_AGC_CONJUNTO.dbf    True
+C:\Users\navae\OneDrive\Escritorio\Tec\Semestre 7\AgroCebada\AgroCebada2026\data\raw\DATASET_RETO_AGRO_2026\Parcelas_Reto_AGC_CONJUNTO_70_30\Parcelas_Reto_AGC_CONJUNTO.prj    True

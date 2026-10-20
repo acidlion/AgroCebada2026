@@ -1,0 +1,12 @@
+RESUMEN DE EXTRACCION CLIMATICA COMPLETA
+
+     variable  registros  parcelas  valores_faltantes  menor_media  mayor_media
+Precipitacion       9456       197                  0     0.000000   392.024017
+         Tmax       9456       197                  0    18.760885    30.158184
+         Tmin       9456       197                  0     5.415943    16.259834
+
+FALTANTES POR VARIABLE Y PERIODO
+
+Empty DataFrame
+Columns: [variable, anio, mes, parcelas_sin_valor]
+Index: []

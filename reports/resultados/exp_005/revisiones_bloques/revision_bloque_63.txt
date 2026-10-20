@@ -1,0 +1,61 @@
+CONSOLIDACION 62A-C Y COMPROBACION VI6T
+
+Nueve procedimientos: tres referencias y seis nuevos.
+Metricas recalculadas desde predicciones OOF.
+No se entrenaron modelos ni se modificaron entregas.
+VI6T: comparacion con media de meses disponibles.
+La concordancia no verifica toda la trazabilidad.
+La comparacion Ridge 33 vs 32 no se ejecuto.
+
+COMPARACION GLOBAL
+
+                     modelo     origen          MAE         RMSE           R2  sesgo_pred_menos_real  delta_MAE_vs_ridge_original  delta_RMSE_vs_ridge_original  delta_R2_vs_ridge_original  delta_MAE_vs_ensamble  delta_RMSE_vs_ensamble  delta_R2_vs_ensamble
+ ensamble_ridge_xgb3m_50_50 referencia 0.4488772447 0.6114043954 0.4802524899           0.0538432397                -0.0212194274                 -0.0172976949                0.0298251417           0.0000000000            0.0000000000          0.0000000000
+          xgb_e4_mensual_3m referencia 0.4590948183 0.6267461717 0.4538415163           0.0653537868                -0.0110018538                 -0.0019559186                0.0034141681           0.0102175736            0.0153417763         -0.0264109736
+        ridge_ciclo_anidado referencia 0.4700966721 0.6287020903 0.4504273482           0.0423326926                 0.0000000000                  0.0000000000                0.0000000000           0.0212194274            0.0172976949         -0.0298251417
+ridge_62A_ndvi_evi_ambiente        62A 0.5162712576 0.6657451846 0.3837578899           0.0350843541                 0.0461745854                  0.0370430942               -0.0666694583           0.0673940128            0.0543407892         -0.0964946000
+ kernel_ridge_62B_rbf_ciclo        62B 0.5172771110 0.6678353664 0.3798822927           0.0412606548                 0.0471804389                  0.0391332761               -0.0705450554           0.0683998663            0.0564309710         -0.1003701972
+  ridge_62A_planet_ambiente        62A 0.5350495119 0.6862671622 0.3451802929           0.0190918993                 0.0649528398                  0.0575650718               -0.1052470552           0.0861722672            0.0748627668         -0.1350721970
+ridge_62A_sentinel_ambiente        62A 0.5265370866 0.6870444769 0.3436960627           0.0575252728                 0.0564404144                  0.0583423865               -0.1067312855           0.0776598418            0.0756400815         -0.1365564272
+    ridge_62A_solo_ambiente        62A 0.5516130411 0.6977720606 0.3230408601           0.1245691096                 0.0815163689                  0.0690699703               -0.1273864881           0.1027357964            0.0863676652         -0.1572116299
+ridge_62C_ventanas_ndvi_evi        62C 0.5618340880 0.7275395058 0.2640497354           0.1140331992                 0.0917374159                  0.0988374154               -0.1863776128           0.1129568433            0.1161351104         -0.2162027545
+
+RESUMEN VI6T
+
+ parcelas  minimo_meses_disponibles  parcelas_con_7_meses  parcelas_con_menos_de_7_meses  parcelas_sin_meses  parcelas_concordantes  max_diferencia_absoluta
+      138                         6                   131                              7                   0                    138             0.0000000000
+
+COBERTURA VI6T
+
+ meses_disponibles  parcelas
+                 6         7
+                 7       131
+
+DISCREPANCIAS VI6T
+
+Empty DataFrame
+Columns: [basico_landsat__vi6t__media_mensual__2025_04, basico_landsat__vi6t__media_mensual__2025_05, basico_landsat__vi6t__media_mensual__2025_06, basico_landsat__vi6t__media_mensual__2025_07, basico_landsat__vi6t__media_mensual__2025_08, basico_landsat__vi6t__media_mensual__2025_09, basico_landsat__vi6t__media_mensual__2025_10, meses_disponibles, media_mensual_reconstruida, valor_usado_en_X_ciclo, diferencia_ciclo_menos_reconstruida, coincide_con_tolerancia]
+Index: []
+
+ESTADO Y PENDIENTES
+
+{
+  "alcance": "Consolidacion 62A-C y concordancia mensual de VI6T",
+  "mejor_RMSE_observado_en_esta_tabla": "ensamble_ridge_xgb3m_50_50",
+  "VI6T_concordancia_mensual_completa": true,
+  "trazabilidad_original_VI6T_totalmente_verificada": false,
+  "pendientes": [
+    "Confirmar la ruta desde observaciones Landsat hasta la tabla mensual utilizada.",
+    "Distinguir tablas experimentales imputadas de las fuentes usadas en X_ciclo.",
+    "Confirmar definicion y unidades antes de dar una interpretacion agronomica a VI6T."
+  ],
+  "limitaciones": [
+    "Coincidir con medias mensuales no demuestra que esas medias no hayan sido modificadas previamente.",
+    "Una discrepancia no demuestra fuga de informacion.",
+    "Resultados sobre folds consultados durante el desarrollo.",
+    "No es una evaluacion final independiente."
+  ],
+  "modelos_entrenados_en_este_bloque": 0,
+  "entregas_modificadas": false,
+  "comparacion_33_vs_32_ejecutada": false
+}

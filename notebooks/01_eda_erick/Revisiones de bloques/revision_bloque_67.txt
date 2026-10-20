@@ -1,0 +1,116 @@
+SVR RBF CON 33 Y 213 VARIABLES
+
+Entradas: X_ciclo y X_mensual originales.
+Mismas 138 etiquetas y particiones espaciales.
+Seleccion interna de C, epsilon y gamma por RMSE.
+36 combinaciones por busqueda interna.
+Imputacion y escalado de X dentro del Pipeline.
+y sin estandarizar; epsilon en t/ha.
+Gamma relativo al numero de variables: 0.1/p, 1/p, 10/p.
+No se agregan antecedentes ni variables del bloque 65.
+MAE, RMSE y sesgo en t/ha; R2 sin unidades.
+Delta MAE/RMSE negativo indica mejora.
+Delta R2 positivo indica mejora.
+Recuentos por fold no prueban significancia.
+Comparacion exploratoria sobre folds ya consultados.
+No se selecciono automaticamente un modelo final.
+No se generaron nuevos ensambles ni entregas.
+
+REPRESENTACIONES
+
+            modelo  parcelas  variables  celdas_faltantes  parcelas_con_faltantes  combinaciones_internas
+   svr_67_ciclo_33       138         33                 0                       0                      36
+svr_67_mensual_213       138        213                 7                       7                      36
+
+COMPARACION GLOBAL
+
+                    modelo      MAE     RMSE       R2  sesgo_pred_menos_real  delta_MAE_vs_ridge_original  delta_RMSE_vs_ridge_original  delta_R2_vs_ridge_original  delta_MAE_vs_ensamble  delta_RMSE_vs_ensamble  delta_R2_vs_ensamble
+ensamble_ridge_xgb3m_50_50 0.448877 0.611404 0.480252               0.053843                    -0.021219                     -0.017298                    0.029825               0.000000                0.000000              0.000000
+         xgb_e4_mensual_3m 0.459095 0.626746 0.453842               0.065354                    -0.011002                     -0.001956                    0.003414               0.010218                0.015342             -0.026411
+       ridge_ciclo_anidado 0.470097 0.628702 0.450427               0.042333                     0.000000                      0.000000                    0.000000               0.021219                0.017298             -0.029825
+           svr_67_ciclo_33 0.508067 0.678159 0.360563               0.065245                     0.037971                      0.049457                   -0.089865               0.059190                0.066754             -0.119690
+        svr_67_mensual_213 0.543657 0.716575 0.286065               0.166352                     0.073561                      0.087873                   -0.164362               0.094780                0.105171             -0.194187
+
+CONSISTENCIA DESCRIPTIVA
+
+            modelo  folds_menor_RMSE_que_ridge  folds_menor_RMSE_que_ensamble  max_RMSE_fold
+   svr_67_ciclo_33                           3                              2       0.865396
+svr_67_mensual_213                           2                              1       0.877467
+
+MENSUAL FRENTE A CICLO
+
+                comparacion  delta_MAE  delta_RMSE  delta_R2
+SVR_mensual_menos_SVR_ciclo   0.035590    0.038416 -0.074498
+
+RESULTADOS POR FOLD
+
+                    modelo  fold  parcelas      MAE     RMSE        R2  sesgo_pred_menos_real
+       ridge_ciclo_anidado     1        31 0.510727 0.657937 -0.444983              -0.243262
+       ridge_ciclo_anidado     2        26 0.368536 0.557214  0.096748               0.048804
+       ridge_ciclo_anidado     3        27 0.416018 0.562560  0.153894              -0.268910
+       ridge_ciclo_anidado     4        27 0.462721 0.572739  0.457639               0.336278
+       ridge_ciclo_anidado     5        27 0.582700 0.761410 -2.584080               0.381303
+         xgb_e4_mensual_3m     1        31 0.391652 0.553586 -0.022972              -0.060439
+         xgb_e4_mensual_3m     2        26 0.423252 0.619016 -0.114728              -0.032564
+         xgb_e4_mensual_3m     3        27 0.446314 0.570517  0.129790              -0.390012
+         xgb_e4_mensual_3m     4        27 0.483525 0.594466  0.415709               0.375158
+         xgb_e4_mensual_3m     5        27 0.559395 0.779726 -2.758581               0.449636
+ensamble_ridge_xgb3m_50_50     1        31 0.436702 0.588368 -0.155560              -0.151851
+ensamble_ridge_xgb3m_50_50     2        26 0.382701 0.572529  0.046414               0.008120
+ensamble_ridge_xgb3m_50_50     3        27 0.410643 0.542667  0.212676              -0.329461
+ensamble_ridge_xgb3m_50_50     4        27 0.456179 0.570494  0.461882               0.355718
+ensamble_ridge_xgb3m_50_50     5        27 0.557513 0.759966 -2.570498               0.415469
+           svr_67_ciclo_33     1        31 0.530611 0.642839 -0.379427              -0.206032
+           svr_67_ciclo_33     2        26 0.377659 0.547490  0.127998              -0.047744
+           svr_67_ciclo_33     3        27 0.502410 0.722445 -0.395394              -0.287073
+           svr_67_ciclo_33     4        27 0.445995 0.562718  0.476452               0.323690
+           svr_67_ciclo_33     5        27 0.675492 0.865396 -3.629876               0.579390
+        svr_67_mensual_213     1        31 0.451247 0.610475 -0.244025              -0.049130
+        svr_67_mensual_213     2        26 0.439906 0.651173 -0.233554               0.017618
+        svr_67_mensual_213     3        27 0.422636 0.523316  0.267825              -0.237116
+        svr_67_mensual_213     4        27 0.731393 0.862804 -0.230833               0.684630
+        svr_67_mensual_213     5        27 0.682954 0.877467 -3.759940               0.442170
+
+AJUSTES POR FOLD
+
+            modelo  fold  n_train  n_validacion  RMSE_interno_elegido  MAE_val  RMSE_val    R2_val  R2_train  sesgo_pred_menos_real  avisos
+   svr_67_ciclo_33     1      107            31              0.636143 0.530611  0.642839 -0.379427  0.785875              -0.206032       0
+   svr_67_ciclo_33     2      112            26              0.703229 0.377659  0.547490  0.127998  0.712097              -0.047744       0
+   svr_67_ciclo_33     3      111            27              0.685757 0.502410  0.722445 -0.395394  0.799393              -0.287073       0
+   svr_67_ciclo_33     4      111            27              0.609918 0.445995  0.562718  0.476452  0.659779               0.323690       0
+   svr_67_ciclo_33     5      111            27              0.552619 0.675492  0.865396 -3.629876  0.689478               0.579390       0
+svr_67_mensual_213     1      107            31              0.690560 0.451247  0.610475 -0.244025  0.834821              -0.049130       0
+svr_67_mensual_213     2      112            26              0.703622 0.439906  0.651173 -0.233554  0.812122               0.017618       0
+svr_67_mensual_213     3      111            27              0.667044 0.422636  0.523316  0.267825  0.762793              -0.237116       0
+svr_67_mensual_213     4      111            27              0.625271 0.731393  0.862804 -0.230833  0.554037               0.684630       0
+svr_67_mensual_213     5      111            27              0.618298 0.682954  0.877467 -3.759940  0.729448               0.442170       0
+
+PARAMETROS ELEGIDOS
+
+            modelo  fold     svr__C  svr__epsilon  svr__gamma
+   svr_67_ciclo_33     1  10.000000      0.050000    0.003030
+   svr_67_ciclo_33     2  10.000000      0.050000    0.003030
+   svr_67_ciclo_33     3 100.000000      0.100000    0.003030
+   svr_67_ciclo_33     4  10.000000      0.050000    0.003030
+   svr_67_ciclo_33     5  10.000000      0.100000    0.003030
+svr_67_mensual_213     1  10.000000      0.100000    0.000469
+svr_67_mensual_213     2  10.000000      0.100000    0.000469
+svr_67_mensual_213     3  10.000000      0.100000    0.000469
+svr_67_mensual_213     4   1.000000      0.200000    0.000469
+svr_67_mensual_213     5  10.000000      0.200000    0.000469
+
+DIAGNOSTICO
+
+                    modelo  prediccion_minima  prediccion_maxima  prediccion_std  max_error_absoluto  predicciones_negativas
+       ridge_ciclo_anidado           2.433263           5.108381        0.573880            2.088116                       0
+         xgb_e4_mensual_3m           2.809625           4.687121        0.489301            2.101327                       0
+ensamble_ridge_xgb3m_50_50           2.621444           4.835913        0.513945            2.020272                       0
+           svr_67_ciclo_33           2.430621           6.046521        0.584850            2.318789                       0
+        svr_67_mensual_213           2.526669           5.063988        0.572059            2.175196                       0
+
+AVISOS
+
+Empty DataFrame
+Columns: [modelo, fold, categoria, mensaje]
+Index: []
+

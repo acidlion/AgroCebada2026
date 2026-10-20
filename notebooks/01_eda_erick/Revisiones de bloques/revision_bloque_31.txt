@@ -1,0 +1,89 @@
+BASE RELACIONADA MENSUAL
+
+ filas  parcelas  meses  columnas
+  9456       197     48        75
+
+RESULTADO DE LOS CRUCES
+
+           fuente  filas_con_registro_mensual  filas_sin_registro_mensual  registros_presentes_sin_medias
+   basico_Landsat                        9456                           0                             163
+basico_Sentinel-2                        9456                           0                              39
+       pro_Planet                        2364                        7092                               0
+
+COLUMNAS DE LA BASE
+
+ID_POLIGONO
+anio
+mes
+fecha_mes
+precipitacion_mm
+tmax_c
+tmin_c
+elevacion_m
+pendiente_grados
+basico_landsat__vi6t_promedio_media_mensual
+basico_landsat__vi6t_promedio_n_obs
+basico_landsat__capturas_totales
+basico_landsat__capturas_nubosidad_100
+basico_landsat__nubosidad_media
+basico_landsat__registro_mensual_presente
+basico_sentinel_2__ndvi_promedio_media_mensual
+basico_sentinel_2__ndvi_promedio_n_obs
+basico_sentinel_2__evi_promedio_media_mensual
+basico_sentinel_2__evi_promedio_n_obs
+basico_sentinel_2__crc_promedio_media_mensual
+basico_sentinel_2__crc_promedio_n_obs
+basico_sentinel_2__mcrc_promedio_media_mensual
+basico_sentinel_2__mcrc_promedio_n_obs
+basico_sentinel_2__ndsvi_promedio_media_mensual
+basico_sentinel_2__ndsvi_promedio_n_obs
+basico_sentinel_2__srndi_promedio_media_mensual
+basico_sentinel_2__srndi_promedio_n_obs
+basico_sentinel_2__mra_promedio_media_mensual
+basico_sentinel_2__mra_promedio_n_obs
+basico_sentinel_2__lai_promedio_media_mensual
+basico_sentinel_2__lai_promedio_n_obs
+basico_sentinel_2__fapar_promedio_media_mensual
+basico_sentinel_2__fapar_promedio_n_obs
+basico_sentinel_2__savi_promedio_media_mensual
+basico_sentinel_2__savi_promedio_n_obs
+basico_sentinel_2__ndti_promedio_media_mensual
+basico_sentinel_2__ndti_promedio_n_obs
+basico_sentinel_2__sti_promedio_media_mensual
+basico_sentinel_2__sti_promedio_n_obs
+basico_sentinel_2__ndwi_promedio_media_mensual
+basico_sentinel_2__ndwi_promedio_n_obs
+basico_sentinel_2__endwi_promedio_media_mensual
+basico_sentinel_2__endwi_promedio_n_obs
+basico_sentinel_2__msi_promedio_media_mensual
+basico_sentinel_2__msi_promedio_n_obs
+basico_sentinel_2__emsi_promedio_media_mensual
+basico_sentinel_2__emsi_promedio_n_obs
+basico_sentinel_2__dswi2_promedio_media_mensual
+basico_sentinel_2__dswi2_promedio_n_obs
+basico_sentinel_2__dswi3_promedio_media_mensual
+basico_sentinel_2__dswi3_promedio_n_obs
+basico_sentinel_2__dswi4_promedio_media_mensual
+basico_sentinel_2__dswi4_promedio_n_obs
+basico_sentinel_2__dswi5_promedio_media_mensual
+basico_sentinel_2__dswi5_promedio_n_obs
+basico_sentinel_2__nddi_promedio_media_mensual
+basico_sentinel_2__nddi_promedio_n_obs
+basico_sentinel_2__enddi_promedio_media_mensual
+basico_sentinel_2__enddi_promedio_n_obs
+basico_sentinel_2__capturas_totales
+basico_sentinel_2__capturas_nubosidad_100
+basico_sentinel_2__nubosidad_media
+basico_sentinel_2__registro_mensual_presente
+pro_planet__ndvi_promedio_media_mensual
+pro_planet__ndvi_promedio_n_obs
+pro_planet__evi_promedio_media_mensual
+pro_planet__evi_promedio_n_obs
+pro_planet__lai_promedio_media_mensual
+pro_planet__lai_promedio_n_obs
+pro_planet__msavi_promedio_media_mensual
+pro_planet__msavi_promedio_n_obs
+pro_planet__capturas_totales
+pro_planet__capturas_nubosidad_100
+pro_planet__nubosidad_media
+pro_planet__registro_mensual_presente

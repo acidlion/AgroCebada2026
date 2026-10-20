@@ -1,0 +1,200 @@
+TRAZABILIDAD DE OBSERVACIONES Y VI6T
+
+Comparacion por ID, fecha y sensor.
+Reconstruccion: media por mes y media de meses disponibles.
+Se revisan ocho variables de VI6T y FAPAR.
+No es una auditoria de todas las columnas satelitales.
+Los valores reconstruidos no sustituyen X_ciclo.
+No se entrenaron modelos ni se modificaron entregas.
+
+CLAVES
+
+    estado  filas
+      both 104610
+ left_only   3056
+right_only      0
+
+RESUMEN DE CAMBIOS
+
+      variable      tipo_cambio  en_ciclo_2025  celdas
+     fapar_max faltante_a_valor          False       4
+     fapar_min faltante_a_valor          False       4
+fapar_promedio faltante_a_valor          False       4
+     fapar_std faltante_a_valor          False       4
+      vi6t_max faltante_a_valor          False       1
+      vi6t_min faltante_a_valor          False       1
+ vi6t_promedio faltante_a_valor          False       1
+      vi6t_std faltante_a_valor          False       1
+
+DETALLE DE CAMBIOS
+
+ID_POLIGONO fecha_captura     sensor       variable  valor_original  valor_preparado      tipo_cambio  en_ciclo_2025  parcela_etiquetada
+    AGC_013    2024-05-19    Landsat  vi6t_promedio             NaN    -0.6293333333 faltante_a_valor          False                True
+    AGC_013    2024-05-19    Landsat       vi6t_std             NaN     0.0073333333 faltante_a_valor          False                True
+    AGC_013    2024-05-19    Landsat       vi6t_max             NaN    -0.6193333333 faltante_a_valor          False                True
+    AGC_013    2024-05-19    Landsat       vi6t_min             NaN    -0.6373333333 faltante_a_valor          False                True
+    AGC_019    2022-12-07 Sentinel-2 fapar_promedio             NaN     0.0950000000 faltante_a_valor          False                True
+    AGC_086    2022-12-07 Sentinel-2 fapar_promedio             NaN     0.0743333333 faltante_a_valor          False               False
+    AGC_103    2022-12-07 Sentinel-2 fapar_promedio             NaN     0.0976666667 faltante_a_valor          False                True
+    AGC_173    2022-12-07 Sentinel-2 fapar_promedio             NaN     0.1795000000 faltante_a_valor          False               False
+    AGC_019    2022-12-07 Sentinel-2      fapar_std             NaN     0.0396666667 faltante_a_valor          False                True
+    AGC_086    2022-12-07 Sentinel-2      fapar_std             NaN     0.0183333333 faltante_a_valor          False               False
+    AGC_103    2022-12-07 Sentinel-2      fapar_std             NaN     0.0383333333 faltante_a_valor          False                True
+    AGC_173    2022-12-07 Sentinel-2      fapar_std             NaN     0.1025000000 faltante_a_valor          False               False
+    AGC_019    2022-12-07 Sentinel-2      fapar_max             NaN     0.3093333333 faltante_a_valor          False                True
+    AGC_086    2022-12-07 Sentinel-2      fapar_max             NaN     0.2043333333 faltante_a_valor          False               False
+    AGC_103    2022-12-07 Sentinel-2      fapar_max             NaN     0.2596666667 faltante_a_valor          False                True
+    AGC_173    2022-12-07 Sentinel-2      fapar_max             NaN     0.5590000000 faltante_a_valor          False               False
+    AGC_019    2022-12-07 Sentinel-2      fapar_min             NaN     0.0330000000 faltante_a_valor          False                True
+    AGC_086    2022-12-07 Sentinel-2      fapar_min             NaN     0.0433333333 faltante_a_valor          False               False
+    AGC_103    2022-12-07 Sentinel-2      fapar_min             NaN     0.0520000000 faltante_a_valor          False                True
+    AGC_173    2022-12-07 Sentinel-2      fapar_min             NaN     0.0700000000 faltante_a_valor          False               False
+
+RESUMEN VI6T
+
+ parcelas  original_coincide_con_X  preparado_coincide_con_X  original_y_preparado_coinciden  celdas_modificadas_en_ciclo  celdas_modificadas_en_ciclo_y_etiquetadas
+      138                      138                       138                             138                            0                                          0
+
+COMPARACION VI6T
+
+             desde_original  desde_preparado  usado_en_X_ciclo  meses_original  meses_preparado  coincide_original_con_X  coincide_preparado_con_X  original_y_preparado_coinciden
+ID_POLIGONO                                                                                                                                                                       
+AGC_001       -0.6224166667    -0.6224166667     -0.6224166667               6                6                     True                      True                            True
+AGC_002       -0.6191166667    -0.6191166667     -0.6191166667               7                7                     True                      True                            True
+AGC_004       -0.6254047619    -0.6254047619     -0.6254047619               7                7                     True                      True                            True
+AGC_005       -0.6366309524    -0.6366309524     -0.6366309524               7                7                     True                      True                            True
+AGC_006       -0.6163486395    -0.6163486395     -0.6163486395               7                7                     True                      True                            True
+AGC_007       -0.6441527778    -0.6441527778     -0.6441527778               6                6                     True                      True                            True
+AGC_008       -0.6322023810    -0.6322023810     -0.6322023810               7                7                     True                      True                            True
+AGC_009       -0.6488690476    -0.6488690476     -0.6488690476               7                7                     True                      True                            True
+AGC_010       -0.6245476190    -0.6245476190     -0.6245476190               7                7                     True                      True                            True
+AGC_012       -0.6236802721    -0.6236802721     -0.6236802721               7                7                     True                      True                            True
+AGC_013       -0.6195510204    -0.6195510204     -0.6195510204               7                7                     True                      True                            True
+AGC_014       -0.6327357143    -0.6327357143     -0.6327357143               7                7                     True                      True                            True
+AGC_015       -0.6174537415    -0.6174537415     -0.6174537415               7                7                     True                      True                            True
+AGC_017       -0.6188435374    -0.6188435374     -0.6188435374               7                7                     True                      True                            True
+AGC_018       -0.6369880952    -0.6369880952     -0.6369880952               7                7                     True                      True                            True
+AGC_019       -0.6258452381    -0.6258452381     -0.6258452381               7                7                     True                      True                            True
+AGC_020       -0.6212142857    -0.6212142857     -0.6212142857               7                7                     True                      True                            True
+AGC_021       -0.6199573129    -0.6199573129     -0.6199573129               7                7                     True                      True                            True
+AGC_022       -0.6286190476    -0.6286190476     -0.6286190476               7                7                     True                      True                            True
+AGC_023       -0.6331190476    -0.6331190476     -0.6331190476               7                7                     True                      True                            True
+AGC_024       -0.6303214286    -0.6303214286     -0.6303214286               7                7                     True                      True                            True
+AGC_026       -0.6276904762    -0.6276904762     -0.6276904762               7                7                     True                      True                            True
+AGC_032       -0.6264190476    -0.6264190476     -0.6264190476               7                7                     True                      True                            True
+AGC_033       -0.6166000000    -0.6166000000     -0.6166000000               7                7                     True                      True                            True
+AGC_034       -0.6387916667    -0.6387916667     -0.6387916667               6                6                     True                      True                            True
+AGC_035       -0.6223333333    -0.6223333333     -0.6223333333               7                7                     True                      True                            True
+AGC_037       -0.6292380952    -0.6292380952     -0.6292380952               7                7                     True                      True                            True
+AGC_038       -0.6393928571    -0.6393928571     -0.6393928571               7                7                     True                      True                            True
+AGC_040       -0.6400714286    -0.6400714286     -0.6400714286               7                7                     True                      True                            True
+AGC_041       -0.6395476190    -0.6395476190     -0.6395476190               7                7                     True                      True                            True
+AGC_044       -0.6190357143    -0.6190357143     -0.6190357143               7                7                     True                      True                            True
+AGC_045       -0.6367261905    -0.6367261905     -0.6367261905               7                7                     True                      True                            True
+AGC_046       -0.6183214286    -0.6183214286     -0.6183214286               7                7                     True                      True                            True
+AGC_047       -0.6299404762    -0.6299404762     -0.6299404762               7                7                     True                      True                            True
+AGC_048       -0.6265238095    -0.6265238095     -0.6265238095               7                7                     True                      True                            True
+AGC_049       -0.6246190476    -0.6246190476     -0.6246190476               7                7                     True                      True                            True
+AGC_051       -0.6317261905    -0.6317261905     -0.6317261905               7                7                     True                      True                            True
+AGC_053       -0.6312857143    -0.6312857143     -0.6312857143               7                7                     True                      True                            True
+AGC_054       -0.6212976190    -0.6212976190     -0.6212976190               7                7                     True                      True                            True
+AGC_055       -0.6302603741    -0.6302603741     -0.6302603741               7                7                     True                      True                            True
+AGC_056       -0.6109903061    -0.6109903061     -0.6109903061               7                7                     True                      True                            True
+AGC_057       -0.6211571429    -0.6211571429     -0.6211571429               7                7                     True                      True                            True
+AGC_058       -0.6239642857    -0.6239642857     -0.6239642857               7                7                     True                      True                            True
+AGC_059       -0.6282785714    -0.6282785714     -0.6282785714               7                7                     True                      True                            True
+AGC_060       -0.6361880952    -0.6361880952     -0.6361880952               7                7                     True                      True                            True
+AGC_062       -0.6165000000    -0.6165000000     -0.6165000000               7                7                     True                      True                            True
+AGC_064       -0.6384761905    -0.6384761905     -0.6384761905               7                7                     True                      True                            True
+AGC_066       -0.6242976190    -0.6242976190     -0.6242976190               7                7                     True                      True                            True
+AGC_067       -0.6465416667    -0.6465416667     -0.6465416667               6                6                     True                      True                            True
+AGC_068       -0.6366904762    -0.6366904762     -0.6366904762               7                7                     True                      True                            True
+AGC_069       -0.6256214286    -0.6256214286     -0.6256214286               7                7                     True                      True                            True
+AGC_070       -0.6477619048    -0.6477619048     -0.6477619048               7                7                     True                      True                            True
+AGC_072       -0.6207619048    -0.6207619048     -0.6207619048               7                7                     True                      True                            True
+AGC_073       -0.6164642857    -0.6164642857     -0.6164642857               7                7                     True                      True                            True
+AGC_074       -0.6202738095    -0.6202738095     -0.6202738095               7                7                     True                      True                            True
+AGC_077       -0.6198690476    -0.6198690476     -0.6198690476               7                7                     True                      True                            True
+AGC_078       -0.6450416667    -0.6450416667     -0.6450416667               6                6                     True                      True                            True
+AGC_079       -0.6432500000    -0.6432500000     -0.6432500000               7                7                     True                      True                            True
+AGC_080       -0.6408888889    -0.6408888889     -0.6408888889               6                6                     True                      True                            True
+AGC_081       -0.6458690476    -0.6458690476     -0.6458690476               7                7                     True                      True                            True
+AGC_083       -0.6318571429    -0.6318571429     -0.6318571429               7                7                     True                      True                            True
+AGC_084       -0.6289047619    -0.6289047619     -0.6289047619               7                7                     True                      True                            True
+AGC_089       -0.6403333333    -0.6403333333     -0.6403333333               7                7                     True                      True                            True
+AGC_090       -0.6308809524    -0.6308809524     -0.6308809524               7                7                     True                      True                            True
+AGC_092       -0.6139057823    -0.6139057823     -0.6139057823               7                7                     True                      True                            True
+AGC_096       -0.6221785714    -0.6221785714     -0.6221785714               7                7                     True                      True                            True
+AGC_097       -0.6166270408    -0.6166270408     -0.6166270408               7                7                     True                      True                            True
+AGC_098       -0.6333928571    -0.6333928571     -0.6333928571               7                7                     True                      True                            True
+AGC_099       -0.6268571429    -0.6268571429     -0.6268571429               7                7                     True                      True                            True
+AGC_100       -0.6277142857    -0.6277142857     -0.6277142857               7                7                     True                      True                            True
+AGC_101       -0.6215476190    -0.6215476190     -0.6215476190               7                7                     True                      True                            True
+AGC_102       -0.6272976190    -0.6272976190     -0.6272976190               7                7                     True                      True                            True
+AGC_103       -0.6282500000    -0.6282500000     -0.6282500000               7                7                     True                      True                            True
+AGC_104       -0.6193761905    -0.6193761905     -0.6193761905               7                7                     True                      True                            True
+AGC_105       -0.6251000000    -0.6251000000     -0.6251000000               7                7                     True                      True                            True
+AGC_106       -0.6190595238    -0.6190595238     -0.6190595238               7                7                     True                      True                            True
+AGC_108       -0.6291085034    -0.6291085034     -0.6291085034               7                7                     True                      True                            True
+AGC_109       -0.6074217687    -0.6074217687     -0.6074217687               7                7                     True                      True                            True
+AGC_110       -0.6166238095    -0.6166238095     -0.6166238095               7                7                     True                      True                            True
+AGC_111       -0.6237928571    -0.6237928571     -0.6237928571               7                7                     True                      True                            True
+AGC_112       -0.6296904762    -0.6296904762     -0.6296904762               7                7                     True                      True                            True
+AGC_114       -0.6223928571    -0.6223928571     -0.6223928571               7                7                     True                      True                            True
+AGC_115       -0.6196785714    -0.6196785714     -0.6196785714               7                7                     True                      True                            True
+AGC_117       -0.6376071429    -0.6376071429     -0.6376071429               7                7                     True                      True                            True
+AGC_119       -0.6440833333    -0.6440833333     -0.6440833333               7                7                     True                      True                            True
+AGC_121       -0.6393571429    -0.6393571429     -0.6393571429               7                7                     True                      True                            True
+AGC_122       -0.6267738095    -0.6267738095     -0.6267738095               7                7                     True                      True                            True
+AGC_123       -0.6229523810    -0.6229523810     -0.6229523810               7                7                     True                      True                            True
+AGC_124       -0.6204511905    -0.6204511905     -0.6204511905               7                7                     True                      True                            True
+AGC_125       -0.6271904762    -0.6271904762     -0.6271904762               7                7                     True                      True                            True
+AGC_127       -0.6438000000    -0.6438000000     -0.6438000000               7                7                     True                      True                            True
+AGC_131       -0.6364047619    -0.6364047619     -0.6364047619               7                7                     True                      True                            True
+AGC_132       -0.6234115646    -0.6234115646     -0.6234115646               7                7                     True                      True                            True
+AGC_133       -0.6284619048    -0.6284619048     -0.6284619048               7                7                     True                      True                            True
+AGC_134       -0.6408690476    -0.6408690476     -0.6408690476               7                7                     True                      True                            True
+AGC_135       -0.6210952381    -0.6210952381     -0.6210952381               7                7                     True                      True                            True
+AGC_137       -0.6375047619    -0.6375047619     -0.6375047619               7                7                     True                      True                            True
+AGC_138       -0.6270119048    -0.6270119048     -0.6270119048               7                7                     True                      True                            True
+AGC_139       -0.6232857143    -0.6232857143     -0.6232857143               7                7                     True                      True                            True
+AGC_140       -0.6426250000    -0.6426250000     -0.6426250000               6                6                     True                      True                            True
+AGC_141       -0.6244166667    -0.6244166667     -0.6244166667               7                7                     True                      True                            True
+AGC_144       -0.6175714286    -0.6175714286     -0.6175714286               7                7                     True                      True                            True
+AGC_145       -0.6235238095    -0.6235238095     -0.6235238095               7                7                     True                      True                            True
+AGC_146       -0.6307833333    -0.6307833333     -0.6307833333               7                7                     True                      True                            True
+AGC_148       -0.6333571429    -0.6333571429     -0.6333571429               7                7                     True                      True                            True
+AGC_150       -0.6260190476    -0.6260190476     -0.6260190476               7                7                     True                      True                            True
+AGC_151       -0.6442333333    -0.6442333333     -0.6442333333               7                7                     True                      True                            True
+AGC_152       -0.6437095238    -0.6437095238     -0.6437095238               7                7                     True                      True                            True
+AGC_155       -0.6356284014    -0.6356284014     -0.6356284014               7                7                     True                      True                            True
+AGC_157       -0.6298809524    -0.6298809524     -0.6298809524               7                7                     True                      True                            True
+AGC_159       -0.6284574830    -0.6284574830     -0.6284574830               7                7                     True                      True                            True
+AGC_160       -0.6221869048    -0.6221869048     -0.6221869048               7                7                     True                      True                            True
+AGC_161       -0.6233964286    -0.6233964286     -0.6233964286               7                7                     True                      True                            True
+AGC_162       -0.6164414966    -0.6164414966     -0.6164414966               7                7                     True                      True                            True
+AGC_163       -0.6320476190    -0.6320476190     -0.6320476190               7                7                     True                      True                            True
+AGC_164       -0.6288571429    -0.6288571429     -0.6288571429               7                7                     True                      True                            True
+AGC_165       -0.6147993197    -0.6147993197     -0.6147993197               7                7                     True                      True                            True
+AGC_166       -0.6503571429    -0.6503571429     -0.6503571429               7                7                     True                      True                            True
+AGC_167       -0.6236401361    -0.6236401361     -0.6236401361               7                7                     True                      True                            True
+AGC_168       -0.6281785714    -0.6281785714     -0.6281785714               7                7                     True                      True                            True
+AGC_169       -0.6306666667    -0.6306666667     -0.6306666667               7                7                     True                      True                            True
+AGC_170       -0.6353214286    -0.6353214286     -0.6353214286               7                7                     True                      True                            True
+AGC_171       -0.6261428571    -0.6261428571     -0.6261428571               7                7                     True                      True                            True
+AGC_172       -0.6228435374    -0.6228435374     -0.6228435374               7                7                     True                      True                            True
+AGC_176       -0.6219523810    -0.6219523810     -0.6219523810               7                7                     True                      True                            True
+AGC_178       -0.6295595238    -0.6295595238     -0.6295595238               7                7                     True                      True                            True
+AGC_179       -0.6136416667    -0.6136416667     -0.6136416667               7                7                     True                      True                            True
+AGC_180       -0.6363452381    -0.6363452381     -0.6363452381               7                7                     True                      True                            True
+AGC_181       -0.6239285714    -0.6239285714     -0.6239285714               7                7                     True                      True                            True
+AGC_184       -0.6276642857    -0.6276642857     -0.6276642857               7                7                     True                      True                            True
+AGC_185       -0.6265714286    -0.6265714286     -0.6265714286               7                7                     True                      True                            True
+AGC_187       -0.6267619048    -0.6267619048     -0.6267619048               7                7                     True                      True                            True
+AGC_189       -0.6301571429    -0.6301571429     -0.6301571429               7                7                     True                      True                            True
+AGC_193       -0.6303928571    -0.6303928571     -0.6303928571               7                7                     True                      True                            True
+AGC_194       -0.6493333333    -0.6493333333     -0.6493333333               7                7                     True                      True                            True
+AGC_195       -0.6206785714    -0.6206785714     -0.6206785714               7                7                     True                      True                            True
+AGC_196       -0.6310357143    -0.6310357143     -0.6310357143               7                7                     True                      True                            True
+AGC_197       -0.6278928571    -0.6278928571     -0.6278928571               7                7                     True                      True                            True
+

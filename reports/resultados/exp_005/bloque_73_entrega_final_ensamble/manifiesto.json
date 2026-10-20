@@ -1,0 +1,28 @@
+{
+  "procedimiento": "ensamble_ridge_xgb3m_50_50",
+  "n_train": 138,
+  "n_prediccion": 59,
+  "variables_ridge": 33,
+  "variables_xgboost": 303,
+  "fuente_xgboost": "tablas_e4_57['e4_mensual_3m']",
+  "alpha_final_ridge": 1.0,
+  "pesos": {
+    "ridge": 0.5,
+    "xgboost": 0.5
+  },
+  "columnas_entrega": [
+    "ID_PARCELA",
+    "RENDIMIENTO"
+  ],
+  "unidad": "t/ha",
+  "sha256_csv": "3f8f94b8043b9ed17e153462b7f6670f87df8de8c6e3b67b09458903e0696736",
+  "evaluacion_OOF_previa": {
+    "MAE_t_ha": 0.44887724471537443,
+    "RMSE_t_ha": 0.6114043954005277,
+    "R2": 0.4802524899094036,
+    "sesgo_t_ha": 0.05384323974386151
+  },
+  "nota_metricas": "Las métricas OOF corresponden a la evaluación previa; no son métricas medidas sobre estas 59 parcelas.",
+  "entregas_anteriores_sobrescritas": false,
+  "publicado_en_plataforma": false
+}

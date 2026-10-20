@@ -1,0 +1,6 @@
+﻿modelo,fold,ridge__alpha
+ridge_62C_ventanas_ndvi_evi,1,10.0
+ridge_62C_ventanas_ndvi_evi,2,10.0
+ridge_62C_ventanas_ndvi_evi,3,10.0
+ridge_62C_ventanas_ndvi_evi,4,100.0
+ridge_62C_ventanas_ndvi_evi,5,1.0

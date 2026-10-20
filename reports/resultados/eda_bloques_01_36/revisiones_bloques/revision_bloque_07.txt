@@ -1,0 +1,18 @@
+RESUMEN DE NAs RESTANTES
+
+dataset  NA_originales  NA_excluidos_por_patrones  NA_restantes  filas_con_NA_restantes
+ BASICO        5834976                    5819676         15300                    3061
+    PRO         192912                     192912             0                       0
+
+DETALLE POR COLUMNA
+
+dataset              columna  NA_restantes
+ BASICO       fapar_promedio             4
+ BASICO            fapar_std             4
+ BASICO            fapar_max             4
+ BASICO            fapar_min             4
+ BASICO        vi6t_promedio          3057
+ BASICO             vi6t_std          3057
+ BASICO             vi6t_max          3057
+ BASICO             vi6t_min          3057
+ BASICO porcentaje_nubosidad          3056

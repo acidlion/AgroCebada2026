@@ -1,0 +1,24 @@
+{
+  "objetivo": "Auditoria descriptiva de errores OOF compartidos",
+  "modelos": [
+    "ridge_ciclo_anidado",
+    "xgb_e4_mensual_3m"
+  ],
+  "cuantil_error_grande": 0.8,
+  "criterio_compartido": "Ambos errores absolutos >= percentil 80 de su modelo y ambos errores estrictamente del mismo signo",
+  "orden_prioridad": "Menor de los dos errores absolutos, descendente",
+  "numero_vecinos": 5,
+  "espacio_vecinos": "33 variables originales del ciclo",
+  "distancia": "Euclidea tras StandardScaler del entrenamiento del fold",
+  "notas": [
+    "Los umbrales solo ordenan la inspeccion.",
+    "No constituyen pruebas estadisticas.",
+    "Los vecinos pertenecen al entrenamiento del fold externo.",
+    "El rendimiento observado no se usa para calcular distancias.",
+    "Las diferencias de rendimiento entre vecinos son descriptivas.",
+    "No se entrenan modelos predictivos.",
+    "No se eliminan parcelas.",
+    "No se evalua calidad de imagen sin tablas originales.",
+    "No se modifica la entrega ni se predicen las 59 parcelas."
+  ]
+}

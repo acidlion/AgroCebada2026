@@ -1,0 +1,15 @@
+PATRONES DE DISPONIBILIDAD
+
+                   patron  filas  porcentaje
+       Solo otros índices  44877       41.68
+Sin datos en ambos grupos  31741       29.48
+                Solo VI6T  31048       28.84
+
+PATRONES POR SENSOR
+
+patron_disponibilidad  Sin datos en ambos grupos  Solo VI6T  Solo otros índices
+sensor                                                                         
+Landsat                                    17578      31048                   0
+Sentinel-2                                 14163          0               44877
+
+Filas con VI6T parcialmente completo: 0

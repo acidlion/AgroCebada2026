@@ -1,0 +1,6 @@
+﻿nuevo,comparado_con,delta_MAE,delta_RMSE
+ridge_e4_dinamica,ridge_ciclo_anidado,0.0690226696212336,0.0719650437530237
+ridge_e4_dinamica_3m,ridge_e4_dinamica,-0.0254612611069166,-0.024586200522259682
+ridge_e4_dinamica_6m,ridge_e4_dinamica_3m,0.005232710808480312,0.008186042798936755
+xgb_e4_mensual_3m,xgb_meses_separados,-0.014049469353496158,-0.010212878392716007
+xgb_e4_mensual_6m,xgb_e4_mensual_3m,0.0033600696619005554,0.011493333364797742

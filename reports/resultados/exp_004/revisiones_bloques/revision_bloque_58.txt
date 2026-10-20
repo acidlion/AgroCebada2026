@@ -1,0 +1,103 @@
+EXPERIMENTO 4: EVALUACION TEMPORAL
+
+Ridge: seleccion interna de alpha por grupos.
+XGBoost: configuracion fija anterior.
+Mismas parcelas y folds externos anteriores.
+Delta negativo = menor error que la comparacion indicada.
+Los recuentos por fold no prueban significancia.
+La comparacion sigue siendo exploratoria.
+No se entreno un modelo final ni se cambio la entrega.
+
+COMPARACION GLOBAL
+
+              modelo  variables  MAE_OOF  RMSE_OOF   R2_OOF  sesgo_pred_menos_real          referencia  delta_MAE_vs_referencia  delta_RMSE_vs_referencia
+   xgb_e4_mensual_3m        303 0.459095  0.626746 0.453842               0.065354 xgb_meses_separados                -0.014049                 -0.010213
+ ridge_ciclo_anidado         33 0.470097  0.628702 0.450427               0.042333 ridge_ciclo_anidado                 0.000000                  0.000000
+ xgb_meses_separados        213 0.473144  0.636959 0.435897               0.083965 xgb_meses_separados                 0.000000                  0.000000
+   xgb_e4_mensual_6m        381 0.462455  0.638240 0.433627               0.107794 xgb_meses_separados                -0.010689                  0.001280
+ridge_e4_dinamica_3m         47 0.513658  0.676081 0.364475               0.047390 ridge_ciclo_anidado                 0.043561                  0.047379
+ridge_e4_dinamica_6m         48 0.518891  0.684267 0.348992               0.056768 ridge_ciclo_anidado                 0.048794                  0.055565
+   ridge_e4_dinamica         45 0.539119  0.700667 0.317412               0.086144 ridge_ciclo_anidado                 0.069023                  0.071965
+
+CAMBIOS INCREMENTALES
+
+               nuevo        comparado_con  delta_MAE  delta_RMSE
+   ridge_e4_dinamica  ridge_ciclo_anidado   0.069023    0.071965
+ridge_e4_dinamica_3m    ridge_e4_dinamica  -0.025461   -0.024586
+ridge_e4_dinamica_6m ridge_e4_dinamica_3m   0.005233    0.008186
+   xgb_e4_mensual_3m  xgb_meses_separados  -0.014049   -0.010213
+   xgb_e4_mensual_6m    xgb_e4_mensual_3m   0.003360    0.011493
+
+CONSISTENCIA DESCRIPTIVA
+
+              modelo  folds_menor_RMSE_que_referencia  folds_menor_MAE_que_referencia  max_RMSE_fold  max_sesgo_absoluto_fold  R2_train_media_folds
+   ridge_e4_dinamica                                1                               1       0.839365                 0.630425              0.682841
+ridge_e4_dinamica_3m                                1                               1       0.746965                 0.465291              0.708712
+ridge_e4_dinamica_6m                                1                               1       0.755859                 0.502534              0.709980
+   xgb_e4_mensual_3m                                3                               3       0.779726                 0.449636              0.996029
+   xgb_e4_mensual_6m                                3                               3       0.792922                 0.477877              0.996143
+
+RESULTADOS POR FOLD
+
+              modelo familia  fold  n_train  n_validacion  variables  alpha_elegido  RMSE_interno_elegido  MAE_val  RMSE_val    R2_val  R2_train  sesgo_pred_menos_real  avisos
+   ridge_e4_dinamica   ridge     1      107            31         45       1.000000              0.729019 0.581772  0.712674 -0.695413  0.806842              -0.247803       0
+   ridge_e4_dinamica   ridge     2      112            26         45      10.000000              0.780823 0.394024  0.583658  0.008982  0.708399               0.060093       0
+   ridge_e4_dinamica   ridge     3      111            27         45      10.000000              0.747025 0.420791  0.572803  0.122801  0.686938              -0.297816       0
+   ridge_e4_dinamica   ridge     4      111            27         45     100.000000              0.647976 0.720888  0.839365 -0.164867  0.554193               0.630425       0
+   ridge_e4_dinamica   ridge     5      111            27         45      10.000000              0.672372 0.566428  0.751927 -2.495360  0.657835               0.334327       0
+ridge_e4_dinamica_3m   ridge     1      107            31         47       1.000000              0.717258 0.564914  0.715482 -0.708800  0.819000              -0.204082       0
+ridge_e4_dinamica_3m   ridge     2      112            26         47      10.000000              0.815729 0.386860  0.573977  0.041583  0.712231               0.052280       0
+ridge_e4_dinamica_3m   ridge     3      111            27         47      10.000000              0.736002 0.465610  0.612281 -0.002278  0.698483              -0.370880       0
+ridge_e4_dinamica_3m   ridge     4      111            27         47      10.000000              0.655227 0.578454  0.705952  0.176004  0.654289               0.465291       0
+ridge_e4_dinamica_3m   ridge     5      111            27         47      10.000000              0.669133 0.560162  0.746965 -2.449374  0.659556               0.331780       0
+ridge_e4_dinamica_6m   ridge     1      107            31         48       1.000000              0.725670 0.565220  0.715646 -0.709582  0.818997              -0.204210       0
+ridge_e4_dinamica_6m   ridge     2      112            26         48      10.000000              0.815971 0.386719  0.573183  0.044234  0.712323               0.047445       0
+ridge_e4_dinamica_6m   ridge     3      111            27         48      10.000000              0.736719 0.465031  0.610518  0.003485  0.698692              -0.368029       0
+ridge_e4_dinamica_6m   ridge     4      111            27         48      10.000000              0.648815 0.594512  0.738027  0.099428  0.659532               0.502534       0
+ridge_e4_dinamica_6m   ridge     5      111            27         48      10.000000              0.674863 0.571213  0.755859 -2.532007  0.660354               0.344419       0
+   xgb_e4_mensual_3m     xgb     1      107            31        303            NaN                   NaN 0.391652  0.553586 -0.022972  0.997020              -0.060439       0
+   xgb_e4_mensual_3m     xgb     2      112            26        303            NaN                   NaN 0.423252  0.619016 -0.114728  0.995706              -0.032564       0
+   xgb_e4_mensual_3m     xgb     3      111            27        303            NaN                   NaN 0.446314  0.570517  0.129790  0.996941              -0.390012       0
+   xgb_e4_mensual_3m     xgb     4      111            27        303            NaN                   NaN 0.483525  0.594466  0.415709  0.995516               0.375158       0
+   xgb_e4_mensual_3m     xgb     5      111            27        303            NaN                   NaN 0.559395  0.779726 -2.758581  0.994963               0.449636       0
+   xgb_e4_mensual_6m     xgb     1      107            31        381            NaN                   NaN 0.351981  0.559738 -0.045834  0.996901               0.027436       0
+   xgb_e4_mensual_6m     xgb     2      112            26        381            NaN                   NaN 0.409246  0.611170 -0.086650  0.995937              -0.005456       0
+   xgb_e4_mensual_6m     xgb     3      111            27        381            NaN                   NaN 0.447657  0.563640  0.150642  0.997056              -0.406762       0
+   xgb_e4_mensual_6m     xgb     4      111            27        381            NaN                   NaN 0.539059  0.645118  0.311898  0.995848               0.453585       0
+   xgb_e4_mensual_6m     xgb     5      111            27        381            NaN                   NaN 0.578727  0.792922 -2.886882  0.994971               0.477877       0
+
+COMPARACION CON REFERENCIA POR FOLD
+
+              modelo          referencia  fold  MAE_nuevo  MAE_referencia  delta_MAE  RMSE_nuevo  RMSE_referencia  delta_RMSE
+   ridge_e4_dinamica ridge_ciclo_anidado     1   0.581772        0.510727   0.071045    0.712674         0.657937    0.054737
+   ridge_e4_dinamica ridge_ciclo_anidado     2   0.394024        0.368536   0.025487    0.583658         0.557214    0.026444
+   ridge_e4_dinamica ridge_ciclo_anidado     3   0.420791        0.416018   0.004773    0.572803         0.562560    0.010243
+   ridge_e4_dinamica ridge_ciclo_anidado     4   0.720888        0.462721   0.258167    0.839365         0.572739    0.266626
+   ridge_e4_dinamica ridge_ciclo_anidado     5   0.566428        0.582700  -0.016272    0.751927         0.761410   -0.009483
+ridge_e4_dinamica_3m ridge_ciclo_anidado     1   0.564914        0.510727   0.054187    0.715482         0.657937    0.057545
+ridge_e4_dinamica_3m ridge_ciclo_anidado     2   0.386860        0.368536   0.018324    0.573977         0.557214    0.016763
+ridge_e4_dinamica_3m ridge_ciclo_anidado     3   0.465610        0.416018   0.049592    0.612281         0.562560    0.049721
+ridge_e4_dinamica_3m ridge_ciclo_anidado     4   0.578454        0.462721   0.115733    0.705952         0.572739    0.133213
+ridge_e4_dinamica_3m ridge_ciclo_anidado     5   0.560162        0.582700  -0.022538    0.746965         0.761410   -0.014446
+ridge_e4_dinamica_6m ridge_ciclo_anidado     1   0.565220        0.510727   0.054493    0.715646         0.657937    0.057708
+ridge_e4_dinamica_6m ridge_ciclo_anidado     2   0.386719        0.368536   0.018183    0.573183         0.557214    0.015969
+ridge_e4_dinamica_6m ridge_ciclo_anidado     3   0.465031        0.416018   0.049013    0.610518         0.562560    0.047958
+ridge_e4_dinamica_6m ridge_ciclo_anidado     4   0.594512        0.462721   0.131790    0.738027         0.572739    0.165287
+ridge_e4_dinamica_6m ridge_ciclo_anidado     5   0.571213        0.582700  -0.011487    0.755859         0.761410   -0.005552
+   xgb_e4_mensual_3m xgb_meses_separados     1   0.391652        0.389147   0.002505    0.553586         0.585799   -0.032213
+   xgb_e4_mensual_3m xgb_meses_separados     2   0.423252        0.445699  -0.022447    0.619016         0.625625   -0.006609
+   xgb_e4_mensual_3m xgb_meses_separados     3   0.446314        0.502150  -0.055836    0.570517         0.615897   -0.045381
+   xgb_e4_mensual_3m xgb_meses_separados     4   0.483525        0.468412   0.015113    0.594466         0.577815    0.016651
+   xgb_e4_mensual_3m xgb_meses_separados     5   0.559395        0.571741  -0.012346    0.779726         0.767825    0.011901
+   xgb_e4_mensual_6m xgb_meses_separados     1   0.351981        0.389147  -0.037166    0.559738         0.585799   -0.026061
+   xgb_e4_mensual_6m xgb_meses_separados     2   0.409246        0.445699  -0.036453    0.611170         0.625625   -0.014455
+   xgb_e4_mensual_6m xgb_meses_separados     3   0.447657        0.502150  -0.054492    0.563640         0.615897   -0.052257
+   xgb_e4_mensual_6m xgb_meses_separados     4   0.539059        0.468412   0.070647    0.645118         0.577815    0.067303
+   xgb_e4_mensual_6m xgb_meses_separados     5   0.578727        0.571741   0.006985    0.792922         0.767825    0.025098
+
+AVISOS
+
+Empty DataFrame
+Columns: [modelo, fold, categoria, es_convergencia, mensaje]
+Index: []
+

@@ -1,0 +1,93 @@
+MODELO BASE: configuración de modelo_fold.
+Ajuste: 138 parcelas etiquetadas y 213 variables.
+Predicción: 59 parcelas.
+
+Deltas = predicción del escenario - predicción base.
+Unidades: las mismas de y_comparacion.
+No son errores observados ni intervalos de confianza.
+La tolerancia numérica no es un umbral agronómico.
+
+PARAMETROS DEL MODELO
+
+{
+  "objective": "reg:squarederror",
+  "base_score": null,
+  "booster": "gbtree",
+  "callbacks": null,
+  "colsample_bylevel": null,
+  "colsample_bynode": null,
+  "colsample_bytree": 0.7,
+  "device": null,
+  "early_stopping_rounds": null,
+  "enable_categorical": true,
+  "eval_metric": null,
+  "feature_types": null,
+  "feature_weights": null,
+  "gamma": null,
+  "grow_policy": null,
+  "importance_type": null,
+  "interaction_constraints": null,
+  "learning_rate": 0.03,
+  "max_bin": null,
+  "max_cat_threshold": null,
+  "max_cat_to_onehot": null,
+  "max_delta_step": null,
+  "max_depth": 3,
+  "max_leaves": null,
+  "min_child_weight": 3,
+  "missing": NaN,
+  "monotone_constraints": null,
+  "multi_strategy": null,
+  "n_estimators": 400,
+  "n_jobs": -1,
+  "num_parallel_tree": null,
+  "random_state": 0,
+  "reg_alpha": null,
+  "reg_lambda": 5.0,
+  "sampling_method": null,
+  "scale_pos_weight": null,
+  "subsample": 0.8,
+  "tree_method": null,
+  "validate_parameters": null,
+  "verbosity": null
+}
+
+RESUMEN DE SENSIBILIDAD
+
+escenario_vs_base  parcelas_con_cambio  delta_medio  cambio_absoluto_medio  cambio_absoluto_mediano  p90_cambio_absoluto  max_cambio_absoluto
+          limites                    0     0.000000               0.000000                 0.000000             0.000000             0.000000
+          mediana                    1    -0.000290               0.000290                 0.000000             0.000000             0.017081
+        combinado                    1    -0.000290               0.000290                 0.000000             0.000000             0.017081
+
+RESUMEN POR ALERTA: GRUPOS SOLAPADOS
+
+                grupo  parcelas  parcelas_con_algun_cambio  max_cambio_medio  max_cambio_observado
+                todas        59                          1          0.000290              0.017081
+      con_fuera_rango        27                          1          0.000633              0.017081
+               con_NA         1                          1          0.017081              0.017081
+superan_p90_predictor         3                          0          0.000000              0.000000
+
+PARCELAS PRIORITARIAS
+
+             pred_base  pred_limites  pred_mediana  pred_combinado  delta_limites  delta_mediana  delta_combinado  max_cambio_absoluto  variables_fuera_rango  variables_faltantes  distancia_estandarizada  supera_p90_referencia_OOF  distancia_geografica_m
+ID_POLIGONO                                                                                                                                                                                                                                                   
+AGC_029       3.067672      3.067672      3.067672        3.067672       0.000000       0.000000         0.000000             0.000000                      9                    0                 1.241502                       True              782.019260
+AGC_120       3.344105      3.344105      3.344105        3.344105       0.000000       0.000000         0.000000             0.000000                      7                    0                 1.189150                       True             1258.655898
+AGC_003       3.283666      3.283666      3.283666        3.283666       0.000000       0.000000         0.000000             0.000000                      5                    0                 1.165845                       True              382.677014
+AGC_118       2.911017      2.911017      2.893937        2.893937       0.000000      -0.017081        -0.017081             0.017081                      2                    1                 0.988146                      False             1073.618542
+
+DIEZ MAYORES CAMBIOS
+
+             pred_base  pred_limites  pred_mediana  pred_combinado  delta_limites  delta_mediana  delta_combinado  max_cambio_absoluto  variables_fuera_rango  variables_faltantes  distancia_estandarizada  supera_p90_referencia_OOF  distancia_geografica_m
+ID_POLIGONO                                                                                                                                                                                                                                                   
+AGC_118       2.911017      2.911017      2.893937        2.893937       0.000000      -0.017081        -0.017081             0.017081                      2                    1                 0.988146                      False             1073.618542
+AGC_011       4.653302      4.653302      4.653302        4.653302       0.000000       0.000000         0.000000             0.000000                      0                    0                 0.557988                      False              835.702363
+AGC_003       3.283666      3.283666      3.283666        3.283666       0.000000       0.000000         0.000000             0.000000                      5                    0                 1.165845                       True              382.677014
+AGC_025       3.029202      3.029202      3.029202        3.029202       0.000000       0.000000         0.000000             0.000000                      0                    0                 0.527166                      False              398.122304
+AGC_027       2.920834      2.920834      2.920834        2.920834       0.000000       0.000000         0.000000             0.000000                      1                    0                 0.550559                      False              523.825133
+AGC_028       4.534313      4.534313      4.534313        4.534313       0.000000       0.000000         0.000000             0.000000                      0                    0                 0.535115                      False              203.516585
+AGC_029       3.067672      3.067672      3.067672        3.067672       0.000000       0.000000         0.000000             0.000000                      9                    0                 1.241502                       True              782.019260
+AGC_030       2.953633      2.953633      2.953633        2.953633       0.000000       0.000000         0.000000             0.000000                      0                    0                 0.782916                      False              504.624855
+AGC_031       4.323507      4.323507      4.323507        4.323507       0.000000       0.000000         0.000000             0.000000                      0                    0                 0.842871                      False              181.340240
+AGC_036       4.462224      4.462224      4.462224        4.462224       0.000000       0.000000         0.000000             0.000000                     11                    0                 0.866385                      False              295.393297
+

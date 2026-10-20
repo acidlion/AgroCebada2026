@@ -1,0 +1,80 @@
+================================================================================
+INVENTARIO: precipitacion
+Filas: 48 | Columnas: 14
+
+ESTRUCTURA Y FALTANTES
+
+            columna    tipo  cantidad_NA
+               anio   int64            0
+                mes   int64            0
+            archivo  object            0
+     dias_esperados   int64            0
+   dias_encontrados   int64            0
+              filas   int64            0
+           columnas   int64            0
+  resolucion_grados float64            0
+                crs  object            0
+             unidad  object            0
+             nodata float64            0
+         min_mm_mes float64            0
+         max_mm_mes float64            0
+media_mm_mes_region float64            0
+
+PRIMERAS TRES FILAS
+
+ anio  mes                                     archivo  dias_esperados  dias_encontrados  filas  columnas  resolucion_grados       crs unidad  nodata  min_mm_mes  max_mm_mes  media_mm_mes_region
+ 2022    1 Precipitacion_mensual/2022/PREC_2022_01.tif              31                31     72        65               0.05 EPSG:4326 mm/mes -9999.0         0.0  131.202194            21.537550
+ 2022    2 Precipitacion_mensual/2022/PREC_2022_02.tif              28                28     72        65               0.05 EPSG:4326 mm/mes -9999.0         0.0  106.729340            12.222431
+ 2022    3 Precipitacion_mensual/2022/PREC_2022_03.tif              31                31     72        65               0.05 EPSG:4326 mm/mes -9999.0         0.0   40.774372             7.704464
+
+================================================================================
+INVENTARIO: temperatura
+Filas: 96 | Columnas: 13
+
+ESTRUCTURA Y FALTANTES
+
+          columna    tipo  cantidad_NA
+         variable  object            0
+             anio   int64            0
+              mes   int64            0
+          archivo  object            0
+            filas   int64            0
+         columnas   int64            0
+resolucion_grados float64            0
+              crs  object            0
+           unidad  object            0
+           nodata float64            0
+       min_region float64            0
+       max_region float64            0
+     media_region float64            0
+
+PRIMERAS TRES FILAS
+
+variable  anio  mes                    archivo  filas  columnas  resolucion_grados       crs unidad  nodata  min_region  max_region  media_region
+    Tmax  2022    1 Tmax/2022/Tmax_2022_01.tif     72        65               0.05 EPSG:4326     °C -9999.0   19.663115   29.675657     23.698543
+    Tmax  2022    2 Tmax/2022/Tmax_2022_02.tif     72        65               0.05 EPSG:4326     °C -9999.0   20.132898   30.457623     24.396611
+    Tmax  2022    3 Tmax/2022/Tmax_2022_03.tif     72        65               0.05 EPSG:4326     °C -9999.0   23.777445   32.403358     27.732240
+
+================================================================================
+INVENTARIO: topografia
+Filas: 2 | Columnas: 9
+
+ESTRUCTURA Y FALTANTES
+
+        columna    tipo  cantidad_NA
+        archivo  object            0
+       variable  object            0
+         unidad  object            0
+   resolucion_m   int64            0
+            crs  object            0
+            min float64            0
+            max float64            0
+          media float64            0
+pixeles_validos   int64            0
+
+PRIMERAS TRES FILAS
+
+                             archivo  variable   unidad  resolucion_m       crs  min         max       media  pixeles_validos
+       Elevacion_INEGI_CEM4_120m.tif Elevacion m s.n.m.           120 EPSG:6372  8.0 5608.000000 1828.260950          4081208
+Pendiente_INEGI_CEM4_120m_grados.tif Pendiente   grados           120 EPSG:6372  0.0   70.637863   10.171154          4047765
+

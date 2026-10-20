@@ -1,0 +1,29 @@
+AUDITORIA DE FECHAS Y CLAVES
+
+            dataset  filas  fechas_vacias  fechas_no_interpretables fecha_minima fecha_maxima  filas_con_clave_incompleta  filas_en_claves_repetidas  grupos_de_clave_repetida  filas_excedentes_por_clave  filas_identicas_excedentes
+BASICO_EXPERIMENTAL 104610              0                         0   2022-01-01   2025-12-31                           0                          0                         0                           0                           0
+                PRO  47804              0                         0   2025-01-01   2025-12-30                           0                          0                         0                           0                           0
+
+FECHAS PROBLEMATICAS: BASICO_EXPERIMENTAL
+
+Empty DataFrame
+Columns: [ID_POLIGONO, fecha_captura, sensor]
+Index: []
+
+MUESTRA DE CLAVES REPETIDAS: BASICO_EXPERIMENTAL (hasta 20 filas)
+
+Empty DataFrame
+Columns: [ID_POLIGONO, fecha_captura, sensor, ndvi_promedio, ndvi_std, ndvi_max, ndvi_min, evi_promedio, evi_std, evi_max, evi_min, crc_promedio, crc_std, crc_max, crc_min, mcrc_promedio, mcrc_std, mcrc_max, mcrc_min, ndsvi_promedio, ndsvi_std, ndsvi_max, ndsvi_min, srndi_promedio, srndi_std, srndi_max, srndi_min, mra_promedio, mra_std, mra_max, mra_min, lai_promedio, lai_std, lai_max, lai_min, fapar_promedio, fapar_std, fapar_max, fapar_min, savi_promedio, savi_std, savi_max, savi_min, vi6t_promedio, vi6t_std, vi6t_max, vi6t_min, ndti_promedio, ndti_std, ndti_max, ndti_min, sti_promedio, sti_std, sti_max, sti_min, ndwi_promedio, ndwi_std, ndwi_max, ndwi_min, endwi_promedio, endwi_std, endwi_max, endwi_min, msi_promedio, msi_std, msi_max, msi_min, emsi_promedio, emsi_std, emsi_max, emsi_min, dswi2_promedio, dswi2_std, dswi2_max, dswi2_min, dswi3_promedio, dswi3_std, dswi3_max, dswi3_min, dswi4_promedio, dswi4_std, dswi4_max, dswi4_min, dswi5_promedio, dswi5_std, dswi5_max, dswi5_min, nddi_promedio, nddi_std, nddi_max, nddi_min, enddi_promedio, enddi_std, enddi_max, enddi_min, porcentaje_nubosidad]
+Index: []
+
+FECHAS PROBLEMATICAS: PRO
+
+Empty DataFrame
+Columns: [ID_POLIGONO, fecha_captura, sensor]
+Index: []
+
+MUESTRA DE CLAVES REPETIDAS: PRO (hasta 20 filas)
+
+Empty DataFrame
+Columns: [ID_POLIGONO, fecha_captura, sensor, ndvi_promedio, ndvi_std, ndvi_max, ndvi_min, evi_promedio, evi_std, evi_max, evi_min, lai_promedio, lai_std, lai_max, lai_min, msavi_promedio, msavi_std, msavi_max, msavi_min, porcentaje_nubosidad]
+Index: []

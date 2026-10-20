@@ -1,0 +1,11 @@
+﻿objeto,filas,columnas,indice_unico,indice_igual_y_50
+X_ciclo,138,33,True,True
+X_mensual,138,213,True,True
+tabla_mensual_fuente_57,197,425,True,False
+base_mensual_e4_57,197,213,True,False
+train_57,138,381,True,True
+pred_57,59,381,True,False
+datos_57,59,381,True,False
+matriz_58,138,381,True,True
+X_train_58,111,381,True,False
+X_val_58,27,381,True,False

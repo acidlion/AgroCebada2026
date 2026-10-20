@@ -1,0 +1,13 @@
+REVISION DE CLIMA POR PARCELA Y MES
+
+ filas  parcelas  meses  combinaciones_faltantes  combinaciones_extra  NA_climaticos  precipitaciones_negativas  casos_Tmin_mayor_Tmax
+  9456       197     48                        0                    0              0                          0                      0
+
+PRIMERAS CINCO FILAS
+
+ID_POLIGONO  anio  mes  fecha_mes  precipitacion_mm    tmax_c    tmin_c
+    AGC_001  2022    1 2022-01-01         19.545547 20.292349  6.107370
+    AGC_001  2022    2 2022-02-01         14.697198 21.410572  6.613323
+    AGC_001  2022    3 2022-03-01          4.974521 24.541271  8.275019
+    AGC_001  2022    4 2022-04-01         47.755169 25.377922 11.046246
+    AGC_001  2022    5 2022-05-01         45.257622 26.147617 11.043602

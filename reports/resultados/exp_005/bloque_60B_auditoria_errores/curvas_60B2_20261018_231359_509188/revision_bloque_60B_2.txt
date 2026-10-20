@@ -1,0 +1,413 @@
+CURVAS Y COBERTURA DE PARCELAS PRIORITARIAS
+
+Fuente: ndvi_mensual_56.
+Ventana: abril-octubre de 2025.
+No se imputaron curvas ni se corrigieron etiquetas.
+Los huecos permanecen como datos faltantes.
+Los conteos desconocidos no se sustituyeron por cero.
+La procedencia documental del rendimiento sigue pendiente.
+
+FICHAS
+
+             fold_validacion  rendimiento_observado  ridge_ciclo_anidado  xgb_e4_mensual_3m  ensamble_ridge_xgb3m_50_50  compartido_grande        patron_error  abs_error_ensamble  etiqueta_2_50
+ID_POLIGONO                                                                                                                                                                                      
+AGC_171                    1               2.150000             4.154495           4.110335                    4.132415               True  ambos_sobreestiman            1.982415          False
+AGC_015                    2               2.640000             4.728116           4.592427                    4.660272               True  ambos_sobreestiman            2.020272          False
+AGC_041                    5               2.500000             4.207406           4.601327                    4.404367               True  ambos_sobreestiman            1.904367           True
+AGC_034                    5               2.000000             3.860249           3.643805                    3.752027               True  ambos_sobreestiman            1.752027          False
+AGC_166                    5               2.500000             4.119209           4.479155                    4.299182               True  ambos_sobreestiman            1.799182           True
+AGC_162                    3               5.590000             4.306732           4.201081                    4.253906               True    ambos_subestiman            1.336094          False
+AGC_127                    3               5.570000             4.327619           4.312642                    4.320131               True    ambos_subestiman            1.249869          False
+AGC_024                    1               3.030000             4.235345           4.420869                    4.328107               True  ambos_sobreestiman            1.298107          False
+AGC_058                    4               2.500000             3.543689           3.763674                    3.653681               True  ambos_sobreestiman            1.153681           True
+AGC_048                    4               2.500000             3.566033           3.542005                    3.554019               True  ambos_sobreestiman            1.054019           True
+AGC_138                    4               2.500000             3.713294           3.463906                    3.588600               True  ambos_sobreestiman            1.088600           True
+AGC_068                    4               2.500000             3.453458           3.596028                    3.524743               True  ambos_sobreestiman            1.024743           True
+AGC_160                    2               3.620000             4.654825           4.570927                    4.612876               True  ambos_sobreestiman            0.992876          False
+AGC_169                    4               2.500000             3.428672           3.620089                    3.524380               True  ambos_sobreestiman            1.024380           True
+AGC_172                    3               5.190000             4.350487           4.424503                    4.387495               True    ambos_subestiman            0.802505          False
+AGC_067                    5               3.000000             4.049182           3.757935                    3.903559               True  ambos_sobreestiman            0.903559          False
+AGC_055                    2               5.450000             4.707803           4.457619                    4.582711               True    ambos_subestiman            0.867289          False
+AGC_049                    3               5.530000             4.790612           4.592672                    4.691642               True    ambos_subestiman            0.838358          False
+AGC_001                    5               3.500000             2.433263           2.809625                    2.621444               True    ambos_subestiman            0.878556          False
+AGC_054                    4               2.500000             3.218075           2.889919                    3.053997              False  ambos_sobreestiman            0.553997           True
+AGC_074                    5               2.500000             2.898366           3.013134                    2.955750              False  ambos_sobreestiman            0.455750           True
+AGC_123                    5               2.500000             2.968003           3.091677                    3.029840              False  ambos_sobreestiman            0.529840           True
+AGC_144                    5               2.500000             3.044219           3.367279                    3.205749              False  ambos_sobreestiman            0.705749           True
+
+COBERTURA POR SENSOR
+
+ID_POLIGONO     sensor  meses_esperados  meses_con_registro  meses_con_ndvi  meses_con_conteo_capturas  capturas_reportadas  observaciones_validas_reportadas  capturas_nubosidad_100_reportadas  meses_con_dato_nubosidad  compartido_grande  etiqueta_2_50
+    AGC_171     Planet                7                   7               7                          7                  134                                92                                 42                         7               True          False
+    AGC_171 Sentinel-2                7                   7               7                          7                   51                                36                                 15                         7               True          False
+    AGC_015     Planet                7                   7               7                          7                  134                                93                                 41                         7               True          False
+    AGC_015 Sentinel-2                7                   7               7                          7                   51                                39                                 12                         7               True          False
+    AGC_041     Planet                7                   7               7                          7                  131                                84                                 47                         7               True           True
+    AGC_041 Sentinel-2                7                   7               7                          7                   51                                37                                 14                         7               True           True
+    AGC_034     Planet                7                   7               7                          7                  133                                78                                 55                         7               True          False
+    AGC_034 Sentinel-2                7                   7               7                          7                   51                                38                                 13                         7               True          False
+    AGC_166     Planet                7                   7               7                          7                  131                                82                                 49                         7               True           True
+    AGC_166 Sentinel-2                7                   7               7                          7                   51                                38                                 13                         7               True           True
+    AGC_162     Planet                7                   7               7                          7                  132                                89                                 43                         7               True          False
+    AGC_162 Sentinel-2                7                   7               7                          7                   51                                35                                 16                         7               True          False
+    AGC_127     Planet                7                   7               7                          7                  133                                86                                 47                         7               True          False
+    AGC_127 Sentinel-2                7                   7               7                          7                   51                                33                                 18                         7               True          False
+    AGC_024     Planet                7                   7               7                          7                  135                                94                                 41                         7               True          False
+    AGC_024 Sentinel-2                7                   7               7                          7                   51                                35                                 16                         7               True          False
+    AGC_058     Planet                7                   7               7                          7                  135                               104                                 31                         7               True           True
+    AGC_058 Sentinel-2                7                   7               7                          7                   50                                40                                 10                         7               True           True
+    AGC_048     Planet                7                   7               7                          7                  135                                97                                 38                         7               True           True
+    AGC_048 Sentinel-2                7                   7               7                          7                   50                                42                                  8                         7               True           True
+    AGC_138     Planet                7                   7               7                          7                  134                               102                                 32                         7               True           True
+    AGC_138 Sentinel-2                7                   7               7                          7                   50                                40                                 10                         7               True           True
+    AGC_068     Planet                7                   7               7                          7                  135                               107                                 28                         7               True           True
+    AGC_068 Sentinel-2                7                   7               7                          7                   50                                41                                  9                         7               True           True
+    AGC_160     Planet                7                   7               7                          7                  132                                93                                 39                         7               True          False
+    AGC_160 Sentinel-2                7                   7               7                          7                   51                                36                                 15                         7               True          False
+    AGC_169     Planet                7                   7               7                          7                  135                               100                                 35                         7               True           True
+    AGC_169 Sentinel-2                7                   7               7                          7                   50                                41                                  9                         7               True           True
+    AGC_172     Planet                7                   7               7                          7                  130                                86                                 44                         7               True          False
+    AGC_172 Sentinel-2                7                   7               7                          7                   51                                33                                 18                         7               True          False
+    AGC_067     Planet                7                   7               7                          7                  132                                77                                 55                         7               True          False
+    AGC_067 Sentinel-2                7                   7               7                          7                   51                                35                                 16                         7               True          False
+    AGC_055     Planet                7                   7               7                          7                  130                                80                                 50                         7               True          False
+    AGC_055 Sentinel-2                7                   7               7                          7                   51                                37                                 14                         7               True          False
+    AGC_049     Planet                7                   7               7                          7                  132                                90                                 42                         7               True          False
+    AGC_049 Sentinel-2                7                   7               7                          7                   51                                32                                 19                         7               True          False
+    AGC_001     Planet                7                   7               7                          7                  136                                97                                 39                         7               True          False
+    AGC_001 Sentinel-2                7                   7               7                          7                   50                                40                                 10                         7               True          False
+    AGC_054     Planet                7                   7               7                          7                  135                               105                                 30                         7              False           True
+    AGC_054 Sentinel-2                7                   7               7                          7                   50                                39                                 11                         7              False           True
+    AGC_074     Planet                7                   7               7                          7                  132                                89                                 43                         7              False           True
+    AGC_074 Sentinel-2                7                   7               7                          7                   50                                36                                 14                         7              False           True
+    AGC_123     Planet                7                   7               7                          7                  131                                95                                 36                         7              False           True
+    AGC_123 Sentinel-2                7                   7               7                          7                   50                                38                                 12                         7              False           True
+    AGC_144     Planet                7                   7               7                          7                  132                               100                                 32                         7              False           True
+    AGC_144 Sentinel-2                7                   7               7                          7                   50                                40                                 10                         7              False           True
+
+CURVAS MENSUALES
+
+ID_POLIGONO     sensor  fecha_mes  ndvi_media  ndvi_mediana  n_observaciones_validas  n_capturas  capturas_nubosidad_100  nubosidad_media  registro_en_tabla  ndvi_disponible
+    AGC_171     Planet 2025-04-01    0.210708      0.211000                       24          26                       2         9.753115               True             True
+    AGC_171     Planet 2025-05-01    0.209267      0.217000                       15          22                       7        39.843545               True             True
+    AGC_171     Planet 2025-06-01    0.287333      0.291000                        6          11                       5        52.839727               True             True
+    AGC_171     Planet 2025-07-01    0.491182      0.502000                       11          15                       4        29.409133               True             True
+    AGC_171     Planet 2025-08-01    0.620938      0.619000                       16          24                       8        36.330333               True             True
+    AGC_171     Planet 2025-09-01    0.633000      0.638000                        9          19                      10        55.412421               True             True
+    AGC_171     Planet 2025-10-01    0.506364      0.514000                       11          17                       6        45.284882               True             True
+    AGC_171 Sentinel-2 2025-04-01    0.142429      0.145000                        7           8                       1        12.500000               True             True
+    AGC_171 Sentinel-2 2025-05-01    0.135000      0.143000                        5           7                       2        34.492556               True             True
+    AGC_171 Sentinel-2 2025-06-01    0.196333      0.206000                        3           8                       5        73.398966               True             True
+    AGC_171 Sentinel-2 2025-07-01    0.438500      0.449000                        6           7                       1        14.353904               True             True
+    AGC_171 Sentinel-2 2025-08-01    0.524500      0.546000                        6           7                       1        25.309694               True             True
+    AGC_171 Sentinel-2 2025-09-01    0.477500      0.517500                        4           7                       3        56.131379               True             True
+    AGC_171 Sentinel-2 2025-10-01    0.393200      0.393000                        5           7                       2        44.482328               True             True
+    AGC_015     Planet 2025-04-01    0.231920      0.231000                       25          26                       1         7.146577               True             True
+    AGC_015     Planet 2025-05-01    0.231187      0.234500                       16          24                       8        34.100250               True             True
+    AGC_015     Planet 2025-06-01    0.342600      0.298000                        5          10                       5        50.000000               True             True
+    AGC_015     Planet 2025-07-01    0.458750      0.430000                        8          15                       7        46.666667               True             True
+    AGC_015     Planet 2025-08-01    0.530176      0.521000                       17          24                       7        31.316583               True             True
+    AGC_015     Planet 2025-09-01    0.697083      0.700500                       12          19                       7        42.643474               True             True
+    AGC_015     Planet 2025-10-01    0.666200      0.657000                       10          16                       6        40.887313               True             True
+    AGC_015 Sentinel-2 2025-04-01    0.171250      0.171000                        8           8                       0         0.803213               True             True
+    AGC_015 Sentinel-2 2025-05-01    0.152200      0.162000                        5           7                       2        36.660929               True             True
+    AGC_015 Sentinel-2 2025-06-01    0.208500      0.239500                        4           8                       4        55.973896               True             True
+    AGC_015 Sentinel-2 2025-07-01    0.371500      0.353000                        6           7                       1        23.924269               True             True
+    AGC_015 Sentinel-2 2025-08-01    0.442000      0.436000                        7           7                       0         0.975330               True             True
+    AGC_015 Sentinel-2 2025-09-01    0.544600      0.621000                        5           7                       2        54.274240               True             True
+    AGC_015 Sentinel-2 2025-10-01    0.504750      0.509500                        4           7                       3        51.807229               True             True
+    AGC_041     Planet 2025-04-01    0.209000      0.212000                       21          21                       0         5.153333               True             True
+    AGC_041     Planet 2025-05-01    0.192083      0.192500                       12          22                      10        49.428273               True             True
+    AGC_041     Planet 2025-06-01    0.311333      0.268500                        6          13                       7        61.880231               True             True
+    AGC_041     Planet 2025-07-01    0.695125      0.709000                        8          16                       8        55.226750               True             True
+    AGC_041     Planet 2025-08-01    0.689600      0.688000                       15          19                       4        29.055947               True             True
+    AGC_041     Planet 2025-09-01    0.579083      0.567000                       12          22                      10        60.351182               True             True
+    AGC_041     Planet 2025-10-01    0.485000      0.473000                       10          18                       8        52.077667               True             True
+    AGC_041 Sentinel-2 2025-04-01    0.119143      0.134000                        7           8                       1        15.102986               True             True
+    AGC_041 Sentinel-2 2025-05-01    0.114750      0.124000                        4           7                       3        56.802721               True             True
+    AGC_041 Sentinel-2 2025-06-01    0.198667      0.192000                        3           8                       5        63.260582               True             True
+    AGC_041 Sentinel-2 2025-07-01    0.650500      0.651500                        6           7                       1        21.029047               True             True
+    AGC_041 Sentinel-2 2025-08-01    0.601857      0.618000                        7           7                       0         1.571105               True             True
+    AGC_041 Sentinel-2 2025-09-01    0.505000      0.518000                        5           7                       2        29.721412               True             True
+    AGC_041 Sentinel-2 2025-10-01    0.381000      0.378000                        5           7                       2        30.412482               True             True
+    AGC_034     Planet 2025-04-01    0.216905      0.220000                       21          23                       2        11.760696               True             True
+    AGC_034     Planet 2025-05-01    0.195250      0.192500                       12          22                      10        49.230364               True             True
+    AGC_034     Planet 2025-06-01    0.271800      0.258000                        5          13                       8        69.610923               True             True
+    AGC_034     Planet 2025-07-01    0.492750      0.481500                        8          16                       8        56.478687               True             True
+    AGC_034     Planet 2025-08-01    0.638800      0.641000                       15          19                       4        29.469684               True             True
+    AGC_034     Planet 2025-09-01    0.575857      0.588000                        7          22                      15        72.940318               True             True
+    AGC_034     Planet 2025-10-01    0.496100      0.493000                       10          18                       8        52.489389               True             True
+    AGC_034 Sentinel-2 2025-04-01    0.135750      0.146000                        8           8                       0         0.168919               True             True
+    AGC_034 Sentinel-2 2025-05-01    0.086600      0.090000                        5           7                       2        54.424067               True             True
+    AGC_034 Sentinel-2 2025-06-01    0.142250      0.147000                        4           8                       4        64.850788               True             True
+    AGC_034 Sentinel-2 2025-07-01    0.484800      0.488000                        5           7                       2        28.571429               True             True
+    AGC_034 Sentinel-2 2025-08-01    0.551857      0.560000                        7           7                       0         2.895753               True             True
+    AGC_034 Sentinel-2 2025-09-01    0.463000      0.502000                        5           7                       2        35.489060               True             True
+    AGC_034 Sentinel-2 2025-10-01    0.400750      0.408500                        4           7                       3        51.576577               True             True
+    AGC_166     Planet 2025-04-01    0.218381      0.221000                       21          21                       0         4.569619               True             True
+    AGC_166     Planet 2025-05-01    0.203077      0.202000                       13          22                       9        46.472000               True             True
+    AGC_166     Planet 2025-06-01    0.330833      0.283000                        6          13                       7        56.204154               True             True
+    AGC_166     Planet 2025-07-01    0.669667      0.707000                        9          16                       7        55.024313               True             True
+    AGC_166     Planet 2025-08-01    0.703857      0.705000                       14          19                       5        30.259579               True             True
+    AGC_166     Planet 2025-09-01    0.550727      0.545000                       11          22                      11        60.365818               True             True
+    AGC_166     Planet 2025-10-01    0.437500      0.428000                        8          18                      10        55.560556               True             True
+    AGC_166 Sentinel-2 2025-04-01    0.128000      0.134500                        6           8                       2        25.218121               True             True
+    AGC_166 Sentinel-2 2025-05-01    0.126750      0.126500                        4           7                       3        64.391179               True             True
+    AGC_166 Sentinel-2 2025-06-01    0.187250      0.188500                        4           8                       4        66.845638               True             True
+    AGC_166 Sentinel-2 2025-07-01    0.643667      0.638500                        6           7                       1        21.495686               True             True
+    AGC_166 Sentinel-2 2025-08-01    0.599000      0.606000                        7           7                       0         5.100671               True             True
+    AGC_166 Sentinel-2 2025-09-01    0.458200      0.457000                        5           7                       2        32.636625               True             True
+    AGC_166 Sentinel-2 2025-10-01    0.270000      0.306500                        6           7                       1        22.301055               True             True
+    AGC_162     Planet 2025-04-01    0.177960      0.175000                       25          26                       1        11.211423               True             True
+    AGC_162     Planet 2025-05-01    0.173937      0.175500                       16          23                       7        34.553870               True             True
+    AGC_162     Planet 2025-06-01    0.195750      0.195000                        4          10                       6        60.374200               True             True
+    AGC_162     Planet 2025-07-01    0.341250      0.290500                        8          15                       7        58.204600               True             True
+    AGC_162     Planet 2025-08-01    0.430421      0.434000                       19          23                       4        25.863826               True             True
+    AGC_162     Planet 2025-09-01    0.569143      0.566000                        7          19                      12        70.125737               True             True
+    AGC_162     Planet 2025-10-01    0.552400      0.552500                       10          16                       6        48.756625               True             True
+    AGC_162 Sentinel-2 2025-04-01    0.137286      0.138000                        7           8                       1        14.240772               True             True
+    AGC_162 Sentinel-2 2025-05-01    0.132500      0.131500                        4           7                       3        42.857143               True             True
+    AGC_162 Sentinel-2 2025-06-01    0.152000      0.158000                        4           8                       4        53.418624               True             True
+    AGC_162 Sentinel-2 2025-07-01    0.273000      0.244500                        6           7                       1        14.285714               True             True
+    AGC_162 Sentinel-2 2025-08-01    0.352714      0.338000                        7           7                       0        12.008629               True             True
+    AGC_162 Sentinel-2 2025-09-01    0.381000      0.399000                        3           7                       4        70.517737               True             True
+    AGC_162 Sentinel-2 2025-10-01    0.477750      0.480500                        4           7                       3        42.857143               True             True
+    AGC_127     Planet 2025-04-01    0.315208      0.313500                       24          26                       2         9.023000               True             True
+    AGC_127     Planet 2025-05-01    0.303706      0.309000                       17          23                       6        33.777174               True             True
+    AGC_127     Planet 2025-06-01    0.377500      0.368500                        4           9                       5        55.555556               True             True
+    AGC_127     Planet 2025-07-01    0.512200      0.521500                       10          16                       6        40.831063               True             True
+    AGC_127     Planet 2025-08-01    0.616357      0.609000                       14          23                       9        39.130435               True             True
+    AGC_127     Planet 2025-09-01    0.622889      0.633000                        9          19                      10        57.709316               True             True
+    AGC_127     Planet 2025-10-01    0.646375      0.642500                        8          17                       9        53.164353               True             True
+    AGC_127 Sentinel-2 2025-04-01    0.263625      0.284000                        8           8                       0         0.000000               True             True
+    AGC_127 Sentinel-2 2025-05-01    0.275000      0.274000                        4           7                       3        42.857143               True             True
+    AGC_127 Sentinel-2 2025-06-01    0.333667      0.324000                        3           8                       5        62.500000               True             True
+    AGC_127 Sentinel-2 2025-07-01    0.467000      0.458000                        5           7                       2        28.571429               True             True
+    AGC_127 Sentinel-2 2025-08-01    0.537000      0.537000                        6           7                       1        14.285714               True             True
+    AGC_127 Sentinel-2 2025-09-01    0.526000      0.550000                        3           7                       4        57.142857               True             True
+    AGC_127 Sentinel-2 2025-10-01    0.555750      0.555000                        4           7                       3        42.857143               True             True
+    AGC_024     Planet 2025-04-01    0.216792      0.217000                       24          26                       2        10.885308               True             True
+    AGC_024     Planet 2025-05-01    0.215733      0.227000                       15          22                       7        38.727500               True             True
+    AGC_024     Planet 2025-06-01    0.254000      0.247000                        5          11                       6        56.969545               True             True
+    AGC_024     Planet 2025-07-01    0.483182      0.480000                       11          15                       4        30.983067               True             True
+    AGC_024     Planet 2025-08-01    0.678438      0.676000                       16          24                       8        36.320333               True             True
+    AGC_024     Planet 2025-09-01    0.735909      0.747000                       11          20                       9        57.572400               True             True
+    AGC_024     Planet 2025-10-01    0.689583      0.700000                       12          17                       5        41.782529               True             True
+    AGC_024 Sentinel-2 2025-04-01    0.144143      0.145000                        7           8                       1        12.500000               True             True
+    AGC_024 Sentinel-2 2025-05-01    0.139600      0.144000                        5           7                       2        32.666133               True             True
+    AGC_024 Sentinel-2 2025-06-01    0.134500      0.151500                        4           8                       4        69.365492               True             True
+    AGC_024 Sentinel-2 2025-07-01    0.411167      0.409000                        6           7                       1        18.048725               True             True
+    AGC_024 Sentinel-2 2025-08-01    0.602400      0.615000                        5           7                       2        28.571429               True             True
+    AGC_024 Sentinel-2 2025-09-01    0.567750      0.637000                        4           7                       3        56.536658               True             True
+    AGC_024 Sentinel-2 2025-10-01    0.614500      0.606500                        4           7                       3        42.857143               True             True
+    AGC_058     Planet 2025-04-01    0.203950      0.201000                       20          20                       0         5.605800               True             True
+    AGC_058     Planet 2025-05-01    0.190000      0.192000                       17          23                       6        31.167174               True             True
+    AGC_058     Planet 2025-06-01    0.269111      0.256000                        9          13                       4        31.004846               True             True
+    AGC_058     Planet 2025-07-01    0.352333      0.348000                        9          13                       4        34.362769               True             True
+    AGC_058     Planet 2025-08-01    0.659438      0.649500                       16          21                       5        28.307286               True             True
+    AGC_058     Planet 2025-09-01    0.708529      0.704000                       17          23                       6        53.493739               True             True
+    AGC_058     Planet 2025-10-01    0.595125      0.606500                       16          22                       6        27.770318               True             True
+    AGC_058 Sentinel-2 2025-04-01    0.130500      0.133000                        8           8                       0         0.000000               True             True
+    AGC_058 Sentinel-2 2025-05-01    0.119400      0.121000                        5           7                       2        39.878849               True             True
+    AGC_058 Sentinel-2 2025-06-01    0.144000      0.147000                        4           8                       4        66.460542               True             True
+    AGC_058 Sentinel-2 2025-07-01    0.313333      0.329000                        6           7                       1        27.595490               True             True
+    AGC_058 Sentinel-2 2025-08-01    0.543833      0.523000                        6           7                       1        14.369847               True             True
+    AGC_058 Sentinel-2 2025-09-01    0.590800      0.605000                        5           6                       1        28.111504               True             True
+    AGC_058 Sentinel-2 2025-10-01    0.435333      0.438500                        6           7                       1        26.114757               True             True
+    AGC_048     Planet 2025-04-01    0.218353      0.216000                       17          20                       3        15.000000               True             True
+    AGC_048     Planet 2025-05-01    0.199250      0.196500                       16          22                       6        33.921364               True             True
+    AGC_048     Planet 2025-06-01    0.317857      0.253000                        7          13                       6        50.421923               True             True
+    AGC_048     Planet 2025-07-01    0.430455      0.422000                       11          14                       3        23.579929               True             True
+    AGC_048     Planet 2025-08-01    0.656941      0.646000                       17          23                       6        34.464565               True             True
+    AGC_048     Planet 2025-09-01    0.762750      0.772000                       16          22                       6        46.852545               True             True
+    AGC_048     Planet 2025-10-01    0.603923      0.608000                       13          21                       8        38.208190               True             True
+    AGC_048 Sentinel-2 2025-04-01    0.151000      0.156000                        8           8                       0         6.928191               True             True
+    AGC_048 Sentinel-2 2025-05-01    0.121400      0.139000                        5           7                       2        42.203647               True             True
+    AGC_048 Sentinel-2 2025-06-01    0.178333      0.189000                        3           8                       5        70.000000               True             True
+    AGC_048 Sentinel-2 2025-07-01    0.339333      0.341000                        6           7                       1        40.592705               True             True
+    AGC_048 Sentinel-2 2025-08-01    0.571429      0.553000                        7           7                       0        12.082067               True             True
+    AGC_048 Sentinel-2 2025-09-01    0.591500      0.579500                        6           6                       0        26.560284               True             True
+    AGC_048 Sentinel-2 2025-10-01    0.513286      0.554000                        7           7                       0        16.732523               True             True
+    AGC_138     Planet 2025-04-01    0.222158      0.219000                       19          20                       1         6.408850               True             True
+    AGC_138     Planet 2025-05-01    0.193937      0.193000                       16          22                       6        38.492364               True             True
+    AGC_138     Planet 2025-06-01    0.271667      0.254000                        9          13                       4        32.539692               True             True
+    AGC_138     Planet 2025-07-01    0.459143      0.470000                        7          13                       6        55.018231               True             True
+    AGC_138     Planet 2025-08-01    0.666056      0.645000                       18          22                       4        32.834136               True             True
+    AGC_138     Planet 2025-09-01    0.693533      0.695000                       15          22                       7        53.097273               True             True
+    AGC_138     Planet 2025-10-01    0.531722      0.543500                       18          22                       4        23.042045               True             True
+    AGC_138 Sentinel-2 2025-04-01    0.143250      0.152000                        8           8                       0        10.923165               True             True
+    AGC_138 Sentinel-2 2025-05-01    0.126167      0.129500                        6           7                       1        31.471166               True             True
+    AGC_138 Sentinel-2 2025-06-01    0.174000      0.175000                        3           8                       5        62.786697               True             True
+    AGC_138 Sentinel-2 2025-07-01    0.454200      0.504000                        5           7                       2        28.571429               True             True
+    AGC_138 Sentinel-2 2025-08-01    0.557000      0.547000                        7           7                       0        11.435125               True             True
+    AGC_138 Sentinel-2 2025-09-01    0.559800      0.595000                        5           6                       1        35.378440               True             True
+    AGC_138 Sentinel-2 2025-10-01    0.417667      0.433500                        6           7                       1        23.853211               True             True
+    AGC_068     Planet 2025-04-01    0.211850      0.209000                       20          21                       1         9.127286               True             True
+    AGC_068     Planet 2025-05-01    0.199000      0.200000                       19          22                       3        17.676364               True             True
+    AGC_068     Planet 2025-06-01    0.328889      0.290000                        9          13                       4        43.389385               True             True
+    AGC_068     Planet 2025-07-01    0.462400      0.386500                       10          13                       3        42.304538               True             True
+    AGC_068     Planet 2025-08-01    0.557611      0.521000                       18          22                       4        21.070318               True             True
+    AGC_068     Planet 2025-09-01    0.759500      0.764500                       14          22                       8        45.008273               True             True
+    AGC_068     Planet 2025-10-01    0.649529      0.671000                       17          22                       5        22.727273               True             True
+    AGC_068 Sentinel-2 2025-04-01    0.133143      0.136000                        7           8                       1        12.500000               True             True
+    AGC_068 Sentinel-2 2025-05-01    0.116333      0.127000                        6           7                       1        14.285714               True             True
+    AGC_068 Sentinel-2 2025-06-01    0.178000      0.165000                        3           8                       5        67.675781               True             True
+    AGC_068 Sentinel-2 2025-07-01    0.331600      0.289000                        5           7                       2        28.571429               True             True
+    AGC_068 Sentinel-2 2025-08-01    0.417000      0.384000                        7           7                       0        12.500000               True             True
+    AGC_068 Sentinel-2 2025-09-01    0.607333      0.641000                        6           6                       0        36.979167               True             True
+    AGC_068 Sentinel-2 2025-10-01    0.553714      0.561000                        7           7                       0         2.492560               True             True
+    AGC_160     Planet 2025-04-01    0.211333      0.207500                       24          26                       2         8.522462               True             True
+    AGC_160     Planet 2025-05-01    0.212615      0.214000                       13          22                       9        40.909091               True             True
+    AGC_160     Planet 2025-06-01    0.349500      0.325500                        6          10                       4        40.000000               True             True
+    AGC_160     Planet 2025-07-01    0.439000      0.519000                        9          16                       7        52.316250               True             True
+    AGC_160     Planet 2025-08-01    0.427789      0.383000                       19          24                       5        28.394583               True             True
+    AGC_160     Planet 2025-09-01    0.725231      0.723000                       13          18                       5        54.028556               True             True
+    AGC_160     Planet 2025-10-01    0.740444      0.753000                        9          16                       7        55.597563               True             True
+    AGC_160 Sentinel-2 2025-04-01    0.133750      0.159500                        8           8                       0         5.641852               True             True
+    AGC_160 Sentinel-2 2025-05-01    0.170500      0.170000                        4           7                       3        42.857143               True             True
+    AGC_160 Sentinel-2 2025-06-01    0.262667      0.254000                        3           8                       5        62.500000               True             True
+    AGC_160 Sentinel-2 2025-07-01    0.379167      0.457000                        6           7                       1        24.886954               True             True
+    AGC_160 Sentinel-2 2025-08-01    0.330000      0.252000                        6           7                       1        14.285714               True             True
+    AGC_160 Sentinel-2 2025-09-01    0.593000      0.561500                        4           7                       3        47.529727               True             True
+    AGC_160 Sentinel-2 2025-10-01    0.670600      0.645000                        5           7                       2        28.571429               True             True
+    AGC_169     Planet 2025-04-01    0.200263      0.198000                       19          20                       1         6.281100               True             True
+    AGC_169     Planet 2025-05-01    0.191316      0.193000                       19          23                       4        22.702000               True             True
+    AGC_169     Planet 2025-06-01    0.303429      0.247000                        7          13                       6        46.153846               True             True
+    AGC_169     Planet 2025-07-01    0.382000      0.361500                        8          13                       5        43.753077               True             True
+    AGC_169     Planet 2025-08-01    0.603563      0.606000                       16          21                       5        28.404333               True             True
+    AGC_169     Planet 2025-09-01    0.768214      0.778000                       14          23                       9        43.244217               True             True
+    AGC_169     Planet 2025-10-01    0.606412      0.627000                       17          22                       5        27.120955               True             True
+    AGC_169 Sentinel-2 2025-04-01    0.120125      0.129500                        8           8                       0         0.807823               True             True
+    AGC_169 Sentinel-2 2025-05-01    0.124500      0.128000                        6           7                       1        14.674441               True             True
+    AGC_169 Sentinel-2 2025-06-01    0.167333      0.159000                        3           8                       5        62.542517               True             True
+    AGC_169 Sentinel-2 2025-07-01    0.295000      0.255000                        5           7                       2        28.668610               True             True
+    AGC_169 Sentinel-2 2025-08-01    0.444857      0.445000                        7           7                       0         5.393586               True             True
+    AGC_169 Sentinel-2 2025-09-01    0.651800      0.652000                        5           6                       1        34.977324               True             True
+    AGC_169 Sentinel-2 2025-10-01    0.520429      0.543000                        7           7                       0        11.564626               True             True
+    AGC_172     Planet 2025-04-01    0.204167      0.207000                       24          26                       2        17.061115               True             True
+    AGC_172     Planet 2025-05-01    0.194056      0.197500                       18          22                       4        24.910455               True             True
+    AGC_172     Planet 2025-06-01    0.279750      0.252500                        4          10                       6        65.132000               True             True
+    AGC_172     Planet 2025-07-01    0.387125      0.358000                        8          15                       7        52.636533               True             True
+    AGC_172     Planet 2025-08-01    0.601278      0.604000                       18          23                       5        28.052522               True             True
+    AGC_172     Planet 2025-09-01    0.708800      0.724000                        5          19                      14        78.631368               True             True
+    AGC_172     Planet 2025-10-01    0.622333      0.623000                        9          15                       6        42.661867               True             True
+    AGC_172 Sentinel-2 2025-04-01    0.152625      0.159000                        8           8                       0         0.651042               True             True
+    AGC_172 Sentinel-2 2025-05-01    0.105000      0.119500                        4           7                       3        54.910714               True             True
+    AGC_172 Sentinel-2 2025-06-01    0.179000      0.179000                        2           8                       6        75.000000               True             True
+    AGC_172 Sentinel-2 2025-07-01    0.339000      0.308500                        6           7                       1        14.285714               True             True
+    AGC_172 Sentinel-2 2025-08-01    0.525600      0.526000                        5           7                       2        28.571429               True             True
+    AGC_172 Sentinel-2 2025-09-01    0.590667      0.592000                        3           7                       4        71.081349               True             True
+    AGC_172 Sentinel-2 2025-10-01    0.542000      0.540000                        5           7                       2        28.571429               True             True
+    AGC_067     Planet 2025-04-01    0.267737      0.265000                       19          22                       3        13.636364               True             True
+    AGC_067     Planet 2025-05-01    0.228714      0.231000                       14          22                       8        50.852409               True             True
+    AGC_067     Planet 2025-06-01    0.304000      0.304500                        6          13                       7        60.180769               True             True
+    AGC_067     Planet 2025-07-01    0.582000      0.581000                        7          17                      10        70.000941               True             True
+    AGC_067     Planet 2025-08-01    0.780462      0.791000                       13          18                       5        42.544611               True             True
+    AGC_067     Planet 2025-09-01    0.727000      0.722000                       10          22                      12        63.004545               True             True
+    AGC_067     Planet 2025-10-01    0.461500      0.443500                        8          18                      10        55.678111               True             True
+    AGC_067 Sentinel-2 2025-04-01    0.154625      0.170500                        8           8                       0        19.047619               True             True
+    AGC_067 Sentinel-2 2025-05-01    0.145000      0.145000                        2           7                       5        71.428571               True             True
+    AGC_067 Sentinel-2 2025-06-01    0.164333      0.163000                        3           8                       5        71.296296               True             True
+    AGC_067 Sentinel-2 2025-07-01    0.503800      0.503000                        5           7                       2        28.571429               True             True
+    AGC_067 Sentinel-2 2025-08-01    0.679429      0.707000                        7           7                       0         6.651550               True             True
+    AGC_067 Sentinel-2 2025-09-01    0.581800      0.618000                        5           7                       2        35.903250               True             True
+    AGC_067 Sentinel-2 2025-10-01    0.311000      0.352000                        5           7                       2        37.263794               True             True
+    AGC_055     Planet 2025-04-01    0.258190      0.252000                       21          26                       5        22.516423               True             True
+    AGC_055     Planet 2025-05-01    0.241571      0.237500                       14          21                       7        39.524095               True             True
+    AGC_055     Planet 2025-06-01    0.321333      0.319000                        3          10                       7        70.000000               True             True
+    AGC_055     Planet 2025-07-01    0.585625      0.591500                        8          16                       8        52.212438               True             True
+    AGC_055     Planet 2025-08-01    0.606389      0.623000                       18          23                       5        33.303348               True             True
+    AGC_055     Planet 2025-09-01    0.645333      0.663000                        9          18                       9        56.008167               True             True
+    AGC_055     Planet 2025-10-01    0.613000      0.608000                        7          16                       9        56.436437               True             True
+    AGC_055 Sentinel-2 2025-04-01    0.178500      0.186500                        8           8                       0         9.236453               True             True
+    AGC_055 Sentinel-2 2025-05-01    0.182250      0.181500                        4           7                       3        42.857143               True             True
+    AGC_055 Sentinel-2 2025-06-01    0.241000      0.255000                        3           8                       5        63.177340               True             True
+    AGC_055 Sentinel-2 2025-07-01    0.467500      0.520500                        6           7                       1        25.475018               True             True
+    AGC_055 Sentinel-2 2025-08-01    0.481286      0.541000                        7           7                       0        15.482055               True             True
+    AGC_055 Sentinel-2 2025-09-01    0.479750      0.461500                        4           7                       3        52.427868               True             True
+    AGC_055 Sentinel-2 2025-10-01    0.503800      0.537000                        5           7                       2        42.223786               True             True
+    AGC_049     Planet 2025-04-01    0.226000      0.224500                       24          26                       2         9.802385               True             True
+    AGC_049     Planet 2025-05-01    0.222353      0.227000                       17          23                       6        26.206609               True             True
+    AGC_049     Planet 2025-06-01    0.336800      0.287000                        5          10                       5        57.816600               True             True
+    AGC_049     Planet 2025-07-01    0.410000      0.359000                       10          15                       5        47.051933               True             True
+    AGC_049     Planet 2025-08-01    0.538632      0.534000                       19          23                       4        30.179478               True             True
+    AGC_049     Planet 2025-09-01    0.688833      0.712000                        6          19                      13        73.312421               True             True
+    AGC_049     Planet 2025-10-01    0.670444      0.670000                        9          16                       7        43.750000               True             True
+    AGC_049 Sentinel-2 2025-04-01    0.165857      0.181000                        7           8                       1        13.090551               True             True
+    AGC_049 Sentinel-2 2025-05-01    0.173250      0.171500                        4           7                       3        42.857143               True             True
+    AGC_049 Sentinel-2 2025-06-01    0.235250      0.231500                        4           8                       4        52.755906               True             True
+    AGC_049 Sentinel-2 2025-07-01    0.353500      0.313500                        6           7                       1        14.285714               True             True
+    AGC_049 Sentinel-2 2025-08-01    0.444167      0.399500                        6           7                       1        18.897638               True             True
+    AGC_049 Sentinel-2 2025-09-01    0.632000      0.632000                        1           7                       6        85.714286               True             True
+    AGC_049 Sentinel-2 2025-10-01    0.601250      0.601000                        4           7                       3        42.857143               True             True
+    AGC_001     Planet 2025-04-01    0.187100      0.188000                       20          22                       2         9.090909               True             True
+    AGC_001     Planet 2025-05-01    0.171824      0.175000                       17          22                       5        28.746045               True             True
+    AGC_001     Planet 2025-06-01    0.267000      0.231000                       11          13                       2        16.807846               True             True
+    AGC_001     Planet 2025-07-01    0.323222      0.293000                        9          13                       4        30.876000               True             True
+    AGC_001     Planet 2025-08-01    0.537188      0.541500                       16          22                       6        33.402136               True             True
+    AGC_001     Planet 2025-09-01    0.798909      0.803000                       11          23                      12        56.446435               True             True
+    AGC_001     Planet 2025-10-01    0.700846      0.699000                       13          21                       8        42.539810               True             True
+    AGC_001 Sentinel-2 2025-04-01    0.123250      0.123500                        8           8                       0         1.098575               True             True
+    AGC_001 Sentinel-2 2025-05-01    0.107750      0.117500                        4           7                       3        47.166610               True             True
+    AGC_001 Sentinel-2 2025-06-01    0.161500      0.161500                        2           8                       6        75.000000               True             True
+    AGC_001 Sentinel-2 2025-07-01    0.245833      0.228000                        6           7                       1        14.285714               True             True
+    AGC_001 Sentinel-2 2025-08-01    0.420714      0.382000                        7           7                       0        13.098066               True             True
+    AGC_001 Sentinel-2 2025-09-01    0.593500      0.631500                        6           6                       0        22.941409               True             True
+    AGC_001 Sentinel-2 2025-10-01    0.544571      0.602000                        7           7                       0        19.358670               True             True
+    AGC_054     Planet 2025-04-01    0.185667      0.183000                       18          20                       2        10.000000               True             True
+    AGC_054     Planet 2025-05-01    0.177316      0.176000                       19          23                       4        21.015696               True             True
+    AGC_054     Planet 2025-06-01    0.255900      0.229000                       10          13                       3        30.329692               True             True
+    AGC_054     Planet 2025-07-01    0.524000      0.534000                       10          13                       3        24.621846               True             True
+    AGC_054     Planet 2025-08-01    0.653941      0.654000                       17          21                       4        28.215333               True             True
+    AGC_054     Planet 2025-09-01    0.608125      0.600500                       16          23                       7        44.716826               True             True
+    AGC_054     Planet 2025-10-01    0.463267      0.463000                       15          22                       7        31.844909               True             True
+    AGC_054 Sentinel-2 2025-04-01    0.124250      0.124500                        8           8                       0         0.000000               True             True
+    AGC_054 Sentinel-2 2025-05-01    0.100200      0.111000                        5           7                       2        30.313589               True             True
+    AGC_054 Sentinel-2 2025-06-01    0.168500      0.168500                        2           8                       6        75.000000               True             True
+    AGC_054 Sentinel-2 2025-07-01    0.492667      0.511000                        6           7                       1        27.932636               True             True
+    AGC_054 Sentinel-2 2025-08-01    0.555286      0.571000                        7           7                       0         0.000000               True             True
+    AGC_054 Sentinel-2 2025-09-01    0.446400      0.419000                        5           6                       1        32.452575               True             True
+    AGC_054 Sentinel-2 2025-10-01    0.358500      0.377500                        6           7                       1        26.480836               True             True
+    AGC_074     Planet 2025-04-01    0.212909      0.215000                       22          23                       1         8.399261               True             True
+    AGC_074     Planet 2025-05-01    0.190923      0.186000                       13          21                       8        50.869095               True             True
+    AGC_074     Planet 2025-06-01    0.224500      0.216000                        6          14                       8        60.832500               True             True
+    AGC_074     Planet 2025-07-01    0.401667      0.387000                        9          14                       5        35.717214               True             True
+    AGC_074     Planet 2025-08-01    0.830200      0.843000                       15          20                       5        32.448000               True             True
+    AGC_074     Planet 2025-09-01    0.786667      0.800500                       12          20                       8        56.868150               True             True
+    AGC_074     Planet 2025-10-01    0.494917      0.481500                       12          20                       8        46.897350               True             True
+    AGC_074 Sentinel-2 2025-04-01    0.153500      0.157000                        8           8                       0         8.412951               True             True
+    AGC_074 Sentinel-2 2025-05-01    0.139200      0.140000                        5           7                       2        30.436761               True             True
+    AGC_074 Sentinel-2 2025-06-01    0.141000      0.141000                        2           8                       6        83.996815               True             True
+    AGC_074 Sentinel-2 2025-07-01    0.363800      0.327000                        5           7                       2        28.571429               True             True
+    AGC_074 Sentinel-2 2025-08-01    0.728714      0.735000                        7           7                       0         6.035790               True             True
+    AGC_074 Sentinel-2 2025-09-01    0.683000      0.680500                        4           6                       2        45.665251               True             True
+    AGC_074 Sentinel-2 2025-10-01    0.423600      0.439000                        5           7                       2        28.753412               True             True
+    AGC_123     Planet 2025-04-01    0.183000      0.184000                       21          22                       1         7.632773               True             True
+    AGC_123     Planet 2025-05-01    0.176063      0.180000                       16          21                       5        31.130524               True             True
+    AGC_123     Planet 2025-06-01    0.241100      0.204000                       10          14                       4        51.871071               True             True
+    AGC_123     Planet 2025-07-01    0.565667      0.567000                        9          15                       6        44.172133               True             True
+    AGC_123     Planet 2025-08-01    0.663571      0.659500                       14          19                       5        35.671684               True             True
+    AGC_123     Planet 2025-09-01    0.613500      0.603500                       12          20                       8        54.361200               True             True
+    AGC_123     Planet 2025-10-01    0.431154      0.423000                       13          20                       7        36.400050               True             True
+    AGC_123 Sentinel-2 2025-04-01    0.119625      0.120000                        8           8                       0         0.000000               True             True
+    AGC_123 Sentinel-2 2025-05-01    0.097000      0.111000                        5           7                       2        51.793722               True             True
+    AGC_123 Sentinel-2 2025-06-01    0.121000      0.121000                        2           8                       6        76.807735               True             True
+    AGC_123 Sentinel-2 2025-07-01    0.518000      0.551500                        6           7                       1        26.441384               True             True
+    AGC_123 Sentinel-2 2025-08-01    0.580571      0.586000                        7           7                       0         6.470211               True             True
+    AGC_123 Sentinel-2 2025-09-01    0.502000      0.509500                        6           6                       0         8.370703               True             True
+    AGC_123 Sentinel-2 2025-10-01    0.344250      0.346500                        4           7                       3        42.857143               True             True
+    AGC_144     Planet 2025-04-01    0.185571      0.186000                       21          22                       1         7.675318               True             True
+    AGC_144     Planet 2025-05-01    0.177687      0.180500                       16          21                       5        32.025381               True             True
+    AGC_144     Planet 2025-06-01    0.245714      0.221000                        7          14                       7        50.242143               True             True
+    AGC_144     Planet 2025-07-01    0.672727      0.714000                       11          15                       4        32.896067               True             True
+    AGC_144     Planet 2025-08-01    0.698056      0.702000                       18          20                       2        19.793200               True             True
+    AGC_144     Planet 2025-09-01    0.617667      0.614500                       12          20                       8        52.386650               True             True
+    AGC_144     Planet 2025-10-01    0.391600      0.384000                       15          20                       5        33.448050               True             True
+    AGC_144 Sentinel-2 2025-04-01    0.118625      0.118500                        8           8                       0         0.000000               True             True
+    AGC_144 Sentinel-2 2025-05-01    0.114200      0.112000                        5           7                       2        28.828984               True             True
+    AGC_144 Sentinel-2 2025-06-01    0.121333      0.120000                        3           8                       5        70.898438               True             True
+    AGC_144 Sentinel-2 2025-07-01    0.608000      0.661500                        6           7                       1        24.433379               True             True
+    AGC_144 Sentinel-2 2025-08-01    0.590000      0.632000                        7           7                       0         9.958791               True             True
+    AGC_144 Sentinel-2 2025-09-01    0.475333      0.504000                        6           6                       0         6.490385               True             True
+    AGC_144 Sentinel-2 2025-10-01    0.309200      0.312000                        5           7                       2        28.571429               True             True
+

@@ -1,0 +1,52 @@
+{
+  "objetivo": "diagnostico temporal, no entrenamiento",
+  "periodo": [
+    "2024-01-01",
+    "2025-10-31"
+  ],
+  "sensores": [
+    "Sentinel-2",
+    "Planet"
+  ],
+  "variable": "ndvi_promedio",
+  "min_meses_para_resumir_maximo": 4,
+  "ventanas": {
+    "ciclo_2024_abril_octubre": [
+      "2024-04-01",
+      "2024-11-01"
+    ],
+    "antecedente_6m_oct2024_mar2025": [
+      "2024-10-01",
+      "2025-04-01"
+    ],
+    "antecedente_3m_ene_mar2025": [
+      "2025-01-01",
+      "2025-04-01"
+    ],
+    "ciclo_2025_abril_octubre": [
+      "2025-04-01",
+      "2025-11-01"
+    ]
+  },
+  "ids_ejemplos": [
+    "AGC_001",
+    "AGC_040",
+    "AGC_079",
+    "AGC_118",
+    "AGC_157",
+    "AGC_197"
+  ],
+  "notas": [
+    "No se utiliza rendimiento.",
+    "Se mantienen las observaciones de las tablas preparadas.",
+    "No se impone un umbral nuevo de nubosidad.",
+    "No se interpolan ni suavizan valores.",
+    "No se fusionan valores de sensores diferentes.",
+    "Planet 2024 no se inventa ni se imputa.",
+    "Maximos calculados sobre medias mensuales abril-octubre.",
+    "En empates se registra el primer mes y el numero de empates.",
+    "El maximo observado no identifica una fecha de siembra.",
+    "Todas las series se cortan antes de noviembre de 2025.",
+    "Se incluyen las 197 parcelas para descripcion, no seleccion supervisada."
+  ]
+}

@@ -1,0 +1,34 @@
+RESUMEN RIDGE
+
+               modelo  MAE_OOF  RMSE_OOF   R2_OOF  sesgo_pred_menos_real  R2_train_media_folds
+  ridge_ciclo_anidado 0.470097  0.628702 0.450427               0.042333              0.668367
+ridge_mensual_anidado 0.562753  0.732759 0.253451               0.101157              0.689207
+
+RESULTADOS POR FOLD
+
+               modelo  fold  n_train  n_validacion  RMSE_interno_elegido  MAE_val  RMSE_val    R2_val  R2_train  sesgo_pred_menos_real  avisos
+  ridge_ciclo_anidado     1      107            31              0.757246 0.510727  0.657937 -0.444983  0.733646              -0.243262       0
+  ridge_ciclo_anidado     2      112            26              0.718574 0.368536  0.557214  0.096748  0.682079               0.048804       0
+  ridge_ciclo_anidado     3      111            27              0.696785 0.416018  0.562560  0.153894  0.671105              -0.268910       0
+  ridge_ciclo_anidado     4      111            27              0.647682 0.462721  0.572739  0.457639  0.615593               0.336278       0
+  ridge_ciclo_anidado     5      111            27              0.608245 0.582700  0.761410 -2.584080  0.639411               0.381303       0
+ridge_mensual_anidado     1      107            31              0.765949 0.471217  0.615231 -0.263487  0.764712              -0.179366       0
+ridge_mensual_anidado     2      112            26              0.734355 0.395699  0.622714 -0.128085  0.748127               0.035899       0
+ridge_mensual_anidado     3      111            27              0.701084 0.498498  0.634808 -0.077389  0.718045              -0.409646       0
+ridge_mensual_anidado     4      111            27              0.640692 0.721545  0.833197 -0.147808  0.533295               0.620754       0
+ridge_mensual_anidado     5      111            27              0.614699 0.734177  0.916050 -4.187746  0.681855               0.477283       0
+
+PARAMETROS ELEGIDOS
+
+               modelo  fold  ridge__alpha
+  ridge_ciclo_anidado     1     10.000000
+  ridge_ciclo_anidado     2     10.000000
+  ridge_ciclo_anidado     3     10.000000
+  ridge_ciclo_anidado     4     10.000000
+  ridge_ciclo_anidado     5     10.000000
+ridge_mensual_anidado     1    100.000000
+ridge_mensual_anidado     2    100.000000
+ridge_mensual_anidado     3    100.000000
+ridge_mensual_anidado     4   1000.000000
+ridge_mensual_anidado     5    100.000000
+

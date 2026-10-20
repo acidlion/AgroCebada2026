@@ -1,0 +1,127 @@
+REVISION DEL RIDGE FINAL DEL CICLO
+
+Alpha del modelo final conservado: 1.0
+Intercepto con variables estandarizadas: 3.955362
+
+Las distancias son descriptivas y usan escala comun.
+El p90 no define confianza ni area formal de aplicabilidad.
+Las contribuciones son relativas al intercepto del modelo.
+No son efectos causales ni explican por si solas la diferencia con XGBoost.
+La comparacion con alpha=10 no selecciona otro modelo.
+No se modificaron el modelo final ni las entregas.
+
+SELECCION INTERNA DE ALPHA
+
+      alpha  RMSE_interno_medio  std_RMSE_entre_divisiones  orden_busqueda  RMSE_division_1  RMSE_division_2  RMSE_division_3  elegido  delta_RMSE_vs_mejor_interno
+   0.100000            0.729536                   0.085323               3         0.696221         0.846631         0.645758    False                     0.005822
+   1.000000            0.723714                   0.079278               1         0.674759         0.835542         0.660842     True                     0.000000
+  10.000000            0.724970                   0.059394               2         0.664646         0.805750         0.704515    False                     0.001256
+ 100.000000            0.792949                   0.066856               4         0.710785         0.793519         0.874544    False                     0.069235
+1000.000000            0.859093                   0.103972               5         0.734182         0.854368         0.988728    False                     0.135378
+
+RESUMEN DE ALERTAS
+
+ variables_modelo  variables_distancia  parcelas_prediccion  parcelas_con_valores_fuera_rango  celdas_fuera_rango  parcelas_superan_p90_descriptivo  p90_distancia_referencia  parcelas_VI6T_menos_7_meses
+               33                   33                   59                                 9                  21                                 2                  0.808995                            1
+
+DISTANCIAS DESCRIPTIVAS
+
+                        grupo  parcelas  mediana    media      p90      max
+referencia_folds_escala_comun       138 0.569197 0.615341 0.808995 1.355848
+                prediccion_59        59 0.427418 0.450196 0.638774 1.031960
+
+SENSIBILIDAD A ALPHA=10
+
+ alpha_elegido  alpha_alternativo  delta_medio_alpha10_menos_elegido  cambio_absoluto_medio  cambio_absoluto_mediano  p90_cambio_absoluto  max_cambio_absoluto  predicciones_negativas_elegido  predicciones_negativas_alpha10
+      1.000000          10.000000                          -0.004678               0.080752                 0.079805             0.153048             0.241076                               0                               0
+
+PARCELAS PRIORITARIAS
+
+            pred_ridge_elegido  pred_ridge_alpha10  delta_alpha10_menos_elegido  abs_cambio_alpha  pred_xgb  delta_ridge_menos_xgb  abs_cambio_vs_xgb  variables_fuera_rango  distancia_estandarizada_ciclo vecino_similar_etiquetado  supera_p90_descriptivo  intercepto_modelo  suma_contribuciones  meses_disponibles_VI6T
+ID_PARCELA                                                                                                                                                                                                                                                                                                                   
+AGC_118               4.145987            4.045484                    -0.100502          0.100502  2.911017               1.234970           1.234970                      0                       0.785059                   AGC_176                   False           3.955362             0.190624                       6
+AGC_003               4.126514            3.914147                    -0.212367          0.212367  3.283666               0.842848           0.842848                      0                       0.617455                   AGC_024                   False           3.955362             0.171151                       7
+AGC_173               2.652052            2.893128                     0.241076          0.241076  3.367042              -0.714990           0.714990                      4                       0.803581                   AGC_014                   False           3.955362            -1.303310                       7
+AGC_116               3.801742            3.896430                     0.094688          0.094688  4.511079              -0.709336           0.709336                      0                       0.443565                   AGC_159                   False           3.955362            -0.153620                       7
+AGC_191               4.433872            4.513677                     0.079805          0.079805  5.119641              -0.685769           0.685769                      0                       0.512370                   AGC_064                   False           3.955362             0.478510                       7
+AGC_142               5.057808            5.019093                    -0.038715          0.038715  4.516322               0.541486           0.541486                      1                       0.693029                   AGC_092                   False           3.955362             1.102446                       7
+AGC_130               4.584735            4.452275                    -0.132460          0.132460  4.059274               0.525461           0.525461                      0                       0.458299                   AGC_008                   False           3.955362             0.629372                       7
+AGC_153               3.954297            3.880701                    -0.073596          0.073596  4.391107              -0.436810           0.436810                      1                       0.204569                   AGC_115                   False           3.955362            -0.001065                       7
+AGC_154               4.814499            4.643514                    -0.170985          0.170985  4.428911               0.385588           0.385588                      0                       0.501602                   AGC_018                   False           3.955362             0.859137                       7
+AGC_093               3.168282            3.153408                    -0.014874          0.014874  2.786050               0.382232           0.382232                      0                       0.214820                   AGC_163                   False           3.955362            -0.787080                       7
+
+DIEZ MAYORES CAMBIOS POR ALPHA
+
+            pred_ridge_elegido  pred_ridge_alpha10  delta_alpha10_menos_elegido  abs_cambio_alpha  pred_xgb  delta_ridge_menos_xgb  abs_cambio_vs_xgb  variables_fuera_rango  distancia_estandarizada_ciclo vecino_similar_etiquetado  supera_p90_descriptivo  intercepto_modelo  suma_contribuciones  meses_disponibles_VI6T
+ID_PARCELA                                                                                                                                                                                                                                                                                                                   
+AGC_173               2.652052            2.893128                     0.241076          0.241076  3.367042              -0.714990           0.714990                      4                       0.803581                   AGC_014                   False           3.955362            -1.303310                       7
+AGC_042               3.205045            3.439683                     0.234638          0.234638  3.304496              -0.099451           0.099451                      0                       0.405654                   AGC_038                   False           3.955362            -0.750317                       7
+AGC_003               4.126514            3.914147                    -0.212367          0.212367  3.283666               0.842848           0.842848                      0                       0.617455                   AGC_024                   False           3.955362             0.171151                       7
+AGC_154               4.814499            4.643514                    -0.170985          0.170985  4.428911               0.385588           0.385588                      0                       0.501602                   AGC_018                   False           3.955362             0.859137                       7
+AGC_120               3.393684            3.231149                    -0.162535          0.162535  3.344105               0.049579           0.049579                      5                       0.858674                   AGC_152                    True           3.955362            -0.561678                       7
+AGC_107               4.179618            4.334659                     0.155041          0.155041  4.459394              -0.279776           0.279776                      2                       0.493311                   AGC_045                   False           3.955362             0.224255                       7
+AGC_085               4.335265            4.182715                    -0.152550          0.152550  3.976950               0.358315           0.358315                      0                       0.481084                   AGC_171                   False           3.955362             0.379902                       7
+AGC_052               4.694591            4.545204                    -0.149387          0.149387  4.382475               0.312115           0.312115                      0                       0.393840                   AGC_032                   False           3.955362             0.739228                       7
+AGC_016               4.356173            4.214006                    -0.142167          0.142167  4.164595               0.191578           0.191578                      0                       0.419297                   AGC_024                   False           3.955362             0.400811                       7
+AGC_130               4.584735            4.452275                    -0.132460          0.132460  4.059274               0.525461           0.525461                      0                       0.458299                   AGC_008                   False           3.955362             0.629372                       7
+
+CINCO PRINCIPALES CONTRIBUCIONES POR PARCELA
+
+ID_PARCELA                              variable  valor_parcela  media_entrenamiento  valor_estandarizado  coeficiente_estandarizado  contribucion_t_ha  magnitud_contribucion
+   AGC_003 basico_sentinel_2__dswi2__media_ciclo       2.113214             1.943744             1.313502                   0.303870           0.399134               0.399134
+   AGC_003            precipitacion_acumulada_mm    1335.090225           951.335762             2.242179                  -0.176419          -0.395563               0.395563
+   AGC_003     basico_landsat__vi6t__media_ciclo      -0.640738            -0.628478            -1.379214                   0.233260          -0.321716               0.321716
+   AGC_003   basico_sentinel_2__sti__media_ciclo       1.594649             1.511905             1.199383                   0.245588           0.294554               0.294554
+   AGC_003 basico_sentinel_2__dswi3__media_ciclo       2.165393             2.009157             0.965286                   0.291884           0.281751               0.281751
+   AGC_093                    tmin_media_ciclo_c      12.122947            12.877894            -1.359956                   0.383830          -0.521993               0.521993
+   AGC_093  basico_sentinel_2__savi__media_ciclo       0.195359             0.218151            -1.005378                  -0.465869           0.468375               0.468375
+   AGC_093   basico_sentinel_2__sti__media_ciclo       1.414246             1.511905            -1.415580                   0.245588          -0.347650               0.347650
+   AGC_093   basico_sentinel_2__msi__media_ciclo       0.996334             0.950090             0.629081                  -0.340132          -0.213971               0.213971
+   AGC_093        pro_planet__msavi__media_ciclo       0.259728             0.275668            -0.554252                   0.359433          -0.199216               0.199216
+   AGC_116  basico_sentinel_2__savi__media_ciclo       0.230271             0.218151             0.534658                  -0.465869          -0.249081               0.249081
+   AGC_116        pro_planet__msavi__media_ciclo       0.295298             0.275668             0.682598                   0.359433           0.245348               0.245348
+   AGC_116                      pendiente_grados       0.790755             2.806086            -0.985267                   0.138991          -0.136943               0.136943
+   AGC_116          pro_planet__evi__media_ciclo       0.300311             0.282147             0.640923                  -0.189320          -0.121339               0.121339
+   AGC_116          pro_planet__lai__media_ciclo       1.593617             1.531557             0.456112                  -0.258231          -0.117782               0.117782
+   AGC_118  basico_sentinel_2__savi__media_ciclo       0.176855             0.218151            -1.821634                  -0.465869           0.848644               0.848644
+   AGC_118 basico_sentinel_2__dswi3__media_ciclo       1.757424             2.009157            -1.555297                   0.291884          -0.453966               0.453966
+   AGC_118   basico_sentinel_2__crc__media_ciclo       0.268602             0.311340            -1.276444                  -0.299937           0.382853               0.382853
+   AGC_118        pro_planet__msavi__media_ciclo       0.248359             0.275668            -0.949579                   0.359433          -0.341310               0.341310
+   AGC_118                      pendiente_grados       7.544257             2.806086             2.316424                   0.138991           0.321963               0.321963
+   AGC_130                    tmin_media_ciclo_c      13.484572            12.877894             1.092866                   0.383830           0.419475               0.419475
+   AGC_130        pro_planet__msavi__media_ciclo       0.252304             0.275668            -0.812412                   0.359433          -0.292007               0.292007
+   AGC_130   basico_sentinel_2__crc__media_ciclo       0.340726             0.311340             0.877686                  -0.299937          -0.263251               0.263251
+   AGC_130          pro_planet__evi__media_ciclo       0.253051             0.282147            -1.026665                  -0.189320           0.194368               0.194368
+   AGC_130 basico_sentinel_2__dswi2__media_ciclo       2.026207             1.943744             0.639139                   0.303870           0.194215               0.194215
+   AGC_142  basico_sentinel_2__savi__media_ciclo       0.190429             0.218151            -1.222884                  -0.465869           0.569704               0.569704
+   AGC_142          pro_planet__lai__media_ciclo       1.238014             1.531557            -2.157388                  -0.258231           0.557104               0.557104
+   AGC_142        pro_planet__msavi__media_ciclo       0.239429             0.275668            -1.260094                   0.359433          -0.452919               0.452919
+   AGC_142 basico_sentinel_2__dswi3__media_ciclo       1.779060             2.009157            -1.421625                   0.291884          -0.414949               0.414949
+   AGC_142     basico_landsat__vi6t__media_ciclo      -0.613143            -0.628478             1.725172                   0.233260           0.402414               0.402414
+   AGC_153 basico_sentinel_2__dswi2__media_ciclo       1.713205             1.943744            -1.786823                   0.303870          -0.542962               0.542962
+   AGC_153   basico_sentinel_2__crc__media_ciclo       0.256286             0.311340            -1.644307                  -0.299937           0.493189               0.493189
+   AGC_153 basico_sentinel_2__dswi3__media_ciclo       1.738480             2.009157            -1.672338                   0.291884          -0.488128               0.488128
+   AGC_153          pro_planet__lai__media_ciclo       1.280992             1.531557            -1.841525                  -0.258231           0.475539               0.475539
+   AGC_153  basico_sentinel_2__mcrc__media_ciclo       0.229497             0.301612            -2.233094                   0.203763          -0.455023               0.455023
+   AGC_154 basico_sentinel_2__dswi3__media_ciclo       2.508654             2.009157             3.086080                   0.291884           0.900776               0.900776
+   AGC_154 basico_sentinel_2__dswi2__media_ciclo       2.308810             1.943744             2.829496                   0.303870           0.859799               0.859799
+   AGC_154  basico_sentinel_2__savi__media_ciclo       0.257402             0.218151             1.731440                  -0.465869          -0.806625               0.806625
+   AGC_154          pro_planet__lai__media_ciclo       1.838266             1.531557             2.254156                  -0.258231          -0.582093               0.582093
+   AGC_154   basico_sentinel_2__crc__media_ciclo       0.370924             0.311340             1.779607                  -0.299937          -0.533771               0.533771
+   AGC_173  basico_sentinel_2__savi__media_ciclo       0.274484             0.218151             2.484934                  -0.465869          -1.157655               1.157655
+   AGC_173        pro_planet__msavi__media_ciclo       0.346624             0.275668             2.467296                   0.359433           0.886827               0.886827
+   AGC_173          pro_planet__lai__media_ciclo       1.950480             1.531557             3.078875                  -0.258231          -0.795061               0.795061
+   AGC_173                    tmin_media_ciclo_c      12.002433            12.877894            -1.577051                   0.383830          -0.605320               0.605320
+   AGC_173          pro_planet__evi__media_ciclo       0.359748             0.282147             2.738216                  -0.189320          -0.518398               0.518398
+   AGC_191  basico_sentinel_2__savi__media_ciclo       0.239274             0.218151             0.931770                  -0.465869          -0.434083               0.434083
+   AGC_191   basico_sentinel_2__msi__media_ciclo       0.866342             0.950090            -1.139284                  -0.340132           0.387507               0.387507
+   AGC_191                      pendiente_grados       7.826061             2.806086             2.454194                   0.138991           0.341111               0.341111
+   AGC_191                    tmin_media_ciclo_c      13.328084            12.877894             0.810970                   0.383830           0.311275               0.311275
+   AGC_191   basico_sentinel_2__crc__media_ciclo       0.332981             0.311340             0.646368                  -0.299937          -0.193870               0.193870
+
+AVISOS ALPHA=10
+
+Empty DataFrame
+Columns: [categoria, mensaje]
+Index: []
+

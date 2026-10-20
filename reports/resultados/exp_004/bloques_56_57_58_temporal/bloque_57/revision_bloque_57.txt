@@ -1,0 +1,44 @@
+EXPERIMENTO 4: TABLAS TEMPORALES
+
+No se entrenaron modelos ni se usaron valores de rendimiento.
+No se imputaron ni estandarizaron mediciones.
+Los meses de maximo no son fechas de siembra.
+Planet 2024 no se incorporo ni se imputo.
+Las bases y entregas anteriores se conservaron.
+
+RESUMEN DE VARIANTES
+
+            variante  parcelas_totales  parcelas_train  parcelas_prediccion  variables  NA_train  NA_prediccion  parcelas_train_con_NA  columnas_totalmente_vacias_train
+   e4_ciclo_dinamica               197             138                   59         45         0              0                      0                                 0
+e4_ciclo_dinamica_3m               197             138                   59         47         0              0                      0                                 0
+e4_ciclo_dinamica_6m               197             138                   59         48         0              0                      0                                 0
+       e4_mensual_3m               197             138                   59        303         7              1                      7                                 0
+       e4_mensual_6m               197             138                   59        381         7              1                      7                                 0
+
+COLUMNAS CON FALTANTES
+
+     variante                                     variable  NA_train  NA_prediccion
+e4_mensual_3m basico_landsat__vi6t__media_mensual__2025_07         2              1
+e4_mensual_3m basico_landsat__vi6t__media_mensual__2025_09         5              0
+e4_mensual_6m basico_landsat__vi6t__media_mensual__2025_07         2              1
+e4_mensual_6m basico_landsat__vi6t__media_mensual__2025_09         5              0
+
+NUEVOS DESCRIPTORES RESUMIDOS
+
+                                 variable               grupo                                                descripcion                 periodo sensor_o_fuente
+            e4__sentinel2__ndvi_max_ciclo  dinamica_ndvi_2025                       Máximo de las siete medias mensuales      abril-octubre 2025      Sentinel-2
+        e4__sentinel2__ndvi_mes_max_ciclo  dinamica_ndvi_2025    Primer mes con el máximo observado; no fecha de siembra      abril-octubre 2025      Sentinel-2
+       e4__sentinel2__ndvi_amplitud_ciclo  dinamica_ndvi_2025                Máximo menos mínimo de las medias mensuales      abril-octubre 2025      Sentinel-2
+       e4__sentinel2__ndvi_cambio_jun_ago  dinamica_ndvi_2025                         NDVI de agosto menos NDVI de junio      abril-octubre 2025      Sentinel-2
+       e4__sentinel2__ndvi_cambio_sep_oct  dinamica_ndvi_2025                   NDVI de octubre menos NDVI de septiembre      abril-octubre 2025      Sentinel-2
+       e4__sentinel2__ndvi_max_en_octubre  dinamica_ndvi_2025        Indicador de máximo en el borde final de la ventana      abril-octubre 2025      Sentinel-2
+               e4__planet__ndvi_max_ciclo  dinamica_ndvi_2025                       Máximo de las siete medias mensuales      abril-octubre 2025          Planet
+           e4__planet__ndvi_mes_max_ciclo  dinamica_ndvi_2025    Primer mes con el máximo observado; no fecha de siembra      abril-octubre 2025          Planet
+          e4__planet__ndvi_amplitud_ciclo  dinamica_ndvi_2025                Máximo menos mínimo de las medias mensuales      abril-octubre 2025          Planet
+          e4__planet__ndvi_cambio_jun_ago  dinamica_ndvi_2025                         NDVI de agosto menos NDVI de junio      abril-octubre 2025          Planet
+          e4__planet__ndvi_cambio_sep_oct  dinamica_ndvi_2025                   NDVI de octubre menos NDVI de septiembre      abril-octubre 2025          Planet
+          e4__planet__ndvi_max_en_octubre  dinamica_ndvi_2025        Indicador de máximo en el borde final de la ventana      abril-octubre 2025          Planet
+    e4__sentinel2__ndvi_media_ene_mar2025 antecedente_ndvi_3m             Media con igual peso de enero, febrero y marzo        enero-marzo 2025      Sentinel-2
+       e4__planet__ndvi_media_ene_mar2025 antecedente_ndvi_3m             Media con igual peso de enero, febrero y marzo        enero-marzo 2025          Planet
+e4__sentinel2__ndvi_media_oct2024_mar2025 antecedente_ndvi_6m Media con igual peso de seis meses; no incluye Planet 2024 octubre 2024-marzo 2025      Sentinel-2
+

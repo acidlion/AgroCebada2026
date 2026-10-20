@@ -1,0 +1,24 @@
+RESUMEN POR CATEGORIA
+
+            categoria  columnas  celdas_faltantes
+       identificacion         2                 0
+            estaticas         3                 0
+             objetivo         1                59
+        clima_mensual        21                 0
+    indices_mensuales       189                 8
+conteos_observaciones       189                 0
+     presencia_sensor        21                 0
+
+COLUMNAS CON FALTANTES
+
+                                     columna         categoria tipo_pandas  faltantes
+                            RENDIMIENTO_T_HA          objetivo     float64         59
+basico_landsat__vi6t__media_mensual__2025_07 indices_mensuales     float64          3
+basico_landsat__vi6t__media_mensual__2025_09 indices_mensuales     float64          5
+
+DISTRIBUCION DE TIPOS
+
+float64    214
+Int64      189
+boolean     21
+string       2

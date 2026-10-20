@@ -1,0 +1,90 @@
+EXTRATREES SOBRE BASES PROPIAS DE 33 Y 213 VARIABLES
+
+Mismas 138 etiquetas y cinco folds espaciales.
+Configuracion fija tomada de AgroCebada.
+240 arboles; max_features=0.5; min_samples_leaf=2.
+max_depth=None; bootstrap=False; semilla=2026.
+Mediana ajustada solo con entrenamiento del fold.
+Sin seleccion adicional de variables ni indicadores NA.
+Sin busqueda interna ni estandarizacion del objetivo.
+No replica todo el pipeline de la otra carpeta.
+MAE, RMSE y sesgo en t/ha; R2 sin unidades.
+Comparacion exploratoria sobre folds ya consultados.
+La configuracion proviene de otro experimento con las mismas etiquetas.
+No se generan ensambles nuevos ni entregas.
+
+REPRESENTACIONES
+
+                   modelo  parcelas  variables  celdas_faltantes  parcelas_con_faltantes
+   extratrees_72_ciclo_33       138         33                 0                       0
+extratrees_72_mensual_213       138        213                 7                       7
+
+COMPARACION GLOBAL
+
+                    modelo      MAE     RMSE       R2  sesgo_pred_menos_real  delta_MAE_vs_ridge_original  delta_RMSE_vs_ridge_original  delta_R2_vs_ridge_original  delta_MAE_vs_ensamble  delta_RMSE_vs_ensamble  delta_R2_vs_ensamble
+ensamble_ridge_xgb3m_50_50 0.448877 0.611404 0.480252               0.053843                    -0.021219                     -0.017298                    0.029825               0.000000                0.000000              0.000000
+         xgb_e4_mensual_3m 0.459095 0.626746 0.453842               0.065354                    -0.011002                     -0.001956                    0.003414               0.010218                0.015342             -0.026411
+       ridge_ciclo_anidado 0.470097 0.628702 0.450427               0.042333                     0.000000                      0.000000                    0.000000               0.021219                0.017298             -0.029825
+    extratrees_72_ciclo_33 0.523431 0.693561 0.331187               0.087696                     0.053334                      0.064859                   -0.119240               0.074554                0.082157             -0.149065
+ extratrees_72_mensual_213 0.540521 0.720301 0.278622               0.136914                     0.070424                      0.091599                   -0.171806               0.091643                0.108896             -0.201631
+
+CONSISTENCIA DESCRIPTIVA
+
+                   modelo  folds_menor_RMSE_que_ridge  folds_menor_RMSE_que_ensamble  max_RMSE_fold
+   extratrees_72_ciclo_33                           2                              1       1.042322
+extratrees_72_mensual_213                           1                              1       1.075014
+
+MENSUAL FRENTE A CICLO
+
+                   comparacion  delta_MAE  delta_RMSE  delta_R2
+ExtraTrees_mensual_menos_ciclo   0.017090    0.026740 -0.052566
+
+RESULTADOS POR FOLD
+
+                    modelo  fold  parcelas      MAE     RMSE        R2  sesgo_pred_menos_real
+       ridge_ciclo_anidado     1        31 0.510727 0.657937 -0.444983              -0.243262
+         xgb_e4_mensual_3m     1        31 0.391652 0.553586 -0.022972              -0.060439
+ensamble_ridge_xgb3m_50_50     1        31 0.436702 0.588368 -0.155560              -0.151851
+    extratrees_72_ciclo_33     1        31 0.433455 0.602147 -0.210318              -0.060168
+ extratrees_72_mensual_213     1        31 0.379424 0.556819 -0.034957               0.026565
+       ridge_ciclo_anidado     2        26 0.368536 0.557214  0.096748               0.048804
+         xgb_e4_mensual_3m     2        26 0.423252 0.619016 -0.114728              -0.032564
+ensamble_ridge_xgb3m_50_50     2        26 0.382701 0.572529  0.046414               0.008120
+    extratrees_72_ciclo_33     2        26 0.439723 0.577739  0.028978              -0.187190
+ extratrees_72_mensual_213     2        26 0.461737 0.615759 -0.103027              -0.098053
+       ridge_ciclo_anidado     3        27 0.416018 0.562560  0.153894              -0.268910
+         xgb_e4_mensual_3m     3        27 0.446314 0.570517  0.129790              -0.390012
+ensamble_ridge_xgb3m_50_50     3        27 0.410643 0.542667  0.212676              -0.329461
+    extratrees_72_ciclo_33     3        27 0.456786 0.599256  0.039912              -0.411348
+ extratrees_72_mensual_213     3        27 0.510689 0.636731 -0.083925              -0.450417
+       ridge_ciclo_anidado     4        27 0.462721 0.572739  0.457639               0.336278
+         xgb_e4_mensual_3m     4        27 0.483525 0.594466  0.415709               0.375158
+ensamble_ridge_xgb3m_50_50     4        27 0.456179 0.570494  0.461882               0.355718
+    extratrees_72_ciclo_33     4        27 0.430448 0.524711  0.544788               0.276256
+ extratrees_72_mensual_213     4        27 0.479856 0.607977  0.388849               0.404741
+       ridge_ciclo_anidado     5        27 0.582700 0.761410 -2.584080               0.381303
+         xgb_e4_mensual_3m     5        27 0.559395 0.779726 -2.758581               0.449636
+ensamble_ridge_xgb3m_50_50     5        27 0.557513 0.759966 -2.570498               0.415469
+    extratrees_72_ciclo_33     5        27 0.866973 1.042322 -5.716515               0.832656
+ extratrees_72_mensual_213     5        27 0.891845 1.075014 -6.144446               0.809378
+
+AJUSTES POR FOLD
+
+                   modelo  fold  n_train  n_validacion  RMSE_train  R2_train  MAE_val  RMSE_val    R2_val  sesgo_val  avisos
+   extratrees_72_ciclo_33     1      107            31    0.151382  0.971103 0.433455  0.602147 -0.210318  -0.060168       0
+   extratrees_72_ciclo_33     2      112            26    0.172185  0.958386 0.439723  0.577739  0.028978  -0.187190       0
+   extratrees_72_ciclo_33     3      111            27    0.177629  0.956496 0.456786  0.599256  0.039912  -0.411348       0
+   extratrees_72_ciclo_33     4      111            27    0.183181  0.948478 0.430448  0.524711  0.544788   0.276256       0
+   extratrees_72_ciclo_33     5      111            27    0.170227  0.952178 0.866973  1.042322 -5.716515   0.832656       0
+extratrees_72_mensual_213     1      107            31    0.096253  0.988317 0.379424  0.556819 -0.034957   0.026565       0
+extratrees_72_mensual_213     2      112            26    0.102119  0.985363 0.461737  0.615759 -0.103027  -0.098053       0
+extratrees_72_mensual_213     3      111            27    0.103518  0.985225 0.510689  0.636731 -0.083925  -0.450417       0
+extratrees_72_mensual_213     4      111            27    0.108059  0.982071 0.479856  0.607977  0.388849   0.404741       0
+extratrees_72_mensual_213     5      111            27    0.101929  0.982854 0.891845  1.075014 -6.144446   0.809378       0
+
+AVISOS
+
+Empty DataFrame
+Columns: [modelo, fold, categoria, mensaje]
+Index: []
+

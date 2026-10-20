@@ -1,0 +1,24 @@
+PROYECCION: EPSG:32614
+
+PARTICIONES ESPACIALES
+
+ fold  parcelas_train  parcelas_validacion  bloques_train  bloques_validacion  NA_mensuales_train  NA_mensuales_validacion
+    1             107                   31              9                   1                   7                        0
+    2             112                   26              8                   2                   7                        0
+    3             111                   27              7                   3                   7                        0
+    4             111                   27              8                   2                   7                        0
+    5             111                   27              8                   2                   0                        7
+
+GRUPOS GEOGRAFICOS
+
+ bloque_espacial  fold_validacion  parcelas
+               0                5        11
+               1                2        23
+               2                5        16
+               3                4        20
+               4                2         3
+               5                3        21
+               6                1        31
+               7                3         4
+               8                4         7
+               9                3         2

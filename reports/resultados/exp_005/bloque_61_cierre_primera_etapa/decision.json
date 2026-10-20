@@ -1,0 +1,27 @@
+{
+  "alcance": "Cierre de comparacion de antecedentes y auditoria 60B; no sustituye el historico completo",
+  "mejor_resultado_OOF_observado": "ensamble_ridge_xgb3m_50_50",
+  "componentes": {
+    "ridge_ciclo_anidado": 0.5,
+    "xgb_e4_mensual_3m": 0.5
+  },
+  "alternativa_sencilla": "ridge_ciclo_anidado",
+  "variantes_60A_adoptadas": [],
+  "motivo_no_adopcion_60A": "Las cuatro empeoran MAE y RMSE globales respecto al Ridge original",
+  "etiquetas_corregidas": 0,
+  "parcelas_eliminadas": 0,
+  "modelos_finales_entrenados_en_este_bloque": 0,
+  "nueva_entrega_generada": false,
+  "entregas_anteriores_sobrescritas": false,
+  "estado_operativo": "La entrega existente permanece intacta. Este cierre no implica que el ensamble este entrenado o exportado para las 59 parcelas.",
+  "limitaciones": [
+    "Solo 138 etiquetas para la comparacion OOF.",
+    "Folds externos consultados durante la exploracion.",
+    "No hay prueba final independiente de esta seleccion.",
+    "Resultados exploratorios; no prueban significancia.",
+    "La auditoria no identifica una causa agronomica demostrada.",
+    "Concordancia documental no certifica medicion en campo.",
+    "No se atribuye inspeccion visual completa del PDF."
+  ],
+  "paso_posterior_separado": "Si se adopta el ensamble para entrega: verificar recetas completas de ambos componentes, ajustarlos con las 138 etiquetas, predecir las 59 y validar un archivo nuevo sin sobrescribir el anterior."
+}

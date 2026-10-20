@@ -1,0 +1,11 @@
+BASE MENSUAL DEL CICLO ABRIL-OCTUBRE 2025
+
+ filas  parcelas  meses fecha_inicial fecha_final
+  1379       197      7    2025-04-01  2025-10-01
+
+DISPONIBILIDAD SATELITAL EN EL CICLO
+
+           fuente  indices  filas_sin_registro  filas_sin_ninguna_media  celdas_NA_en_medias
+   basico_landsat        1                   0                        8                    8
+basico_sentinel_2       22                   0                        0                    0
+       pro_planet        4                   0                        0                    0

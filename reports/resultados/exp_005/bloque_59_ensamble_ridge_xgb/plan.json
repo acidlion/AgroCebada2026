@@ -1,0 +1,18 @@
+{
+  "componentes": {
+    "ridge_ciclo_anidado": 0.5,
+    "xgb_e4_mensual_3m": 0.5
+  },
+  "nombre_ensamble": "ensamble_ridge_xgb3m_50_50",
+  "huella_entradas_oof": "697d6049e8ccc2055ec9ea68a688ec2a4dbfada35164f440a5fe7f8b8fd58552",
+  "notas": [
+    "Pesos fijos 50/50, sin optimización.",
+    "Se combinan predicciones OOF alineadas.",
+    "Cada componente se evaluó sin entrenar con las etiquetas de su fold externo.",
+    "Los componentes se eligieron después de observar experimentos anteriores: evaluación exploratoria.",
+    "No se reentrenaron modelos.",
+    "No se utilizaron ni predijeron las 59 parcelas objetivo.",
+    "No se reemplazó la entrega vigente.",
+    "La correlación de errores y los recuentos son descriptivos, no pruebas de significancia."
+  ]
+}

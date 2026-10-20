@@ -1,0 +1,2 @@
+﻿modelo,folds_menor_RMSE_que_original,folds_menor_MAE_que_original,max_RMSE_fold
+ridge_64_sin_vi6t,1,2,0.8246108246104212

@@ -1,0 +1,8 @@
+SENSIBILIDAD: CORRELACIONES POR PARCELA Y POR PERFIL
+
+                  variable  n_parcelas  n_perfiles  pearson_por_parcela  pearson_por_perfil  spearman_por_parcela  spearman_por_perfil
+precipitacion_acumulada_mm         138          43            -0.468537           -0.545848             -0.393708            -0.540259
+        tmax_media_ciclo_c         138          43            -0.285360           -0.244173             -0.363166            -0.294556
+        tmin_media_ciclo_c         138          43             0.609574            0.499882              0.542456             0.514885
+
+Cada perfil tiene el mismo peso en la comparación por perfiles. No se calcularon nuevos valores p.

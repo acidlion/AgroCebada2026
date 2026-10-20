@@ -1,0 +1,6 @@
+﻿modelo,fold,ridge__alpha
+ridge_62A_ndvi_evi_ambiente,1,0.1
+ridge_62A_ndvi_evi_ambiente,2,10.0
+ridge_62A_ndvi_evi_ambiente,3,10.0
+ridge_62A_ndvi_evi_ambiente,4,0.1
+ridge_62A_ndvi_evi_ambiente,5,1.0

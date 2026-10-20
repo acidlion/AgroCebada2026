@@ -1,0 +1,182 @@
+/* 1. Importar tipografía premium */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* 2. Paleta de Colores: Cultivo de Cebada */
+:root {
+    --cebada-madura: #DDA15E; /* Dorado terroso (Cosecha/Rendimiento) */
+    --cebada-brillante: #E9C46A; /* Amarillo paja claro (Acentos/Hover) */
+    --verde-brote: #606C38; /* Verde olivo vivo (Crecimiento/Botones) */
+    --tierra-oscura: #283618; /* Verde muy oscuro casi marrón (Texto y Navbar) */
+    --tierra-clara: #BC6C25; /* Naranja cobrizo (Alertas/Diferenciador) */
+    --fondo-paja: #F9F6ED; 
+    --dorado-mate: #F2E8CF;
+}
+
+/* 3. Estilos Globales */
+body {
+    font-family: 'Poppins', sans-serif !important;
+    background-color: var(--fondo-paja) !important;
+    color: var(--tierra-oscura);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600 !important;
+    color: var(--tierra-oscura) !important;
+}
+
+/* 4. Barra de Navegación y Menús */
+.navbar {
+    background-color: var(--tierra-oscura) !important;
+    box-shadow: 0 4px 12px rgba(40, 54, 24, 0.15) !important;
+}
+
+/* Menú Lateral */
+.sidebar-campo {
+    background-color: var(--dorado-mate) !important;
+    border-right: 1px solid rgba(221, 161, 94, 0.3) !important;
+}
+
+/* Tarjetas Flotantes (KPIs, Mapas y Gráficas) */
+.card-kpi, .map-card {
+    background-color: var(--dorado-mate) !important;
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 12px rgba(40, 54, 24, 0.08) !important; 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    border-bottom: 4px solid transparent; 
+}
+
+/* Animación y efecto flotante con brillo de cebada */
+.card-kpi:hover {
+    transform: translateY(-8px);
+    border-bottom: 4px solid var(--cebada-brillante); /* Línea dorada inferior al pasar el mouse */
+    box-shadow: 0 15px 30px rgba(221, 161, 94, 0.15) !important; /* Sombra dorada */
+    cursor: pointer;
+}
+
+.card-kpi:hover .kpi-icon {
+    transform: scale(1.15) rotate(5deg); /* Pequeño giro orgánico */
+    color: var(--cebada-madura) !important; /* El icono se vuelve dorado al interactuar */
+}
+
+.kpi-icon {
+    transition: all 0.3s ease;
+}
+
+/* 6. Tipografía de las Métricas */
+.kpi-value {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--verde-brote); /* Los números van en verde crecimiento */
+}
+
+.kpi-label {
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.80rem;
+    color: #6c757d;
+}
+
+/* 7. Botón de Ejecución del Modelo */
+#btn-ejecutar-modelo {
+    background-color: var(--verde-brote) !important;
+    border: none !important;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(96, 108, 56, 0.3);
+    transition: all 0.3s ease;
+}
+
+#btn-ejecutar-modelo:hover {
+    background-color: var(--cebada-madura) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(221, 161, 94, 0.4);
+}
+/* Sobrescribir fondos blancos de Bootstrap en contenedores y pestañas */
+.bg-white {
+    background-color: var(--dorado-mate) !important;
+}
+
+/* Estilos para las pestañas (Tabs) para que se fusionen con el nuevo diseño */
+.nav-tabs .nav-link {
+    color: var(--tierra-oscura) !important;
+    font-weight: 600;
+    border: none !important;
+    border-bottom: 3px solid transparent !important;
+    background-color: transparent !important;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--cebada-madura) !important;
+    border-bottom: 3px solid var(--cebada-madura) !important;
+    background-color: var(--dorado-mate) !important; /* Se integra con el panel inferior */
+}
+
+/* Ajustar el fondo del encabezado de la tabla de predicciones */
+.dash-table-container .dash-spreadsheet-container .dash-spreadsheet-inner th {
+    background-color: #E6D8AE !important; /* Un dorado apenas un tono más oscuro para el encabezado */
+    color: var(--tierra-oscura) !important;
+    border-bottom: 2px solid var(--cebada-madura) !important;
+}
+
+.dash-table-container .dash-spreadsheet-container .dash-spreadsheet-inner td {
+    background-color: var(--dorado-mate) !important;
+    border-bottom: 1px solid rgba(221, 161, 94, 0.2) !important;
+}
+/* ==========================================
+   PANTALLA DE BIENVENIDA (SPLASH SCREEN)
+========================================== */
+#pantalla-bienvenida {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--tierra-oscura); /* Fondo verde muy oscuro */
+    z-index: 9999; /* Asegura que esté por encima de todo el dashboard */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    cursor: pointer;
+}
+
+/* El icono del grano de cebada (usaremos fa-wheat-awn) */
+.grano-cebada {
+    font-size: 6rem;
+    color: var(--cebada-brillante);
+    animation: palpitar-grano 2s infinite ease-in-out;
+    margin-bottom: 1rem;
+}
+
+/* Animación de latido y brillo dorado */
+@keyframes palpitar-grano {
+    0% { transform: scale(1); text-shadow: 0 0 10px rgba(233, 196, 106, 0.3); }
+    50% { transform: scale(1.15); text-shadow: 0 0 40px rgba(233, 196, 106, 0.8); }
+    100% { transform: scale(1); text-shadow: 0 0 10px rgba(233, 196, 106, 0.3); }
+}
+
+/* Animación para el texto de "Haz clic" */
+.texto-parpadeante {
+    color: var(--fondo-paja);
+    opacity: 0.7;
+    animation: parpadeo 1.5s infinite;
+    letter-spacing: 2px;
+}
+
+@keyframes parpadeo {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* 
+   Esta es la clase que Python inyectará al hacer clic. 
+   Desvanece la pantalla y la hace "traspasable" (pointer-events: none)
+*/
+.splash-oculto {
+    opacity: 0 !important;
+    transform: translateY(-50px) scale(1.05); /* Se desvanece flotando hacia arriba */
+    pointer-events: none !important; 
+}

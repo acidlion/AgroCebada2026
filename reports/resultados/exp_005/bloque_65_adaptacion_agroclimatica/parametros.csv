@@ -1,0 +1,11 @@
+﻿modelo,fold,ridge__alpha
+ridge_65_clima_ventanas,1,100.0
+ridge_65_clima_ventanas,2,100.0
+ridge_65_clima_ventanas,3,0.1
+ridge_65_clima_ventanas,4,100.0
+ridge_65_clima_ventanas,5,10.0
+ridge_65_clima_cuadraticos,1,100.0
+ridge_65_clima_cuadraticos,2,100.0
+ridge_65_clima_cuadraticos,3,100.0
+ridge_65_clima_cuadraticos,4,1000.0
+ridge_65_clima_cuadraticos,5,10.0

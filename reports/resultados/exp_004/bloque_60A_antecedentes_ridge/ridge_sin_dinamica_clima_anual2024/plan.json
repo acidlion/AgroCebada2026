@@ -1,0 +1,96 @@
+{
+  "modelo": "ridge_sin_dinamica_clima_anual2024",
+  "rejilla": {
+    "ridge__alpha": [
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0
+    ]
+  },
+  "parametros_estimador": {
+    "memory": null,
+    "steps": [
+      [
+        "imputacion",
+        "SimpleImputer(strategy='median')"
+      ],
+      [
+        "escala",
+        "StandardScaler()"
+      ],
+      [
+        "ridge",
+        "Ridge(solver='svd')"
+      ]
+    ],
+    "transform_input": null,
+    "verbose": false,
+    "imputacion": "SimpleImputer(strategy='median')",
+    "escala": "StandardScaler()",
+    "ridge": "Ridge(solver='svd')",
+    "imputacion__add_indicator": false,
+    "imputacion__copy": true,
+    "imputacion__fill_value": null,
+    "imputacion__keep_empty_features": false,
+    "imputacion__missing_values": NaN,
+    "imputacion__strategy": "median",
+    "escala__copy": true,
+    "escala__with_mean": true,
+    "escala__with_std": true,
+    "ridge__alpha": 1.0,
+    "ridge__copy_X": true,
+    "ridge__fit_intercept": true,
+    "ridge__max_iter": null,
+    "ridge__positive": false,
+    "ridge__random_state": null,
+    "ridge__solver": "svd",
+    "ridge__tol": 0.0001
+  },
+  "criterio_interno": "menor RMSE medio",
+  "folds_internos": 3,
+  "folds_externos": 5,
+  "columnas": [
+    "AREA_HA",
+    "precipitacion_acumulada_mm",
+    "tmax_media_ciclo_c",
+    "tmin_media_ciclo_c",
+    "elevacion_m",
+    "pendiente_grados",
+    "basico_landsat__vi6t__media_ciclo",
+    "basico_sentinel_2__ndvi__media_ciclo",
+    "basico_sentinel_2__evi__media_ciclo",
+    "basico_sentinel_2__crc__media_ciclo",
+    "basico_sentinel_2__mcrc__media_ciclo",
+    "basico_sentinel_2__ndsvi__media_ciclo",
+    "basico_sentinel_2__srndi__media_ciclo",
+    "basico_sentinel_2__mra__media_ciclo",
+    "basico_sentinel_2__lai__media_ciclo",
+    "basico_sentinel_2__fapar__media_ciclo",
+    "basico_sentinel_2__savi__media_ciclo",
+    "basico_sentinel_2__ndti__media_ciclo",
+    "basico_sentinel_2__sti__media_ciclo",
+    "basico_sentinel_2__ndwi__media_ciclo",
+    "basico_sentinel_2__endwi__media_ciclo",
+    "basico_sentinel_2__msi__media_ciclo",
+    "basico_sentinel_2__emsi__media_ciclo",
+    "basico_sentinel_2__dswi2__media_ciclo",
+    "basico_sentinel_2__dswi3__media_ciclo",
+    "basico_sentinel_2__dswi4__media_ciclo",
+    "basico_sentinel_2__dswi5__media_ciclo",
+    "basico_sentinel_2__nddi__media_ciclo",
+    "basico_sentinel_2__enddi__media_ciclo",
+    "pro_planet__ndvi__media_ciclo",
+    "pro_planet__evi__media_ciclo",
+    "pro_planet__lai__media_ciclo",
+    "pro_planet__msavi__media_ciclo",
+    "antecedente__precipitacion_anual2024_mm",
+    "antecedente__tmin_anual2024_c",
+    "antecedente__tmax_anual2024_c"
+  ],
+  "huella_X": "5dc6e267ccc996ac6abb0c710851f654762b7c3df4dc5831a964d97dccd8afa7",
+  "huella_y": "72890c399265a4ee67d8ce7241d0e8d73e54a2d7acc49f2c93b6033769ed3a92",
+  "huella_grupos": "6324b549aa9880f1cc2ec751023a08fa73da00e630f21a673b1481785f9c2c2f",
+  "nota": "Comparación exploratoria. La validación externa ya ha informado decisiones previas del proyecto."
+}

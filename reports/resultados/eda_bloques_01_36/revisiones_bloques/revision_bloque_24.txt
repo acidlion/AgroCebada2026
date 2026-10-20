@@ -1,0 +1,14 @@
+COBERTURA DE LAS PARCELAS EN LOS RASTERES DE MUESTRA
+
+     variable                              archivo  parcelas_revisadas  dentro_completo  cobertura_parcial_o_contacto  fuera
+Precipitacion                     PREC_2022_01.tif                 197              197                             0      0
+         Tmax                     Tmax_2022_01.tif                 197              197                             0      0
+         Tmin                     Tmin_2022_01.tif                 197              197                             0      0
+    Elevacion        Elevacion_INEGI_CEM4_120m.tif                 197              197                             0      0
+    Pendiente Pendiente_INEGI_CEM4_120m_grados.tif                 197              197                             0      0
+
+CASOS QUE REQUIEREN REVISION
+
+Empty DataFrame
+Columns: [variable, parcela, situacion]
+Index: []

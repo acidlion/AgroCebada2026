@@ -1,0 +1,28 @@
+VERSION XGBOOST: 3.4.1
+
+COMPARACION RANDOM FOREST Y XGBOOST
+
+             modelo  MAE_OOF  RMSE_OOF    R2_OOF  MAE_media_folds  RMSE_media_folds  R2_media_folds  R2_train_media_folds  reduccion_RMSE_vs_baseline_pct
+xgb_meses_separados 0.473144  0.636959  0.435897         0.475430          0.634592       -0.499008              0.995824                       33.575263
+ rf_meses_separados 0.504797  0.678088  0.360696         0.508737          0.667724       -0.830631              0.893659                       29.286163
+   rf_resumen_ciclo 0.595045  0.745641  0.226973         0.598872          0.731870       -1.107188              0.867958                       22.241476
+  xgb_resumen_ciclo 0.621767  0.781536  0.150754         0.622743          0.766162       -1.180263              0.985579                       18.498136
+     baseline_media 0.857892  0.958918 -0.278494         0.864235          0.951172       -2.379805              0.000000                        0.000000
+
+XGBOOST: RESULTADOS POR FOLD
+
+             modelo  fold  n_train  n_validacion  MAE_val  RMSE_val    R2_val  R2_train  sesgo_pred_menos_real
+  xgb_resumen_ciclo     1      107            31 0.540545  0.684198 -0.562635  0.988390              -0.115161
+  xgb_resumen_ciclo     2      112            26 0.428592  0.565755  0.068845  0.984020              -0.175452
+  xgb_resumen_ciclo     3      111            27 0.513213  0.667348 -0.190671  0.986178              -0.409282
+  xgb_resumen_ciclo     4      111            27 0.827026  0.951656 -0.497387  0.984584               0.701318
+  xgb_resumen_ciclo     5      111            27 0.804335  0.961851 -4.719466  0.984720               0.722403
+xgb_meses_separados     1      107            31 0.389147  0.585799 -0.145488  0.997090              -0.004490
+xgb_meses_separados     2      112            26 0.445699  0.625625 -0.138659  0.995928              -0.009433
+xgb_meses_separados     3      111            27 0.502150  0.615897 -0.014154  0.996417              -0.440795
+xgb_meses_separados     4      111            27 0.468412  0.577815  0.447983  0.995262               0.400700
+xgb_meses_separados     5      111            27 0.571741  0.767825 -2.644720  0.994423               0.483488
+
+CONFIGURACION XGBOOST
+
+{'objective': 'reg:squarederror', 'booster': 'gbtree', 'n_estimators': 400, 'learning_rate': 0.03, 'max_depth': 3, 'min_child_weight': 3, 'subsample': 0.8, 'colsample_bytree': 0.7, 'reg_lambda': 5.0, 'random_state': 0, 'n_jobs': -1, 'missing': nan}

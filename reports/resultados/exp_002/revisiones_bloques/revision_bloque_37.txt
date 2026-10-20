@@ -1,0 +1,15 @@
+ALINEACION DE REPRESENTACIONES
+
+        version  parcelas_etiquetadas  variables_candidatas  celdas_NA  parcelas_con_algun_NA
+  resumen_ciclo                   138                    33          0                      0
+meses_separados                   138                   213          7                      7
+
+PRIMERAS PARCELAS Y RENDIMIENTO
+
+             RENDIMIENTO_T_HA
+ID_POLIGONO                  
+AGC_001                  3.50
+AGC_002                  4.63
+AGC_004                  3.00
+AGC_005                  5.16
+AGC_006                  4.49

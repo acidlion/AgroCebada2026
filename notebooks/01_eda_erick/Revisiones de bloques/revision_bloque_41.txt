@@ -1,0 +1,14 @@
+ABLACION DE VI6T: RESULTADOS GLOBALES
+
+ version  variables  MAE_OOF  RMSE_OOF   R2_OOF  sesgo_pred_menos_real
+con_VI6T        213 0.504797  0.678088 0.360696               0.114991
+sin_VI6T        206 0.510262  0.685927 0.345830               0.134418
+
+RESULTADOS POR FOLD
+
+ fold  n_validacion  MAE_con_VI6T  MAE_sin_VI6T  RMSE_con_VI6T  RMSE_sin_VI6T  sesgo_con_VI6T  sesgo_sin_VI6T
+    1            31      0.355743      0.352799       0.560380       0.567503        0.080066        0.109389
+    2            26      0.440508      0.443436       0.612896       0.609772       -0.060110       -0.071006
+    3            27      0.513681      0.486559       0.639466       0.609128       -0.472063       -0.443356
+    4            27      0.475379      0.492739       0.597471       0.612504        0.415041        0.430896
+    5            27      0.758375      0.796630       0.928408       0.964745        0.610709        0.642264

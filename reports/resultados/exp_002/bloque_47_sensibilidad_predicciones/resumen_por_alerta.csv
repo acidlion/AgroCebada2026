@@ -1,0 +1,5 @@
+﻿grupo,parcelas,parcelas_con_algun_cambio,max_cambio_medio,max_cambio_observado
+todas,59,1,0.0002895007699222888,0.01708054542541504
+con_fuera_rango,27,1,0.0006326127935338904,0.01708054542541504
+con_NA,1,1,0.01708054542541504,0.01708054542541504
+superan_p90_predictor,3,0,0.0,0.0

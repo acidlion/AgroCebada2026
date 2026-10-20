@@ -1,0 +1,5 @@
+﻿comprobacion,estado,fuente,alcance
+Once etiquetas de 2.50 coinciden con CSV original,Confirmado en revision de fuentes del proyecto,DATASET_RETO_AGRO_2026/ID_area_rendimiento_70_30_Reto_AgroCebada.csv,Concordancia con archivo entregado; no verifica medicion en campo
+"Etiquetas de AGC_015, AGC_171, AGC_024, AGC_162 y AGC_127 coinciden con CSV original",Confirmado en revision de fuentes del proyecto,DATASET_RETO_AGRO_2026/ID_area_rendimiento_70_30_Reto_AgroCebada.csv,No es un nuevo cotejo automatico en este bloque
+Metodo de medicion del rendimiento,Pendiente,No documentado en el CSV revisado,"No inferir redondeo, error o dato compartido"
+Calidad de todas las capturas originales,No certificada,Resumen mensual y conteos disponibles,Cobertura completa no equivale a calidad garantizada

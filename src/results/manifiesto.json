@@ -1,0 +1,18 @@
+{
+  "procedimiento": "ensamble_ridge_xgb3m_50_50",
+  "n_train": 138,
+  "n_prediccion": 59,
+  "variables_ridge": 33,
+  "variables_xgboost": 303,
+  "alpha_final_ridge": 1.0,
+  "pesos": {
+    "ridge": 0.5,
+    "xgboost": 0.5
+  },
+  "columnas_entrega": [
+    "ID_PARCELA",
+    "RENDIMIENTO"
+  ],
+  "unidad": "t/ha",
+  "sha256_csv": "744e5a3848be5b71b6e1c32a4240822bcf0f6113e87af295835b6f90993315ee"
+}

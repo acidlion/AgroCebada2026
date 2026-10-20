@@ -1,0 +1,8 @@
+State boundary data for Puebla, Tlaxcala, and Hidalgo
+
+Source: geoBoundaries gbOpen Mexico ADM1, boundary year 2020.
+Original boundary source: Instituto Nacional de Estadistica y Geografia (INEGI).
+Dataset repository: https://github.com/wmgeolab/geoBoundaries
+Pinned source version: 90a1d52
+License: Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO).
+Dataset API: https://www.geoboundaries.org/api/current/gbOpen/MEX/ADM1/

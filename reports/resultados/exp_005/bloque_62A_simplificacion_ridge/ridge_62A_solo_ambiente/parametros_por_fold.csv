@@ -1,0 +1,6 @@
+﻿modelo,fold,ridge__alpha
+ridge_62A_solo_ambiente,1,0.1
+ridge_62A_solo_ambiente,2,0.1
+ridge_62A_solo_ambiente,3,10.0
+ridge_62A_solo_ambiente,4,100.0
+ridge_62A_solo_ambiente,5,0.1

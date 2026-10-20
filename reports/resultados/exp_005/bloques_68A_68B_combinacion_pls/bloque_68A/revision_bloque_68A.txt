@@ -1,0 +1,2263 @@
+RECETAS PARA COMBINACION ENSAMBLE Y PLSR
+
+No se entrenaron modelos ni se evaluaron pesos.
+No se ejecutaron las celdas recuperadas.
+El historial es evidencia de codigo, no prueba de que la celda terminara correctamente.
+
+PLAN DE PESOS
+
+{
+  "formula": "(1-w)*(0.5*Ridge + 0.5*XGBoost_3m) + w*PLSR_ciclo",
+  "pesos_candidatos_PLSR": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "seleccion": "Dentro del entrenamiento externo, usando predicciones internas fuera de muestra",
+  "reglas": [
+    "No elegir pesos usando rendimientos del fold externo.",
+    "No asignar pesos manualmente por numero de fold.",
+    "No reutilizar OOF global como entrenamiento del combinador.",
+    "Respetar seleccion interna de parametros de componentes.",
+    "Comparacion exploratoria sobre folds ya consultados."
+  ],
+  "estado": "Plan propuesto; combinador todavia no entrenado"
+}
+
+CODIGO BLOQUE 50
+
+# Bloque 50: Ridge para rendimiento con validación espacial anidada.
+# También define la función utilizada en el bloque 51.
+# No modifica los modelos ni las predicciones anteriores.
+
+from datetime import datetime
+from pathlib import Path
+import hashlib
+import json
+import warnings
+
+import numpy as np
+import pandas as pd
+
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import Ridge
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score,
+)
+from sklearn.model_selection import GroupKFold, GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+
+# ============================================================
+# 1. COMPROBACIONES Y COPIAS.
+# ============================================================
+
+X_ciclo_50 = X_ciclo.copy().astype(float)
+X_mensual_50 = X_mensual.copy().astype(float)
+y_50 = y_comparacion.copy().astype(float)
+grupos_50 = grupos_espaciales.copy()
+
+assert X_ciclo_50.index.equals(y_50.index)
+assert X_mensual_50.index.equals(y_50.index)
+assert grupos_50.index.equals(y_50.index)
+
+assert X_ciclo_50.shape == (138, 33)
+assert X_mensual_50.shape == (138, 213)
+assert y_50.index.is_unique
+assert np.isfinite(y_50.to_numpy()).all()
+assert grupos_50.notna().all()
+assert len(particiones_espaciales) == 5
+
+for matriz_50 in (X_ciclo_50, X_mensual_50):
+    assert matriz_50.columns.is_unique
+    assert not np.isinf(matriz_50.to_numpy()).any()
+
+
+# ============================================================
+# 2. UTILIDADES DE REGISTRO Y MÉTRICAS.
+# ============================================================
+
+def huella_tabla_50(tabla):
+    """Detectar cambios en valores, orden, índices o columnas."""
+    contenido = tabla.to_csv(
+        index=True,
+        float_format="%.17g",
+        na_rep="NA",
+    ).encode("utf-8")
+
+    return hashlib.sha256(contenido).hexdigest()
+
+
+def metricas_50(observado, predicho):
+    observado = np.asarray(observado, dtype=float)
+    predicho = np.asarray(predicho, dtype=float)
+
+    return {
+        "MAE": mean_absolute_error(observado, predicho),
+        "RMSE": np.sqrt(
+            mean_squared_error(observado, predicho)
+        ),
+        "R2": r2_score(observado, predicho),
+        "sesgo": (predicho - observado).mean(),
+    }
+
+
+def evaluar_anidado_50(
+    nombre,
+    X,
+    estimador,
+    rejilla,
+    carpeta,
+):
+    """Evaluar un procedimiento sin consultar el fold externo."""
+    assert X.index.equals(y_50.index)
+
+    pred_oof = np.full(len(y_50), np.nan)
+    veces = np.zeros(len(y_50), dtype=int)
+    fold_por_parcela = np.full(len(y_50), -1, dtype=int)
+
+    filas_folds = []
+    filas_parametros = []
+    filas_avisos = []
+
+    carpeta = Path(carpeta)
+    carpeta.mkdir(parents=True, exist_ok=False)
+
+    plan = {
+        "modelo": nombre,
+        "rejilla": rejilla,
+        "parametros_estimador": estimador.get_params(deep=True),
+        "criterio_interno": "menor RMSE medio",
+        "folds_internos": 3,
+        "folds_externos": len(particiones_espaciales),
+        "columnas": X.columns.tolist(),
+        "huella_X": huella_tabla_50(X),
+        "huella_y": huella_tabla_50(y_50.to_frame()),
+        "huella_grupos": huella_tabla_50(grupos_50.to_frame()),
+        "nota": (
+            "Comparación exploratoria. La validación externa "
+            "ya ha informado decisiones previas del proyecto."
+        ),
+    }
+
+    (carpeta / "plan.json").write_text(
+        json.dumps(
+            plan,
+            ensure_ascii=False,
+            indent=2,
+            default=str,
+        ),
+        encoding="utf-8",
+    )
+
+    for fold, (train, val) in enumerate(
+        particiones_espaciales,
+        start=1
+    ):
+        train = np.asarray(train)
+        val = np.asarray(val)
+
+        assert len(np.unique(train)) == len(train)
+        assert len(np.unique(val)) == len(val)
+        assert set(train).isdisjoint(set(val))
+        assert set(train) | set(val) == set(range(len(y_50)))
+
+        X_train = X.iloc[train]
+        X_val = X.iloc[val]
+        y_train = y_50.iloc[train]
+        y_val = y_50.iloc[val]
+        grupos_train = grupos_50.iloc[train]
+
+        assert set(grupos_train).isdisjoint(
+            set(grupos_50.iloc[val])
+        )
+        assert grupos_train.nunique() >= 3
+
+        cv_interno = list(
+            GroupKFold(n_splits=3).split(
+                X_train,
+                y_train,
+                groups=grupos_train,
+            )
+        )
+
+        for train_interno, val_interno in cv_interno:
+            assert set(
+                grupos_train.iloc[train_interno]
+            ).isdisjoint(
+                set(grupos_train.iloc[val_interno])
+            )
+
+            assert not X_train.iloc[
+                train_interno
+            ].isna().all(axis=0).any(), (
+                "Hay una columna completamente vacía "
+                "en un entrenamiento interno."
+            )
+
+        busqueda = GridSearchCV(
+            estimator=estimador,
+            param_grid=rejilla,
+            scoring="neg_root_mean_squared_error",
+            cv=cv_interno,
+            refit=True,
+            n_jobs=1,
+            error_score="raise",
+            return_train_score=False,
+        )
+
+        print(
+            f"{nombre} | fold externo {fold}/5...",
+            flush=True,
+        )
+
+        with warnings.catch_warnings(record=True) as avisos:
+            warnings.simplefilter("always")
+            busqueda.fit(X_train, y_train)
+
+        for aviso in avisos:
+            filas_avisos.append({
+                "modelo": nombre,
+                "fold": fold,
+                "categoria": aviso.category.__name__,
+                "mensaje": str(aviso.message),
+            })
+
+        elegido = busqueda.best_estimator_
+        pred_val = elegido.predict(X_val)
+        pred_train = elegido.predict(X_train)
+
+        assert np.isfinite(pred_val).all()
+        assert np.isfinite(pred_train).all()
+
+        pred_oof[val] = pred_val
+        veces[val] += 1
+        fold_por_parcela[val] = fold
+
+        met_val = metricas_50(y_val, pred_val)
+
+        filas_folds.append({
+            "modelo": nombre,
+            "fold": fold,
+            "n_train": len(train),
+            "n_validacion": len(val),
+            "RMSE_interno_elegido": -busqueda.best_score_,
+            "MAE_val": met_val["MAE"],
+            "RMSE_val": met_val["RMSE"],
+            "R2_val": met_val["R2"],
+            "R2_train": r2_score(y_train, pred_train),
+            "sesgo_pred_menos_real": met_val["sesgo"],
+            "avisos": len(avisos),
+        })
+
+        filas_parametros.append({
+            "modelo": nombre,
+            "fold": fold,
+            **busqueda.best_params_,
+        })
+
+        # Guardar cada búsqueda permite revisar el proceso.
+        pd.DataFrame(busqueda.cv_results_).to_csv(
+            carpeta / f"busqueda_interna_fold_{fold}.csv",
+            index=False,
+            encoding="utf-8-sig",
+        )
+
+        pd.DataFrame(filas_folds).to_csv(
+            carpeta / "metricas_por_fold.csv",
+            index=False,
+            encoding="utf-8-sig",
+        )
+
+    assert (veces == 1).all()
+    assert np.isfinite(pred_oof).all()
+
+    oof = pd.DataFrame({
+        "rendimiento_observado": y_50,
+        "fold_validacion": fold_por_parcela,
+        nombre: pred_oof,
+    })
+    oof.index.name = "ID_POLIGONO"
+
+    folds = pd.DataFrame(filas_folds)
+    parametros = pd.DataFrame(filas_parametros)
+
+    avisos = pd.DataFrame(
+        filas_avisos,
+        columns=["modelo", "fold", "categoria", "mensaje"],
+    )
+
+    globales = metricas_50(y_50, pred_oof)
+
+    resumen = pd.DataFrame([{
+        "modelo": nombre,
+        "MAE_OOF": globales["MAE"],
+        "RMSE_OOF": globales["RMSE"],
+        "R2_OOF": globales["R2"],
+        "sesgo_pred_menos_real": globales["sesgo"],
+        "R2_train_media_folds": folds["R2_train"].mean(),
+    }])
+
+    for archivo, tabla, incluir_indice in [
+        ("predicciones_oof.csv", oof, True),
+        ("metricas_por_fold.csv", folds, False),
+        ("parametros_por_fold.csv", parametros, False),
+        ("resumen.csv", resumen, False),
+        ("avisos.csv", avisos, False),
+    ]:
+        tabla.to_csv(
+            carpeta / archivo,
+            index=incluir_indice,
+            encoding="utf-8-sig",
+        )
+
+    return {
+        "oof": oof,
+        "folds": folds,
+        "parametros": parametros,
+        "resumen": resumen,
+        "avisos": avisos,
+        "carpeta": carpeta,
+    }
+
+
+# ============================================================
+# 3. EVALUAR RIDGE EN LAS DOS REPRESENTACIONES.
+# ============================================================
+
+carpeta_ridge_50 = (
+    raiz_proyecto
+    / "reports"
+    / "ridge_rendimiento"
+    / f"bloque_50_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}"
+)
+carpeta_ridge_50.mkdir(parents=True, exist_ok=False)
+
+pipeline_ridge_50 = Pipeline([
+    ("imputacion", SimpleImputer(strategy="median")),
+    ("escala", StandardScaler()),
+    ("ridge", Ridge(solver="svd")),
+])
+
+rejilla_ridge_50 = {
+    "ridge__alpha": [0.1, 1.0, 10.0, 100.0, 1000.0],
+}
+
+resultados_ridge_50 = {}
+
+for nombre_50, matriz_50 in {
+    "ridge_ciclo_anidado": X_ciclo_50,
+    "ridge_mensual_anidado": X_mensual_50,
+}.items():
+    resultados_ridge_50[nombre_50] = evaluar_anidado_50(
+        nombre=nombre_50,
+        X=matriz_50,
+        estimador=pipeline_ridge_50,
+        rejilla=rejilla_ridge_50,
+        carpeta=carpeta_ridge_50 / nombre_50,
+    )
+
+resumen_ridge_50 = pd.concat(
+    [r["resumen"] for r in resultados_ridge_50.values()],
+    ignore_index=True,
+)
+
+folds_ridge_50 = pd.concat(
+    [r["folds"] for r in resultados_ridge_50.values()],
+    ignore_index=True,
+)
+
+parametros_ridge_50 = pd.concat(
+    [r["parametros"] for r in resultados_ridge_50.values()],
+    ignore_index=True,
+)
+
+ruta_reporte_50 = carpeta_ridge_50 / "revision_bloque_50.txt"
+
+with ruta_reporte_50.open("w", encoding="utf-8") as archivo_50:
+    for titulo_50, tabla_50 in [
+        ("RESUMEN RIDGE", resumen_ridge_50),
+        ("RESULTADOS POR FOLD", folds_ridge_50),
+        ("PARAMETROS ELEGIDOS", parametros_ridge_50),
+    ]:
+        archivo_50.write(titulo_50 + "\n\n")
+        archivo_50.write(
+            tabla_50.to_string(
+                index=False,
+                float_format=lambda v: f"{v:.6f}",
+            )
+        )
+        archivo_50.write("\n\n")
+
+print("\nRESUMEN RIDGE")
+display(resumen_ridge_50)
+
+print("\nRESULTADOS POR FOLD")
+display(folds_ridge_50)
+
+print("\nREGULARIZACIÓN ELEGIDA DENTRO DE CADA ENTRENAMIENTO")
+display(parametros_ridge_50)
+
+print("\nNo se entrenó un Ridge final para las 59 parcelas.")
+print(f"\nTXT para compartir: {ruta_reporte_50.resolve()}")
+
+CODIGO BLOQUE 58
+
+# Bloque 58: Evaluar las cinco variantes del experimento 4.
+# Ridge: selección interna de alpha por grupos.
+# XGBoost: configuración fija previamente evaluada.
+# No modifica modelos finales ni las 59 predicciones de entrega.
+
+from datetime import datetime
+import hashlib
+import json
+import warnings
+
+import numpy as np
+import pandas as pd
+import sklearn
+import xgboost
+
+from sklearn.exceptions import ConvergenceWarning
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import Ridge
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score,
+)
+from sklearn.model_selection import GroupKFold, GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from xgboost import XGBRegressor
+
+
+# ============================================================
+# 1. FIJAR LOS EXPERIMENTOS ANTES DE OBSERVAR RESULTADOS.
+# ============================================================
+
+plan_experimentos_58 = {
+    "ridge_e4_dinamica": {
+        "familia": "ridge",
+        "tabla": "e4_ciclo_dinamica",
+        "referencia": "ridge_ciclo_anidado",
+    },
+    "ridge_e4_dinamica_3m": {
+        "familia": "ridge",
+        "tabla": "e4_ciclo_dinamica_3m",
+        "referencia": "ridge_ciclo_anidado",
+    },
+    "ridge_e4_dinamica_6m": {
+        "familia": "ridge",
+        "tabla": "e4_ciclo_dinamica_6m",
+        "referencia": "ridge_ciclo_anidado",
+    },
+    "xgb_e4_mensual_3m": {
+        "familia": "xgb",
+        "tabla": "e4_mensual_3m",
+        "referencia": "xgb_meses_separados",
+    },
+    "xgb_e4_mensual_6m": {
+        "familia": "xgb",
+        "tabla": "e4_mensual_6m",
+        "referencia": "xgb_meses_separados",
+    },
+}
+
+rejilla_ridge_58 = {
+    "ridge__alpha": [0.1, 1.0, 10.0, 100.0, 1000.0],
+}
+
+configuracion_xgb_58 = {
+    "objective": "reg:squarederror",
+    "booster": "gbtree",
+    "n_estimators": 400,
+    "learning_rate": 0.03,
+    "max_depth": 3,
+    "min_child_weight": 3,
+    "subsample": 0.8,
+    "colsample_bytree": 0.7,
+    "reg_lambda": 5.0,
+    "random_state": 0,
+    "n_jobs": -1,
+    "missing": np.nan,
+}
+
+y_e4_58 = y_comparacion.copy().astype(float)
+grupos_e4_58 = grupos_espaciales.copy()
+
+assert len(y_e4_58) == 138
+assert y_e4_58.index.is_unique
+assert np.isfinite(y_e4_58.to_numpy()).all()
+assert grupos_e4_58.index.equals(y_e4_58.index)
+assert grupos_e4_58.notna().all()
+
+assert len(particiones_espaciales) == 5
+
+
+# ============================================================
+# 2. COMPROBAR DATOS, PARTICIONES Y REFERENCIAS.
+# ============================================================
+
+# Confirmar que las etiquetas y los grupos no cambiaron.
+pd.testing.assert_series_equal(y_e4_58, y_50)
+pd.testing.assert_series_equal(grupos_e4_58, grupos_50)
+
+matrices_e4_58 = {}
+
+for nombre_58, experimento_58 in plan_experimentos_58.items():
+    clave_tabla_58 = experimento_58["tabla"]
+
+    matriz_58 = X_train_e4_57[
+        clave_tabla_58
+    ].copy().astype(float)
+
+    assert matriz_58.index.equals(y_e4_58.index)
+    assert matriz_58.columns.is_unique
+
+    assert not np.isinf(matriz_58.to_numpy()).any()
+    assert not matriz_58.isna().all(axis=0).any()
+
+    # Verificar que las columnas base siguen intactas.
+    if experimento_58["familia"] == "ridge":
+        pd.testing.assert_frame_equal(
+            matriz_58[X_ciclo.columns],
+            X_ciclo.astype(float),
+            check_names=False,
+        )
+    else:
+        pd.testing.assert_frame_equal(
+            matriz_58[X_mensual.columns],
+            X_mensual.astype(float),
+            check_names=False,
+        )
+
+    matrices_e4_58[nombre_58] = matriz_58
+
+fold_por_parcela_58 = np.full(
+    len(y_e4_58), -1, dtype=int
+)
+cobertura_externa_58 = np.zeros(
+    len(y_e4_58), dtype=int
+)
+
+# Preparar una sola vez las divisiones internas, compartidas
+# por las tres variantes Ridge.
+particiones_internas_e4_58 = {}
+
+for fold_58, (train_58, val_58) in enumerate(
+    particiones_espaciales,
+    start=1,
+):
+    assert len(np.unique(train_58)) == len(train_58)
+    assert len(np.unique(val_58)) == len(val_58)
+
+    assert set(train_58).isdisjoint(set(val_58))
+    assert set(train_58) | set(val_58) == set(
+        range(len(y_e4_58))
+    )
+
+    grupos_train_58 = grupos_e4_58.iloc[train_58]
+
+    assert set(grupos_train_58).isdisjoint(
+        set(grupos_e4_58.iloc[val_58])
+    )
+    assert grupos_train_58.nunique() >= 3
+
+    fold_por_parcela_58[val_58] = fold_58
+    cobertura_externa_58[val_58] += 1
+
+    internas_58 = list(
+        GroupKFold(n_splits=3).split(
+            np.zeros((len(train_58), 1)),
+            y_e4_58.iloc[train_58],
+            groups=grupos_train_58,
+        )
+    )
+
+    for tr_interno_58, va_interno_58 in internas_58:
+        assert set(
+            grupos_train_58.iloc[tr_interno_58]
+        ).isdisjoint(
+            set(grupos_train_58.iloc[va_interno_58])
+        )
+
+    particiones_internas_e4_58[fold_58] = internas_58
+
+assert (cobertura_externa_58 == 1).all()
+
+assert predicciones_consolidadas_52.index.equals(
+    y_e4_58.index
+)
+
+assert np.allclose(
+    predicciones_consolidadas_52[
+        "rendimiento_observado"
+    ].to_numpy(),
+    y_e4_58.to_numpy(),
+    rtol=0,
+    atol=1e-12,
+)
+
+assert np.array_equal(
+    predicciones_consolidadas_52[
+        "fold_validacion"
+    ].to_numpy(),
+    fold_por_parcela_58,
+)
+
+nombres_referencias_58 = [
+    "ridge_ciclo_anidado",
+    "xgb_meses_separados",
+]
+
+predicciones_e4_58 = pd.DataFrame({
+    "rendimiento_observado": y_e4_58,
+    "fold_validacion": fold_por_parcela_58,
+})
+predicciones_e4_58.index.name = "ID_POLIGONO"
+
+for nombre_58 in nombres_referencias_58:
+    pred_ref_58 = predicciones_consolidadas_52[
+        nombre_58
+    ].astype(float)
+
+    assert np.isfinite(pred_ref_58.to_numpy()).all()
+    predicciones_e4_58[nombre_58] = pred_ref_58
+
+
+# ============================================================
+# 3. GUARDAR EL PLAN Y LAS ASIGNACIONES.
+# ============================================================
+
+carpeta_evaluacion_e4_58 = (
+    raiz_proyecto
+    / "reports"
+    / "experimento_4_temporal"
+    / f"bloque_58_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}"
+)
+
+carpeta_evaluacion_e4_58.mkdir(
+    parents=True,
+    exist_ok=False,
+)
+
+def huella_evaluacion_58(tabla):
+    contenido = tabla.to_csv(
+        index=True,
+        float_format="%.17g",
+        na_rep="NA",
+    ).encode("utf-8")
+    return hashlib.sha256(contenido).hexdigest()
+
+plan_guardado_58 = {
+    "experimentos": plan_experimentos_58,
+    "rejilla_ridge": rejilla_ridge_58,
+    "configuracion_xgb": configuracion_xgb_58,
+    "scikit_learn": sklearn.__version__,
+    "xgboost": xgboost.__version__,
+    "huella_y": huella_evaluacion_58(y_e4_58.to_frame()),
+    "huella_grupos": huella_evaluacion_58(
+        grupos_e4_58.to_frame()
+    ),
+    "matrices": {
+        nombre: {
+            "variables": matriz.shape[1],
+            "columnas": matriz.columns.tolist(),
+            "huella": huella_evaluacion_58(matriz),
+        }
+        for nombre, matriz in matrices_e4_58.items()
+    },
+    "notas": [
+        "Mismas particiones espaciales externas anteriores.",
+        "Ridge: tres divisiones internas por grupos.",
+        "XGBoost: configuración fija, sin búsqueda ni early stopping.",
+        "No se utilizan las 59 parcelas para evaluar o seleccionar.",
+        "No se modifica el modelo final vigente.",
+        "Comparación exploratoria; folds externos ya consultados.",
+        "Mes del máximo representado como número de mes.",
+        "Los antecedentes resumidos y mensuales no contienen "
+        "exactamente las mismas mediciones.",
+    ],
+}
+
+(carpeta_evaluacion_e4_58 / "plan.json").write_text(
+    json.dumps(
+        plan_guardado_58,
+        ensure_ascii=False,
+        indent=2,
+        default=str,
+    ),
+    encoding="utf-8",
+)
+
+pd.DataFrame({
+    "ID_POLIGONO": y_e4_58.index,
+    "grupo_espacial": grupos_e4_58.to_numpy(),
+    "fold_externo": fold_por_parcela_58,
+}).to_csv(
+    carpeta_evaluacion_e4_58 / "asignaciones_externas.csv",
+    index=False,
+    encoding="utf-8-sig",
+)
+
+
+# ============================================================
+# 4. EVALUAR LAS CINCO VARIANTES.
+# ============================================================
+
+filas_folds_e4_58 = []
+filas_avisos_e4_58 = []
+
+for nombre_58, experimento_58 in plan_experimentos_58.items():
+    matriz_58 = matrices_e4_58[nombre_58]
+    familia_58 = experimento_58["familia"]
+
+    carpeta_modelo_58 = carpeta_evaluacion_e4_58 / nombre_58
+    carpeta_modelo_58.mkdir(exist_ok=False)
+
+    pred_oof_58 = np.full(len(y_e4_58), np.nan)
+
+    for fold_58, (train_58, val_58) in enumerate(
+        particiones_espaciales,
+        start=1,
+    ):
+        X_train_58 = matriz_58.iloc[train_58]
+        X_val_58 = matriz_58.iloc[val_58]
+
+        y_train_58 = y_e4_58.iloc[train_58]
+        y_val_58 = y_e4_58.iloc[val_58]
+
+        assert not X_train_58.isna().all(axis=0).any()
+
+        print(
+            f"{nombre_58} | fold externo {fold_58}/5...",
+            flush=True,
+        )
+
+        alpha_elegido_58 = np.nan
+        rmse_interno_58 = np.nan
+
+        with warnings.catch_warnings(record=True) as avisos_58:
+            warnings.simplefilter("always")
+
+            if familia_58 == "ridge":
+                internas_58 = particiones_internas_e4_58[
+                    fold_58
+                ]
+
+                for tr_interno_58, _ in internas_58:
+                    assert not X_train_58.iloc[
+                        tr_interno_58
+                    ].isna().all(axis=0).any()
+
+                pipeline_58 = Pipeline([
+                    (
+                        "imputacion",
+                        SimpleImputer(strategy="median"),
+                    ),
+                    ("escala", StandardScaler()),
+                    ("ridge", Ridge(solver="svd")),
+                ])
+
+                busqueda_58 = GridSearchCV(
+                    estimator=pipeline_58,
+                    param_grid=rejilla_ridge_58,
+                    scoring="neg_root_mean_squared_error",
+                    cv=internas_58,
+                    refit=True,
+                    n_jobs=1,
+                    error_score="raise",
+                    return_train_score=False,
+                )
+
+                busqueda_58.fit(X_train_58, y_train_58)
+
+                estimador_fold_58 = (
+                    busqueda_58.best_estimator_
+                )
+
+                alpha_elegido_58 = float(
+                    busqueda_58.best_params_[
+                        "ridge__alpha"
+                    ]
+                )
+
+                rmse_interno_58 = float(
+                    -busqueda_58.best_score_
+                )
+
+            else:
+                estimador_fold_58 = XGBRegressor(
+                    **configuracion_xgb_58
+                )
+
+                estimador_fold_58.fit(
+                    X_train_58,
+                    y_train_58,
+                )
+
+        for aviso_58 in avisos_58:
+            filas_avisos_e4_58.append({
+                "modelo": nombre_58,
+                "fold": fold_58,
+                "categoria": aviso_58.category.__name__,
+                "es_convergencia": issubclass(
+                    aviso_58.category,
+                    ConvergenceWarning,
+                ),
+                "mensaje": str(aviso_58.message),
+            })
+
+        pred_val_58 = estimador_fold_58.predict(X_val_58)
+        pred_train_58 = estimador_fold_58.predict(X_train_58)
+
+        assert np.isfinite(pred_val_58).all()
+        assert np.isfinite(pred_train_58).all()
+
+        pred_oof_58[val_58] = pred_val_58
+
+        errores_58 = (
+            pred_val_58 - y_val_58.to_numpy()
+        )
+
+        filas_folds_e4_58.append({
+            "modelo": nombre_58,
+            "familia": familia_58,
+            "fold": fold_58,
+            "n_train": len(train_58),
+            "n_validacion": len(val_58),
+            "variables": matriz_58.shape[1],
+            "alpha_elegido": alpha_elegido_58,
+            "RMSE_interno_elegido": rmse_interno_58,
+            "MAE_val": mean_absolute_error(
+                y_val_58, pred_val_58
+            ),
+            "RMSE_val": np.sqrt(
+                mean_squared_error(y_val_58, pred_val_58)
+            ),
+            "R2_val": r2_score(y_val_58, pred_val_58),
+            "R2_train": r2_score(
+                y_train_58, pred_train_58
+            ),
+            "sesgo_pred_menos_real": errores_58.mean(),
+            "avisos": len(avisos_58),
+        })
+
+        # Guardar avances de cada fold.
+        pd.DataFrame(filas_folds_e4_58).to_csv(
+            carpeta_evaluacion_e4_58 / "metricas_por_fold.csv",
+            index=False,
+            encoding="utf-8-sig",
+        )
+
+        pd.DataFrame({
+            "ID_POLIGONO": X_val_58.index,
+            "rendimiento_observado": y_val_58.to_numpy(),
+            "prediccion": pred_val_58,
+        }).to_csv(
+            carpeta_modelo_58 / f"predicciones_fold_{fold_58}.csv",
+            index=False,
+            encoding="utf-8-sig",
+        )
+
+        if familia_58 == "ridge":
+            pd.DataFrame(
+                busqueda_58.cv_results_
+            ).to_csv(
+                carpeta_modelo_58
+                / f"busqueda_interna_fold_{fold_58}.csv",
+                index=False,
+                encoding="utf-8-sig",
+            )
+
+        print(
+            f"  RMSE externo: "
+            f"{np.sqrt(np.mean(errores_58**2)):.6f}",
+            flush=True,
+        )
+
+    assert np.isfinite(pred_oof_58).all()
+
+    predicciones_e4_58[nombre_58] = pred_oof_58
+
+    predicciones_e4_58.to_csv(
+        carpeta_evaluacion_e4_58 / "predicciones_oof.csv",
+        encoding="utf-8-sig",
+    )
+
+metricas_folds_e4_58 = pd.DataFrame(
+    filas_folds_e4_58
+)
+
+avisos_e4_58 = pd.DataFrame(
+    filas_avisos_e4_58,
+    columns=[
+        "modelo",
+        "fold",
+        "categoria",
+        "es_convergencia",
+        "mensaje",
+    ],
+)
+
+
+# ============================================================
+# 5. MÉTRICAS GLOBALES DE REFERENCIAS Y VARIANTES.
+# ============================================================
+
+columnas_modelos_e4_58 = (
+    nombres_referencias_58
+    + list(plan_experimentos_58)
+)
+
+filas_globales_e4_58 = []
+
+for nombre_58 in columnas_modelos_e4_58:
+    pred_58 = predicciones_e4_58[nombre_58]
+
+    filas_globales_e4_58.append({
+        "modelo": nombre_58,
+        "variables": (
+            matrices_e4_58[nombre_58].shape[1]
+            if nombre_58 in matrices_e4_58
+            else (
+                33
+                if nombre_58 == "ridge_ciclo_anidado"
+                else 213
+            )
+        ),
+        "MAE_OOF": mean_absolute_error(
+            y_e4_58, pred_58
+        ),
+        "RMSE_OOF": np.sqrt(
+            mean_squared_error(y_e4_58, pred_58)
+        ),
+        "R2_OOF": r2_score(y_e4_58, pred_58),
+        "sesgo_pred_menos_real": (
+            pred_58 - y_e4_58
+        ).mean(),
+    })
+
+comparacion_global_e4_58 = pd.DataFrame(
+    filas_globales_e4_58
+)
+
+metricas_indexadas_58 = comparacion_global_e4_58.set_index(
+    "modelo"
+)
+
+referencia_por_modelo_58 = {
+    "ridge_ciclo_anidado": "ridge_ciclo_anidado",
+    "xgb_meses_separados": "xgb_meses_separados",
+    **{
+        nombre: datos["referencia"]
+        for nombre, datos in plan_experimentos_58.items()
+    },
+}
+
+comparacion_global_e4_58["referencia"] = (
+    comparacion_global_e4_58["modelo"]
+    .map(referencia_por_modelo_58)
+)
+
+for metrica_58 in ("MAE", "RMSE"):
+    comparacion_global_e4_58[
+        f"delta_{metrica_58}_vs_referencia"
+    ] = [
+        fila[f"{metrica_58}_OOF"]
+        - metricas_indexadas_58.loc[
+            fila["referencia"],
+            f"{metrica_58}_OOF",
+        ]
+        for _, fila in comparacion_global_e4_58.iterrows()
+    ]
+
+comparacion_global_e4_58 = (
+    comparacion_global_e4_58
+    .sort_values("RMSE_OOF")
+    .reset_index(drop=True)
+)
+
+
+# ============================================================
+# 6. COMPARACIONES INCREMENTALES DEFINIDAS PREVIAMENTE.
+# ============================================================
+
+pares_incrementales_58 = [
+    ("ridge_e4_dinamica", "ridge_ciclo_anidado"),
+    ("ridge_e4_dinamica_3m", "ridge_e4_dinamica"),
+    ("ridge_e4_dinamica_6m", "ridge_e4_dinamica_3m"),
+    ("xgb_e4_mensual_3m", "xgb_meses_separados"),
+    ("xgb_e4_mensual_6m", "xgb_e4_mensual_3m"),
+]
+
+filas_incrementales_58 = []
+
+for nuevo_58, anterior_58 in pares_incrementales_58:
+    filas_incrementales_58.append({
+        "nuevo": nuevo_58,
+        "comparado_con": anterior_58,
+        "delta_MAE": (
+            metricas_indexadas_58.loc[nuevo_58, "MAE_OOF"]
+            - metricas_indexadas_58.loc[
+                anterior_58, "MAE_OOF"
+            ]
+        ),
+        "delta_RMSE": (
+            metricas_indexadas_58.loc[nuevo_58, "RMSE_OOF"]
+            - metricas_indexadas_58.loc[
+                anterior_58, "RMSE_OOF"
+            ]
+        ),
+    })
+
+comparacion_incremental_e4_58 = pd.DataFrame(
+    filas_incrementales_58
+)
+
+
+# ============================================================
+# 7. COMPARAR CADA VARIANTE CONTRA SU REFERENCIA POR FOLD.
+# ============================================================
+
+filas_pareadas_58 = []
+
+for nombre_58, experimento_58 in plan_experimentos_58.items():
+    referencia_58 = experimento_58["referencia"]
+
+    for fold_58 in range(1, 6):
+        mascara_58 = fold_por_parcela_58 == fold_58
+
+        observado_58 = y_e4_58.to_numpy()[mascara_58]
+
+        pred_nueva_58 = predicciones_e4_58[
+            nombre_58
+        ].to_numpy()[mascara_58]
+
+        pred_referencia_58 = predicciones_e4_58[
+            referencia_58
+        ].to_numpy()[mascara_58]
+
+        mae_nuevo_58 = mean_absolute_error(
+            observado_58, pred_nueva_58
+        )
+        mae_ref_58 = mean_absolute_error(
+            observado_58, pred_referencia_58
+        )
+
+        rmse_nuevo_58 = np.sqrt(mean_squared_error(
+            observado_58, pred_nueva_58
+        ))
+        rmse_ref_58 = np.sqrt(mean_squared_error(
+            observado_58, pred_referencia_58
+        ))
+
+        filas_pareadas_58.append({
+            "modelo": nombre_58,
+            "referencia": referencia_58,
+            "fold": fold_58,
+            "MAE_nuevo": mae_nuevo_58,
+            "MAE_referencia": mae_ref_58,
+            "delta_MAE": mae_nuevo_58 - mae_ref_58,
+            "RMSE_nuevo": rmse_nuevo_58,
+            "RMSE_referencia": rmse_ref_58,
+            "delta_RMSE": rmse_nuevo_58 - rmse_ref_58,
+        })
+
+comparacion_folds_e4_58 = pd.DataFrame(
+    filas_pareadas_58
+)
+
+filas_consistencia_58 = []
+
+for nombre_58, casos_58 in comparacion_folds_e4_58.groupby(
+    "modelo"
+):
+    ajustes_58 = metricas_folds_e4_58.loc[
+        metricas_folds_e4_58["modelo"].eq(nombre_58)
+    ]
+
+    filas_consistencia_58.append({
+        "modelo": nombre_58,
+        "folds_menor_RMSE_que_referencia": int(
+            casos_58["delta_RMSE"].lt(-1e-10).sum()
+        ),
+        "folds_menor_MAE_que_referencia": int(
+            casos_58["delta_MAE"].lt(-1e-10).sum()
+        ),
+        "max_RMSE_fold": ajustes_58["RMSE_val"].max(),
+        "max_sesgo_absoluto_fold": (
+            ajustes_58["sesgo_pred_menos_real"].abs().max()
+        ),
+        "R2_train_media_folds": (
+            ajustes_58["R2_train"].mean()
+        ),
+    })
+
+consistencia_e4_58 = pd.DataFrame(
+    filas_consistencia_58
+)
+
+
+# ============================================================
+# 8. GUARDAR RESULTADOS Y TXT.
+# ============================================================
+
+for archivo_58, tabla_58, incluir_indice_58 in [
+    ("predicciones_oof.csv", predicciones_e4_58, True),
+    (
+        "comparacion_global.csv",
+        comparacion_global_e4_58,
+        False,
+    ),
+    (
+        "comparacion_incremental.csv",
+        comparacion_incremental_e4_58,
+        False,
+    ),
+    ("metricas_por_fold.csv", metricas_folds_e4_58, False),
+    (
+        "comparacion_pareada_por_fold.csv",
+        comparacion_folds_e4_58,
+        False,
+    ),
+    ("consistencia.csv", consistencia_e4_58, False),
+    ("avisos.csv", avisos_e4_58, False),
+]:
+    tabla_58.to_csv(
+        carpeta_evaluacion_e4_58 / archivo_58,
+        index=incluir_indice_58,
+        encoding="utf-8-sig",
+    )
+
+ruta_reporte_58 = (
+    carpeta_evaluacion_e4_58 / "revision_bloque_58.txt"
+)
+
+with ruta_reporte_58.open("w", encoding="utf-8") as archivo_58:
+    archivo_58.write(
+        "EXPERIMENTO 4: EVALUACION TEMPORAL\n\n"
+        "Ridge: seleccion interna de alpha por grupos.\n"
+        "XGBoost: configuracion fija anterior.\n"
+        "Mismas parcelas y folds externos anteriores.\n"
+        "Delta negativo = menor error que la comparacion indicada.\n"
+        "Los recuentos por fold no prueban significancia.\n"
+        "La comparacion sigue siendo exploratoria.\n"
+        "No se entreno un modelo final ni se cambio la entrega.\n\n"
+    )
+
+    for titulo_58, tabla_58 in [
+        ("COMPARACION GLOBAL", comparacion_global_e4_58),
+        (
+            "CAMBIOS INCREMENTALES",
+            comparacion_incremental_e4_58,
+        ),
+        ("CONSISTENCIA DESCRIPTIVA", consistencia_e4_58),
+        ("RESULTADOS POR FOLD", metricas_folds_e4_58),
+        (
+            "COMPARACION CON REFERENCIA POR FOLD",
+            comparacion_folds_e4_58,
+        ),
+        ("AVISOS", avisos_e4_58),
+    ]:
+        archivo_58.write(titulo_58 + "\n\n")
+        archivo_58.write(
+            tabla_58.to_string(
+                index=False,
+                float_format=lambda v: f"{v:.6f}",
+            )
+        )
+        archivo_58.write("\n\n")
+
+
+# ============================================================
+# 9. MOSTRAR RESULTADOS.
+# ============================================================
+
+print("\nCOMPARACIÓN GLOBAL")
+display(comparacion_global_e4_58)
+
+print("\nCAMBIOS INCREMENTALES")
+display(comparacion_incremental_e4_58)
+
+print("\nCONSISTENCIA DESCRIPTIVA")
+display(consistencia_e4_58)
+
+print("\nRESULTADOS POR FOLD")
+display(metricas_folds_e4_58)
+
+if avisos_e4_58.empty:
+    print("\nNo se registraron avisos de entrenamiento.")
+else:
+    print("\nAVISOS PARA REVISAR")
+    display(avisos_e4_58)
+
+print(
+    "\nNo se seleccionó automáticamente un ganador."
+    "\nNo se generaron nuevas predicciones para las 59 parcelas."
+    "\nEl Ridge final del bloque 53 permanece intacto."
+    "\nLos NaN de alpha y RMSE interno en XGBoost son esperados:"
+    " ese procedimiento no realizó búsqueda interna."
+)
+
+print(f"\nResultados: {carpeta_evaluacion_e4_58.resolve()}")
+print(f"\nTXT para compartir: {ruta_reporte_58.resolve()}")
+
+FUENTE DEL EVALUADOR
+
+def evaluar_anidado_50(
+    nombre,
+    X,
+    estimador,
+    rejilla,
+    carpeta,
+):
+    """Evaluar un procedimiento sin consultar el fold externo."""
+    assert X.index.equals(y_50.index)
+
+    pred_oof = np.full(len(y_50), np.nan)
+    veces = np.zeros(len(y_50), dtype=int)
+    fold_por_parcela = np.full(len(y_50), -1, dtype=int)
+
+    filas_folds = []
+    filas_parametros = []
+    filas_avisos = []
+
+    carpeta = Path(carpeta)
+    carpeta.mkdir(parents=True, exist_ok=False)
+
+    plan = {
+        "modelo": nombre,
+        "rejilla": rejilla,
+        "parametros_estimador": estimador.get_params(deep=True),
+        "criterio_interno": "menor RMSE medio",
+        "folds_internos": 3,
+        "folds_externos": len(particiones_espaciales),
+        "columnas": X.columns.tolist(),
+        "huella_X": huella_tabla_50(X),
+        "huella_y": huella_tabla_50(y_50.to_frame()),
+        "huella_grupos": huella_tabla_50(grupos_50.to_frame()),
+        "nota": (
+            "Comparación exploratoria. La validación externa "
+            "ya ha informado decisiones previas del proyecto."
+        ),
+    }
+
+    (carpeta / "plan.json").write_text(
+        json.dumps(
+            plan,
+            ensure_ascii=False,
+            indent=2,
+            default=str,
+        ),
+        encoding="utf-8",
+    )
+
+    for fold, (train, val) in enumerate(
+        particiones_espaciales,
+        start=1
+    ):
+        train = np.asarray(train)
+        val = np.asarray(val)
+
+        assert len(np.unique(train)) == len(train)
+        assert len(np.unique(val)) == len(val)
+        assert set(train).isdisjoint(set(val))
+        assert set(train) | set(val) == set(range(len(y_50)))
+
+        X_train = X.iloc[train]
+        X_val = X.iloc[val]
+        y_train = y_50.iloc[train]
+        y_val = y_50.iloc[val]
+        grupos_train = grupos_50.iloc[train]
+
+        assert set(grupos_train).isdisjoint(
+            set(grupos_50.iloc[val])
+        )
+        assert grupos_train.nunique() >= 3
+
+        cv_interno = list(
+            GroupKFold(n_splits=3).split(
+                X_train,
+                y_train,
+                groups=grupos_train,
+            )
+        )
+
+        for train_interno, val_interno in cv_interno:
+            assert set(
+                grupos_train.iloc[train_interno]
+            ).isdisjoint(
+                set(grupos_train.iloc[val_interno])
+            )
+
+            assert not X_train.iloc[
+                train_interno
+            ].isna().all(axis=0).any(), (
+                "Hay una columna completamente vacía "
+                "en un entrenamiento interno."
+            )
+
+        busqueda = GridSearchCV(
+            estimator=estimador,
+            param_grid=rejilla,
+            scoring="neg_root_mean_squared_error",
+            cv=cv_interno,
+            refit=True,
+            n_jobs=1,
+            error_score="raise",
+            return_train_score=False,
+        )
+
+        print(
+            f"{nombre} | fold externo {fold}/5...",
+            flush=True,
+        )
+
+        with warnings.catch_warnings(record=True) as avisos:
+            warnings.simplefilter("always")
+            busqueda.fit(X_train, y_train)
+
+        for aviso in avisos:
+            filas_avisos.append({
+                "modelo": nombre,
+                "fold": fold,
+                "categoria": aviso.category.__name__,
+                "mensaje": str(aviso.message),
+            })
+
+        elegido = busqueda.best_estimator_
+        pred_val = elegido.predict(X_val)
+        pred_train = elegido.predict(X_train)
+
+        assert np.isfinite(pred_val).all()
+        assert np.isfinite(pred_train).all()
+
+        pred_oof[val] = pred_val
+        veces[val] += 1
+        fold_por_parcela[val] = fold
+
+        met_val = metricas_50(y_val, pred_val)
+
+        filas_folds.append({
+            "modelo": nombre,
+            "fold": fold,
+            "n_train": len(train),
+            "n_validacion": len(val),
+            "RMSE_interno_elegido": -busqueda.best_score_,
+            "MAE_val": met_val["MAE"],
+            "RMSE_val": met_val["RMSE"],
+            "R2_val": met_val["R2"],
+            "R2_train": r2_score(y_train, pred_train),
+            "sesgo_pred_menos_real": met_val["sesgo"],
+            "avisos": len(avisos),
+        })
+
+        filas_parametros.append({
+            "modelo": nombre,
+            "fold": fold,
+            **busqueda.best_params_,
+        })
+
+        # Guardar cada búsqueda permite revisar el proceso.
+        pd.DataFrame(busqueda.cv_results_).to_csv(
+            carpeta / f"busqueda_interna_fold_{fold}.csv",
+            index=False,
+            encoding="utf-8-sig",
+        )
+
+        pd.DataFrame(filas_folds).to_csv(
+            carpeta / "metricas_por_fold.csv",
+            index=False,
+            encoding="utf-8-sig",
+        )
+
+    assert (veces == 1).all()
+    assert np.isfinite(pred_oof).all()
+
+    oof = pd.DataFrame({
+        "rendimiento_observado": y_50,
+        "fold_validacion": fold_por_parcela,
+        nombre: pred_oof,
+    })
+    oof.index.name = "ID_POLIGONO"
+
+    folds = pd.DataFrame(filas_folds)
+    parametros = pd.DataFrame(filas_parametros)
+
+    avisos = pd.DataFrame(
+        filas_avisos,
+        columns=["modelo", "fold", "categoria", "mensaje"],
+    )
+
+    globales = metricas_50(y_50, pred_oof)
+
+    resumen = pd.DataFrame([{
+        "modelo": nombre,
+        "MAE_OOF": globales["MAE"],
+        "RMSE_OOF": globales["RMSE"],
+        "R2_OOF": globales["R2"],
+        "sesgo_pred_menos_real": globales["sesgo"],
+        "R2_train_media_folds": folds["R2_train"].mean(),
+    }])
+
+    for archivo, tabla, incluir_indice in [
+        ("predicciones_oof.csv", oof, True),
+        ("metricas_por_fold.csv", folds, False),
+        ("parametros_por_fold.csv", parametros, False),
+        ("resumen.csv", resumen, False),
+        ("avisos.csv", avisos, False),
+    ]:
+        tabla.to_csv(
+            carpeta / archivo,
+            index=incluir_indice,
+            encoding="utf-8-sig",
+        )
+
+    return {
+        "oof": oof,
+        "folds": folds,
+        "parametros": parametros,
+        "resumen": resumen,
+        "avisos": avisos,
+        "carpeta": carpeta,
+    }
+
+
+ESTIMADORES CARGADOS
+
+{
+  "Ridge": {
+    "error_inspeccion": "BaseEstimator.get_params() missing 1 required positional argument: 'self'"
+  },
+  "XGBRegressor": {
+    "error_inspeccion": "XGBModel.get_params() missing 1 required positional argument: 'self'"
+  },
+  "estimador_busqueda": {
+    "clase": "xgboost.sklearn.XGBRegressor",
+    "parametros": {
+      "objective": "reg:squarederror",
+      "base_score": null,
+      "booster": "gbtree",
+      "callbacks": null,
+      "colsample_bylevel": null,
+      "colsample_bynode": null,
+      "colsample_bytree": null,
+      "device": null,
+      "early_stopping_rounds": null,
+      "enable_categorical": true,
+      "eval_metric": null,
+      "feature_types": null,
+      "feature_weights": null,
+      "gamma": null,
+      "grow_policy": null,
+      "importance_type": null,
+      "interaction_constraints": null,
+      "learning_rate": null,
+      "max_bin": null,
+      "max_cat_threshold": null,
+      "max_cat_to_onehot": null,
+      "max_delta_step": null,
+      "max_depth": null,
+      "max_leaves": null,
+      "min_child_weight": null,
+      "missing": NaN,
+      "monotone_constraints": null,
+      "multi_strategy": null,
+      "n_estimators": null,
+      "n_jobs": -1,
+      "num_parallel_tree": null,
+      "random_state": 0,
+      "reg_alpha": null,
+      "reg_lambda": null,
+      "sampling_method": null,
+      "scale_pos_weight": null,
+      "subsample": null,
+      "tree_method": null,
+      "validate_parameters": null,
+      "verbosity": null
+    }
+  },
+  "Pipeline": {
+    "error_inspeccion": "Pipeline.get_params() missing 1 required positional argument: 'self'"
+  },
+  "estimador_red_49": {
+    "clase": "sklearn.neural_network._multilayer_perceptron.MLPRegressor",
+    "parametros": {
+      "activation": "tanh",
+      "alpha": 1.0,
+      "batch_size": "auto",
+      "beta_1": 0.9,
+      "beta_2": 0.999,
+      "early_stopping": false,
+      "epsilon": 1e-08,
+      "hidden_layer_sizes": [
+        8
+      ],
+      "learning_rate": "constant",
+      "learning_rate_init": 0.001,
+      "loss": "squared_error",
+      "max_fun": 30000,
+      "max_iter": 2000,
+      "momentum": 0.9,
+      "n_iter_no_change": 10,
+      "nesterovs_momentum": true,
+      "power_t": 0.5,
+      "random_state": 0,
+      "shuffle": true,
+      "solver": "lbfgs",
+      "tol": 1e-06,
+      "validation_fraction": 0.1,
+      "verbose": false,
+      "warm_start": false
+    }
+  },
+  "pipeline_ridge_50": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "ridge",
+          "Ridge(solver='svd')"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "ridge": "Ridge(solver='svd')",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "ridge__alpha": 1.0,
+      "ridge__copy_X": true,
+      "ridge__fit_intercept": true,
+      "ridge__max_iter": null,
+      "ridge__positive": false,
+      "ridge__random_state": null,
+      "ridge__solver": "svd",
+      "ridge__tol": 0.0001
+    }
+  },
+  "pipeline_cat_51": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "catboost",
+          "CatBoostRegressor(allow_writing_files=False, boosting_type='Ordered', iterations=400, learning_rate=0.03, loss_function='RMSE', random_seed=0, task_type='CPU', thread_count=4, use_best_model=False, verbose=False)"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "catboost": "CatBoostRegressor(allow_writing_files=False, boosting_type='Ordered', iterations=400, learning_rate=0.03, loss_function='RMSE', random_seed=0, task_type='CPU', thread_count=4, use_best_model=False, verbose=False)",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "catboost__iterations": 400,
+      "catboost__learning_rate": 0.03,
+      "catboost__loss_function": "RMSE",
+      "catboost__thread_count": 4,
+      "catboost__random_seed": 0,
+      "catboost__use_best_model": false,
+      "catboost__verbose": false,
+      "catboost__allow_writing_files": false,
+      "catboost__boosting_type": "Ordered",
+      "catboost__task_type": "CPU"
+    }
+  },
+  "pipeline_final_ridge_53": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "ridge",
+          "Ridge(solver='svd')"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "ridge": "Ridge(solver='svd')",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "ridge__alpha": 1.0,
+      "ridge__copy_X": true,
+      "ridge__fit_intercept": true,
+      "ridge__max_iter": null,
+      "ridge__positive": false,
+      "ridge__random_state": null,
+      "ridge__solver": "svd",
+      "ridge__tol": 0.0001
+    }
+  },
+  "busqueda_final_ridge_53": {
+    "clase": "sklearn.model_selection._search.GridSearchCV",
+    "parametros": {
+      "cv": [
+        [
+          "[  1   2   3   4   5   7   9  10  12  13  16  17  19  21  23  24  26  27\n  28  29  30  34  35  37  38  39  40  41  42  43  44  46  47  48  49  50\n  51  52  55  56  57  58  59  61  62  64  66  68  73  76  77  79  80  83\n  84  85  88  90  92  93  95  96  97  99 100 103 104 105 106 107 108 109\n 110 111 112 113 114 115 116 117 118 120 121 123 124 126 129 131 132 134\n 136]",
+          "[  0   6   8  11  14  15  18  20  22  25  31  32  33  36  45  53  54  60\n  63  65  67  69  70  71  72  74  75  78  81  82  86  87  89  91  94  98\n 101 102 119 122 125 127 128 130 133 135 137]"
+        ],
+        [
+          "[  0   2   4   6   7   8   9  10  11  14  15  16  18  19  20  22  25  26\n  28  30  31  32  33  34  35  36  37  38  41  42  44  45  46  47  49  52\n  53  54  55  60  63  65  67  68  69  70  71  72  74  75  76  78  79  80\n  81  82  83  84  86  87  89  90  91  92  93  94  95  97  98 100 101 102\n 108 109 113 114 115 116 119 120 121 122 123 125 127 128 130 131 133 135\n 136 137]",
+          "[  1   3   5  12  13  17  21  23  24  27  29  39  40  43  48  50  51  56\n  57  58  59  61  62  64  66  73  77  85  88  96  99 103 104 105 106 107\n 110 111 112 117 118 124 126 129 132 134]"
+        ],
+        [
+          "[  0   1   3   5   6   8  11  12  13  14  15  17  18  20  21  22  23  24\n  25  27  29  31  32  33  36  39  40  43  45  48  50  51  53  54  56  57\n  58  59  60  61  62  63  64  65  66  67  69  70  71  72  73  74  75  77\n  78  81  82  85  86  87  88  89  91  94  96  98  99 101 102 103 104 105\n 106 107 110 111 112 117 118 119 122 124 125 126 127 128 129 130 132 133\n 134 135 137]",
+          "[  2   4   7   9  10  16  19  26  28  30  34  35  37  38  41  42  44  46\n  47  49  52  55  68  76  79  80  83  84  90  92  93  95  97 100 108 109\n 113 114 115 116 120 121 123 131 136]"
+        ]
+      ],
+      "error_score": "raise",
+      "estimator__memory": null,
+      "estimator__steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "ridge",
+          "Ridge(solver='svd')"
+        ]
+      ],
+      "estimator__transform_input": null,
+      "estimator__verbose": false,
+      "estimator__imputacion": "SimpleImputer(strategy='median')",
+      "estimator__escala": "StandardScaler()",
+      "estimator__ridge": "Ridge(solver='svd')",
+      "estimator__imputacion__add_indicator": false,
+      "estimator__imputacion__copy": true,
+      "estimator__imputacion__fill_value": null,
+      "estimator__imputacion__keep_empty_features": false,
+      "estimator__imputacion__missing_values": NaN,
+      "estimator__imputacion__strategy": "median",
+      "estimator__escala__copy": true,
+      "estimator__escala__with_mean": true,
+      "estimator__escala__with_std": true,
+      "estimator__ridge__alpha": 1.0,
+      "estimator__ridge__copy_X": true,
+      "estimator__ridge__fit_intercept": true,
+      "estimator__ridge__max_iter": null,
+      "estimator__ridge__positive": false,
+      "estimator__ridge__random_state": null,
+      "estimator__ridge__solver": "svd",
+      "estimator__ridge__tol": 0.0001,
+      "estimator": "Pipeline(steps=[('imputacion', SimpleImputer(strategy='median')),\n                ('escala', StandardScaler()), ('ridge', Ridge(solver='svd'))])",
+      "n_jobs": 1,
+      "param_grid": {
+        "ridge__alpha": [
+          0.1,
+          1.0,
+          10.0,
+          100.0,
+          1000.0
+        ]
+      },
+      "pre_dispatch": "2*n_jobs",
+      "refit": true,
+      "return_train_score": false,
+      "scoring": "neg_root_mean_squared_error",
+      "verbose": 0
+    }
+  },
+  "modelo_final_ridge_53": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "ridge",
+          "Ridge(solver='svd')"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "ridge": "Ridge(solver='svd')",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "ridge__alpha": 1.0,
+      "ridge__copy_X": true,
+      "ridge__fit_intercept": true,
+      "ridge__max_iter": null,
+      "ridge__positive": false,
+      "ridge__random_state": null,
+      "ridge__solver": "svd",
+      "ridge__tol": 0.0001
+    }
+  },
+  "ridge_54": {
+    "clase": "sklearn.linear_model._ridge.Ridge",
+    "parametros": {
+      "alpha": 1.0,
+      "copy_X": true,
+      "fit_intercept": true,
+      "max_iter": null,
+      "positive": false,
+      "random_state": null,
+      "solver": "svd",
+      "tol": 0.0001
+    }
+  },
+  "pipeline_lasso_55": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "lasso",
+          "Lasso(max_iter=50000, tol=1e-05)"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "lasso": "Lasso(max_iter=50000, tol=1e-05)",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "lasso__alpha": 1.0,
+      "lasso__copy_X": true,
+      "lasso__fit_intercept": true,
+      "lasso__max_iter": 50000,
+      "lasso__positive": false,
+      "lasso__precompute": false,
+      "lasso__random_state": null,
+      "lasso__selection": "cyclic",
+      "lasso__tol": 1e-05,
+      "lasso__warm_start": false
+    }
+  },
+  "pipeline_58": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "ridge",
+          "Ridge(solver='svd')"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "ridge": "Ridge(solver='svd')",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "ridge__alpha": 1.0,
+      "ridge__copy_X": true,
+      "ridge__fit_intercept": true,
+      "ridge__max_iter": null,
+      "ridge__positive": false,
+      "ridge__random_state": null,
+      "ridge__solver": "svd",
+      "ridge__tol": 0.0001
+    }
+  },
+  "estimador_fold_58": {
+    "clase": "xgboost.sklearn.XGBRegressor",
+    "parametros": {
+      "objective": "reg:squarederror",
+      "base_score": null,
+      "booster": "gbtree",
+      "callbacks": null,
+      "colsample_bylevel": null,
+      "colsample_bynode": null,
+      "colsample_bytree": 0.7,
+      "device": null,
+      "early_stopping_rounds": null,
+      "enable_categorical": true,
+      "eval_metric": null,
+      "feature_types": null,
+      "feature_weights": null,
+      "gamma": null,
+      "grow_policy": null,
+      "importance_type": null,
+      "interaction_constraints": null,
+      "learning_rate": 0.03,
+      "max_bin": null,
+      "max_cat_threshold": null,
+      "max_cat_to_onehot": null,
+      "max_delta_step": null,
+      "max_depth": 3,
+      "max_leaves": null,
+      "min_child_weight": 3,
+      "missing": NaN,
+      "monotone_constraints": null,
+      "multi_strategy": null,
+      "n_estimators": 400,
+      "n_jobs": -1,
+      "num_parallel_tree": null,
+      "random_state": 0,
+      "reg_alpha": null,
+      "reg_lambda": 5.0,
+      "sampling_method": null,
+      "scale_pos_weight": null,
+      "subsample": 0.8,
+      "tree_method": null,
+      "validate_parameters": null,
+      "verbosity": null
+    }
+  },
+  "pipeline_antecedentes_60A": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "ridge",
+          "Ridge(solver='svd')"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "ridge": "Ridge(solver='svd')",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "ridge__alpha": 1.0,
+      "ridge__copy_X": true,
+      "ridge__fit_intercept": true,
+      "ridge__max_iter": null,
+      "ridge__positive": false,
+      "ridge__random_state": null,
+      "ridge__solver": "svd",
+      "ridge__tol": 0.0001
+    }
+  },
+  "pipeline_62A": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "ridge",
+          "Ridge(solver='svd')"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "ridge": "Ridge(solver='svd')",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "ridge__alpha": 1.0,
+      "ridge__copy_X": true,
+      "ridge__fit_intercept": true,
+      "ridge__max_iter": null,
+      "ridge__positive": false,
+      "ridge__random_state": null,
+      "ridge__solver": "svd",
+      "ridge__tol": 0.0001
+    }
+  },
+  "KernelRidge": {
+    "error_inspeccion": "BaseEstimator.get_params() missing 1 required positional argument: 'self'"
+  },
+  "estimador_62B": {
+    "clase": "sklearn.compose._target.TransformedTargetRegressor",
+    "parametros": {
+      "check_inverse": true,
+      "func": null,
+      "inverse_func": null,
+      "regressor__memory": null,
+      "regressor__steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "kernelridge",
+          "KernelRidge(kernel='rbf')"
+        ]
+      ],
+      "regressor__transform_input": null,
+      "regressor__verbose": false,
+      "regressor__imputacion": "SimpleImputer(strategy='median')",
+      "regressor__escala": "StandardScaler()",
+      "regressor__kernelridge": "KernelRidge(kernel='rbf')",
+      "regressor__imputacion__add_indicator": false,
+      "regressor__imputacion__copy": true,
+      "regressor__imputacion__fill_value": null,
+      "regressor__imputacion__keep_empty_features": false,
+      "regressor__imputacion__missing_values": NaN,
+      "regressor__imputacion__strategy": "median",
+      "regressor__escala__copy": true,
+      "regressor__escala__with_mean": true,
+      "regressor__escala__with_std": true,
+      "regressor__kernelridge__alpha": 1,
+      "regressor__kernelridge__coef0": 1,
+      "regressor__kernelridge__degree": 3,
+      "regressor__kernelridge__gamma": null,
+      "regressor__kernelridge__kernel": "rbf",
+      "regressor__kernelridge__kernel_params": null,
+      "regressor": "Pipeline(steps=[('imputacion', SimpleImputer(strategy='median')),\n                ('escala', StandardScaler()),\n                ('kernelridge', KernelRidge(kernel='rbf'))])",
+      "transformer__copy": true,
+      "transformer__with_mean": true,
+      "transformer__with_std": false,
+      "transformer": "StandardScaler(with_std=False)"
+    }
+  },
+  "pipeline_62C": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "ridge",
+          "Ridge(solver='svd')"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "ridge": "Ridge(solver='svd')",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "ridge__alpha": 1.0,
+      "ridge__copy_X": true,
+      "ridge__fit_intercept": true,
+      "ridge__max_iter": null,
+      "ridge__positive": false,
+      "ridge__random_state": null,
+      "ridge__solver": "svd",
+      "ridge__tol": 0.0001
+    }
+  },
+  "pipeline_64": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "ridge",
+          "Ridge(solver='svd')"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "ridge": "Ridge(solver='svd')",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "ridge__alpha": 1.0,
+      "ridge__copy_X": true,
+      "ridge__fit_intercept": true,
+      "ridge__max_iter": null,
+      "ridge__positive": false,
+      "ridge__random_state": null,
+      "ridge__solver": "svd",
+      "ridge__tol": 0.0001
+    }
+  },
+  "pipeline_65": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "ridge",
+          "Ridge(solver='svd')"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "ridge": "Ridge(solver='svd')",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "ridge__alpha": 1.0,
+      "ridge__copy_X": true,
+      "ridge__fit_intercept": true,
+      "ridge__max_iter": null,
+      "ridge__positive": false,
+      "ridge__random_state": null,
+      "ridge__solver": "svd",
+      "ridge__tol": 0.0001
+    }
+  },
+  "PLSRegression": {
+    "error_inspeccion": "BaseEstimator.get_params() missing 1 required positional argument: 'self'"
+  },
+  "PLSUnObjetivo66": {
+    "error_inspeccion": "BaseEstimator.get_params() missing 1 required positional argument: 'self'"
+  },
+  "pipeline_66": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "pls",
+          "PLSUnObjetivo66()"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "pls": "PLSUnObjetivo66()",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "pls__max_iter": 1000,
+      "pls__n_components": 2,
+      "pls__tol": 1e-06
+    }
+  },
+  "pipeline_67": {
+    "clase": "sklearn.pipeline.Pipeline",
+    "parametros": {
+      "memory": null,
+      "steps": [
+        [
+          "imputacion",
+          "SimpleImputer(strategy='median')"
+        ],
+        [
+          "escala",
+          "StandardScaler()"
+        ],
+        [
+          "svr",
+          "SVR(cache_size=512)"
+        ]
+      ],
+      "transform_input": null,
+      "verbose": false,
+      "imputacion": "SimpleImputer(strategy='median')",
+      "escala": "StandardScaler()",
+      "svr": "SVR(cache_size=512)",
+      "imputacion__add_indicator": false,
+      "imputacion__copy": true,
+      "imputacion__fill_value": null,
+      "imputacion__keep_empty_features": false,
+      "imputacion__missing_values": NaN,
+      "imputacion__strategy": "median",
+      "escala__copy": true,
+      "escala__with_mean": true,
+      "escala__with_std": true,
+      "svr__C": 1.0,
+      "svr__cache_size": 512,
+      "svr__coef0": 0.0,
+      "svr__degree": 3,
+      "svr__epsilon": 0.1,
+      "svr__gamma": "scale",
+      "svr__kernel": "rbf",
+      "svr__max_iter": -1,
+      "svr__shrinking": true,
+      "svr__tol": 0.001,
+      "svr__verbose": false
+    }
+  }
+}
+
+TABLAS CANDIDATAS
+
+                 objeto  filas  columnas  indice_unico  indice_igual_y_50
+                X_ciclo    138        33          True               True
+              X_mensual    138       213          True               True
+tabla_mensual_fuente_57    197       425          True              False
+     base_mensual_e4_57    197       213          True              False
+               train_57    138       381          True               True
+                pred_57     59       381          True              False
+               datos_57     59       381          True              False
+              matriz_58    138       381          True               True
+             X_train_58    111       381          True              False
+               X_val_58     27       381          True              False

@@ -1,0 +1,7 @@
+﻿grupo,parcelas,correlacion_errores_ridge_xgb,errores_de_signo_opuesto,ensamble_menor_error_abs_que_ridge,ensamble_menor_error_abs_que_xgb
+global,138,0.8972538924294801,25,78,71
+fold_1,31,0.9155467960760447,4,23,11
+fold_2,26,0.9044391431864083,5,14,13
+fold_3,27,0.7927843948701813,6,12,17
+fold_4,27,0.8609220108716064,5,13,16
+fold_5,27,0.9284403077330029,5,16,14

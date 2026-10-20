@@ -1,0 +1,92 @@
+{
+  "objetivo": "Comparar familias de variables con Ridge",
+  "base": "33 variables originales de X_ciclo",
+  "parcelas_etiquetadas": 138,
+  "variantes": {
+    "ridge_62A_sentinel_ambiente": [
+      "AREA_HA",
+      "precipitacion_acumulada_mm",
+      "tmax_media_ciclo_c",
+      "tmin_media_ciclo_c",
+      "elevacion_m",
+      "pendiente_grados",
+      "basico_sentinel_2__ndvi__media_ciclo",
+      "basico_sentinel_2__evi__media_ciclo",
+      "basico_sentinel_2__crc__media_ciclo",
+      "basico_sentinel_2__mcrc__media_ciclo",
+      "basico_sentinel_2__ndsvi__media_ciclo",
+      "basico_sentinel_2__srndi__media_ciclo",
+      "basico_sentinel_2__mra__media_ciclo",
+      "basico_sentinel_2__lai__media_ciclo",
+      "basico_sentinel_2__fapar__media_ciclo",
+      "basico_sentinel_2__savi__media_ciclo",
+      "basico_sentinel_2__ndti__media_ciclo",
+      "basico_sentinel_2__sti__media_ciclo",
+      "basico_sentinel_2__ndwi__media_ciclo",
+      "basico_sentinel_2__endwi__media_ciclo",
+      "basico_sentinel_2__msi__media_ciclo",
+      "basico_sentinel_2__emsi__media_ciclo",
+      "basico_sentinel_2__dswi2__media_ciclo",
+      "basico_sentinel_2__dswi3__media_ciclo",
+      "basico_sentinel_2__dswi4__media_ciclo",
+      "basico_sentinel_2__dswi5__media_ciclo",
+      "basico_sentinel_2__nddi__media_ciclo",
+      "basico_sentinel_2__enddi__media_ciclo"
+    ],
+    "ridge_62A_planet_ambiente": [
+      "AREA_HA",
+      "precipitacion_acumulada_mm",
+      "tmax_media_ciclo_c",
+      "tmin_media_ciclo_c",
+      "elevacion_m",
+      "pendiente_grados",
+      "pro_planet__ndvi__media_ciclo",
+      "pro_planet__evi__media_ciclo",
+      "pro_planet__lai__media_ciclo",
+      "pro_planet__msavi__media_ciclo"
+    ],
+    "ridge_62A_ndvi_evi_ambiente": [
+      "AREA_HA",
+      "precipitacion_acumulada_mm",
+      "tmax_media_ciclo_c",
+      "tmin_media_ciclo_c",
+      "elevacion_m",
+      "pendiente_grados",
+      "basico_sentinel_2__ndvi__media_ciclo",
+      "basico_sentinel_2__evi__media_ciclo",
+      "pro_planet__ndvi__media_ciclo",
+      "pro_planet__evi__media_ciclo"
+    ],
+    "ridge_62A_solo_ambiente": [
+      "AREA_HA",
+      "precipitacion_acumulada_mm",
+      "tmax_media_ciclo_c",
+      "tmin_media_ciclo_c",
+      "elevacion_m",
+      "pendiente_grados"
+    ]
+  },
+  "rejilla": {
+    "ridge__alpha": [
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0
+    ]
+  },
+  "evaluador": "evaluar_anidado_50",
+  "criterio_interno": "RMSE",
+  "notas": [
+    "Mismas particiones espaciales anteriores.",
+    "Mediana y escalador dentro del Pipeline.",
+    "No se seleccionan variables por errores externos.",
+    "Los grupos de variables se definen antes de entrenar.",
+    "No se agregan antecedentes ni dinamica.",
+    "Las referencias se reutilizan; no se reentrenan.",
+    "Exploracion sobre datos y folds ya consultados.",
+    "No demuestra una mejora independiente de la seleccion.",
+    "No se predicen las 59 parcelas.",
+    "No se cambia la entrega."
+  ]
+}

@@ -1,0 +1,137 @@
+COMBINACION ENSAMBLE Y PLSR CON PESO INTERNO
+
+No se utilizan OOF globales para aprender pesos.
+Ridge y PLSR seleccionados dentro de cada entrenamiento.
+XGBoost fijo segun receta del bloque 58.
+Peso elegido por media de RMSE en 3 folds internos.
+Componentes externos reproducen referencias anteriores.
+w=0 es candidato, no garantiza mejora externa.
+Comparacion exploratoria: folds ya consultados.
+No se generaron modelos finales ni entregas.
+
+COMPARACION GLOBAL
+
+     modelo      MAE     RMSE       R2  sesgo_pred_menos_real  delta_MAE_vs_ensamble  delta_RMSE_vs_ensamble  delta_R2_vs_ensamble
+   ensamble 0.448877 0.611404 0.480252               0.053843               0.000000                0.000000              0.000000
+combinacion 0.461530 0.618487 0.468140               0.055818               0.012652                0.007083             -0.012112
+        xgb 0.459095 0.626746 0.453842               0.065354               0.010218                0.015342             -0.026411
+      ridge 0.470097 0.628702 0.450427               0.042333               0.021219                0.017298             -0.029825
+        pls 0.474392 0.629766 0.448566               0.077449               0.025515                0.018362             -0.031687
+
+PESOS ELEGIDOS INTERNAMENTE
+
+ fold  peso_PLSR  peso_Ridge  peso_XGBoost  RMSE_interno_elegido
+    1   0.750000    0.125000      0.125000              0.708788
+    2   0.750000    0.125000      0.125000              0.759518
+    3   0.500000    0.250000      0.250000              0.723629
+    4   0.750000    0.125000      0.125000              0.628036
+    5   1.000000    0.000000      0.000000              0.703388
+
+RESULTADOS POR FOLD
+
+     modelo  fold      MAE     RMSE        R2  sesgo_pred_menos_real
+      ridge     1 0.510727 0.657937 -0.444983              -0.243262
+        xgb     1 0.391652 0.553586 -0.022972              -0.060439
+        pls     1 0.464365 0.625600 -0.306433              -0.190573
+   ensamble     1 0.436702 0.588368 -0.155560              -0.151851
+combinacion     1 0.456165 0.614605 -0.260916              -0.180892
+      ridge     2 0.368536 0.557214  0.096748               0.048804
+        xgb     2 0.423252 0.619016 -0.114728              -0.032564
+        pls     2 0.386805 0.585070  0.004180               0.120492
+   ensamble     2 0.382701 0.572529  0.046414               0.008120
+combinacion     2 0.376741 0.575728  0.035726               0.092399
+      ridge     3 0.416018 0.562560  0.153894              -0.268910
+        xgb     3 0.446314 0.570517  0.129790              -0.390012
+        pls     3 0.404887 0.535148  0.234342              -0.144376
+   ensamble     3 0.410643 0.542667  0.212676              -0.329461
+combinacion     3 0.385538 0.521494  0.272914              -0.236919
+      ridge     4 0.462721 0.572739  0.457639               0.336278
+        xgb     4 0.483525 0.594466  0.415709               0.375158
+        pls     4 0.562729 0.655944  0.288610               0.364023
+   ensamble     4 0.456179 0.570494  0.461882               0.355718
+combinacion     4 0.535443 0.631531  0.340578               0.361947
+      ridge     5 0.582700 0.761410 -2.584080               0.381303
+        xgb     5 0.559395 0.779726 -2.758581               0.449636
+        pls     5 0.551414 0.729015 -2.285583               0.278979
+   ensamble     5 0.557513 0.759966 -2.570498               0.415469
+combinacion     5 0.551414 0.729015 -2.285583               0.278979
+
+BUSQUEDA INTERNA DE PESOS
+
+ fold_externo  peso_PLSR  RMSE_medio_interno
+            1   0.000000            0.765004
+            1   0.250000            0.733158
+            1   0.500000            0.713156
+            1   0.750000            0.708788
+            1   1.000000            0.725348
+            2   0.000000            0.899479
+            2   0.250000            0.816258
+            2   0.500000            0.763992
+            2   0.750000            0.759518
+            2   1.000000            0.809174
+            3   0.000000            0.795240
+            3   0.250000            0.747238
+            3   0.500000            0.723629
+            3   0.750000            0.735683
+            3   1.000000            0.789350
+            4   0.000000            0.687128
+            4   0.250000            0.657863
+            4   0.500000            0.637696
+            4   0.750000            0.628036
+            4   1.000000            0.630223
+            5   0.000000            0.760751
+            5   0.250000            0.735440
+            5   0.500000            0.716924
+            5   0.750000            0.706046
+            5   1.000000            0.703388
+
+AJUSTES DE COMPONENTES
+
+           contexto modelo  n_train  n_destino               parametros  RMSE_seleccion
+externo_1_interno_1  ridge       71         36    {"ridge__alpha": 1.0}        0.638566
+externo_1_interno_1    pls       71         36 {"pls__n_components": 3}        0.659109
+externo_1_interno_2  ridge       72         35   {"ridge__alpha": 10.0}        0.880791
+externo_1_interno_2    pls       72         35 {"pls__n_components": 3}        0.863424
+externo_1_interno_3  ridge       71         36   {"ridge__alpha": 10.0}        0.681925
+externo_1_interno_3    pls       71         36 {"pls__n_components": 3}        0.676354
+    externo_1_refit  ridge      107         31   {"ridge__alpha": 10.0}        0.757246
+    externo_1_refit    pls      107         31 {"pls__n_components": 5}        0.764219
+externo_2_interno_1  ridge       74         38   {"ridge__alpha": 10.0}        1.143402
+externo_2_interno_1    pls       74         38 {"pls__n_components": 3}        1.055363
+externo_2_interno_2  ridge       74         38    {"ridge__alpha": 1.0}        0.787985
+externo_2_interno_2    pls       74         38 {"pls__n_components": 8}        0.726287
+externo_2_interno_3  ridge       76         36 {"ridge__alpha": 1000.0}        0.854258
+externo_2_interno_3    pls       76         36 {"pls__n_components": 2}        0.918995
+    externo_2_refit  ridge      112         26   {"ridge__alpha": 10.0}        0.718574
+    externo_2_refit    pls      112         26 {"pls__n_components": 5}        0.735746
+externo_3_interno_1  ridge       73         38   {"ridge__alpha": 10.0}        0.806771
+externo_3_interno_1    pls       73         38 {"pls__n_components": 3}        0.812697
+externo_3_interno_2  ridge       74         37    {"ridge__alpha": 1.0}        0.787985
+externo_3_interno_2    pls       74         37 {"pls__n_components": 8}        0.726287
+externo_3_interno_3  ridge       75         36   {"ridge__alpha": 10.0}        0.763070
+externo_3_interno_3    pls       75         36 {"pls__n_components": 5}        0.739703
+    externo_3_refit  ridge      111         27   {"ridge__alpha": 10.0}        0.696785
+    externo_3_refit    pls      111         27 {"pls__n_components": 3}        0.712403
+externo_4_interno_1  ridge       74         37    {"ridge__alpha": 1.0}        0.715130
+externo_4_interno_1    pls       74         37 {"pls__n_components": 8}        0.769259
+externo_4_interno_2  ridge       74         37 {"ridge__alpha": 1000.0}        0.959376
+externo_4_interno_2    pls       74         37 {"pls__n_components": 3}        0.976440
+externo_4_interno_3  ridge       74         37   {"ridge__alpha": 10.0}        0.816291
+externo_4_interno_3    pls       74         37 {"pls__n_components": 5}        0.792063
+    externo_4_refit  ridge      111         27   {"ridge__alpha": 10.0}        0.647682
+    externo_4_refit    pls      111         27 {"pls__n_components": 3}        0.671371
+externo_5_interno_1  ridge       75         36   {"ridge__alpha": 10.0}        0.570166
+externo_5_interno_1    pls       75         36 {"pls__n_components": 5}        0.589876
+externo_5_interno_2  ridge       77         34  {"ridge__alpha": 100.0}        0.973483
+externo_5_interno_2    pls       77         34 {"pls__n_components": 2}        0.979584
+externo_5_interno_3  ridge       70         41 {"ridge__alpha": 1000.0}        0.592853
+externo_5_interno_3    pls       70         41 {"pls__n_components": 1}        0.615496
+    externo_5_refit  ridge      111         27   {"ridge__alpha": 10.0}        0.608245
+    externo_5_refit    pls      111         27 {"pls__n_components": 5}        0.573671
+
+AVISOS
+
+Empty DataFrame
+Columns: [contexto, categoria, mensaje]
+Index: []
+

@@ -1,0 +1,8 @@
+REVISION DE UN RASTER POR VARIABLE
+
+       fuente      variable                              archivo       CRS  bandas  filas  columnas  resolucion_x  resolucion_y  nodata    tipo_dato escalas desplazamientos                                                                          limites
+precipitacion Precipitacion                     PREC_2022_01.tif EPSG:4326       1     72        65          0.05          0.05 -9999.0 ('float32',)  (1.0,)          (0.0,)   (-99.94999880716205, 17.79999952018261, -96.69999875873327, 21.39999957382679)
+  temperatura          Tmax                     Tmax_2022_01.tif EPSG:4326       1     72        65          0.05          0.05 -9999.0 ('float32',)  (1.0,)          (0.0,) (-99.94999880716205, 17.799999222159386, -96.69999875873327, 21.399999275803566)
+  temperatura          Tmin                     Tmin_2022_01.tif EPSG:4326       1     72        65          0.05          0.05 -9999.0 ('float32',)  (1.0,)          (0.0,) (-99.94999880716205, 17.799999222159386, -96.69999875873327, 21.399999275803566)
+   topografia     Elevacion        Elevacion_INEGI_CEM4_120m.tif EPSG:6372       1   3362      2900        120.00        120.00 -9999.0 ('float32',)  (1.0,)          (0.0,)                                      (2715840.0, 650400.0, 3063840.0, 1053840.0)
+   topografia     Pendiente Pendiente_INEGI_CEM4_120m_grados.tif EPSG:6372       1   3362      2900        120.00        120.00 -9999.0 ('float32',)  (1.0,)          (0.0,)                                      (2715840.0, 650400.0, 3063840.0, 1053840.0)

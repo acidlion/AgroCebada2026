@@ -1,0 +1,63 @@
+BLOQUE 49: RED NEURONAL MLP EXPLORATORIA
+
+Mismas parcelas y particiones espaciales previas.
+Mediana y escalado ajustados dentro de cada fold.
+Configuracion fija y semilla 0.
+No se modificaron las 59 predicciones exportadas.
+MAE, RMSE y sesgo: mismas unidades de y_comparacion.
+Delta RMSE negativo: menor RMSE que XGBoost fijo.
+La estabilidad entre semillas sigue pendiente.
+
+CONFIGURACION MLP
+
+{
+  "hidden_layer_sizes": [
+    8
+  ],
+  "activation": "tanh",
+  "solver": "lbfgs",
+  "alpha": 1.0,
+  "max_iter": 2000,
+  "max_fun": 30000,
+  "tol": 1e-06,
+  "early_stopping": false,
+  "random_state": 0
+}
+
+COMPARACION GLOBAL
+
+             modelo  MAE_OOF  RMSE_OOF    R2_OOF  sesgo_pred_menos_real  delta_RMSE_vs_xgb_fijo
+xgb_meses_separados 0.473144  0.636959  0.435897               0.083965                0.000000
+ rf_meses_separados 0.504797  0.678088  0.360696               0.114991                0.041129
+   rf_resumen_ciclo 0.595045  0.745641  0.226973               0.123563                0.108682
+  xgb_resumen_ciclo 0.621767  0.781536  0.150754               0.139551                0.144577
+  mlp_resumen_ciclo 0.595298  0.828246  0.046207               0.126316                0.191287
+     baseline_media 0.857892  0.958918 -0.278494              -0.002534                0.321959
+mlp_meses_separados 0.776576  0.993611 -0.372677               0.078145                0.356652
+
+RESUMEN DE LAS REDES
+
+             modelo  MAE_OOF  RMSE_OOF    R2_OOF  sesgo_pred_menos_real  R2_train_media_folds  folds_con_aviso_convergencia
+  mlp_resumen_ciclo 0.595298  0.828246  0.046207               0.126316              0.924226                             0
+mlp_meses_separados 0.776576  0.993611 -0.372677               0.078145              0.995795                             0
+
+RESULTADOS POR FOLD
+
+             modelo  fold  n_train  n_validacion  variables  parametros_red  MAE_val  RMSE_val     R2_val  R2_train  sesgo_pred_menos_real  iteraciones  avisos_convergencia  avisos_totales
+  mlp_resumen_ciclo     1      107            31         33             281 0.535742  0.690124  -0.589820  0.954237               0.028608          609                    0               0
+  mlp_resumen_ciclo     2      112            26         33             281 0.531330  0.680886  -0.348696  0.917315              -0.142164          475                    0               0
+  mlp_resumen_ciclo     3      111            27         33             281 0.574587  0.815945  -0.779955  0.918668              -0.302852          466                    0               0
+  mlp_resumen_ciclo     4      111            27         33             281 0.400781  0.520667   0.551776  0.918523               0.205788          895                    0               0
+  mlp_resumen_ciclo     5      111            27         33             281 0.940503  1.255410  -8.743411  0.912387               0.846731          602                    0               0
+mlp_meses_separados     1      107            31        213            1721 0.698789  0.857771  -1.456049  0.997411              -0.120810         1058                    0               0
+mlp_meses_separados     2      112            26        213            1721 0.618869  0.805102  -0.885677  0.995568               0.075269          971                    0               0
+mlp_meses_separados     3      111            27        213            1721 0.870634  1.073341  -2.080084  0.996176              -0.753357          742                    0               0
+mlp_meses_separados     4      111            27        213            1721 0.525029  0.659672   0.280502  0.995408               0.365882         1470                    0               0
+mlp_meses_separados     5      111            27        213            1721 1.175239  1.410613 -11.301429  0.994412               0.853111         1298                    0               0
+
+AVISOS DE ENTRENAMIENTO
+
+Empty DataFrame
+Columns: [modelo, fold, categoria, es_convergencia, mensaje]
+Index: []
+

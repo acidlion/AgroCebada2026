@@ -1,0 +1,71 @@
+{
+  "modelo": "kernel_ridge_62B_rbf_ciclo",
+  "parcelas_etiquetadas": 138,
+  "variables": 33,
+  "columnas": [
+    "AREA_HA",
+    "precipitacion_acumulada_mm",
+    "tmax_media_ciclo_c",
+    "tmin_media_ciclo_c",
+    "elevacion_m",
+    "pendiente_grados",
+    "basico_landsat__vi6t__media_ciclo",
+    "basico_sentinel_2__ndvi__media_ciclo",
+    "basico_sentinel_2__evi__media_ciclo",
+    "basico_sentinel_2__crc__media_ciclo",
+    "basico_sentinel_2__mcrc__media_ciclo",
+    "basico_sentinel_2__ndsvi__media_ciclo",
+    "basico_sentinel_2__srndi__media_ciclo",
+    "basico_sentinel_2__mra__media_ciclo",
+    "basico_sentinel_2__lai__media_ciclo",
+    "basico_sentinel_2__fapar__media_ciclo",
+    "basico_sentinel_2__savi__media_ciclo",
+    "basico_sentinel_2__ndti__media_ciclo",
+    "basico_sentinel_2__sti__media_ciclo",
+    "basico_sentinel_2__ndwi__media_ciclo",
+    "basico_sentinel_2__endwi__media_ciclo",
+    "basico_sentinel_2__msi__media_ciclo",
+    "basico_sentinel_2__emsi__media_ciclo",
+    "basico_sentinel_2__dswi2__media_ciclo",
+    "basico_sentinel_2__dswi3__media_ciclo",
+    "basico_sentinel_2__dswi4__media_ciclo",
+    "basico_sentinel_2__dswi5__media_ciclo",
+    "basico_sentinel_2__nddi__media_ciclo",
+    "basico_sentinel_2__enddi__media_ciclo",
+    "pro_planet__ndvi__media_ciclo",
+    "pro_planet__evi__media_ciclo",
+    "pro_planet__lai__media_ciclo",
+    "pro_planet__msavi__media_ciclo"
+  ],
+  "kernel": "rbf",
+  "rejilla": {
+    "regressor__kernelridge__alpha": [
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "regressor__kernelridge__gamma": [
+      0.001,
+      0.01,
+      0.1
+    ]
+  },
+  "combinaciones_por_busqueda": 12,
+  "evaluador": "evaluar_anidado_50",
+  "criterio_interno": "RMSE",
+  "centrado_objetivo": "TransformedTargetRegressor con StandardScaler sin division por desviacion; ajustado en cada fit",
+  "notas": [
+    "Mismas particiones espaciales anteriores.",
+    "Mediana y escalador de X dentro del Pipeline.",
+    "Centrado de y dentro del estimador.",
+    "No se agregan antecedentes ni dinamica.",
+    "No se recortan ni corrigen predicciones.",
+    "No se seleccionan parametros usando errores externos.",
+    "Las referencias OOF se reutilizan.",
+    "Exploracion sobre folds ya consultados.",
+    "No se entrena un modelo final para entrega.",
+    "No se predicen las 59 parcelas objetivo.",
+    "No se modifica ninguna entrega."
+  ]
+}

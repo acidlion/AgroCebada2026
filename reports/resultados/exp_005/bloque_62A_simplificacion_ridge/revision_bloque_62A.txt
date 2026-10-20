@@ -1,0 +1,146 @@
+RIDGE POR SENSORES Y FAMILIAS DE VARIABLES
+
+Comparacion exploratoria con seleccion interna de alpha.
+Mismas 138 etiquetas y particiones espaciales.
+No se agregan antecedentes ni dinamica.
+MAE, RMSE y sesgo en t/ha; R2 sin unidades.
+Delta MAE/RMSE negativo indica mejora.
+Delta R2 positivo indica mejora.
+Recuentos por fold no prueban significancia.
+Folds ya consultados durante el desarrollo.
+No se selecciono automaticamente un modelo final.
+No se modificaron entregas.
+
+VARIANTES
+
+                     modelo  parcelas  variables  faltantes
+ridge_62A_sentinel_ambiente       138         28          0
+  ridge_62A_planet_ambiente       138         10          0
+ridge_62A_ndvi_evi_ambiente       138         10          0
+    ridge_62A_solo_ambiente       138          6          0
+
+MAPA DE COLUMNAS
+
+                             variable   familia indice  es_ndvi_evi
+                              AREA_HA  ambiente   None        False
+           precipitacion_acumulada_mm  ambiente   None        False
+                   tmax_media_ciclo_c  ambiente   None        False
+                   tmin_media_ciclo_c  ambiente   None        False
+                          elevacion_m  ambiente   None        False
+                     pendiente_grados  ambiente   None        False
+    basico_landsat__vi6t__media_ciclo   landsat   vi6t        False
+ basico_sentinel_2__ndvi__media_ciclo sentinel2   ndvi         True
+  basico_sentinel_2__evi__media_ciclo sentinel2    evi         True
+  basico_sentinel_2__crc__media_ciclo sentinel2    crc        False
+ basico_sentinel_2__mcrc__media_ciclo sentinel2   mcrc        False
+basico_sentinel_2__ndsvi__media_ciclo sentinel2  ndsvi        False
+basico_sentinel_2__srndi__media_ciclo sentinel2  srndi        False
+  basico_sentinel_2__mra__media_ciclo sentinel2    mra        False
+  basico_sentinel_2__lai__media_ciclo sentinel2    lai        False
+basico_sentinel_2__fapar__media_ciclo sentinel2  fapar        False
+ basico_sentinel_2__savi__media_ciclo sentinel2   savi        False
+ basico_sentinel_2__ndti__media_ciclo sentinel2   ndti        False
+  basico_sentinel_2__sti__media_ciclo sentinel2    sti        False
+ basico_sentinel_2__ndwi__media_ciclo sentinel2   ndwi        False
+basico_sentinel_2__endwi__media_ciclo sentinel2  endwi        False
+  basico_sentinel_2__msi__media_ciclo sentinel2    msi        False
+ basico_sentinel_2__emsi__media_ciclo sentinel2   emsi        False
+basico_sentinel_2__dswi2__media_ciclo sentinel2  dswi2        False
+basico_sentinel_2__dswi3__media_ciclo sentinel2  dswi3        False
+basico_sentinel_2__dswi4__media_ciclo sentinel2  dswi4        False
+basico_sentinel_2__dswi5__media_ciclo sentinel2  dswi5        False
+ basico_sentinel_2__nddi__media_ciclo sentinel2   nddi        False
+basico_sentinel_2__enddi__media_ciclo sentinel2  enddi        False
+        pro_planet__ndvi__media_ciclo    planet   ndvi         True
+         pro_planet__evi__media_ciclo    planet    evi         True
+         pro_planet__lai__media_ciclo    planet    lai        False
+       pro_planet__msavi__media_ciclo    planet  msavi        False
+
+COMPARACION GLOBAL
+
+                     modelo      MAE     RMSE       R2  sesgo_pred_menos_real  delta_MAE_vs_ridge_original  delta_RMSE_vs_ridge_original  delta_R2_vs_ridge_original  delta_MAE_vs_ensamble  delta_RMSE_vs_ensamble  delta_R2_vs_ensamble
+ ensamble_ridge_xgb3m_50_50 0.448877 0.611404 0.480252               0.053843                    -0.021219                     -0.017298                    0.029825               0.000000                0.000000              0.000000
+          xgb_e4_mensual_3m 0.459095 0.626746 0.453842               0.065354                    -0.011002                     -0.001956                    0.003414               0.010218                0.015342             -0.026411
+        ridge_ciclo_anidado 0.470097 0.628702 0.450427               0.042333                     0.000000                      0.000000                    0.000000               0.021219                0.017298             -0.029825
+ridge_62A_ndvi_evi_ambiente 0.516271 0.665745 0.383758               0.035084                     0.046175                      0.037043                   -0.066669               0.067394                0.054341             -0.096495
+  ridge_62A_planet_ambiente 0.535050 0.686267 0.345180               0.019092                     0.064953                      0.057565                   -0.105247               0.086172                0.074863             -0.135072
+ridge_62A_sentinel_ambiente 0.526537 0.687044 0.343696               0.057525                     0.056440                      0.058342                   -0.106731               0.077660                0.075640             -0.136556
+    ridge_62A_solo_ambiente 0.551613 0.697772 0.323041               0.124569                     0.081516                      0.069070                   -0.127386               0.102736                0.086368             -0.157212
+
+CONSISTENCIA DESCRIPTIVA
+
+                     modelo  folds_menor_RMSE_que_ridge  folds_menor_RMSE_que_ensamble  max_RMSE_fold
+ridge_62A_sentinel_ambiente                           2                              2       0.823941
+  ridge_62A_planet_ambiente                           0                              0       0.781754
+ridge_62A_ndvi_evi_ambiente                           0                              0       0.782998
+    ridge_62A_solo_ambiente                           1                              0       0.796394
+
+RESULTADOS POR FOLD
+
+                     modelo  fold  parcelas      MAE     RMSE        R2  sesgo_pred_menos_real
+        ridge_ciclo_anidado     1        31 0.510727 0.657937 -0.444983              -0.243262
+        ridge_ciclo_anidado     2        26 0.368536 0.557214  0.096748               0.048804
+        ridge_ciclo_anidado     3        27 0.416018 0.562560  0.153894              -0.268910
+        ridge_ciclo_anidado     4        27 0.462721 0.572739  0.457639               0.336278
+        ridge_ciclo_anidado     5        27 0.582700 0.761410 -2.584080               0.381303
+          xgb_e4_mensual_3m     1        31 0.391652 0.553586 -0.022972              -0.060439
+          xgb_e4_mensual_3m     2        26 0.423252 0.619016 -0.114728              -0.032564
+          xgb_e4_mensual_3m     3        27 0.446314 0.570517  0.129790              -0.390012
+          xgb_e4_mensual_3m     4        27 0.483525 0.594466  0.415709               0.375158
+          xgb_e4_mensual_3m     5        27 0.559395 0.779726 -2.758581               0.449636
+ ensamble_ridge_xgb3m_50_50     1        31 0.436702 0.588368 -0.155560              -0.151851
+ ensamble_ridge_xgb3m_50_50     2        26 0.382701 0.572529  0.046414               0.008120
+ ensamble_ridge_xgb3m_50_50     3        27 0.410643 0.542667  0.212676              -0.329461
+ ensamble_ridge_xgb3m_50_50     4        27 0.456179 0.570494  0.461882               0.355718
+ ensamble_ridge_xgb3m_50_50     5        27 0.557513 0.759966 -2.570498               0.415469
+ridge_62A_sentinel_ambiente     1        31 0.561180 0.700592 -0.638416              -0.319020
+ridge_62A_sentinel_ambiente     2        26 0.348666 0.543013  0.142202               0.025810
+ridge_62A_sentinel_ambiente     3        27 0.417612 0.569328  0.133414              -0.286943
+ridge_62A_sentinel_ambiente     4        27 0.715072 0.823941 -0.122448               0.580401
+ridge_62A_sentinel_ambiente     5        27 0.578436 0.749733 -2.474986               0.341989
+  ridge_62A_planet_ambiente     1        31 0.575207 0.667966 -0.489370              -0.381124
+  ridge_62A_planet_ambiente     2        26 0.393414 0.587259 -0.003286               0.101878
+  ridge_62A_planet_ambiente     3        27 0.430659 0.596805  0.047747              -0.269640
+  ridge_62A_planet_ambiente     4        27 0.671519 0.771652  0.015496               0.479422
+  ridge_62A_planet_ambiente     5        27 0.593253 0.781754 -2.778160               0.227281
+ridge_62A_ndvi_evi_ambiente     1        31 0.567026 0.661137 -0.459072              -0.356941
+ridge_62A_ndvi_evi_ambiente     2        26 0.386778 0.581617  0.015898               0.092839
+ridge_62A_ndvi_evi_ambiente     3        27 0.429378 0.582329  0.093384              -0.257970
+ridge_62A_ndvi_evi_ambiente     4        27 0.569743 0.696799  0.197233               0.449042
+ridge_62A_ndvi_evi_ambiente     5        27 0.616116 0.782998 -2.790193               0.308669
+    ridge_62A_solo_ambiente     1        31 0.535084 0.630723 -0.327918              -0.331003
+    ridge_62A_solo_ambiente     2        26 0.464336 0.682007 -0.353139               0.297405
+    ridge_62A_solo_ambiente     3        27 0.423178 0.569453  0.133032              -0.244368
+    ridge_62A_solo_ambiente     4        27 0.707345 0.796394 -0.048649               0.483137
+    ridge_62A_solo_ambiente     5        27 0.627339 0.790794 -2.866041               0.491569
+
+PARAMETROS
+
+                     modelo  fold  ridge__alpha
+ridge_62A_sentinel_ambiente     1     10.000000
+ridge_62A_sentinel_ambiente     2     10.000000
+ridge_62A_sentinel_ambiente     3     10.000000
+ridge_62A_sentinel_ambiente     4    100.000000
+ridge_62A_sentinel_ambiente     5     10.000000
+  ridge_62A_planet_ambiente     1     10.000000
+  ridge_62A_planet_ambiente     2     10.000000
+  ridge_62A_planet_ambiente     3     10.000000
+  ridge_62A_planet_ambiente     4    100.000000
+  ridge_62A_planet_ambiente     5      1.000000
+ridge_62A_ndvi_evi_ambiente     1      0.100000
+ridge_62A_ndvi_evi_ambiente     2     10.000000
+ridge_62A_ndvi_evi_ambiente     3     10.000000
+ridge_62A_ndvi_evi_ambiente     4      0.100000
+ridge_62A_ndvi_evi_ambiente     5      1.000000
+    ridge_62A_solo_ambiente     1      0.100000
+    ridge_62A_solo_ambiente     2      0.100000
+    ridge_62A_solo_ambiente     3     10.000000
+    ridge_62A_solo_ambiente     4    100.000000
+    ridge_62A_solo_ambiente     5      0.100000
+
+AVISOS
+
+Empty DataFrame
+Columns: [modelo, fold, categoria, mensaje]
+Index: []
+

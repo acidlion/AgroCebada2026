@@ -1,0 +1,76 @@
+ENSAMBLE FIJO: RIDGE + XGBOOST CON TRES MESES PREVIOS
+
+Pesos: 0.5 y 0.5, fijados antes del cálculo.
+No se entrenaron modelos ni se optimizaron pesos.
+Mismas 138 parcelas y asignaciones externas.
+Selección previa de componentes exploratoria.
+Delta negativo = menor error que la referencia indicada.
+La correlación y los recuentos no prueban significancia.
+No se generaron predicciones para las 59 parcelas.
+No se cambió la entrega vigente.
+
+COMPARACION GLOBAL
+
+                    modelo  MAE_OOF  RMSE_OOF   R2_OOF  sesgo_pred_menos_real  delta_MAE_vs_ridge  delta_RMSE_vs_ridge  delta_MAE_vs_xgb3m  delta_RMSE_vs_xgb3m
+ensamble_ridge_xgb3m_50_50 0.448877  0.611404 0.480252               0.053843           -0.021219            -0.017298           -0.010218            -0.015342
+         xgb_e4_mensual_3m 0.459095  0.626746 0.453842               0.065354           -0.011002            -0.001956            0.000000             0.000000
+       ridge_ciclo_anidado 0.470097  0.628702 0.450427               0.042333            0.000000             0.000000            0.011002             0.001956
+
+RESULTADOS POR FOLD
+
+                    modelo  fold  parcelas  MAE_val  RMSE_val    R2_val  sesgo_pred_menos_real
+       ridge_ciclo_anidado     1        31 0.510727  0.657937 -0.444983              -0.243262
+       ridge_ciclo_anidado     2        26 0.368536  0.557214  0.096748               0.048804
+       ridge_ciclo_anidado     3        27 0.416018  0.562560  0.153894              -0.268910
+       ridge_ciclo_anidado     4        27 0.462721  0.572739  0.457639               0.336278
+       ridge_ciclo_anidado     5        27 0.582700  0.761410 -2.584080               0.381303
+         xgb_e4_mensual_3m     1        31 0.391652  0.553586 -0.022972              -0.060439
+         xgb_e4_mensual_3m     2        26 0.423252  0.619016 -0.114728              -0.032564
+         xgb_e4_mensual_3m     3        27 0.446314  0.570517  0.129790              -0.390012
+         xgb_e4_mensual_3m     4        27 0.483525  0.594466  0.415709               0.375158
+         xgb_e4_mensual_3m     5        27 0.559395  0.779726 -2.758581               0.449636
+ensamble_ridge_xgb3m_50_50     1        31 0.436702  0.588368 -0.155560              -0.151851
+ensamble_ridge_xgb3m_50_50     2        26 0.382701  0.572529  0.046414               0.008120
+ensamble_ridge_xgb3m_50_50     3        27 0.410643  0.542667  0.212676              -0.329461
+ensamble_ridge_xgb3m_50_50     4        27 0.456179  0.570494  0.461882               0.355718
+ensamble_ridge_xgb3m_50_50     5        27 0.557513  0.759966 -2.570498               0.415469
+
+ENSAMBLE CONTRA CADA COMPONENTE
+
+         referencia  fold  MAE_ensamble  MAE_referencia  delta_MAE  RMSE_ensamble  RMSE_referencia  delta_RMSE
+ridge_ciclo_anidado     1      0.436702        0.510727  -0.074024       0.588368         0.657937   -0.069569
+ridge_ciclo_anidado     2      0.382701        0.368536   0.014165       0.572529         0.557214    0.015315
+ridge_ciclo_anidado     3      0.410643        0.416018  -0.005375       0.542667         0.562560   -0.019893
+ridge_ciclo_anidado     4      0.456179        0.462721  -0.006543       0.570494         0.572739   -0.002245
+ridge_ciclo_anidado     5      0.557513        0.582700  -0.025186       0.759966         0.761410   -0.001444
+  xgb_e4_mensual_3m     1      0.436702        0.391652   0.045050       0.588368         0.553586    0.034782
+  xgb_e4_mensual_3m     2      0.382701        0.423252  -0.040551       0.572529         0.619016   -0.046487
+  xgb_e4_mensual_3m     3      0.410643        0.446314  -0.035671       0.542667         0.570517   -0.027850
+  xgb_e4_mensual_3m     4      0.456179        0.483525  -0.027346       0.570494         0.594466   -0.023972
+  xgb_e4_mensual_3m     5      0.557513        0.559395  -0.001882       0.759966         0.779726   -0.019759
+
+COMPLEMENTARIEDAD DE ERRORES
+
+ grupo  parcelas  correlacion_errores_ridge_xgb  errores_de_signo_opuesto  ensamble_menor_error_abs_que_ridge  ensamble_menor_error_abs_que_xgb
+global       138                       0.897254                        25                                  78                                71
+fold_1        31                       0.915547                         4                                  23                                11
+fold_2        26                       0.904439                         5                                  14                                13
+fold_3        27                       0.792784                         6                                  12                                17
+fold_4        27                       0.860922                         5                                  13                                16
+fold_5        27                       0.928440                         5                                  16                                14
+
+DIEZ MAYORES ERRORES DEL ENSAMBLE
+
+             rendimiento_observado  fold_validacion  ridge_ciclo_anidado  xgb_e4_mensual_3m  ensamble_ridge_xgb3m_50_50  error__ridge_ciclo_anidado  error_abs__ridge_ciclo_anidado  error__xgb_e4_mensual_3m  error_abs__xgb_e4_mensual_3m  error__ensamble_ridge_xgb3m_50_50  error_abs__ensamble_ridge_xgb3m_50_50
+ID_POLIGONO                                                                                                                                                                                                                                                                                                          
+AGC_015                   2.640000                2             4.728116           4.592427                    4.660272                    2.088116                        2.088116                  1.952427                      1.952427                           2.020272                               2.020272
+AGC_171                   2.150000                1             4.154495           4.110335                    4.132415                    2.004495                        2.004495                  1.960335                      1.960335                           1.982415                               1.982415
+AGC_041                   2.500000                5             4.207406           4.601327                    4.404367                    1.707406                        1.707406                  2.101327                      2.101327                           1.904367                               1.904367
+AGC_166                   2.500000                5             4.119209           4.479155                    4.299182                    1.619209                        1.619209                  1.979155                      1.979155                           1.799182                               1.799182
+AGC_034                   2.000000                5             3.860249           3.643805                    3.752027                    1.860249                        1.860249                  1.643805                      1.643805                           1.752027                               1.752027
+AGC_162                   5.590000                3             4.306732           4.201081                    4.253906                   -1.283268                        1.283268                 -1.388919                      1.388919                          -1.336094                               1.336094
+AGC_024                   3.030000                1             4.235345           4.420869                    4.328107                    1.205345                        1.205345                  1.390869                      1.390869                           1.298107                               1.298107
+AGC_127                   5.570000                3             4.327619           4.312642                    4.320131                   -1.242381                        1.242381                 -1.257358                      1.257358                          -1.249869                               1.249869
+AGC_058                   2.500000                4             3.543689           3.763674                    3.653681                    1.043689                        1.043689                  1.263674                      1.263674                           1.153681                               1.153681
+AGC_138                   2.500000                4             3.713294           3.463906                    3.588600                    1.213294                        1.213294                  0.963906                      0.963906                           1.088600                               1.088600
+

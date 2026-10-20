@@ -1,0 +1,14 @@
+PATRONES DE NAs RESTANTES
+
+    sensor                                          columnas_con_NA_restante  filas
+   Landsat vi6t_promedio, vi6t_std, vi6t_max, vi6t_min, porcentaje_nubosidad   3056
+Sentinel-2                   fapar_promedio, fapar_std, fapar_max, fapar_min      4
+   Landsat                       vi6t_promedio, vi6t_std, vi6t_max, vi6t_min      1
+
+CASOS DE FAPAR
+
+ID_POLIGONO fecha_captura     sensor  porcentaje_nubosidad  ndvi_promedio  fapar_promedio  fapar_std  fapar_max  fapar_min
+    AGC_086    07/12/2022 Sentinel-2                   0.0          0.169             NaN        NaN        NaN        NaN
+    AGC_019    07/12/2022 Sentinel-2                   0.0          0.170             NaN        NaN        NaN        NaN
+    AGC_173    07/12/2022 Sentinel-2                   0.0          0.267             NaN        NaN        NaN        NaN
+    AGC_103    07/12/2022 Sentinel-2                   0.0          0.165             NaN        NaN        NaN        NaN

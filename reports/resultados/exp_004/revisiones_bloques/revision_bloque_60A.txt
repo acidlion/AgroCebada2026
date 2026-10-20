@@ -1,0 +1,97 @@
+ANTECEDENTES SIN DESCRIPTORES DE DINAMICA
+
+Cuatro variantes Ridge con la misma base original.
+Seleccion interna de alpha por grupos.
+Mismas 138 etiquetas y folds externos anteriores.
+Clima previo: no es una medicion de degradacion del suelo.
+No se entrenaron modelos finales para las 59 parcelas.
+No se modifico ninguna entrega.
+Comparacion exploratoria; recuentos no prueban significancia.
+
+RESUMEN DE TABLAS
+
+                          variante  parcelas  variables  NA_train  NA_prediccion
+        ridge_sin_dinamica_ndvi_3m       197         35         0              0
+        ridge_sin_dinamica_ndvi_6m       197         36         0              0
+       ridge_sin_dinamica_clima_3m       197         36         0              0
+ridge_sin_dinamica_clima_anual2024       197         36         0              0
+
+COBERTURA CLIMATICA
+
+    ventana  parcelas  meses_esperados  minimo_meses_completos  maximo_meses_completos
+  anual2024       197               12                      12                      12
+ene_mar2025       197                3                       3                       3
+
+COMPARACION GLOBAL
+
+                            modelo  MAE_OOF  RMSE_OOF   R2_OOF  sesgo_pred_menos_real  delta_MAE_vs_ridge_original  delta_RMSE_vs_ridge_original  delta_MAE_vs_ensamble  delta_RMSE_vs_ensamble
+        ensamble_ridge_xgb3m_50_50 0.448877  0.611404 0.480252               0.053843                    -0.021219                     -0.017298               0.000000                0.000000
+                 xgb_e4_mensual_3m 0.459095  0.626746 0.453842               0.065354                    -0.011002                     -0.001956               0.010218                0.015342
+               ridge_ciclo_anidado 0.470097  0.628702 0.450427               0.042333                     0.000000                      0.000000               0.021219                0.017298
+        ridge_sin_dinamica_ndvi_3m 0.474677  0.634794 0.439725               0.013243                     0.004580                      0.006092               0.025800                0.023390
+        ridge_sin_dinamica_ndvi_6m 0.483760  0.642471 0.426092               0.028624                     0.013663                      0.013769               0.034883                0.031066
+ridge_sin_dinamica_clima_anual2024 0.487235  0.647437 0.417186               0.084604                     0.017138                      0.018735               0.038357                0.036032
+       ridge_sin_dinamica_clima_3m 0.497522  0.659436 0.395382               0.054344                     0.027426                      0.030734               0.048645                0.048032
+
+CONSISTENCIA DESCRIPTIVA
+
+                            modelo  folds_menor_RMSE_que_ridge  folds_menor_MAE_que_ridge  max_RMSE_fold  max_sesgo_absoluto_fold  R2_train_media_folds
+       ridge_sin_dinamica_clima_3m                           1                          2       0.805651                 0.391164              0.649490
+ridge_sin_dinamica_clima_anual2024                           2                          2       0.733149                 0.323899              0.709585
+        ridge_sin_dinamica_ndvi_3m                           3                          2       0.757837                 0.378664              0.690772
+        ridge_sin_dinamica_ndvi_6m                           2                          0       0.763794                 0.388029              0.692758
+
+RESULTADOS POR FOLD
+
+                            modelo  fold  n_train  n_validacion  RMSE_interno_elegido  MAE_val  RMSE_val    R2_val  R2_train  sesgo_pred_menos_real  avisos
+        ridge_sin_dinamica_ndvi_3m     1      107            31              0.766471 0.540742  0.702221 -0.646043  0.780955              -0.203500       0
+        ridge_sin_dinamica_ndvi_3m     2      112            26              0.743147 0.372109  0.555561  0.102100  0.686332               0.042629       0
+        ridge_sin_dinamica_ndvi_3m     3      111            27              0.700506 0.443308  0.598546  0.042185  0.679772              -0.326295       0
+        ridge_sin_dinamica_ndvi_3m     4      111            27              0.641729 0.425102  0.513452  0.564112  0.666167               0.207916       0
+        ridge_sin_dinamica_ndvi_3m     5      111            27              0.609169 0.578536  0.757837 -2.550518  0.640635               0.378664       0
+        ridge_sin_dinamica_ndvi_6m     1      107            31              0.757491 0.547612  0.703393 -0.651545  0.783676              -0.204486       0
+        ridge_sin_dinamica_ndvi_6m     2      112            26              0.742121 0.368923  0.553558  0.108562  0.687056               0.028105       0
+        ridge_sin_dinamica_ndvi_6m     3      111            27              0.700782 0.439785  0.592536  0.061323  0.680487              -0.316225       0
+        ridge_sin_dinamica_ndvi_6m     4      111            27              0.632150 0.464636  0.558649  0.483997  0.671733               0.282212       0
+        ridge_sin_dinamica_ndvi_6m     5      111            27              0.612114 0.584131  0.763794 -2.606556  0.640838               0.388029       0
+       ridge_sin_dinamica_clima_3m     1      107            31              0.735174 0.501582  0.649499 -0.408157  0.735533              -0.229613       0
+       ridge_sin_dinamica_clima_3m     2      112            26              0.725090 0.397658  0.584912  0.004717  0.687580               0.118060       0
+       ridge_sin_dinamica_clima_3m     3      111            27              0.711185 0.411103  0.572163  0.124760  0.616324              -0.256805       0
+       ridge_sin_dinamica_clima_3m     4      111            27              0.635695 0.556266  0.657539  0.285145  0.554630               0.391164       0
+       ridge_sin_dinamica_clima_3m     5      111            27              0.575241 0.616702  0.805651 -3.012671  0.653385               0.293340       0
+ridge_sin_dinamica_clima_anual2024     1      107            31              0.702429 0.519204  0.714719 -0.705159  0.805435              -0.070838       0
+ridge_sin_dinamica_clima_anual2024     2      112            26              0.698309 0.384682  0.565956  0.068184  0.690512               0.069361       0
+ridge_sin_dinamica_clima_anual2024     3      111            27              0.629646 0.565156  0.680812 -0.239201  0.751219              -0.118120       0
+ridge_sin_dinamica_clima_anual2024     4      111            27              0.649615 0.411904  0.496478  0.592456  0.661129               0.241185       0
+ridge_sin_dinamica_clima_anual2024     5      111            27              0.599641 0.546692  0.733149 -2.322955  0.639632               0.323899       0
+
+PARAMETROS ELEGIDOS
+
+                            modelo  fold  ridge__alpha
+        ridge_sin_dinamica_ndvi_3m     1      1.000000
+        ridge_sin_dinamica_ndvi_3m     2     10.000000
+        ridge_sin_dinamica_ndvi_3m     3     10.000000
+        ridge_sin_dinamica_ndvi_3m     4      1.000000
+        ridge_sin_dinamica_ndvi_3m     5     10.000000
+        ridge_sin_dinamica_ndvi_6m     1      1.000000
+        ridge_sin_dinamica_ndvi_6m     2     10.000000
+        ridge_sin_dinamica_ndvi_6m     3     10.000000
+        ridge_sin_dinamica_ndvi_6m     4      1.000000
+        ridge_sin_dinamica_ndvi_6m     5     10.000000
+       ridge_sin_dinamica_clima_3m     1     10.000000
+       ridge_sin_dinamica_clima_3m     2     10.000000
+       ridge_sin_dinamica_clima_3m     3    100.000000
+       ridge_sin_dinamica_clima_3m     4    100.000000
+       ridge_sin_dinamica_clima_3m     5     10.000000
+ridge_sin_dinamica_clima_anual2024     1      0.100000
+ridge_sin_dinamica_clima_anual2024     2     10.000000
+ridge_sin_dinamica_clima_anual2024     3      0.100000
+ridge_sin_dinamica_clima_anual2024     4      1.000000
+ridge_sin_dinamica_clima_anual2024     5     10.000000
+
+AVISOS
+
+Empty DataFrame
+Columns: [modelo, fold, categoria, mensaje]
+Index: []
+

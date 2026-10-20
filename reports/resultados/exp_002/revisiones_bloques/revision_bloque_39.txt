@@ -1,0 +1,29 @@
+COMPARACION DE REPRESENTACIONES
+
+            modelo  MAE_OOF  RMSE_OOF    R2_OOF  MAE_media_folds  RMSE_media_folds  R2_media_folds  R2_train_media_folds  reduccion_RMSE_vs_baseline_pct
+    baseline_media 0.857892  0.958918 -0.278494         0.864235          0.951172       -2.379805              0.000000                        0.000000
+  rf_resumen_ciclo 0.595045  0.745641  0.226973         0.598872          0.731870       -1.107188              0.867958                       22.241476
+rf_meses_separados 0.504797  0.678088  0.360696         0.508737          0.667724       -0.830631              0.893659                       29.286163
+
+RESULTADOS POR PARTICION
+
+            modelo  fold  n_train  n_validacion  MAE_val  RMSE_val    R2_val  R2_train
+    baseline_media     1      107            31 0.637715  0.715691 -0.709800  0.000000
+    baseline_media     2      112            26 0.833599  0.917811 -1.450597  0.000000
+    baseline_media     3      111            27 0.766446  0.878798 -1.064740  0.000000
+    baseline_media     4      111            27 0.955529  1.046108 -0.809372  0.000000
+    baseline_media     5      111            27 1.127888  1.197450 -7.864515  0.000000
+  rf_resumen_ciclo     1      107            31 0.433783  0.588355 -0.155506  0.896561
+  rf_resumen_ciclo     2      112            26 0.466655  0.603824 -0.060684  0.877080
+  rf_resumen_ciclo     3      111            27 0.507242  0.634444 -0.076150  0.868693
+  rf_resumen_ciclo     4      111            27 0.742875  0.841647 -0.171209  0.853822
+  rf_resumen_ciclo     5      111            27 0.843803  0.991082 -5.072388  0.843632
+rf_meses_separados     1      107            31 0.355743  0.560380 -0.048235  0.922018
+rf_meses_separados     2      112            26 0.440508  0.612896 -0.092796  0.900831
+rf_meses_separados     3      111            27 0.513681  0.639466 -0.093255  0.895537
+rf_meses_separados     4      111            27 0.475379  0.597471  0.409788  0.875723
+rf_meses_separados     5      111            27 0.758375  0.928408 -4.328656  0.874186
+
+CONFIGURACION RANDOM FOREST
+
+{'n_estimators': 500, 'min_samples_leaf': 3, 'max_features': 0.5, 'random_state': 0, 'n_jobs': -1}

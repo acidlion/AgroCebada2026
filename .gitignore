@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Data
+# Ignorar el contenido general de data
+data/*
+
+# Excepciones que SÍ se deben subir al repositorio:
+!data/processed/
+!data/external/
+
+output/
+.env
+# Entornos virtuales
+env_tlayolli/
+venv/
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+.DS_Store
+# modelo joblib pesa más de 50MB y usas Render, ignóralo aquí
+# *.joblib

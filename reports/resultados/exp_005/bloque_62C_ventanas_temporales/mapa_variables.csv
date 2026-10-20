@@ -1,0 +1,13 @@
+﻿variable,sensor,indice,ventana,columnas_origen
+ventana__sentinel2__ndvi__abr_jun2025,sentinel2,ndvi,abr_jun2025,"[""basico_sentinel_2__ndvi__media_mensual__2025_04"", ""basico_sentinel_2__ndvi__media_mensual__2025_05"", ""basico_sentinel_2__ndvi__media_mensual__2025_06""]"
+ventana__sentinel2__ndvi__jul_ago2025,sentinel2,ndvi,jul_ago2025,"[""basico_sentinel_2__ndvi__media_mensual__2025_07"", ""basico_sentinel_2__ndvi__media_mensual__2025_08""]"
+ventana__sentinel2__ndvi__sep_oct2025,sentinel2,ndvi,sep_oct2025,"[""basico_sentinel_2__ndvi__media_mensual__2025_09"", ""basico_sentinel_2__ndvi__media_mensual__2025_10""]"
+ventana__sentinel2__evi__abr_jun2025,sentinel2,evi,abr_jun2025,"[""basico_sentinel_2__evi__media_mensual__2025_04"", ""basico_sentinel_2__evi__media_mensual__2025_05"", ""basico_sentinel_2__evi__media_mensual__2025_06""]"
+ventana__sentinel2__evi__jul_ago2025,sentinel2,evi,jul_ago2025,"[""basico_sentinel_2__evi__media_mensual__2025_07"", ""basico_sentinel_2__evi__media_mensual__2025_08""]"
+ventana__sentinel2__evi__sep_oct2025,sentinel2,evi,sep_oct2025,"[""basico_sentinel_2__evi__media_mensual__2025_09"", ""basico_sentinel_2__evi__media_mensual__2025_10""]"
+ventana__planet__ndvi__abr_jun2025,planet,ndvi,abr_jun2025,"[""pro_planet__ndvi__media_mensual__2025_04"", ""pro_planet__ndvi__media_mensual__2025_05"", ""pro_planet__ndvi__media_mensual__2025_06""]"
+ventana__planet__ndvi__jul_ago2025,planet,ndvi,jul_ago2025,"[""pro_planet__ndvi__media_mensual__2025_07"", ""pro_planet__ndvi__media_mensual__2025_08""]"
+ventana__planet__ndvi__sep_oct2025,planet,ndvi,sep_oct2025,"[""pro_planet__ndvi__media_mensual__2025_09"", ""pro_planet__ndvi__media_mensual__2025_10""]"
+ventana__planet__evi__abr_jun2025,planet,evi,abr_jun2025,"[""pro_planet__evi__media_mensual__2025_04"", ""pro_planet__evi__media_mensual__2025_05"", ""pro_planet__evi__media_mensual__2025_06""]"
+ventana__planet__evi__jul_ago2025,planet,evi,jul_ago2025,"[""pro_planet__evi__media_mensual__2025_07"", ""pro_planet__evi__media_mensual__2025_08""]"
+ventana__planet__evi__sep_oct2025,planet,evi,sep_oct2025,"[""pro_planet__evi__media_mensual__2025_09"", ""pro_planet__evi__media_mensual__2025_10""]"

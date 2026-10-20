@@ -1,0 +1,4 @@
+﻿escenario_vs_base,parcelas_con_cambio,delta_medio,cambio_absoluto_medio,cambio_absoluto_mediano,p90_cambio_absoluto,max_cambio_absoluto
+limites,0,0.0,0.0,0.0,0.0,0.0
+mediana,1,-0.0002895007699222888,0.0002895007699222888,0.0,0.0,0.01708054542541504
+combinado,1,-0.0002895007699222888,0.0002895007699222888,0.0,0.0,0.01708054542541504

@@ -1,0 +1,3 @@
+﻿modelo,folds_menor_RMSE_que_ridge,folds_menor_RMSE_que_ensamble,max_RMSE_fold
+ridge_65_clima_ventanas,2,1,0.8475720975761493
+ridge_65_clima_cuadraticos,2,1,0.8983744652742733

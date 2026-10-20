@@ -1,0 +1,39 @@
+COMPARACION DE RECONSTRUCCION DE VI6T
+
+    mes                  metodo  n_casos        MAE       RMSE  sesgo_pred_menos_real
+2025-07       pred_mes_anterior      194 0.01530249 0.02016457             0.01031452
+2025-07      pred_interpolacion      194 0.01107524 0.01404321            -0.00104392
+2025-07 pred_otros_sensores_oof      194 0.00859749 0.01098359            -0.00011832
+2025-09       pred_mes_anterior      192 0.01165415 0.01550432            -0.00061628
+2025-09      pred_interpolacion      192 0.01068613 0.01378419            -0.00061590
+2025-09 pred_otros_sensores_oof      192 0.00997034 0.01290846             0.00009064
+
+PREDICTORES DE LA REGRESION
+
+basico_sentinel_2__ndvi_promedio_media_mensual
+basico_sentinel_2__evi_promedio_media_mensual
+basico_sentinel_2__crc_promedio_media_mensual
+basico_sentinel_2__mcrc_promedio_media_mensual
+basico_sentinel_2__ndsvi_promedio_media_mensual
+basico_sentinel_2__srndi_promedio_media_mensual
+basico_sentinel_2__mra_promedio_media_mensual
+basico_sentinel_2__lai_promedio_media_mensual
+basico_sentinel_2__fapar_promedio_media_mensual
+basico_sentinel_2__savi_promedio_media_mensual
+basico_sentinel_2__ndti_promedio_media_mensual
+basico_sentinel_2__sti_promedio_media_mensual
+basico_sentinel_2__ndwi_promedio_media_mensual
+basico_sentinel_2__endwi_promedio_media_mensual
+basico_sentinel_2__msi_promedio_media_mensual
+basico_sentinel_2__emsi_promedio_media_mensual
+basico_sentinel_2__dswi2_promedio_media_mensual
+basico_sentinel_2__dswi3_promedio_media_mensual
+basico_sentinel_2__dswi4_promedio_media_mensual
+basico_sentinel_2__dswi5_promedio_media_mensual
+basico_sentinel_2__nddi_promedio_media_mensual
+basico_sentinel_2__enddi_promedio_media_mensual
+pro_planet__ndvi_promedio_media_mensual
+pro_planet__evi_promedio_media_mensual
+pro_planet__lai_promedio_media_mensual
+pro_planet__msavi_promedio_media_mensual
+es_septiembre

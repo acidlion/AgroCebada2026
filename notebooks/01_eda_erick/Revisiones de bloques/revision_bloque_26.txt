@@ -1,0 +1,37 @@
+RESUMEN DE EXTRACCION DE PRUEBA
+
+     variable  parcelas  valores_disponibles  valores_faltantes  menor_media  mayor_media
+    Elevacion       197                  197                  0  2496.648468  2906.039520
+    Pendiente       197                  197                  0     0.281865     9.396395
+Precipitacion       197                  197                  0     6.847781    23.235132
+         Tmax       197                  197                  0    19.918749    20.436686
+         Tmin       197                  197                  0     6.046129     7.702507
+
+PRIMERAS CINCO FILAS POR VARIABLE
+
+ID_POLIGONO  media_ponderada  minimo_pixeles  maximo_pixeles      variable                              archivo anio  mes
+    AGC_196         6.847781        6.847781        6.847781 Precipitacion                     PREC_2022_01.tif 2022    1
+    AGC_044         8.457767        8.457767        8.457767 Precipitacion                     PREC_2022_01.tif 2022    1
+    AGC_020         8.457767        8.457767        8.457767 Precipitacion                     PREC_2022_01.tif 2022    1
+    AGC_174        19.384503       19.384502       23.592558 Precipitacion                     PREC_2022_01.tif 2022    1
+    AGC_083        21.224924       21.224924       21.224924 Precipitacion                     PREC_2022_01.tif 2022    1
+    AGC_196        20.394972       20.394972       20.394972          Tmax                     Tmax_2022_01.tif 2022    1
+    AGC_044        20.436686       20.436686       20.436686          Tmax                     Tmax_2022_01.tif 2022    1
+    AGC_020        20.436686       20.436686       20.436686          Tmax                     Tmax_2022_01.tif 2022    1
+    AGC_174        20.226089       20.202421       20.226089          Tmax                     Tmax_2022_01.tif 2022    1
+    AGC_083        20.155764       20.155764       20.155764          Tmax                     Tmax_2022_01.tif 2022    1
+    AGC_196         6.257922        6.257922        6.257922          Tmin                     Tmin_2022_01.tif 2022    1
+    AGC_044         6.283666        6.283666        6.283666          Tmin                     Tmin_2022_01.tif 2022    1
+    AGC_020         6.283666        6.283666        6.283666          Tmin                     Tmin_2022_01.tif 2022    1
+    AGC_174         7.190449        7.190449        7.445071          Tmin                     Tmin_2022_01.tif 2022    1
+    AGC_083         7.404945        7.404945        7.404945          Tmin                     Tmin_2022_01.tif 2022    1
+    AGC_196      2543.659752     2539.000000     2550.000000     Elevacion        Elevacion_INEGI_CEM4_120m.tif <NA> <NA>
+    AGC_044      2529.993625     2529.000000     2531.000000     Elevacion        Elevacion_INEGI_CEM4_120m.tif <NA> <NA>
+    AGC_020      2528.924828     2528.000000     2531.000000     Elevacion        Elevacion_INEGI_CEM4_120m.tif <NA> <NA>
+    AGC_174      2546.616547     2542.000000     2553.000000     Elevacion        Elevacion_INEGI_CEM4_120m.tif <NA> <NA>
+    AGC_083      2564.037732     2557.000000     2569.000000     Elevacion        Elevacion_INEGI_CEM4_120m.tif <NA> <NA>
+    AGC_196         1.740829        0.778125        2.271474     Pendiente Pendiente_INEGI_CEM4_120m_grados.tif <NA> <NA>
+    AGC_044         0.348862        0.304322        0.566185     Pendiente Pendiente_INEGI_CEM4_120m_grados.tif <NA> <NA>
+    AGC_020         0.561396        0.304322        0.778125     Pendiente Pendiente_INEGI_CEM4_120m_grados.tif <NA> <NA>
+    AGC_174         2.284557        0.680460        5.762671     Pendiente Pendiente_INEGI_CEM4_120m_grados.tif <NA> <NA>
+    AGC_083         2.368227        0.932198        2.904267     Pendiente Pendiente_INEGI_CEM4_120m_grados.tif <NA> <NA>

@@ -1,0 +1,13 @@
+﻿sensor,indice,ventana,parcelas,meses_esperados,minimo_meses_disponibles,ventanas_completas
+sentinel2,ndvi,abr_jun2025,138,3,3,138
+sentinel2,ndvi,jul_ago2025,138,2,2,138
+sentinel2,ndvi,sep_oct2025,138,2,2,138
+sentinel2,evi,abr_jun2025,138,3,3,138
+sentinel2,evi,jul_ago2025,138,2,2,138
+sentinel2,evi,sep_oct2025,138,2,2,138
+planet,ndvi,abr_jun2025,138,3,3,138
+planet,ndvi,jul_ago2025,138,2,2,138
+planet,ndvi,sep_oct2025,138,2,2,138
+planet,evi,abr_jun2025,138,3,3,138
+planet,evi,jul_ago2025,138,2,2,138
+planet,evi,sep_oct2025,138,2,2,138

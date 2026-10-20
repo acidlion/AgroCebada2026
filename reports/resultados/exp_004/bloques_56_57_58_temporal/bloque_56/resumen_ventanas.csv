@@ -1,0 +1,9 @@
+﻿ventana,sensor,parcelas,meses_esperados,parcelas_con_algun_ndvi,meses_disponibles_mediana,meses_disponibles_min,meses_disponibles_max
+antecedente_3m_ene_mar2025,Planet,197,3,197,3.0,3,3
+antecedente_3m_ene_mar2025,Sentinel-2,197,3,197,3.0,3,3
+antecedente_6m_oct2024_mar2025,Planet,197,6,197,3.0,3,3
+antecedente_6m_oct2024_mar2025,Sentinel-2,197,6,197,6.0,6,6
+ciclo_2024_abril_octubre,Planet,197,7,0,0.0,0,0
+ciclo_2024_abril_octubre,Sentinel-2,197,7,197,7.0,6,7
+ciclo_2025_abril_octubre,Planet,197,7,197,7.0,7,7
+ciclo_2025_abril_octubre,Sentinel-2,197,7,197,7.0,7,7

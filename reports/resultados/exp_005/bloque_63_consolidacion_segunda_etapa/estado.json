@@ -1,0 +1,20 @@
+{
+  "alcance": "Consolidacion 62A-C y concordancia mensual de VI6T",
+  "mejor_RMSE_observado_en_esta_tabla": "ensamble_ridge_xgb3m_50_50",
+  "VI6T_concordancia_mensual_completa": true,
+  "trazabilidad_original_VI6T_totalmente_verificada": false,
+  "pendientes": [
+    "Confirmar la ruta desde observaciones Landsat hasta la tabla mensual utilizada.",
+    "Distinguir tablas experimentales imputadas de las fuentes usadas en X_ciclo.",
+    "Confirmar definicion y unidades antes de dar una interpretacion agronomica a VI6T."
+  ],
+  "limitaciones": [
+    "Coincidir con medias mensuales no demuestra que esas medias no hayan sido modificadas previamente.",
+    "Una discrepancia no demuestra fuga de informacion.",
+    "Resultados sobre folds consultados durante el desarrollo.",
+    "No es una evaluacion final independiente."
+  ],
+  "modelos_entrenados_en_este_bloque": 0,
+  "entregas_modificadas": false,
+  "comparacion_33_vs_32_ejecutada": false
+}

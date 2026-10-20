@@ -1,0 +1,78 @@
+{
+  "modelo": "ridge_62C_ventanas_ndvi_evi",
+  "rejilla": {
+    "ridge__alpha": [
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0
+    ]
+  },
+  "parametros_estimador": {
+    "memory": null,
+    "steps": [
+      [
+        "imputacion",
+        "SimpleImputer(strategy='median')"
+      ],
+      [
+        "escala",
+        "StandardScaler()"
+      ],
+      [
+        "ridge",
+        "Ridge(solver='svd')"
+      ]
+    ],
+    "transform_input": null,
+    "verbose": false,
+    "imputacion": "SimpleImputer(strategy='median')",
+    "escala": "StandardScaler()",
+    "ridge": "Ridge(solver='svd')",
+    "imputacion__add_indicator": false,
+    "imputacion__copy": true,
+    "imputacion__fill_value": null,
+    "imputacion__keep_empty_features": false,
+    "imputacion__missing_values": NaN,
+    "imputacion__strategy": "median",
+    "escala__copy": true,
+    "escala__with_mean": true,
+    "escala__with_std": true,
+    "ridge__alpha": 1.0,
+    "ridge__copy_X": true,
+    "ridge__fit_intercept": true,
+    "ridge__max_iter": null,
+    "ridge__positive": false,
+    "ridge__random_state": null,
+    "ridge__solver": "svd",
+    "ridge__tol": 0.0001
+  },
+  "criterio_interno": "menor RMSE medio",
+  "folds_internos": 3,
+  "folds_externos": 5,
+  "columnas": [
+    "AREA_HA",
+    "precipitacion_acumulada_mm",
+    "tmax_media_ciclo_c",
+    "tmin_media_ciclo_c",
+    "elevacion_m",
+    "pendiente_grados",
+    "ventana__sentinel2__ndvi__abr_jun2025",
+    "ventana__sentinel2__ndvi__jul_ago2025",
+    "ventana__sentinel2__ndvi__sep_oct2025",
+    "ventana__sentinel2__evi__abr_jun2025",
+    "ventana__sentinel2__evi__jul_ago2025",
+    "ventana__sentinel2__evi__sep_oct2025",
+    "ventana__planet__ndvi__abr_jun2025",
+    "ventana__planet__ndvi__jul_ago2025",
+    "ventana__planet__ndvi__sep_oct2025",
+    "ventana__planet__evi__abr_jun2025",
+    "ventana__planet__evi__jul_ago2025",
+    "ventana__planet__evi__sep_oct2025"
+  ],
+  "huella_X": "d52d2dec50e9781417f0244cc9ff674fde6b793b98e74f3ebedaaaf8e57507c1",
+  "huella_y": "72890c399265a4ee67d8ce7241d0e8d73e54a2d7acc49f2c93b6033769ed3a92",
+  "huella_grupos": "6324b549aa9880f1cc2ec751023a08fa73da00e630f21a673b1481785f9c2c2f",
+  "nota": "Comparación exploratoria. La validación externa ya ha informado decisiones previas del proyecto."
+}

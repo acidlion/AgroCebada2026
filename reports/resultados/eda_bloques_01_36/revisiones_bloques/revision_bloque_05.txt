@@ -1,0 +1,136 @@
+================================================================================
+RESUMEN GENERAL
+
+dataset  filas  parcelas  celdas_NA_totales  filas_con_algun_NA  NA_nubosidad  nubosidad_100  porcentaje_filas_nubosidad_100
+ BASICO 107666       197            5834976              107666          3056          28684                           26.64
+    PRO  47804       197             192912               12057             0          12057                           25.22
+
+================================================================================
+RESUMEN POR SENSOR
+
+dataset     sensor  filas  NA_nubosidad  nubosidad_100  filas_sin_ningun_indice  nubosidad_100_con_algun_indice  nubosidad_100_sin_ningun_indice
+ BASICO    Landsat  48626          3056          14521                    17578                               0                            14521
+ BASICO Sentinel-2  59040             0          14163                    14163                               0                            14163
+    PRO     Planet  47804             0          12057                    12057                               0                            12057
+
+================================================================================
+FALTANTES POR COLUMNA
+
+dataset              columna    tipo  cantidad_NA  porcentaje_NA
+ BASICO          ID_POLIGONO  object            0           0.00
+ BASICO        fecha_captura  object            0           0.00
+ BASICO               sensor  object            0           0.00
+ BASICO        ndvi_promedio float64        62789          58.32
+ BASICO             ndvi_std float64        62789          58.32
+ BASICO             ndvi_max float64        62789          58.32
+ BASICO             ndvi_min float64        62789          58.32
+ BASICO         evi_promedio float64        62789          58.32
+ BASICO              evi_std float64        62789          58.32
+ BASICO              evi_max float64        62789          58.32
+ BASICO              evi_min float64        62789          58.32
+ BASICO         crc_promedio float64        62789          58.32
+ BASICO              crc_std float64        62789          58.32
+ BASICO              crc_max float64        62789          58.32
+ BASICO              crc_min float64        62789          58.32
+ BASICO        mcrc_promedio float64        62789          58.32
+ BASICO             mcrc_std float64        62789          58.32
+ BASICO             mcrc_max float64        62789          58.32
+ BASICO             mcrc_min float64        62789          58.32
+ BASICO       ndsvi_promedio float64        62789          58.32
+ BASICO            ndsvi_std float64        62789          58.32
+ BASICO            ndsvi_max float64        62789          58.32
+ BASICO            ndsvi_min float64        62789          58.32
+ BASICO       srndi_promedio float64        62789          58.32
+ BASICO            srndi_std float64        62789          58.32
+ BASICO            srndi_max float64        62789          58.32
+ BASICO            srndi_min float64        62789          58.32
+ BASICO         mra_promedio float64        62789          58.32
+ BASICO              mra_std float64        62789          58.32
+ BASICO              mra_max float64        62789          58.32
+ BASICO              mra_min float64        62789          58.32
+ BASICO         lai_promedio float64        62789          58.32
+ BASICO              lai_std float64        62789          58.32
+ BASICO              lai_max float64        62789          58.32
+ BASICO              lai_min float64        62789          58.32
+ BASICO       fapar_promedio float64        62793          58.32
+ BASICO            fapar_std float64        62793          58.32
+ BASICO            fapar_max float64        62793          58.32
+ BASICO            fapar_min float64        62793          58.32
+ BASICO        savi_promedio float64        62789          58.32
+ BASICO             savi_std float64        62789          58.32
+ BASICO             savi_max float64        62789          58.32
+ BASICO             savi_min float64        62789          58.32
+ BASICO        vi6t_promedio float64        76618          71.16
+ BASICO             vi6t_std float64        76618          71.16
+ BASICO             vi6t_max float64        76618          71.16
+ BASICO             vi6t_min float64        76618          71.16
+ BASICO        ndti_promedio float64        62789          58.32
+ BASICO             ndti_std float64        62789          58.32
+ BASICO             ndti_max float64        62789          58.32
+ BASICO             ndti_min float64        62789          58.32
+ BASICO         sti_promedio float64        62789          58.32
+ BASICO              sti_std float64        62789          58.32
+ BASICO              sti_max float64        62789          58.32
+ BASICO              sti_min float64        62789          58.32
+ BASICO        ndwi_promedio float64        62789          58.32
+ BASICO             ndwi_std float64        62789          58.32
+ BASICO             ndwi_max float64        62789          58.32
+ BASICO             ndwi_min float64        62789          58.32
+ BASICO       endwi_promedio float64        62789          58.32
+ BASICO            endwi_std float64        62789          58.32
+ BASICO            endwi_max float64        62789          58.32
+ BASICO            endwi_min float64        62789          58.32
+ BASICO         msi_promedio float64        62789          58.32
+ BASICO              msi_std float64        62789          58.32
+ BASICO              msi_max float64        62789          58.32
+ BASICO              msi_min float64        62789          58.32
+ BASICO        emsi_promedio float64        62789          58.32
+ BASICO             emsi_std float64        62789          58.32
+ BASICO             emsi_max float64        62789          58.32
+ BASICO             emsi_min float64        62789          58.32
+ BASICO       dswi2_promedio float64        62789          58.32
+ BASICO            dswi2_std float64        62789          58.32
+ BASICO            dswi2_max float64        62789          58.32
+ BASICO            dswi2_min float64        62789          58.32
+ BASICO       dswi3_promedio float64        62789          58.32
+ BASICO            dswi3_std float64        62789          58.32
+ BASICO            dswi3_max float64        62789          58.32
+ BASICO            dswi3_min float64        62789          58.32
+ BASICO       dswi4_promedio float64        62789          58.32
+ BASICO            dswi4_std float64        62789          58.32
+ BASICO            dswi4_max float64        62789          58.32
+ BASICO            dswi4_min float64        62789          58.32
+ BASICO       dswi5_promedio float64        62789          58.32
+ BASICO            dswi5_std float64        62789          58.32
+ BASICO            dswi5_max float64        62789          58.32
+ BASICO            dswi5_min float64        62789          58.32
+ BASICO        nddi_promedio float64        62789          58.32
+ BASICO             nddi_std float64        62789          58.32
+ BASICO             nddi_max float64        62789          58.32
+ BASICO             nddi_min float64        62789          58.32
+ BASICO       enddi_promedio float64        62789          58.32
+ BASICO            enddi_std float64        62789          58.32
+ BASICO            enddi_max float64        62789          58.32
+ BASICO            enddi_min float64        62789          58.32
+ BASICO porcentaje_nubosidad float64         3056           2.84
+    PRO          ID_POLIGONO  object            0           0.00
+    PRO        fecha_captura  object            0           0.00
+    PRO               sensor  object            0           0.00
+    PRO        ndvi_promedio float64        12057          25.22
+    PRO             ndvi_std float64        12057          25.22
+    PRO             ndvi_max float64        12057          25.22
+    PRO             ndvi_min float64        12057          25.22
+    PRO         evi_promedio float64        12057          25.22
+    PRO              evi_std float64        12057          25.22
+    PRO              evi_max float64        12057          25.22
+    PRO              evi_min float64        12057          25.22
+    PRO         lai_promedio float64        12057          25.22
+    PRO              lai_std float64        12057          25.22
+    PRO              lai_max float64        12057          25.22
+    PRO              lai_min float64        12057          25.22
+    PRO       msavi_promedio float64        12057          25.22
+    PRO            msavi_std float64        12057          25.22
+    PRO            msavi_max float64        12057          25.22
+    PRO            msavi_min float64        12057          25.22
+    PRO porcentaje_nubosidad float64            0           0.00
+

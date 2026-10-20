@@ -1,0 +1,85 @@
+RIDGE ORIGINAL VS RIDGE SIN VI6T
+
+Original: 33 variables; variante: 32 variables.
+Unica columna retirada: basico_landsat__vi6t__media_ciclo.
+Mismas 138 etiquetas y particiones espaciales.
+Seleccion interna de alpha con la misma rejilla.
+Mediana y escalado dentro del Pipeline.
+La referencia original se reutiliza desde OOF existente.
+Se compara el procedimiento completo con reajuste de alpha.
+No es una medida causal de importancia agronomica.
+Delta MAE/RMSE negativo indica mejora al retirar VI6T.
+Delta R2 positivo indica mejora al retirar VI6T.
+Comparacion exploratoria sobre folds ya consultados.
+No se generan nuevos ensambles ni entregas.
+
+COMPARACION GLOBAL
+
+                    modelo      MAE     RMSE       R2  sesgo_pred_menos_real  delta_MAE_vs_ridge_original  delta_RMSE_vs_ridge_original  delta_R2_vs_ridge_original  delta_MAE_vs_ensamble  delta_RMSE_vs_ensamble  delta_R2_vs_ensamble
+ensamble_ridge_xgb3m_50_50 0.448877 0.611404 0.480252               0.053843                    -0.021219                     -0.017298                    0.029825               0.000000                0.000000              0.000000
+         xgb_e4_mensual_3m 0.459095 0.626746 0.453842               0.065354                    -0.011002                     -0.001956                    0.003414               0.010218                0.015342             -0.026411
+       ridge_ciclo_anidado 0.470097 0.628702 0.450427               0.042333                     0.000000                      0.000000                    0.000000               0.021219                0.017298             -0.029825
+         ridge_64_sin_vi6t 0.531030 0.693226 0.331832               0.069263                     0.060933                      0.064524                   -0.118595               0.082153                0.081822             -0.148420
+
+COMPARACION PAREADA POR FOLD
+
+ fold  MAE_original  MAE_sin_vi6t  delta_MAE  RMSE_original  RMSE_sin_vi6t  delta_RMSE  R2_original  R2_sin_vi6t  delta_R2
+    1      0.510727      0.559977   0.049251       0.657937       0.698963    0.041026    -0.444983    -0.630806 -0.185823
+    2      0.368536      0.348433  -0.020103       0.557214       0.534385   -0.022828     0.096748     0.169242  0.072494
+    3      0.416018      0.414434  -0.001585       0.562560       0.569625    0.007065     0.153894     0.132508 -0.021385
+    4      0.462721      0.714790   0.252069       0.572739       0.824611    0.251871     0.457639    -0.124275 -0.581914
+    5      0.582700      0.606464   0.023764       0.761410       0.784752    0.023341    -2.584080    -2.807193 -0.223112
+
+CONSISTENCIA DESCRIPTIVA
+
+           modelo  folds_menor_RMSE_que_original  folds_menor_MAE_que_original  max_RMSE_fold
+ridge_64_sin_vi6t                              1                             2       0.824611
+
+RESULTADOS POR FOLD
+
+                    modelo  fold  parcelas      MAE     RMSE        R2  sesgo_pred_menos_real
+       ridge_ciclo_anidado     1        31 0.510727 0.657937 -0.444983              -0.243262
+       ridge_ciclo_anidado     2        26 0.368536 0.557214  0.096748               0.048804
+       ridge_ciclo_anidado     3        27 0.416018 0.562560  0.153894              -0.268910
+       ridge_ciclo_anidado     4        27 0.462721 0.572739  0.457639               0.336278
+       ridge_ciclo_anidado     5        27 0.582700 0.761410 -2.584080               0.381303
+         xgb_e4_mensual_3m     1        31 0.391652 0.553586 -0.022972              -0.060439
+         xgb_e4_mensual_3m     2        26 0.423252 0.619016 -0.114728              -0.032564
+         xgb_e4_mensual_3m     3        27 0.446314 0.570517  0.129790              -0.390012
+         xgb_e4_mensual_3m     4        27 0.483525 0.594466  0.415709               0.375158
+         xgb_e4_mensual_3m     5        27 0.559395 0.779726 -2.758581               0.449636
+ensamble_ridge_xgb3m_50_50     1        31 0.436702 0.588368 -0.155560              -0.151851
+ensamble_ridge_xgb3m_50_50     2        26 0.382701 0.572529  0.046414               0.008120
+ensamble_ridge_xgb3m_50_50     3        27 0.410643 0.542667  0.212676              -0.329461
+ensamble_ridge_xgb3m_50_50     4        27 0.456179 0.570494  0.461882               0.355718
+ensamble_ridge_xgb3m_50_50     5        27 0.557513 0.759966 -2.570498               0.415469
+         ridge_64_sin_vi6t     1        31 0.559977 0.698963 -0.630806              -0.311953
+         ridge_64_sin_vi6t     2        26 0.348433 0.534385  0.169242               0.014589
+         ridge_64_sin_vi6t     3        27 0.414434 0.569625  0.132508              -0.279398
+         ridge_64_sin_vi6t     4        27 0.714790 0.824611 -0.124275               0.576000
+         ridge_64_sin_vi6t     5        27 0.606464 0.784752 -2.807193               0.401529
+
+AJUSTES POR FOLD
+
+           modelo  fold  n_train  n_validacion  RMSE_interno_elegido  MAE_val  RMSE_val    R2_val  R2_train  sesgo_pred_menos_real  avisos
+ridge_64_sin_vi6t     1      107            31              0.761736 0.559977  0.698963 -0.630806  0.720905              -0.311953       0
+ridge_64_sin_vi6t     2      112            26              0.759278 0.348433  0.534385  0.169242  0.655553               0.014589       0
+ridge_64_sin_vi6t     3      111            27              0.726124 0.414434  0.569625  0.132508  0.655545              -0.279398       0
+ridge_64_sin_vi6t     4      111            27              0.665968 0.714790  0.824611 -0.124275  0.507542               0.576000       0
+ridge_64_sin_vi6t     5      111            27              0.609516 0.606464  0.784752 -2.807193  0.639170               0.401529       0
+
+PARAMETROS
+
+           modelo  fold  ridge__alpha
+ridge_64_sin_vi6t     1     10.000000
+ridge_64_sin_vi6t     2     10.000000
+ridge_64_sin_vi6t     3     10.000000
+ridge_64_sin_vi6t     4    100.000000
+ridge_64_sin_vi6t     5     10.000000
+
+AVISOS
+
+Empty DataFrame
+Columns: [modelo, fold, categoria, mensaje]
+Index: []
+

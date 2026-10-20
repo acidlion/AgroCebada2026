@@ -1,0 +1,2 @@
+﻿modelo,n,MAE_t_ha,RMSE_t_ha,R2,MAPE_pct,fuente,nota
+ExtraTrees de carpeta AgroCebada,28,0.2469293154761906,0.3315650540861416,0.7705188887069124,7.197216275242664,AgroCebada/resultados/metricas_evaluacion.json,Referencia documental; distinta preparacion y seleccion interna

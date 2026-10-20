@@ -1,0 +1,5 @@
+﻿modelo,folds_menor_RMSE_que_ridge,folds_menor_RMSE_que_ensamble,max_RMSE_fold
+ridge_62A_sentinel_ambiente,2,2,0.8239406443077353
+ridge_62A_planet_ambiente,0,0,0.7817540845005775
+ridge_62A_ndvi_evi_ambiente,0,0,0.7829980054666869
+ridge_62A_solo_ambiente,1,0,0.7963938955292169

@@ -1,0 +1,6 @@
+﻿modelo,fold,ridge__alpha
+ridge_sin_dinamica_ndvi_3m,1,1.0
+ridge_sin_dinamica_ndvi_3m,2,10.0
+ridge_sin_dinamica_ndvi_3m,3,10.0
+ridge_sin_dinamica_ndvi_3m,4,1.0
+ridge_sin_dinamica_ndvi_3m,5,10.0

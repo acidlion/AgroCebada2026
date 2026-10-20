@@ -1,0 +1,21 @@
+VALIDACION TEMPORAL CON HUECOS ARTIFICIALES
+
+    mes             metodo  n_casos        MAE       RMSE  sesgo_pred_menos_real
+2025-07  pred_mes_anterior      194 0.01530249 0.02016457             0.01031452
+2025-07 pred_interpolacion      194 0.01107524 0.01404321            -0.00104392
+2025-09  pred_mes_anterior      192 0.01165415 0.01550432            -0.00061628
+2025-09 pred_interpolacion      192 0.01068613 0.01378419            -0.00061590
+
+EJEMPLOS DE RECONSTRUCCION
+
+ID_POLIGONO  fecha_mes  basico_landsat__vi6t_promedio_media_mensual  pred_mes_anterior  pred_interpolacion
+    AGC_001 2025-07-01                                    -0.657500           -0.59600           -0.606943
+    AGC_002 2025-07-01                                    -0.610667           -0.58800           -0.620582
+    AGC_002 2025-09-01                                    -0.626000           -0.65425           -0.642180
+    AGC_003 2025-07-01                                    -0.661000           -0.61200           -0.632164
+    AGC_003 2025-09-01                                    -0.645000           -0.65300           -0.648257
+    AGC_004 2025-07-01                                    -0.625000           -0.61600           -0.621164
+    AGC_004 2025-09-01                                    -0.623000           -0.62650           -0.633361
+    AGC_005 2025-07-01                                    -0.639333           -0.61700           -0.633844
+    AGC_005 2025-09-01                                    -0.640000           -0.65125           -0.645787
+    AGC_006 2025-07-01                                    -0.617000           -0.61650           -0.619369

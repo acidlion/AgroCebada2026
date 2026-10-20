@@ -1,0 +1,100 @@
+CIERRE DE ANTECEDENTES Y AUDITORIA
+
+Metricas recalculadas desde predicciones OOF.
+Error y sesgo = prediccion menos observado.
+MAE, RMSE y sesgo en t/ha; R2 sin unidades.
+Alcance: siete procedimientos de esta etapa.
+No representa un test independiente de la seleccion.
+
+COMPARACION GLOBAL
+
+                            modelo  parcelas      MAE     RMSE       R2  sesgo_pred_menos_real  delta_MAE_vs_ridge_original  delta_RMSE_vs_ridge_original  delta_MAE_vs_ensamble  delta_RMSE_vs_ensamble
+        ensamble_ridge_xgb3m_50_50       138 0.448877 0.611404 0.480252               0.053843                    -0.021219                     -0.017298               0.000000                0.000000
+                 xgb_e4_mensual_3m       138 0.459095 0.626746 0.453842               0.065354                    -0.011002                     -0.001956               0.010218                0.015342
+               ridge_ciclo_anidado       138 0.470097 0.628702 0.450427               0.042333                     0.000000                      0.000000               0.021219                0.017298
+        ridge_sin_dinamica_ndvi_3m       138 0.474677 0.634794 0.439725               0.013243                     0.004580                      0.006092               0.025800                0.023390
+        ridge_sin_dinamica_ndvi_6m       138 0.483760 0.642471 0.426092               0.028624                     0.013663                      0.013769               0.034883                0.031066
+ridge_sin_dinamica_clima_anual2024       138 0.487235 0.647437 0.417186               0.084604                     0.017138                      0.018735               0.038357                0.036032
+       ridge_sin_dinamica_clima_3m       138 0.497522 0.659436 0.395382               0.054344                     0.027426                      0.030734               0.048645                0.048032
+
+RESULTADOS POR FOLD
+
+                            modelo  fold  parcelas      MAE     RMSE        R2  sesgo_pred_menos_real
+               ridge_ciclo_anidado     1        31 0.510727 0.657937 -0.444983              -0.243262
+               ridge_ciclo_anidado     2        26 0.368536 0.557214  0.096748               0.048804
+               ridge_ciclo_anidado     3        27 0.416018 0.562560  0.153894              -0.268910
+               ridge_ciclo_anidado     4        27 0.462721 0.572739  0.457639               0.336278
+               ridge_ciclo_anidado     5        27 0.582700 0.761410 -2.584080               0.381303
+                 xgb_e4_mensual_3m     1        31 0.391652 0.553586 -0.022972              -0.060439
+                 xgb_e4_mensual_3m     2        26 0.423252 0.619016 -0.114728              -0.032564
+                 xgb_e4_mensual_3m     3        27 0.446314 0.570517  0.129790              -0.390012
+                 xgb_e4_mensual_3m     4        27 0.483525 0.594466  0.415709               0.375158
+                 xgb_e4_mensual_3m     5        27 0.559395 0.779726 -2.758581               0.449636
+        ensamble_ridge_xgb3m_50_50     1        31 0.436702 0.588368 -0.155560              -0.151851
+        ensamble_ridge_xgb3m_50_50     2        26 0.382701 0.572529  0.046414               0.008120
+        ensamble_ridge_xgb3m_50_50     3        27 0.410643 0.542667  0.212676              -0.329461
+        ensamble_ridge_xgb3m_50_50     4        27 0.456179 0.570494  0.461882               0.355718
+        ensamble_ridge_xgb3m_50_50     5        27 0.557513 0.759966 -2.570498               0.415469
+        ridge_sin_dinamica_ndvi_3m     1        31 0.540742 0.702221 -0.646043              -0.203500
+        ridge_sin_dinamica_ndvi_3m     2        26 0.372109 0.555561  0.102100               0.042629
+        ridge_sin_dinamica_ndvi_3m     3        27 0.443308 0.598546  0.042185              -0.326295
+        ridge_sin_dinamica_ndvi_3m     4        27 0.425102 0.513452  0.564112               0.207916
+        ridge_sin_dinamica_ndvi_3m     5        27 0.578536 0.757837 -2.550518               0.378664
+        ridge_sin_dinamica_ndvi_6m     1        31 0.547612 0.703393 -0.651545              -0.204486
+        ridge_sin_dinamica_ndvi_6m     2        26 0.368923 0.553558  0.108562               0.028105
+        ridge_sin_dinamica_ndvi_6m     3        27 0.439785 0.592536  0.061323              -0.316225
+        ridge_sin_dinamica_ndvi_6m     4        27 0.464636 0.558649  0.483997               0.282212
+        ridge_sin_dinamica_ndvi_6m     5        27 0.584131 0.763794 -2.606556               0.388029
+       ridge_sin_dinamica_clima_3m     1        31 0.501582 0.649499 -0.408157              -0.229613
+       ridge_sin_dinamica_clima_3m     2        26 0.397658 0.584912  0.004717               0.118060
+       ridge_sin_dinamica_clima_3m     3        27 0.411103 0.572163  0.124760              -0.256805
+       ridge_sin_dinamica_clima_3m     4        27 0.556266 0.657539  0.285145               0.391164
+       ridge_sin_dinamica_clima_3m     5        27 0.616702 0.805651 -3.012671               0.293340
+ridge_sin_dinamica_clima_anual2024     1        31 0.519204 0.714719 -0.705159              -0.070838
+ridge_sin_dinamica_clima_anual2024     2        26 0.384682 0.565956  0.068184               0.069361
+ridge_sin_dinamica_clima_anual2024     3        27 0.565156 0.680812 -0.239201              -0.118120
+ridge_sin_dinamica_clima_anual2024     4        27 0.411904 0.496478  0.592456               0.241185
+ridge_sin_dinamica_clima_anual2024     5        27 0.546692 0.733149 -2.322955               0.323899
+
+RESUMEN DE AUDITORIA
+
+ parcelas_OOF  errores_mismo_signo  errores_signos_opuestos  errores_grandes_compartidos  correlacion_errores_componentes  parcelas_revision_curvas  pares_parcela_sensor_revisados  pares_con_cobertura_mensual_completa  parcelas_etiqueta_2_50
+          138                  113                       25                           19                         0.897254                        23                              46                                    46                      11
+
+VERIFICACIONES DOCUMENTALES
+
+                                                                        comprobacion                                         estado                                                               fuente                                                           alcance
+                                   Once etiquetas de 2.50 coinciden con CSV original Confirmado en revision de fuentes del proyecto DATASET_RETO_AGRO_2026/ID_area_rendimiento_70_30_Reto_AgroCebada.csv Concordancia con archivo entregado; no verifica medicion en campo
+Etiquetas de AGC_015, AGC_171, AGC_024, AGC_162 y AGC_127 coinciden con CSV original Confirmado en revision de fuentes del proyecto DATASET_RETO_AGRO_2026/ID_area_rendimiento_70_30_Reto_AgroCebada.csv                   No es un nuevo cotejo automatico en este bloque
+                                                  Metodo de medicion del rendimiento                                      Pendiente                                    No documentado en el CSV revisado                      No inferir redondeo, error o dato compartido
+                                            Calidad de todas las capturas originales                                 No certificada                                Resumen mensual y conteos disponibles              Cobertura completa no equivale a calidad garantizada
+
+DECISION Y LIMITACIONES
+
+{
+  "alcance": "Cierre de comparacion de antecedentes y auditoria 60B; no sustituye el historico completo",
+  "mejor_resultado_OOF_observado": "ensamble_ridge_xgb3m_50_50",
+  "componentes": {
+    "ridge_ciclo_anidado": 0.5,
+    "xgb_e4_mensual_3m": 0.5
+  },
+  "alternativa_sencilla": "ridge_ciclo_anidado",
+  "variantes_60A_adoptadas": [],
+  "motivo_no_adopcion_60A": "Las cuatro empeoran MAE y RMSE globales respecto al Ridge original",
+  "etiquetas_corregidas": 0,
+  "parcelas_eliminadas": 0,
+  "modelos_finales_entrenados_en_este_bloque": 0,
+  "nueva_entrega_generada": false,
+  "entregas_anteriores_sobrescritas": false,
+  "estado_operativo": "La entrega existente permanece intacta. Este cierre no implica que el ensamble este entrenado o exportado para las 59 parcelas.",
+  "limitaciones": [
+    "Solo 138 etiquetas para la comparacion OOF.",
+    "Folds externos consultados durante la exploracion.",
+    "No hay prueba final independiente de esta seleccion.",
+    "Resultados exploratorios; no prueban significancia.",
+    "La auditoria no identifica una causa agronomica demostrada.",
+    "Concordancia documental no certifica medicion en campo.",
+    "No se atribuye inspeccion visual completa del PDF."
+  ],
+  "paso_posterior_separado": "Si se adopta el ensamble para entrega: verificar recetas completas de ambos componentes, ajustarlos con las 138 etiquetas, predecir las 59 y validar un archivo nuevo sin sobrescribir el anterior."
+}

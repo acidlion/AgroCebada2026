@@ -1,0 +1,111 @@
+ADAPTACION AGROCLIMATICA ESTADISTICA
+
+No es una replicacion exacta del articulo.
+No implementa CASA ni VPD.
+Conserva las 33 variables originales, incluido VI6T.
+Variante 1: nueve resumenes climaticos, 42 variables.
+Variante 2: agrega 18 terminos, 60 variables.
+Terminos definidos antes de evaluar.
+Mismas 138 etiquetas y particiones espaciales.
+Seleccion interna de alpha; preparacion en Pipeline.
+MAE, RMSE y sesgo en t/ha; R2 sin unidades.
+Recuentos por fold no prueban significancia.
+Comparacion exploratoria sobre folds ya consultados.
+No se generaron nuevos ensambles ni entregas.
+
+VARIANTES
+
+                    modelo  parcelas  variables  faltantes
+   ridge_65_clima_ventanas       138         42          0
+ridge_65_clima_cuadraticos       138         60          0
+
+COBERTURA CLIMATICA
+
+    ventana  parcelas  meses_esperados  minimo_meses_completos
+abr_jun2025       138                3                       3
+jul_ago2025       138                2                       2
+sep_oct2025       138                2                       2
+
+COMPARACION GLOBAL
+
+                    modelo      MAE     RMSE       R2  sesgo_pred_menos_real  delta_MAE_vs_ridge_original  delta_RMSE_vs_ridge_original  delta_R2_vs_ridge_original  delta_MAE_vs_ensamble  delta_RMSE_vs_ensamble  delta_R2_vs_ensamble
+ensamble_ridge_xgb3m_50_50 0.448877 0.611404 0.480252               0.053843                    -0.021219                     -0.017298                    0.029825               0.000000                0.000000              0.000000
+         xgb_e4_mensual_3m 0.459095 0.626746 0.453842               0.065354                    -0.011002                     -0.001956                    0.003414               0.010218                0.015342             -0.026411
+       ridge_ciclo_anidado 0.470097 0.628702 0.450427               0.042333                     0.000000                      0.000000                    0.000000               0.021219                0.017298             -0.029825
+   ridge_65_clima_ventanas 0.535464 0.685298 0.347029               0.065173                     0.065367                      0.056596                   -0.103399               0.086587                0.073894             -0.133224
+ridge_65_clima_cuadraticos 0.559867 0.720423 0.278376               0.112665                     0.089770                      0.091721                   -0.172051               0.110989                0.109019             -0.201876
+
+CONSISTENCIA DESCRIPTIVA
+
+                    modelo  folds_menor_RMSE_que_ridge  folds_menor_RMSE_que_ensamble  max_RMSE_fold
+   ridge_65_clima_ventanas                           2                              1       0.847572
+ridge_65_clima_cuadraticos                           2                              1       0.898374
+
+COMPARACION INCREMENTAL
+
+                     comparacion  delta_MAE  delta_RMSE  delta_R2
+cuadraticos_menos_clima_ventanas   0.024403    0.035125 -0.068652
+
+RESULTADOS POR FOLD
+
+                    modelo  fold  parcelas      MAE     RMSE        R2  sesgo_pred_menos_real
+       ridge_ciclo_anidado     1        31 0.510727 0.657937 -0.444983              -0.243262
+       ridge_ciclo_anidado     2        26 0.368536 0.557214  0.096748               0.048804
+       ridge_ciclo_anidado     3        27 0.416018 0.562560  0.153894              -0.268910
+       ridge_ciclo_anidado     4        27 0.462721 0.572739  0.457639               0.336278
+       ridge_ciclo_anidado     5        27 0.582700 0.761410 -2.584080               0.381303
+         xgb_e4_mensual_3m     1        31 0.391652 0.553586 -0.022972              -0.060439
+         xgb_e4_mensual_3m     2        26 0.423252 0.619016 -0.114728              -0.032564
+         xgb_e4_mensual_3m     3        27 0.446314 0.570517  0.129790              -0.390012
+         xgb_e4_mensual_3m     4        27 0.483525 0.594466  0.415709               0.375158
+         xgb_e4_mensual_3m     5        27 0.559395 0.779726 -2.758581               0.449636
+ensamble_ridge_xgb3m_50_50     1        31 0.436702 0.588368 -0.155560              -0.151851
+ensamble_ridge_xgb3m_50_50     2        26 0.382701 0.572529  0.046414               0.008120
+ensamble_ridge_xgb3m_50_50     3        27 0.410643 0.542667  0.212676              -0.329461
+ensamble_ridge_xgb3m_50_50     4        27 0.456179 0.570494  0.461882               0.355718
+ensamble_ridge_xgb3m_50_50     5        27 0.557513 0.759966 -2.570498               0.415469
+   ridge_65_clima_ventanas     1        31 0.530628 0.654540 -0.430100              -0.292153
+   ridge_65_clima_ventanas     2        26 0.360093 0.545273  0.135046              -0.023703
+   ridge_65_clima_ventanas     3        27 0.541983 0.680212 -0.237016              -0.186816
+   ridge_65_clima_ventanas     4        27 0.550949 0.664137  0.270728               0.428427
+   ridge_65_clima_ventanas     5        27 0.687889 0.847572 -3.441129               0.449752
+ridge_65_clima_cuadraticos     1        31 0.512988 0.637085 -0.354840              -0.273572
+ridge_65_clima_cuadraticos     2        26 0.357544 0.556837  0.097970               0.070322
+ridge_65_clima_cuadraticos     3        27 0.414521 0.565743  0.144293              -0.251983
+ridge_65_clima_cuadraticos     4        27 0.797241 0.898374 -0.334410               0.617773
+ridge_65_clima_cuadraticos     5        27 0.716492 0.872344 -3.704527               0.456439
+
+AJUSTES POR FOLD
+
+                    modelo  fold  n_train  n_validacion  RMSE_interno_elegido  MAE_val  RMSE_val    R2_val  R2_train  sesgo_pred_menos_real  avisos
+   ridge_65_clima_ventanas     1      107            31              0.738531 0.530628  0.654540 -0.430100  0.696621              -0.292153       0
+   ridge_65_clima_ventanas     2      112            26              0.709971 0.360093  0.545273  0.135046  0.640538              -0.023703       0
+   ridge_65_clima_ventanas     3      111            27              0.697535 0.541983  0.680212 -0.237016  0.754950              -0.186816       0
+   ridge_65_clima_ventanas     4      111            27              0.644736 0.550949  0.664137  0.270728  0.568047               0.428427       0
+   ridge_65_clima_ventanas     5      111            27              0.570817 0.687889  0.847572 -3.441129  0.649551               0.449752       0
+ridge_65_clima_cuadraticos     1      107            31              0.711352 0.512988  0.637085 -0.354840  0.705624              -0.273572       0
+ridge_65_clima_cuadraticos     2      112            26              0.690697 0.357544  0.556837  0.097970  0.655439               0.070322       0
+ridge_65_clima_cuadraticos     3      111            27              0.703262 0.414521  0.565743  0.144293  0.645333              -0.251983       0
+ridge_65_clima_cuadraticos     4      111            27              0.643227 0.797241  0.898374 -0.334410  0.464211               0.617773       0
+ridge_65_clima_cuadraticos     5      111            27              0.569089 0.716492  0.872344 -3.704527  0.652791               0.456439       0
+
+PARAMETROS
+
+                    modelo  fold  ridge__alpha
+   ridge_65_clima_ventanas     1    100.000000
+   ridge_65_clima_ventanas     2    100.000000
+   ridge_65_clima_ventanas     3      0.100000
+   ridge_65_clima_ventanas     4    100.000000
+   ridge_65_clima_ventanas     5     10.000000
+ridge_65_clima_cuadraticos     1    100.000000
+ridge_65_clima_cuadraticos     2    100.000000
+ridge_65_clima_cuadraticos     3    100.000000
+ridge_65_clima_cuadraticos     4   1000.000000
+ridge_65_clima_cuadraticos     5     10.000000
+
+AVISOS
+
+Empty DataFrame
+Columns: [modelo, fold, categoria, mensaje]
+Index: []
+

@@ -1,0 +1,5 @@
+﻿sensor,anio,parcelas,cobertura_completa,maximos_resumibles,maximos_en_borde,perfiles_con_empate
+Planet,2024,197,0,0,0,0
+Planet,2025,197,197,197,18,0
+Sentinel-2,2024,197,193,197,14,0
+Sentinel-2,2025,197,197,197,30,0

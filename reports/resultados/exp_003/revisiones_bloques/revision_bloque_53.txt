@@ -1,0 +1,55 @@
+RIDGE DEL CICLO: AJUSTE FINAL Y ENTREGA ALTERNATIVA
+
+Parcelas de entrenamiento: 138
+Parcelas de prediccion: 59
+Variables: 33
+Alpha elegido: 1.0
+RMSE interno de seleccion: 0.723714
+
+El RMSE interno NO sustituye la evaluacion OOF.
+Las diferencias con XGBoost NO son errores reales.
+No se sobrescribio la entrega anterior.
+No se aplicaron recortes a las predicciones.
+
+EVALUACION OOF DEL BLOQUE 50
+
+             modelo  MAE_OOF  RMSE_OOF   R2_OOF  sesgo_pred_menos_real  R2_train_media_folds
+ridge_ciclo_anidado 0.470097  0.628702 0.450427               0.042333              0.668367
+
+RESUMEN DE RENDIMIENTOS ESTIMADOS
+
+       RENDIMIENTO_RIDGE
+count          59.000000
+mean            3.919278
+std             0.685067
+min             2.652052
+25%             3.221923
+50%             4.170901
+75%             4.438807
+max             5.057808
+
+CAMBIOS RESPECTO A XGBOOST
+
+ parcelas  delta_medio_ridge_menos_xgb  cambio_absoluto_medio  cambio_absoluto_mediano  p90_cambio_absoluto  max_cambio_absoluto  predicciones_ridge_negativas
+       59                     0.016891               0.259525                 0.216291             0.528666             1.234970                             0
+
+DIEZ MAYORES CAMBIOS
+
+ID_PARCELA  RENDIMIENTO_XGB  RENDIMIENTO_RIDGE  DELTA_RIDGE_MENOS_XGB  CAMBIO_ABSOLUTO
+   AGC_118         2.911017           4.145987               1.234970         1.234970
+   AGC_003         3.283666           4.126514               0.842848         0.842848
+   AGC_173         3.367042           2.652052              -0.714990         0.714990
+   AGC_116         4.511079           3.801742              -0.709336         0.709336
+   AGC_191         5.119641           4.433872              -0.685769         0.685769
+   AGC_142         4.516322           5.057808               0.541486         0.541486
+   AGC_130         4.059274           4.584735               0.525461         0.525461
+   AGC_153         4.391107           3.954297              -0.436810         0.436810
+   AGC_154         4.428911           4.814499               0.385588         0.385588
+   AGC_093         2.786050           3.168282               0.382232         0.382232
+
+AVISOS
+
+Empty DataFrame
+Columns: [categoria, mensaje]
+Index: []
+

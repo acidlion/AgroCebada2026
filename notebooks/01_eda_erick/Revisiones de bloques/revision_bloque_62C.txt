@@ -1,0 +1,95 @@
+RIDGE CON NDVI/EVI EN TRES VENTANAS
+
+18 variables: 12 de vegetacion y 6 ambientales.
+Igual peso por mes dentro de cada ventana.
+Ventanas incompletas quedan como NA.
+Imputacion y escalado dentro del entrenamiento.
+Seleccion interna de alpha por grupos.
+No se agregan antecedentes ni dinamica.
+No aisla el efecto de ventanas: cambia otros indices.
+Mismas 138 etiquetas y folds externos anteriores.
+Comparacion exploratoria; no es un test independiente.
+No se generaron ensambles ni entregas nuevas.
+
+RESUMEN DE TABLA
+
+ parcelas  variables  variables_ambientales  variables_vegetacion  celdas_faltantes  parcelas_con_faltantes
+      138         18                      6                    12                 0                       0
+
+COBERTURA
+
+   sensor indice     ventana  parcelas  meses_esperados  minimo_meses_disponibles  ventanas_completas
+sentinel2   ndvi abr_jun2025       138                3                         3                 138
+sentinel2   ndvi jul_ago2025       138                2                         2                 138
+sentinel2   ndvi sep_oct2025       138                2                         2                 138
+sentinel2    evi abr_jun2025       138                3                         3                 138
+sentinel2    evi jul_ago2025       138                2                         2                 138
+sentinel2    evi sep_oct2025       138                2                         2                 138
+   planet   ndvi abr_jun2025       138                3                         3                 138
+   planet   ndvi jul_ago2025       138                2                         2                 138
+   planet   ndvi sep_oct2025       138                2                         2                 138
+   planet    evi abr_jun2025       138                3                         3                 138
+   planet    evi jul_ago2025       138                2                         2                 138
+   planet    evi sep_oct2025       138                2                         2                 138
+
+COMPARACION GLOBAL
+
+                     modelo      MAE     RMSE       R2  sesgo_pred_menos_real  delta_MAE_vs_ridge_original  delta_RMSE_vs_ridge_original  delta_R2_vs_ridge_original  delta_MAE_vs_ensamble  delta_RMSE_vs_ensamble  delta_R2_vs_ensamble
+ ensamble_ridge_xgb3m_50_50 0.448877 0.611404 0.480252               0.053843                    -0.021219                     -0.017298                    0.029825               0.000000                0.000000              0.000000
+          xgb_e4_mensual_3m 0.459095 0.626746 0.453842               0.065354                    -0.011002                     -0.001956                    0.003414               0.010218                0.015342             -0.026411
+        ridge_ciclo_anidado 0.470097 0.628702 0.450427               0.042333                     0.000000                      0.000000                    0.000000               0.021219                0.017298             -0.029825
+ridge_62C_ventanas_ndvi_evi 0.561834 0.727540 0.264050               0.114033                     0.091737                      0.098837                   -0.186378               0.112957                0.116135             -0.216203
+
+CONSISTENCIA DESCRIPTIVA
+
+                     modelo  folds_menor_RMSE_que_ridge  folds_menor_RMSE_que_ensamble  max_RMSE_fold
+ridge_62C_ventanas_ndvi_evi                           2                              0       0.909308
+
+RESULTADOS POR FOLD
+
+                     modelo  fold  parcelas      MAE     RMSE        R2  sesgo_pred_menos_real
+        ridge_ciclo_anidado     1        31 0.510727 0.657937 -0.444983              -0.243262
+        ridge_ciclo_anidado     2        26 0.368536 0.557214  0.096748               0.048804
+        ridge_ciclo_anidado     3        27 0.416018 0.562560  0.153894              -0.268910
+        ridge_ciclo_anidado     4        27 0.462721 0.572739  0.457639               0.336278
+        ridge_ciclo_anidado     5        27 0.582700 0.761410 -2.584080               0.381303
+          xgb_e4_mensual_3m     1        31 0.391652 0.553586 -0.022972              -0.060439
+          xgb_e4_mensual_3m     2        26 0.423252 0.619016 -0.114728              -0.032564
+          xgb_e4_mensual_3m     3        27 0.446314 0.570517  0.129790              -0.390012
+          xgb_e4_mensual_3m     4        27 0.483525 0.594466  0.415709               0.375158
+          xgb_e4_mensual_3m     5        27 0.559395 0.779726 -2.758581               0.449636
+ ensamble_ridge_xgb3m_50_50     1        31 0.436702 0.588368 -0.155560              -0.151851
+ ensamble_ridge_xgb3m_50_50     2        26 0.382701 0.572529  0.046414               0.008120
+ ensamble_ridge_xgb3m_50_50     3        27 0.410643 0.542667  0.212676              -0.329461
+ ensamble_ridge_xgb3m_50_50     4        27 0.456179 0.570494  0.461882               0.355718
+ ensamble_ridge_xgb3m_50_50     5        27 0.557513 0.759966 -2.570498               0.415469
+ridge_62C_ventanas_ndvi_evi     1        31 0.506485 0.622309 -0.292725              -0.308277
+ridge_62C_ventanas_ndvi_evi     2        26 0.390293 0.613544 -0.095108               0.112117
+ridge_62C_ventanas_ndvi_evi     3        27 0.420154 0.554110  0.179122              -0.277634
+ridge_62C_ventanas_ndvi_evi     4        27 0.757813 0.874280 -0.263793               0.638799
+ridge_62C_ventanas_ndvi_evi     5        27 0.736272 0.909308 -4.111662               0.467655
+
+AJUSTES POR FOLD
+
+                     modelo  fold  n_train  n_validacion  RMSE_interno_elegido  MAE_val  RMSE_val    R2_val  R2_train  sesgo_pred_menos_real  avisos
+ridge_62C_ventanas_ndvi_evi     1      107            31              0.748969 0.506485  0.622309 -0.292725  0.705651              -0.308277       0
+ridge_62C_ventanas_ndvi_evi     2      112            26              0.687442 0.390293  0.613544 -0.095108  0.682539               0.112117       0
+ridge_62C_ventanas_ndvi_evi     3      111            27              0.726160 0.420154  0.554110  0.179122  0.645035              -0.277634       0
+ridge_62C_ventanas_ndvi_evi     4      111            27              0.653656 0.757813  0.874280 -0.263793  0.532963               0.638799       0
+ridge_62C_ventanas_ndvi_evi     5      111            27              0.638211 0.736272  0.909308 -4.111662  0.652479               0.467655       0
+
+PARAMETROS
+
+                     modelo  fold  ridge__alpha
+ridge_62C_ventanas_ndvi_evi     1     10.000000
+ridge_62C_ventanas_ndvi_evi     2     10.000000
+ridge_62C_ventanas_ndvi_evi     3     10.000000
+ridge_62C_ventanas_ndvi_evi     4    100.000000
+ridge_62C_ventanas_ndvi_evi     5      1.000000
+
+AVISOS
+
+Empty DataFrame
+Columns: [modelo, fold, categoria, mensaje]
+Index: []
+

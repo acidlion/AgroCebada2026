@@ -1,0 +1,146 @@
+======================================================================
+Dataset: BÁSICO
+Filas: 107,666
+Columnas: 96
+
+Columnas y tipos de datos:
+                         tipo
+columna                      
+ID_POLIGONO            object
+fecha_captura          object
+sensor                 object
+ndvi_promedio         float64
+ndvi_std              float64
+ndvi_max              float64
+ndvi_min              float64
+evi_promedio          float64
+evi_std               float64
+evi_max               float64
+evi_min               float64
+crc_promedio          float64
+crc_std               float64
+crc_max               float64
+crc_min               float64
+mcrc_promedio         float64
+mcrc_std              float64
+mcrc_max              float64
+mcrc_min              float64
+ndsvi_promedio        float64
+ndsvi_std             float64
+ndsvi_max             float64
+ndsvi_min             float64
+srndi_promedio        float64
+srndi_std             float64
+srndi_max             float64
+srndi_min             float64
+mra_promedio          float64
+mra_std               float64
+mra_max               float64
+mra_min               float64
+lai_promedio          float64
+lai_std               float64
+lai_max               float64
+lai_min               float64
+fapar_promedio        float64
+fapar_std             float64
+fapar_max             float64
+fapar_min             float64
+savi_promedio         float64
+savi_std              float64
+savi_max              float64
+savi_min              float64
+vi6t_promedio         float64
+vi6t_std              float64
+vi6t_max              float64
+vi6t_min              float64
+ndti_promedio         float64
+ndti_std              float64
+ndti_max              float64
+ndti_min              float64
+sti_promedio          float64
+sti_std               float64
+sti_max               float64
+sti_min               float64
+ndwi_promedio         float64
+ndwi_std              float64
+ndwi_max              float64
+ndwi_min              float64
+endwi_promedio        float64
+endwi_std             float64
+endwi_max             float64
+endwi_min             float64
+msi_promedio          float64
+msi_std               float64
+msi_max               float64
+msi_min               float64
+emsi_promedio         float64
+emsi_std              float64
+emsi_max              float64
+emsi_min              float64
+dswi2_promedio        float64
+dswi2_std             float64
+dswi2_max             float64
+dswi2_min             float64
+dswi3_promedio        float64
+dswi3_std             float64
+dswi3_max             float64
+dswi3_min             float64
+dswi4_promedio        float64
+dswi4_std             float64
+dswi4_max             float64
+dswi4_min             float64
+dswi5_promedio        float64
+dswi5_std             float64
+dswi5_max             float64
+dswi5_min             float64
+nddi_promedio         float64
+nddi_std              float64
+nddi_max              float64
+nddi_min              float64
+enddi_promedio        float64
+enddi_std             float64
+enddi_max             float64
+enddi_min             float64
+porcentaje_nubosidad  float64
+
+Primeras tres filas:
+ID_POLIGONO fecha_captura  sensor  ndvi_promedio  ndvi_std  ndvi_max  ndvi_min  evi_promedio  evi_std  evi_max  evi_min  crc_promedio  crc_std  crc_max  crc_min  mcrc_promedio  mcrc_std  mcrc_max  mcrc_min  ndsvi_promedio  ndsvi_std  ndsvi_max  ndsvi_min  srndi_promedio  srndi_std  srndi_max  srndi_min  mra_promedio  mra_std  mra_max  mra_min  lai_promedio  lai_std  lai_max  lai_min  fapar_promedio  fapar_std  fapar_max  fapar_min  savi_promedio  savi_std  savi_max  savi_min  vi6t_promedio  vi6t_std  vi6t_max  vi6t_min  ndti_promedio  ndti_std  ndti_max  ndti_min  sti_promedio  sti_std  sti_max  sti_min  ndwi_promedio  ndwi_std  ndwi_max  ndwi_min  endwi_promedio  endwi_std  endwi_max  endwi_min  msi_promedio  msi_std  msi_max  msi_min  emsi_promedio  emsi_std  emsi_max  emsi_min  dswi2_promedio  dswi2_std  dswi2_max  dswi2_min  dswi3_promedio  dswi3_std  dswi3_max  dswi3_min  dswi4_promedio  dswi4_std  dswi4_max  dswi4_min  dswi5_promedio  dswi5_std  dswi5_max  dswi5_min  nddi_promedio  nddi_std  nddi_max  nddi_min  enddi_promedio  enddi_std  enddi_max  enddi_min  porcentaje_nubosidad
+    AGC_011    20/04/2022 Landsat            NaN       NaN       NaN       NaN           NaN      NaN      NaN      NaN           NaN      NaN      NaN      NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN           NaN      NaN      NaN      NaN           NaN      NaN      NaN      NaN             NaN        NaN        NaN        NaN            NaN       NaN       NaN       NaN         -0.613     0.018    -0.561    -0.678            NaN       NaN       NaN       NaN           NaN      NaN      NaN      NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN           NaN      NaN      NaN      NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN                   0.0
+    AGC_011    16/03/2024 Landsat            NaN       NaN       NaN       NaN           NaN      NaN      NaN      NaN           NaN      NaN      NaN      NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN           NaN      NaN      NaN      NaN           NaN      NaN      NaN      NaN             NaN        NaN        NaN        NaN            NaN       NaN       NaN       NaN         -0.626     0.014    -0.590    -0.679            NaN       NaN       NaN       NaN           NaN      NaN      NaN      NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN           NaN      NaN      NaN      NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN                   0.0
+    AGC_011    15/03/2024 Landsat            NaN       NaN       NaN       NaN           NaN      NaN      NaN      NaN           NaN      NaN      NaN      NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN           NaN      NaN      NaN      NaN           NaN      NaN      NaN      NaN             NaN        NaN        NaN        NaN            NaN       NaN       NaN       NaN         -0.635     0.014    -0.600    -0.686            NaN       NaN       NaN       NaN           NaN      NaN      NaN      NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN           NaN      NaN      NaN      NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN             NaN        NaN        NaN        NaN            NaN       NaN       NaN       NaN             NaN        NaN        NaN        NaN                   0.0
+
+======================================================================
+Dataset: PRO
+Filas: 47,804
+Columnas: 20
+
+Columnas y tipos de datos:
+                         tipo
+columna                      
+ID_POLIGONO            object
+fecha_captura          object
+sensor                 object
+ndvi_promedio         float64
+ndvi_std              float64
+ndvi_max              float64
+ndvi_min              float64
+evi_promedio          float64
+evi_std               float64
+evi_max               float64
+evi_min               float64
+lai_promedio          float64
+lai_std               float64
+lai_max               float64
+lai_min               float64
+msavi_promedio        float64
+msavi_std             float64
+msavi_max             float64
+msavi_min             float64
+porcentaje_nubosidad  float64
+
+Primeras tres filas:
+ID_POLIGONO fecha_captura sensor  ndvi_promedio  ndvi_std  ndvi_max  ndvi_min  evi_promedio  evi_std  evi_max  evi_min  lai_promedio  lai_std  lai_max  lai_min  msavi_promedio  msavi_std  msavi_max  msavi_min  porcentaje_nubosidad
+    AGC_056    05/02/2025 Planet          0.300     0.042     0.553     0.175         0.138    0.022    0.251    0.068         1.049    0.182    2.144    0.586           0.135      0.022      0.244      0.066                   0.0
+    AGC_056    08/02/2025 Planet          0.204     0.043     0.529     0.125         0.110    0.018    0.209    0.074         0.697    0.167    1.888    0.247           0.110      0.018      0.207      0.072                   0.0
+    AGC_056    07/02/2025 Planet          0.241     0.043     0.534     0.154         0.134    0.018    0.224    0.098         0.826    0.159    1.858    0.404           0.135      0.018      0.230      0.098                   0.0
+

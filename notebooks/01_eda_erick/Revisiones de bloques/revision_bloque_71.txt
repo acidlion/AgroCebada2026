@@ -1,0 +1,74 @@
+ENSAMBLE EN LA RESERVA DE 28 PARCELAS
+
+Mismos IDs de reserva que AgroCebada/ExtraTrees.
+110 parcelas para ajustar; 28 para evaluar.
+Ridge: alpha seleccionado solo en desarrollo, con grupos espaciales y 3 folds.
+XGBoost: receta fija; pesos 50/50 sin reajuste.
+Evaluacion retrospectiva: las 28 etiquetas ya informaron evaluaciones historicas del procedimiento.
+No es un nuevo test independiente.
+La reserva por ID no garantiza independencia espacial.
+No sustituye el resultado OOF espacial sobre 138 parcelas.
+No se modificaron entregas ni modelos finales.
+
+Alpha seleccionado: {'ridge__alpha': 10.0}
+RMSE CV para seleccionar alpha: 0.775566
+Este RMSE de seleccion no es el RMSE del ensamble en reserva.
+
+METRICAS DE RESERVA
+
+                   modelo  n  MAE_t_ha  RMSE_t_ha        R2  MAPE_pct  sesgo_pred_menos_real
+           ensamble_50_50 28  0.288770   0.367114  0.718673  8.053390              -0.008893
+                  xgboost 28  0.314950   0.377330  0.702798  8.949087               0.043658
+                    ridge 28  0.329646   0.419906  0.631945  9.064649              -0.061444
+baseline_media_desarrollo 28  0.643779   0.745311 -0.159535 19.630086               0.276455
+
+DISTRIBUCIONES
+
+                    count     mean      std      min      25%      50%      75%      max
+desarrollo_110 110.000000 4.011455 0.878560 2.000000 3.300000 4.420000 4.577500 5.590000
+reserva_28      28.000000 3.735000 0.704843 2.500000 3.000000 3.745000 4.480000 4.600000
+
+REFERENCIA EXTRATREES NO RECALCULADA
+
+                          modelo  n  MAE_t_ha  RMSE_t_ha       R2  MAPE_pct                                         fuente                                                            nota
+ExtraTrees de carpeta AgroCebada 28  0.246929   0.331565 0.770519  7.197216 AgroCebada/resultados/metricas_evaluacion.json Referencia documental; distinta preparacion y seleccion interna
+
+DETALLE RESERVA
+
+             rendimiento_observado    ridge  xgboost  ensamble_50_50  baseline_media_desarrollo  error_ridge  error_xgboost  error_ensamble_50_50
+ID_POLIGONO                                                                                                                                      
+AGC_001                   3.500000 2.514922 2.689460        2.602191                   4.011455    -0.985078      -0.810540             -0.897809
+AGC_013                   4.010000 4.727441 4.412342        4.569891                   4.011455     0.717441       0.402342              0.559891
+AGC_019                   3.000000 2.751024 3.222370        2.986697                   4.011455    -0.248976       0.222370             -0.013303
+AGC_020                   3.500000 3.138259 3.492358        3.315309                   4.011455    -0.361741      -0.007642             -0.184691
+AGC_022                   4.550000 4.097319 4.168681        4.133000                   4.011455    -0.452681      -0.381319             -0.417000
+AGC_057                   4.550000 4.833284 4.663230        4.748257                   4.011455     0.283284       0.113230              0.198257
+AGC_058                   2.500000 3.275168 3.298704        3.286936                   4.011455     0.775168       0.798704              0.786936
+AGC_062                   3.810000 3.754864 4.277874        4.016369                   4.011455    -0.055136       0.467874              0.206369
+AGC_064                   4.510000 4.562217 4.684291        4.623254                   4.011455     0.052217       0.174291              0.113254
+AGC_073                   4.300000 3.693023 4.470938        4.081980                   4.011455    -0.606977       0.170938             -0.218020
+AGC_078                   3.000000 2.987472 3.315814        3.151643                   4.011455    -0.012528       0.315814              0.151643
+AGC_079                   3.300000 3.098017 3.204316        3.151167                   4.011455    -0.201983      -0.095684             -0.148833
+AGC_089                   3.000000 3.196116 3.199538        3.197827                   4.011455     0.196116       0.199538              0.197827
+AGC_096                   4.590000 4.074123 3.973768        4.023945                   4.011455    -0.515877      -0.616232             -0.566055
+AGC_102                   4.400000 4.325903 4.026246        4.176074                   4.011455    -0.074097      -0.373754             -0.223926
+AGC_103                   3.000000 2.711346 3.182082        2.946714                   4.011455    -0.288654       0.182082             -0.053286
+AGC_114                   3.000000 2.960640 2.782940        2.871790                   4.011455    -0.039360      -0.217060             -0.128210
+AGC_115                   4.600000 3.776574 4.345876        4.061225                   4.011455    -0.823426      -0.254124             -0.538775
+AGC_121                   3.300000 3.256175 3.254502        3.255339                   4.011455    -0.043825      -0.045498             -0.044661
+AGC_123                   2.500000 2.895810 3.002907        2.949358                   4.011455     0.395810       0.502907              0.449358
+AGC_132                   4.130000 4.603925 4.442876        4.523401                   4.011455     0.473925       0.312876              0.393401
+AGC_134                   4.520000 4.365881 4.558851        4.462366                   4.011455    -0.154119       0.038851             -0.057634
+AGC_140                   3.200000 3.286672 2.849230        3.067951                   4.011455     0.086672      -0.350770             -0.132049
+AGC_148                   3.000000 3.224767 3.365344        3.295055                   4.011455     0.224767       0.365344              0.295055
+AGC_180                   4.140000 4.249976 4.476619        4.363298                   4.011455     0.109976       0.336619              0.223298
+AGC_184                   4.470000 4.283193 4.640199        4.461696                   4.011455    -0.186807       0.170199             -0.008304
+AGC_195                   3.680000 4.119451 3.926529        4.022990                   4.011455     0.439451       0.246529              0.342990
+AGC_197                   4.520000 4.096003 3.874541        3.985272                   4.011455    -0.423997      -0.645459             -0.534728
+
+AVISOS
+
+Empty DataFrame
+Columns: [categoria, mensaje]
+Index: []
+

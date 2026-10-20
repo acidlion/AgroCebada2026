@@ -1,0 +1,366 @@
+﻿objeto,filas,columnas,indice_unico,nombres_indice,coincidencias,n_coincidencias
+df_parcela_meses,197,426,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, rendimiento, parcela, poligono",8
+df_validacion_sensores,386,33,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, fecha, valid, poligono",8
+fuente_mensual_e4_57,9456,75,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, fecha, poligono, fuente",8
+tabla_mensual_fuente_57,197,425,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, rendimiento, poligono, fuente",8
+cobertura_mensual_56,44,13,True,"[""None""]","ndvi, mensual, fecha, cobertura, valid, observ, parcela",7
+datos_mensuales_comparacion,138,425,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, rendimiento, poligono",7
+df_base_mensual,9456,75,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, fecha, poligono",7
+df_ciclo_mensual,1379,75,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, fecha, poligono",7
+df_contexto_vi6t,1379,77,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, fecha, poligono",7
+df_eda_parcela,197,63,True,"[""None""]","sentinel, planet, ndvi, evi, rendimiento, parcela, poligono",7
+df_para_expandir,1379,62,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, fecha, poligono",7
+df_parcela_meses_base,197,421,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, parcela, poligono",7
+ndvi_mensual_56,8668,13,True,"[""None""]","ndvi, mensual, fecha, valido, valid, observ, poligono",7
+tabla,197,426,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, rendimiento, poligono",7
+tabla_ciclo_fuente_57,197,62,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, rendimiento, poligono, fuente",7
+tabla_cobertura_54,197,62,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, cobertura, rendimiento, poligono",7
+tabla_exportar,197,426,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, rendimiento, poligono",7
+tabla_mensual_comparacion,197,426,True,"[""None""]","sentinel, planet, ndvi, evi, mensual, rendimiento, poligono",7
+tabla_similitud,197,425,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, rendimiento, poligono",7
+X,138,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_combinado_47,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_limites_47,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_mediana_47,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_mensual,138,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_mensual_50,138,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_mensual_sin_vi6t,138,206,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_pred_47,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_prediccion_diagnostico,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_train,111,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_train_47,138,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_train_49,111,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_train_55,111,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_train_58,111,381,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_val,27,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_val_49,27,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_val_55,27,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+X_val_58,27,381,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+base_mensual_e4_57,197,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+cobertura_ciclo2025_56,14,13,True,"[""None""]","ndvi, fecha, cobertura, valid, observ, parcela",6
+cobertura_incompleta,8,28,True,"[""None""]","sentinel, planet, ndvi, evi, cobertura, poligono",6
+cobertura_por_parcela_56,1576,8,True,"[""None""]","ndvi, cobertura, valid, observ, parcela, poligono",6
+curva_56,22,13,True,"[""None""]","ndvi, fecha, valido, valid, observ, poligono",6
+datos_57,59,381,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+datos_ciclo_comparacion,138,62,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, rendimiento, poligono",6
+df_eda_etiquetadas,138,63,True,"[""None""]","sentinel, planet, ndvi, evi, rendimiento, poligono",6
+empatados_56,1,13,True,"[""None""]","ndvi, fecha, valido, valid, observ, poligono",6
+fuera_inferior,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+fuera_rango,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+fuera_superior,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+grupo_56,7,13,True,"[""None""]","ndvi, fecha, valido, valid, observ, poligono",6
+mascara_cambio_47,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+mascara_fuera_47,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+mascara_na_47,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+matriz_47,59,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+matriz_49,138,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+matriz_50,138,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+matriz_55,138,213,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+matriz_58,138,381,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+mediciones_train_fuente_53,138,33,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, poligono, fuente",6
+mensual_con_prefijo,2364,13,True,"[""None""]","planet, ndvi, evi, mensual, fecha, poligono",6
+mensual_enero_marzo_57,197,90,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+mensual_observado_56,6304,6,True,"[""sensor"", ""ID_POLIGONO"", ""fecha_mes""]","ndvi, mensual, fecha, valid, observ, poligono",6
+pred_57,59,381,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+resumen_por_parcela,197,60,True,"[""None""]","sentinel, planet, ndvi, evi, parcela, poligono",6
+subset_56,2758,13,True,"[""None""]","ndvi, fecha, valido, valid, observ, poligono",6
+tabla_ancha_mensual,197,420,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+tabla_ciclo_53,197,62,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, rendimiento, poligono",6
+tabla_ciclo_comparacion,197,63,True,"[""None""]","sentinel, planet, ndvi, evi, rendimiento, poligono",6
+train_57,138,381,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, mensual, poligono",6
+validos_56,7,13,True,"[""None""]","ndvi, fecha, valido, valid, observ, poligono",6
+X_ciclo,138,33,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, poligono",5
+X_ciclo_50,138,33,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, poligono",5
+X_pred_54,59,33,True,"[""ID_PARCELA""]","sentinel, planet, ndvi, evi, parcela",5
+X_pred_ridge_53,59,33,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, poligono",5
+X_reconstruccion,386,27,True,"[""None""]","sentinel, planet, ndvi, evi, mensual",5
+X_train_54,138,33,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, poligono",5
+X_train_ridge_53,138,33,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, poligono",5
+base_ciclo_e4_57,197,33,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, poligono",5
+casos,7,9,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+casos_59,27,11,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+casos_fold_5,27,9,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+contribuciones_54,59,33,True,"[""ID_PARCELA""]","sentinel, planet, ndvi, evi, parcela",5
+debajo_min_54,59,33,True,"[""ID_PARCELA""]","sentinel, planet, ndvi, evi, parcela",5
+diagnostico_oof,138,9,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+encima_max_54,59,33,True,"[""ID_PARCELA""]","sentinel, planet, ndvi, evi, parcela",5
+fuente_56,47804,20,True,"[""None""]","ndvi, evi, fecha, poligono, fuente",5
+fuera_rango_54,59,33,True,"[""ID_PARCELA""]","sentinel, planet, ndvi, evi, parcela",5
+matriz_53,59,33,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, poligono",5
+mayores_errores_ensamble_59,10,11,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+mayores_errores_mensuales,15,10,True,"[""None""]","mensual, valid, observ, rendimiento, poligono",5
+medias_indices_ciclo,197,27,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, poligono",5
+mensual,2364,13,True,"[""None""]","ndvi, evi, mensual, fecha, poligono",5
+mensual_octubre_diciembre_57,197,78,True,"[""ID_POLIGONO""]","sentinel, ndvi, evi, mensual, poligono",5
+meses_indices_ciclo,197,27,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, evi, poligono",5
+oof_ensamble_59,138,11,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+predicciones_consolidadas_52,138,13,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+predicciones_e4_58,138,9,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+predicciones_oof_lasso_55,138,4,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+referencia_oof,138,10,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+referencias_validas,9,97,True,"[""None""]","ndvi, evi, fecha, valid, poligono",5
+resumen_pixeles,5,4,True,"[""None""]","evi, valido, valid, pixel, parcela",5
+tabla_59,10,11,True,"[""ID_POLIGONO""]","mensual, valid, observ, rendimiento, poligono",5
+antecedentes_ndvi_e4_57,197,3,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, poligono",4
+anteriores,5,97,True,"[""None""]","ndvi, evi, fecha, poligono",4
+candidatos,4,96,True,"[""None""]","ndvi, evi, fecha, poligono",4
+casos_fapar_pendientes,4,97,True,"[""None""]","ndvi, evi, fecha, poligono",4
+casos_nube100_con_ndvi_56,0,7,True,"[""None""]","ndvi, fecha, nube, poligono",4
+cobertura_antecedentes_57,197,3,True,"[""ID_POLIGONO""]","sentinel, planet, cobertura, poligono",4
+df_basico,104610,96,True,"[""None""]","ndvi, evi, fecha, poligono",4
+df_basico_excluidos_sin_datos,3056,96,True,"[""None""]","ndvi, evi, fecha, poligono",4
+df_basico_exp_imputado,104610,96,True,"[""None""]","ndvi, evi, fecha, poligono",4
+df_basico_exp_vi6t,104610,96,True,"[""None""]","ndvi, evi, fecha, poligono",4
+df_basico_original,107666,96,True,"[""None""]","ndvi, evi, fecha, poligono",4
+df_basico_preparado,104610,96,True,"[""None""]","ndvi, evi, fecha, poligono",4
+df_pro_original,47804,20,True,"[""None""]","ndvi, evi, fecha, poligono",4
+df_pro_preparado,47804,20,True,"[""None""]","ndvi, evi, fecha, poligono",4
+diagnostico_cobertura_fold_5,2,6,True,"[""None""]","mensual, cobertura, rendimiento, parcela",4
+diagnostico_pixeles,985,5,True,"[""None""]","valido, valid, pixel, poligono",4
+dinamica_ndvi_e4_57,197,12,True,"[""ID_POLIGONO""]","sentinel, planet, ndvi, poligono",4
+ejemplos_perfiles_56,24,14,True,"[""None""]","ndvi, cobertura, observ, poligono",4
+filas_repetidas,0,20,True,"[""None""]","ndvi, evi, fecha, poligono",4
+landsat_revision,45570,96,True,"[""None""]","ndvi, evi, fecha, poligono",4
+mascara_restante,107666,96,True,"[""None""]","ndvi, evi, fecha, poligono",4
+medias,1379,4,True,"[""None""]","planet, ndvi, evi, mensual",4
+na_fuera_patrones,47804,20,True,"[""None""]","ndvi, evi, fecha, poligono",4
+na_originales,47804,20,True,"[""None""]","ndvi, evi, fecha, poligono",4
+na_restantes,47804,20,True,"[""None""]","ndvi, evi, fecha, poligono",4
+na_totales,47804,20,True,"[""None""]","ndvi, evi, fecha, poligono",4
+ndvi_fuente_e4_57,8668,4,True,"[""None""]","ndvi, fecha, poligono, fuente",4
+observaciones_ndvi_56,67982,7,True,"[""None""]","ndvi, fecha, observ, poligono",4
+oof_xgb_anidado,138,5,True,"[""ID_POLIGONO""]","valid, observ, rendimiento, poligono",4
+perfiles_ciclo_56,788,14,True,"[""None""]","ndvi, cobertura, observ, poligono",4
+perfiles_resumibles_56,591,14,True,"[""None""]","ndvi, cobertura, observ, poligono",4
+posteriores,4,97,True,"[""None""]","ndvi, evi, fecha, poligono",4
+predicciones_oof_mlp_49,138,4,True,"[""ID_POLIGONO""]","valid, observ, rendimiento, poligono",4
+revision_fapar,59040,97,True,"[""None""]","ndvi, evi, fecha, poligono",4
+tabla_56,24,14,True,"[""None""]","ndvi, cobertura, observ, poligono",4
+verificacion_ids,2,6,True,"[""None""]","fecha, observ, rendimiento, parcela",4
+candidatas,9,11,True,"[""None""]","ndvi, fecha, poligono",3
+candidatos_fapar,24,11,True,"[""None""]","ndvi, fecha, poligono",3
+casos_fapar,4,9,True,"[""None""]","ndvi, fecha, poligono",3
+casos_sin_vi6t_ni_nube,3056,8,True,"[""None""]","fecha, nube, poligono",3
+claves_validas,47804,3,True,"[""None""]","fecha, valid, poligono",3
+datos_56,39872,7,True,"[""None""]","ndvi, fecha, poligono",3
+df_ambiente_mensual,9456,9,True,"[""None""]","mensual, fecha, poligono",3
+df_clima_mensual,9456,7,True,"[""None""]","mensual, fecha, poligono",3
+df_clima_mensual_largo,28368,8,True,"[""None""]","mensual, pixel, poligono",3
+df_prueba_temporal,1379,7,True,"[""None""]","mensual, fecha, poligono",3
+diagnostico_por_fold,5,9,True,"[""None""]","mensual, valid, rendimiento",3
+evaluacion_huecos_vi6t,386,9,True,"[""None""]","mensual, fecha, poligono",3
+frecuencia_maximos_56,13,7,True,"[""None""]","cobertura, observ, parcela",3
+huecos_vi6t,8,12,True,"[""None""]","mensual, fecha, poligono",3
+muestras,2,9,True,"[""None""]","valido, valid, pixel",3
+predicciones_oof_comparacion,138,4,True,"[""ID_POLIGONO""]","observ, rendimiento, poligono",3
+predicciones_oof_xgb,138,3,True,"[""ID_POLIGONO""]","observ, rendimiento, poligono",3
+resumen_conjuntos_mensual,2,4,True,"[""None""]","mensual, rendimiento, parcela",3
+resumen_integracion_mensual,1,9,True,"[""None""]","mensual, rendimiento, parcela",3
+resumen_particiones_espaciales,5,7,True,"[""None""]","mensual, valid, parcela",3
+tabla_referencia_49,138,3,True,"[""ID_POLIGONO""]","observ, rendimiento, poligono",3
+verificacion_cobertura,5,6,True,"[""None""]","evi, cobertura, parcela",3
+asignacion_validacion_espacial,138,4,True,"[""ID_POLIGONO""]","valid, poligono",2
+calidad,2364,3,True,"[""ID_POLIGONO"", ""fecha_mes""]","fecha, poligono",2
+caso_vi6t_aislado,1,8,True,"[""None""]","fecha, poligono",2
+claves,47804,3,True,"[""None""]","fecha, poligono",2
+comparacion_entregas_53,59,5,True,"[""None""]","rendimiento, parcela",2
+comparacion_original_54,59,4,True,"[""ID_POLIGONO""]","rendimiento, poligono",2
+coordenadas_validacion,138,2,True,"[""ID_POLIGONO""]","valid, poligono",2
+df_eda_perfiles,43,5,True,"[""None""]","rendimiento, parcela",2
+df_rendimiento,197,4,True,"[""None""]","rendimiento, poligono",2
+df_rendimiento_original,197,5,True,"[""None""]","rendimiento, poligono",2
+diagnostico_pendientes,3061,5,True,"[""None""]","fecha, poligono",2
+diagnostico_predictores_parcela,59,6,True,"[""ID_POLIGONO""]","parcela, poligono",2
+donantes_vi6t,3,7,True,"[""None""]","fecha, poligono",2
+entrega_rendimientos_59,59,2,True,"[""None""]","rendimiento, parcela",2
+entrega_ridge_53,59,2,True,"[""None""]","rendimiento, parcela",2
+extraccion_prueba,985,8,True,"[""None""]","pixel, poligono",2
+gdf_parcelas,197,7,True,"[""None""]","parcela, poligono",2
+geometrias_referencia,197,5,True,"[""None""]","valid, poligono",2
+geometrias_referencia_utm,197,5,True,"[""None""]","valid, poligono",2
+geometrias_validacion,138,1,True,"[""ID_POLIGONO""]","valid, poligono",2
+geometrias_validacion_utm,138,1,True,"[""ID_POLIGONO""]","valid, poligono",2
+indices,47804,16,True,"[""None""]","ndvi, evi",2
+mayores_cambios_53,10,5,True,"[""None""]","rendimiento, parcela",2
+parcelas_en_crs,197,2,True,"[""None""]","parcela, poligono",2
+parcelas_mas_diferentes,10,6,True,"[""ID_POLIGONO""]","parcela, poligono",2
+parcelas_prioritarias_47,4,13,True,"[""ID_POLIGONO""]","parcela, poligono",2
+pares,138,2,True,"[""None""]","planet, rendimiento",2
+perfiles_climaticos,43,8,True,"[""None""]","rendimiento, parcela",2
+predicciones_oof_ablacion,138,3,True,"[""ID_POLIGONO""]","observ, poligono",2
+previos_57,197,3,True,"[""ID_POLIGONO""]","evi, poligono",2
+previos_s2_6m_57,197,6,True,"[""ID_POLIGONO""]","evi, poligono",2
+problemas_cobertura,0,3,True,"[""None""]","cobertura, parcela",2
+propuesta_imputacion_fapar,16,9,True,"[""None""]","fecha, parcela",2
+propuestas,16,9,True,"[""None""]","fecha, parcela",2
+puntos_distancias,197,4,True,"[""ID_POLIGONO""]","valid, poligono",2
+puntos_referencia,197,5,True,"[""None""]","valid, poligono",2
+puntos_train,138,5,True,"[""None""]","valid, poligono",2
+registro_imputacion_fapar,16,10,True,"[""None""]","fecha, parcela",2
+resultado,197,8,True,"[""None""]","pixel, poligono",2
+resultado_fapar,4,7,True,"[""None""]","fecha, poligono",2
+resumen_base_mensual,1,4,True,"[""None""]","mensual, parcela",2
+resumen_bloques_espaciales,10,3,True,"[""None""]","valid, parcela",2
+resumen_ciclo,1,5,True,"[""None""]","fecha, parcela",2
+resumen_cruces,3,4,True,"[""None""]","mensual, fuente",2
+resumen_eda_parcela,1,7,True,"[""None""]","rendimiento, parcela",2
+resumen_expansion_mensual,1,10,True,"[""None""]","mensual, parcela",2
+resumen_fechas_landsat,195,3,True,"[""None""]","fecha, parcela",2
+resumen_grupos_47,4,5,True,"[""None""]","observ, parcela",2
+resumen_mensual_satelital,3,7,True,"[""None""]","mensual, parcela",2
+resumen_perfiles_56,4,7,True,"[""None""]","cobertura, parcela",2
+resumen_rangos_parcelas,59,2,True,"[""ID_POLIGONO""]","parcela, poligono",2
+resumen_referencias_fapar,4,4,True,"[""None""]","fecha, parcela",2
+resumen_significancia,1,7,True,"[""None""]","valid, parcela",2
+resumen_ventanas_56,8,8,True,"[""None""]","ndvi, parcela",2
+revision_raster_muestra,5,14,True,"[""None""]","evi, fuente",2
+topografia_por_parcela,197,3,True,"[""None""]","parcela, poligono",2
+verificacion_csv_53,59,2,True,"[""None""]","rendimiento, parcela",2
+verificacion_entrega_48,59,2,True,"[""None""]","rendimiento, parcela",2
+ablacion_vi6t_por_fold,5,8,True,"[""None""]",valid,1
+ajustes_58,5,14,True,"[""None""]",valid,1
+ancho_57,197,22,True,"[""ID_POLIGONO""]",poligono,1
+auditoria_fechas_claves,2,11,True,"[""None""]",fecha,1
+casos_52,5,11,True,"[""None""]",parcela,1
+ciclo_57,197,7,True,"[""ID_POLIGONO""]",poligono,1
+comparacion_conjuntos,197,3,True,"[""None""]",poligono,1
+comparacion_folds_52,55,11,True,"[""None""]",parcela,1
+comparacion_folds_59,15,7,True,"[""None""]",parcela,1
+complementariedad_59,6,6,True,"[""None""]",parcela,1
+coordenadas_etiquetadas,138,2,True,"[""ID_POLIGONO""]",poligono,1
+coordenadas_todas,197,2,True,"[""ID_POLIGONO""]",poligono,1
+correlaciones_rendimiento,33,13,True,"[""None""]",rendimiento,1
+detalle_contribuciones_54,330,8,True,"[""None""]",parcela,1
+detalle_fuera_rango,167,5,True,"[""None""]",poligono,1
+detalle_modificaciones_47,336,8,True,"[""None""]",poligono,1
+detalle_rangos_54,21,7,True,"[""None""]",parcela,1
+df_topografia,197,3,True,"[""None""]",poligono,1
+diagnostico_47,59,6,True,"[""ID_POLIGONO""]",poligono,1
+diagnostico_ridge_54,59,14,True,"[""ID_PARCELA""]",parcela,1
+diccionario_e4_57,183,5,True,"[""None""]",fuente,1
+diccionario_tabla_mensual,426,4,True,"[""None""]",mensual,1
+diferencias_conjunto,0,3,True,"[""None""]",poligono,1
+distancias_oof,138,3,True,"[""ID_POLIGONO""]",poligono,1
+distancias_prediccion,59,3,True,"[""ID_POLIGONO""]",poligono,1
+folds_55,5,18,True,"[""None""]",valid,1
+folds_ridge_50,10,11,True,"[""None""]",valid,1
+gdf_parcelas_original,197,7,True,"[""None""]",parcela,1
+mayores_cambios_47,10,13,True,"[""ID_POLIGONO""]",poligono,1
+mayores_cambios_alpha_54,10,14,True,"[""ID_PARCELA""]",parcela,1
+metadatos_e4_57,197,1,True,"[""ID_POLIGONO""]",poligono,1
+metadatos_referencia,197,2,True,"[""None""]",poligono,1
+metricas_externas_anidadas,5,9,True,"[""None""]",valid,1
+metricas_fijo,5,9,True,"[""None""]",valid,1
+metricas_folds,5,9,True,"[""None""]",valid,1
+metricas_folds_comparacion,15,8,True,"[""None""]",valid,1
+metricas_folds_e4_58,25,14,True,"[""None""]",valid,1
+metricas_folds_lasso_55,10,18,True,"[""None""]",valid,1
+metricas_folds_mlp_49,10,14,True,"[""None""]",valid,1
+metricas_folds_xgb,10,9,True,"[""None""]",valid,1
+parcelas_prioritarias_54,10,14,True,"[""ID_PARCELA""]",parcela,1
+prediccion_mas_alejada,10,3,True,"[""ID_POLIGONO""]",poligono,1
+principales_contribuciones_54,50,8,True,"[""None""]",parcela,1
+rangos_variables_54,33,5,True,"[""variable""]",parcela,1
+resultado_sensibilidad_47,59,18,True,"[""ID_POLIGONO""]",poligono,1
+resultados,5,9,True,"[""None""]",valid,1
+resultados_fold_49,5,14,True,"[""None""]",valid,1
+resumen_alertas_54,1,8,True,"[""None""]",parcela,1
+resumen_alertas_similitud,1,6,True,"[""None""]",parcela,1
+resumen_alineacion,2,5,True,"[""None""]",parcela,1
+resumen_ambiental_ciclo,197,5,True,"[""ID_POLIGONO""]",poligono,1
+resumen_ambiente,1,5,True,"[""None""]",parcela,1
+resumen_archivos,3,4,True,"[""None""]",evi,1
+resumen_cambios_53,1,7,True,"[""None""]",parcela,1
+resumen_categorias_mensual,7,3,True,"[""None""]",mensual,1
+resumen_clima_extraido,3,6,True,"[""None""]",parcela,1
+resumen_clima_organizado,1,8,True,"[""None""]",parcela,1
+resumen_disponibilidad_ciclo,3,5,True,"[""None""]",fuente,1
+resumen_distancias,2,9,True,"[""None""]",parcela,1
+resumen_distancias_54,2,6,True,"[""None""]",parcela,1
+resumen_distancias_por_fold,5,9,True,"[""None""]",parcela,1
+resumen_extraccion_prueba,5,6,True,"[""None""]",parcela,1
+resumen_general,2,8,True,"[""None""]",parcela,1
+resumen_geometrias,1,4,True,"[""None""]",valid,1
+resumen_perfiles_climaticos,1,5,True,"[""None""]",parcela,1
+resumen_rendimiento,5,3,True,"[""None""]",rendimiento,1
+resumen_rendimientos_53,8,1,True,"[""None""]",rendimiento,1
+resumen_repeticion_clima,3,6,True,"[""None""]",parcela,1
+resumen_sensibilidad_47,3,7,True,"[""None""]",parcela,1
+resumen_similitud,2,6,True,"[""None""]",parcela,1
+resumen_tablas_e4_57,5,9,True,"[""None""]",parcela,1
+revision_alpha_54,5,9,True,"[""None""]",evi,1
+revision_candidatos_vi6t,24,10,True,"[""None""]",evi,1
+sensibilidad_clima,3,7,True,"[""None""]",parcela,1
+subset_47,3,18,True,"[""ID_POLIGONO""]",poligono,1
+tabla_47,10,13,True,"[""ID_POLIGONO""]",poligono,1
+tabla_52,55,11,True,"[""None""]",parcela,1
+tabla_57,15,5,True,"[""None""]",fuente,1
+topografia_extraida,394,3,True,"[""None""]",poligono,1
+variacion_topografia,197,2,True,"[""ID_POLIGONO""]",poligono,1
+verificacion_final_NA,2,6,True,"[""None""]",parcela,1
+archivos_no_encontrados,0,4,True,"[""None""]",,0
+avisos_alpha10_54,0,2,True,"[""None""]",,0
+avisos_e4_58,0,5,True,"[""None""]",,0
+avisos_lasso_55,30,5,True,"[""None""]",,0
+avisos_mlp_49,0,5,True,"[""None""]",,0
+avisos_ridge_53,0,2,True,"[""None""]",,0
+casos_58,5,9,True,"[""None""]",,0
+coeficientes_lasso_55,1230,9,True,"[""None""]",,0
+comparacion_alpha_1_10_54,2,9,True,"[""None""]",,0
+comparacion_con_lasso_55,13,7,True,"[""None""]",,0
+comparacion_folds_e4_58,25,9,True,"[""None""]",,0
+comparacion_global_52,11,7,True,"[""None""]",,0
+comparacion_global_59,3,9,True,"[""None""]",,0
+comparacion_global_e4_58,7,9,True,"[""None""]",,0
+comparacion_incremental_e4_58,5,4,True,"[""None""]",,0
+comparacion_modelos_49,7,6,True,"[""None""]",,0
+comparacion_pareada_59,10,8,True,"[""None""]",,0
+comparacion_reconstruccion_vi6t,6,6,True,"[""None""]",,0
+comparacion_rf_xgb,5,9,True,"[""None""]",,0
+comparacion_xgb_anidada,2,7,True,"[""None""]",,0
+consistencia_52,11,5,True,"[""None""]",,0
+consistencia_e4_58,5,6,True,"[""None""]",,0
+cv_resultados_54,5,12,True,"[""None""]",,0
+detalle,20,5,True,"[""None""]",,0
+detalle_NA_restantes,9,3,True,"[""None""]",,0
+detalle_final_NA,0,3,True,"[""None""]",,0
+estructura,9,3,True,"[""None""]",,0
+evaluacion_ridge_53,1,6,True,"[""None""]",,0
+faltantes_tablas_e4_57,4,4,True,"[""None""]",,0
+frecuencia_55,213,8,True,"[""None""]",,0
+frecuencia_seleccion_lasso_55,246,8,True,"[""None""]",,0
+inventario,96,13,True,"[""None""]",,0
+inventario_referencia,9,3,True,"[""None""]",,0
+metricas_huecos_vi6t,4,6,True,"[""None""]",,0
+metricas_indexadas_58,7,5,True,"[""modelo""]",,0
+metricas_por_nombre_59,3,4,True,"[""modelo""]",,0
+parametros_por_fold_anidado,5,9,True,"[""None""]",,0
+parametros_ridge_50,10,3,True,"[""None""]",,0
+patrones_por_sensor,2,3,True,"[""sensor""]",,0
+referencia_folds_52,5,3,True,"[""None""]",,0
+referencia_ridge_55,1,5,True,"[""None""]",,0
+resultados_busqueda_53,5,12,True,"[""None""]",,0
+resumen_NA_columnas,116,5,True,"[""None""]",,0
+resumen_NA_restantes,2,5,True,"[""None""]",,0
+resumen_ablacion_vi6t,2,6,True,"[""None""]",,0
+resumen_lasso_55,2,11,True,"[""None""]",,0
+resumen_mlp_49,2,7,True,"[""None""]",,0
+resumen_modelos_comparacion,3,9,True,"[""None""]",,0
+resumen_patrones,3,3,True,"[""None""]",,0
+resumen_patrones_restantes,3,3,True,"[""None""]",,0
+resumen_por_sensor,3,8,True,"[""None""]",,0
+resumen_rangos_variables,213,6,True,"[""variable""]",,0
+resumen_ridge_50,2,6,True,"[""None""]",,0
+resumen_sensibilidad_54,1,9,True,"[""None""]",,0
+resumen_xgb,2,9,True,"[""None""]",,0
+tabla_49,0,5,True,"[""None""]",,0
+tabla_50,10,3,True,"[""None""]",,0
+tabla_53,0,2,True,"[""None""]",,0
+tabla_54,0,2,True,"[""None""]",,0
+tabla_55,20,5,True,"[""None""]",,0
+tabla_58,0,5,True,"[""None""]",,0
+tabla_coeficientes_54,33,4,True,"[""None""]",,0
+variables_con_alertas,120,6,True,"[""variable""]",,0
+variables_frecuentes_55,30,8,True,"[""None""]",,0
+verificacion_archivos,146,4,True,"[""None""]",,0
+verificacion_shapefile,4,2,True,"[""None""]",,0
